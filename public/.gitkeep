@@ -1,0 +1,4 @@
+# 이 폴더에 로고, 이미지, 아이콘 등의 정적 파일을 넣으세요
+# 예: public/logo.png, public/images/hero.jpg 등
+# 사용 방법: <img src="/logo.png" /> 또는 <Image src="/logo.png" />
+
