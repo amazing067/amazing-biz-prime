@@ -3,7 +3,6 @@
 import { motion } from "framer-motion";
 import { Send, Gift, Key } from "lucide-react";
 import { useState } from "react";
-import emailjs from "@emailjs/browser";
 
 export default function RecruitSection() {
   const [formData, setFormData] = useState({
@@ -21,28 +20,26 @@ export default function RecruitSection() {
     setIsSubmitting(true);
 
     try {
-      // EmailJS 설정
-      // TODO: EmailJS 계정 설정 후 아래 값들을 변경해주세요
-      const serviceId = process.env.NEXT_PUBLIC_EMAILJS_SERVICE_ID || "YOUR_SERVICE_ID";
-      const templateId = process.env.NEXT_PUBLIC_EMAILJS_TEMPLATE_ID || "YOUR_TEMPLATE_ID";
-      const publicKey = process.env.NEXT_PUBLIC_EMAILJS_PUBLIC_KEY || "YOUR_PUBLIC_KEY";
-
-      // EmailJS로 이메일 전송
-      await emailjs.send(
-        serviceId,
-        templateId,
-        {
-          to_email: "induo@naver.com",
-          from_name: formData.name,
-          from_email: formData.email,
+      // API Route를 통해 이메일 전송
+      const response = await fetch("/api/send-recruit", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          name: formData.name,
+          email: formData.email,
           phone: formData.phone,
           address: formData.address || "미입력",
           experience: formData.experience || "미입력",
           message: formData.message || "미입력",
           subject: `[입사지원] ${formData.name}님의 지원서`,
-        },
-        publicKey
-      );
+        }),
+      });
+
+      if (!response.ok) {
+        const errorData = await response.json();
+        console.error("서버 에러 응답:", errorData);
+        throw new Error(errorData.details || errorData.error || "이메일 전송에 실패했습니다.");
+      }
 
       // 성공 메시지
       alert("지원해주셔서 감사합니다. 지원서가 성공적으로 전송되었습니다. 곧 연락드리겠습니다.");
@@ -56,9 +53,10 @@ export default function RecruitSection() {
         experience: "",
         message: "",
       });
-    } catch (error) {
+    } catch (error: any) {
       console.error("이메일 전송 실패:", error);
-      alert("이메일 전송에 실패했습니다. 다시 시도해주시거나 직접 이메일로 문의해주세요.");
+      const errorMessage = error.message || "이메일 전송에 실패했습니다.";
+      alert(`${errorMessage}\n\n서버 콘솔에서 더 자세한 오류 정보를 확인해주세요.`);
     } finally {
       setIsSubmitting(false);
     }

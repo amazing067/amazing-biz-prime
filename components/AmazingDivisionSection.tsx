@@ -2,6 +2,7 @@
 
 import { motion, AnimatePresence } from "framer-motion";
 import { useState } from "react";
+import Image from "next/image";
 import {
   User,
   Briefcase,
@@ -89,16 +90,25 @@ const directors = [
   {
     id: "067",
     name: "067본부",
+    fullName: "067본부",
+    directorName: "윤성옥 본부장",
+    image: "/067본부윤성옥본부장님.jpg",
     description: "어메이징 사업부 067본부 본부장은 보험 영업 분야의 전문가로서, 체계적인 시스템과 혁신적인 접근으로 설계사들의 성공을 지원합니다.",
   },
   {
     id: "290",
     name: "290본부",
+    fullName: "290본부",
+    directorName: "양창대 본부장",
+    image: "/290본부양창대본부장님.jpg",
     description: "어메이징 사업부 290본부 본부장은 보험 영업 분야의 전문가로서, 체계적인 시스템과 혁신적인 접근으로 설계사들의 성공을 지원합니다.",
   },
   {
     id: "292",
     name: "292본부",
+    fullName: "292본부",
+    directorName: "권성숙 본부장",
+    image: "/292본부권성숙본부장님.png",
     description: "어메이징 사업부 292본부 본부장은 보험 영업 분야의 전문가로서, 체계적인 시스템과 혁신적인 접근으로 설계사들의 성공을 지원합니다.",
   },
 ];
@@ -168,9 +178,9 @@ export default function AmazingDivisionSection() {
                     본부장 소개
                   </h3>
                   
-                  <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
+                  <div className="flex flex-col lg:flex-row gap-8">
                     {/* 왼쪽: 본부 선택 버튼 */}
-                    <div className="lg:col-span-1">
+                    <div className="lg:w-auto">
                       <h4 className="text-lg font-semibold text-slate-900 mb-4">
                         본부 선택
                       </h4>
@@ -181,7 +191,7 @@ export default function AmazingDivisionSection() {
                             onClick={() => setSelectedDirector(director.id)}
                             whileHover={{ scale: 1.02, x: 4 }}
                             whileTap={{ scale: 0.98 }}
-                            className={`w-full text-left px-6 py-4 rounded-xl font-medium transition-all ${
+                            className={`block w-fit text-left px-6 py-3 rounded-xl font-medium transition-all ${
                               selectedDirector === director.id
                                 ? "bg-electric-blue text-white shadow-lg"
                                 : "bg-white text-slate-700 border border-slate-200 hover:border-electric-blue hover:shadow-md"
@@ -194,7 +204,7 @@ export default function AmazingDivisionSection() {
                     </div>
 
                     {/* 오른쪽: 선택된 본부장 정보 */}
-                    <div className="lg:col-span-2">
+                    <div className="flex-1">
                       <AnimatePresence mode="wait">
                         {directors
                           .filter((d) => d.id === selectedDirector)
@@ -205,23 +215,34 @@ export default function AmazingDivisionSection() {
                               animate={{ opacity: 1, x: 0 }}
                               exit={{ opacity: 0, x: -20 }}
                               transition={{ duration: 0.3 }}
-                              className="grid grid-cols-1 md:grid-cols-2 gap-8 items-center"
+                              className="grid grid-cols-1 md:grid-cols-2 gap-8 items-start"
                             >
                               <div>
-                                <div className="w-32 h-32 bg-gradient-to-br from-electric-blue to-blue-600 rounded-3xl mb-6 flex items-center justify-center shadow-lg">
-                                  <User className="w-16 h-16 text-white" />
-                                </div>
-                                <h4 className="text-2xl font-bold text-slate-900 mb-4">
-                                  {director.name} 본부장
+                                <h4 className="text-2xl font-bold text-slate-900 mb-2">
+                                  {director.directorName}
                                 </h4>
+                                <p className="text-slate-600 mb-4 text-sm">
+                                  {director.fullName}
+                                </p>
                                 <p className="text-slate-600 leading-relaxed text-lg">
                                   {director.description}
                                 </p>
                               </div>
-                              <div className="bg-gradient-to-br from-slate-100 to-slate-200 rounded-2xl aspect-square flex items-center justify-center">
-                                <p className="text-slate-400">
-                                  {director.name} 본부장 사진 영역
-                                </p>
+                              <div className="relative bg-gradient-to-br from-slate-100 to-slate-200 rounded-2xl aspect-square overflow-hidden shadow-lg">
+                                <Image
+                                  src={director.image}
+                                  alt={`${director.directorName} 사진`}
+                                  fill
+                                  className="object-cover"
+                                  style={
+                                    director.id === "067" || director.id === "292"
+                                      ? { objectPosition: "center top" }
+                                      : {}
+                                  }
+                                  quality={100}
+                                  sizes="(max-width: 768px) 100vw, 50vw"
+                                  priority
+                                />
                               </div>
                             </motion.div>
                           ))}

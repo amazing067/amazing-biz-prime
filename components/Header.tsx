@@ -2,7 +2,7 @@
 
 import { useState, useEffect, useRef } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { Menu, X, LogIn, Home } from "lucide-react";
+import { Menu, X, LogIn, Home, ChevronDown } from "lucide-react";
 import Link from "next/link";
 import Image from "next/image";
 import { usePathname } from "next/navigation";
@@ -130,6 +130,49 @@ export default function Header() {
               <span>어메이징 사업부</span>
             </Link>
 
+            {/* 업무지원 드롭다운 */}
+            <div className="relative" ref={dropdownRef}>
+              <button
+                onClick={() => setOpenDropdown(openDropdown === "support" ? null : "support")}
+                className={`flex items-center space-x-1 text-slate-700 hover:text-electric-blue transition-colors font-medium ${
+                  openDropdown === "support" ? "text-electric-blue" : ""
+                }`}
+              >
+                <span>업무지원</span>
+                <ChevronDown 
+                  className={`w-4 h-4 transition-transform ${
+                    openDropdown === "support" ? "rotate-180" : ""
+                  }`}
+                />
+              </button>
+
+              <AnimatePresence>
+                {openDropdown === "support" && (
+                  <motion.div
+                    initial={{ opacity: 0, y: -10 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    exit={{ opacity: 0, y: -10 }}
+                    className="absolute top-full left-0 mt-2 w-48 bg-white rounded-lg shadow-lg border border-slate-200 overflow-hidden"
+                  >
+                    <Link
+                      href="/support/business-card"
+                      onClick={() => setOpenDropdown(null)}
+                      className="block px-4 py-3 text-slate-700 hover:bg-slate-50 hover:text-electric-blue transition-colors"
+                    >
+                      명함신청
+                    </Link>
+                    <Link
+                      href="/support/badge"
+                      onClick={() => setOpenDropdown(null)}
+                      className="block px-4 py-3 text-slate-700 hover:bg-slate-50 hover:text-electric-blue transition-colors border-t border-slate-100"
+                    >
+                      명찰신청
+                    </Link>
+                  </motion.div>
+                )}
+              </AnimatePresence>
+            </div>
+
             {/* 입사문의 */}
             <a
               href="#recruit"
@@ -189,6 +232,52 @@ export default function Header() {
               >
                 어메이징 사업부
               </Link>
+
+              {/* 업무지원 */}
+              <div className="mb-2">
+                <button
+                  onClick={() => setOpenDropdown(openDropdown === "support-mobile" ? null : "support-mobile")}
+                  className="flex items-center justify-between w-full font-semibold text-slate-900 hover:text-electric-blue transition-colors"
+                >
+                  <span>업무지원</span>
+                  <ChevronDown 
+                    className={`w-4 h-4 transition-transform ${
+                      openDropdown === "support-mobile" ? "rotate-180" : ""
+                    }`}
+                  />
+                </button>
+                <AnimatePresence>
+                  {openDropdown === "support-mobile" && (
+                    <motion.div
+                      initial={{ opacity: 0, height: 0 }}
+                      animate={{ opacity: 1, height: "auto" }}
+                      exit={{ opacity: 0, height: 0 }}
+                      className="mt-2 ml-4 space-y-2"
+                    >
+                      <Link
+                        href="/support/business-card"
+                        onClick={() => {
+                          setIsMobileMenuOpen(false);
+                          setOpenDropdown(null);
+                        }}
+                        className="block text-slate-700 hover:text-electric-blue transition-colors"
+                      >
+                        명함신청
+                      </Link>
+                      <Link
+                        href="/support/badge"
+                        onClick={() => {
+                          setIsMobileMenuOpen(false);
+                          setOpenDropdown(null);
+                        }}
+                        className="block text-slate-700 hover:text-electric-blue transition-colors"
+                      >
+                        명찰신청
+                      </Link>
+                    </motion.div>
+                  )}
+                </AnimatePresence>
+              </div>
 
               {/* 입사문의 */}
               <a
