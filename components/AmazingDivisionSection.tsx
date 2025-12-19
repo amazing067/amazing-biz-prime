@@ -93,7 +93,9 @@ const directors = [
     fullName: "067본부",
     directorName: "윤성옥 본부장",
     image: "/067본부윤성옥본부장님.jpg",
-    description: "어메이징 사업부 067본부 본부장은 보험 영업 분야의 전문가로서, 체계적인 시스템과 혁신적인 접근으로 설계사들의 성공을 지원합니다.",
+    title: ["수익보다 신뢰를,", "보험 그 이상의 가치를 증명하겠습니다"],
+    description: "안녕하십니까, 어메이징사업부 067본부 대표 윤성옥입니다.\n\n보험은 가족의 삶을 지키는 가장 신중한 선택이어야 합니다.\n저희 어메이징사업부는 국내 33개 보험사의 상품을 객관적으로 비교하여, 고객의 상황에 가장 필요한 보장만을 정직하게 제안합니다.\n\n단순히 상품을 판매하는 조직이 아닌, 고객의 이야기를 경청하고 함께 미래를 고민하는 파트너가 되겠습니다.\n대한민국에서 가장 신뢰받는 보험 전문 조직으로서, 언제나 한결같은 마음으로 고객 곁을 지킬 것을 약속드립니다.",
+    signature: "/067본부윤성옥서명.png",
   },
   {
     id: "290",
@@ -101,7 +103,9 @@ const directors = [
     fullName: "290본부",
     directorName: "양창대 본부장",
     image: "/290본부양창대본부장님.jpg",
-    description: "어메이징 사업부 290본부 본부장은 보험 영업 분야의 전문가로서, 체계적인 시스템과 혁신적인 접근으로 설계사들의 성공을 지원합니다.",
+    title: ["객관적인 데이터와 전문성으로", "고객의 신뢰를 지키겠습니다"],
+    description: "안녕하십니까, 어메이징사업부 본부장 양창대입니다.\n\n보험은 불확실한 미래를 대비하는 가장 확실한 수단입니다.\n하지만 수많은 상품 속에서 나에게 꼭 필요한 보장을 찾기란 결코 쉽지 않습니다.\n\n저희 어메이징사업부는 국내 33개 보험사를 정밀하게 분석하여, 고객의 상황에 가장 최적화된 선택지를 제공하는 데 집중하고 있습니다. 단순한 판매를 넘어, 투명한 정보 제공과 객관적인 비교 시스템을 통해 보험의 본질적인 가치를 전달하고자 합니다.\n\n고객님의 소중한 자산과 일상을 지킨다는 책임감으로, 언제나 정직하고 실력 있는 파트너가 될 것을 약속드립니다.",
+    signature: "/290본부양창대서명.png",
   },
   {
     id: "292",
@@ -109,7 +113,9 @@ const directors = [
     fullName: "292본부",
     directorName: "권성숙 본부장",
     image: "/292본부권성숙본부장님.png",
-    description: "어메이징 사업부 292본부 본부장은 보험 영업 분야의 전문가로서, 체계적인 시스템과 혁신적인 접근으로 설계사들의 성공을 지원합니다.",
+    title: ["기업 경영의 안정성을 완성하는", "전략적 리스크 관리 파트너"],
+    description: "안녕하십니까, 어메이징사업부 292본부 본부장 권성숙입니다.\n\n법인 보험은 세무, 노무, 가업 승계 등 기업 경영 전반과 밀접하게 맞물려 있는 고도의 전략 영역입니다. 292본부는 법인 영업 전문 조직으로서, 기업이 직면할 수 있는 다양한 위험 요소를 선제적으로 분석하고 실질적인 해결책을 제시합니다.\n\n국내 유수의 보험 플랜을 통합 비교하여 귀사의 경영 환경에 가장 부합하는 최적의 솔루션을 설계해 드립니다. 전문적인 식견과 정직한 컨설팅을 통해 기업의 가치를 높이고, 지속 가능한 성장의 든든한 조력자가 될 것을 약속드립니다.",
+    signature: "/292본부권성숙서명.png",
   },
 ];
 
@@ -118,16 +124,16 @@ export default function AmazingDivisionSection() {
   const [selectedDirector, setSelectedDirector] = useState("067");
 
   return (
-    <section className="py-32 bg-gradient-to-b from-cool-gray to-white">
+    <section className="py-12 md:py-16 bg-gradient-to-b from-cool-gray to-white">
       <div className="max-w-7xl mx-auto px-6 lg:px-8">
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, margin: "-100px" }}
           transition={{ duration: 0.8 }}
-          className="text-center mb-20"
+          className="text-center mb-8 md:mb-10"
         >
-          <h2 className="text-4xl md:text-5xl font-bold text-slate-900 mb-4">
+          <h2 className="text-4xl md:text-5xl font-bold text-slate-900 mb-3">
             어메이징 사업부
           </h2>
           <p className="text-xl text-slate-600 font-light">
@@ -136,7 +142,7 @@ export default function AmazingDivisionSection() {
         </motion.div>
 
         {/* Tab Navigation */}
-        <div className="mb-12">
+        <div className="mb-8">
           <div className="flex flex-wrap justify-center gap-2">
             {tabs.map((tab) => {
               const Icon = tab.icon;
@@ -161,7 +167,7 @@ export default function AmazingDivisionSection() {
         </div>
 
         {/* Tab Content */}
-        <div className="min-h-[500px]">
+        <div className="min-h-[400px]">
           <AnimatePresence mode="wait">
             {activeTab === "director" && (
               <motion.div
@@ -173,25 +179,25 @@ export default function AmazingDivisionSection() {
                 transition={{ duration: 0.3 }}
                 className="scroll-mt-20"
               >
-                <div className="glass rounded-3xl p-12 shadow-soft border border-slate-200/50">
-                  <h3 className="text-3xl font-bold text-slate-900 mb-8 text-center">
+                <div className="glass rounded-3xl p-4 md:p-6 lg:p-8 shadow-soft border border-slate-200/50">
+                  <h3 className="text-xl md:text-2xl lg:text-3xl font-bold text-slate-900 mb-4 md:mb-6 text-center">
                     본부장 소개
                   </h3>
                   
-                  <div className="flex flex-col lg:flex-row gap-8">
+                  <div className="flex flex-col lg:flex-row gap-6">
                     {/* 왼쪽: 본부 선택 버튼 */}
-                    <div className="lg:w-auto">
-                      <h4 className="text-lg font-semibold text-slate-900 mb-4">
+                    <div className="lg:w-auto w-full">
+                      <h4 className="text-base md:text-lg font-semibold text-slate-900 mb-3">
                         본부 선택
                       </h4>
-                      <div className="space-y-3">
+                      <div className="space-y-2 md:space-y-3">
                         {directors.map((director) => (
                           <motion.button
                             key={director.id}
                             onClick={() => setSelectedDirector(director.id)}
                             whileHover={{ scale: 1.02, x: 4 }}
                             whileTap={{ scale: 0.98 }}
-                            className={`block w-fit text-left px-6 py-3 rounded-xl font-medium transition-all ${
+                            className={`block w-full md:w-fit text-left px-4 md:px-6 py-2.5 md:py-3 rounded-xl font-medium transition-all text-sm md:text-base ${
                               selectedDirector === director.id
                                 ? "bg-electric-blue text-white shadow-lg"
                                 : "bg-white text-slate-700 border border-slate-200 hover:border-electric-blue hover:shadow-md"
@@ -204,7 +210,7 @@ export default function AmazingDivisionSection() {
                     </div>
 
                     {/* 오른쪽: 선택된 본부장 정보 */}
-                    <div className="flex-1">
+                    <div className="flex-1 min-w-0">
                       <AnimatePresence mode="wait">
                         {directors
                           .filter((d) => d.id === selectedDirector)
@@ -215,20 +221,47 @@ export default function AmazingDivisionSection() {
                               animate={{ opacity: 1, x: 0 }}
                               exit={{ opacity: 0, x: -20 }}
                               transition={{ duration: 0.3 }}
-                              className="grid grid-cols-1 md:grid-cols-2 gap-8 items-start"
+                              className="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-6 items-center"
                             >
-                              <div>
-                                <h4 className="text-2xl font-bold text-slate-900 mb-2">
+                              <div className="order-2 md:order-1">
+                                <h4 className="text-xl md:text-2xl font-bold text-slate-900 mb-2 tracking-tight">
                                   {director.directorName}
                                 </h4>
-                                <p className="text-slate-600 mb-4 text-sm">
+                                <p className="text-slate-600 mb-3 md:mb-4 text-xs md:text-sm font-medium">
                                   {director.fullName}
                                 </p>
-                                <p className="text-slate-600 leading-relaxed text-lg">
+                                {director.title && (
+                                  <div className="mb-4 md:mb-6 pb-3 md:pb-4 border-b-2 border-electric-blue/30 text-center">
+                                    <h5 className="text-base md:text-xl lg:text-2xl font-extrabold bg-gradient-to-r from-electric-blue via-blue-600 to-electric-blue bg-clip-text text-transparent leading-tight tracking-tight px-2">
+                                      {Array.isArray(director.title) ? (
+                                        <>
+                                          {director.title[0]}
+                                          <br />
+                                          {director.title[1]}
+                                        </>
+                                      ) : (
+                                        director.title
+                                      )}
+                                    </h5>
+                                  </div>
+                                )}
+                                <p className="text-slate-700 leading-relaxed text-sm md:text-base lg:text-lg whitespace-pre-line mb-3 md:mb-4 font-medium tracking-wide">
                                   {director.description}
                                 </p>
+                                {director.signature && (
+                                  <div className="mt-3 md:mt-4 text-center">
+                                    <Image
+                                      src={director.signature}
+                                      alt={`${director.directorName} 서명`}
+                                      width={400}
+                                      height={150}
+                                      className="object-contain mx-auto w-full max-w-[280px] md:max-w-[350px] h-auto"
+                                      quality={100}
+                                    />
+                                  </div>
+                                )}
                               </div>
-                              <div className="relative bg-gradient-to-br from-slate-100 to-slate-200 rounded-2xl aspect-square overflow-hidden shadow-lg">
+                              <div className="relative bg-gradient-to-br from-slate-100 to-slate-200 rounded-2xl aspect-square overflow-hidden shadow-lg order-1 md:order-2 w-full max-w-[300px] md:max-w-none mx-auto md:mx-0">
                                 <Image
                                   src={director.image}
                                   alt={`${director.directorName} 사진`}
@@ -237,6 +270,8 @@ export default function AmazingDivisionSection() {
                                   style={
                                     director.id === "067" || director.id === "292"
                                       ? { objectPosition: "center top" }
+                                      : director.id === "290"
+                                      ? { objectPosition: "center 30%" }
                                       : {}
                                   }
                                   quality={100}

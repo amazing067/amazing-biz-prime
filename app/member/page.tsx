@@ -1,15 +1,198 @@
 "use client";
 
 import { motion } from "framer-motion";
+import { useState } from "react";
+import { useRouter } from "next/navigation";
 import { LogIn, Lock, Video, BookOpen } from "lucide-react";
 import Link from "next/link";
 import Header from "@/components/Header";
+import { supabase } from "@/lib/supabase";
 
 export default function MemberPage() {
+  const router = useRouter();
+  const [username, setUsername] = useState("");
+  const [password, setPassword] = useState("");
+  const [error, setError] = useState("");
+  const [loading, setLoading] = useState(false);
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setError("");
+    setLoading(true);
+
+    try {
+      // 아이디를 이메일 형식으로 변환
+      const autoEmail = `${username}@amazing-biz.com`;
+      
+      const { data, error: signInError } = await supabase.auth.signInWithPassword({
+        email: autoEmail,
+        password,
+      });
+
+      if (signInError) {
+        // "Email not confirmed" 에러인 경우 이메일 확인 없이 직접 프로필 조회 시도
+        if (signInError.message.includes('Email not confirmed') || signInError.message.includes('email_not_confirmed')) {
+          // 이메일 확인 API 호출 (백그라운드, 결과 무시)
+          fetch('/api/confirm-email', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ email: autoEmail }),
+          }).catch(() => {}); // 에러 무시
+
+          // 바로 프로필 조회 시도 (이메일 확인 없이)
+          try {
+            const profileResponse = await fetch('/api/get-profile', {
+              method: 'POST',
+              headers: { 'Content-Type': 'application/json' },
+              body: JSON.stringify({ 
+                email: autoEmail,
+                password: password,
+              }),
+            });
+
+            if (profileResponse.ok) {
+              const { profile } = await profileResponse.json();
+              
+              if (profile) {
+                if (!profile.approved) {
+                  setError("관리자 승인 후 이용하실 수 있습니다. 승인 대기 중입니다.");
+                  setLoading(false);
+                  return;
+                }
+
+                if (profile.is_admin) {
+                  router.push("/member/dashboard");
+                } else {
+                  // 일반 회원 로그인 성공 - 설계사 교육방으로 이동
+                  router.push("/member/education");
+                }
+                return;
+              }
+            } else {
+              const errorData = await profileResponse.json().catch(() => ({}));
+              console.error('프로필 조회 실패:', errorData);
+              setError(errorData.error || "로그인에 실패했습니다. 비밀번호를 확인해주세요.");
+              setLoading(false);
+              return;
+            }
+          } catch (profileErr) {
+            console.error('프로필 조회 예외:', profileErr);
+            setError("로그인에 실패했습니다. 비밀번호를 확인해주세요.");
+            setLoading(false);
+            return;
+          }
+        }
+        
+        // 다른 에러인 경우
+        setError(signInError.message);
+        setLoading(false);
+        return;
+      }
+
+      // 로그인 성공한 경우
+      if (data.user) {
+        // 사용자 프로필 가져오기
+        const { data: profile, error: profileError } = await supabase
+          .from('profiles')
+          .select('*')
+          .eq('id', data.user.id)
+          .single();
+
+        if (profileError || !profile) {
+          // 프로필이 없는 경우 (트리거가 작동하지 않았을 수 있음)
+          console.error('프로필 조회 에러:', profileError);
+          
+          // 프로필이 없으면 자동 생성 시도
+          if (profileError?.code === 'PGRST116' || !profile) {
+            // auth.users의 metadata에서 정보 가져오기
+            const userMetadata = data.user.user_metadata || {};
+            
+            try {
+              // 서버 사이드 API를 통해 프로필 생성 (RLS 우회)
+              const createResponse = await fetch('/api/create-profile', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({
+                  userId: data.user.id,
+                  name: userMetadata.name || '',
+                  phone: userMetadata.phone || '',
+                  branch: userMetadata.branch || '',
+                  office: userMetadata.office || '',
+                  position: userMetadata.position || '',
+                }),
+              });
+
+              if (!createResponse.ok) {
+                const errorData = await createResponse.json();
+                console.error('프로필 생성 에러:', errorData);
+                setError(`프로필 생성 중 오류가 발생했습니다: ${errorData.error || '알 수 없는 오류'}`);
+                setLoading(false);
+                return;
+              }
+
+              const { profile: newProfile } = await createResponse.json();
+
+              if (!newProfile) {
+                setError("프로필을 생성했지만 불러올 수 없습니다. 잠시 후 다시 시도해주세요.");
+                setLoading(false);
+                return;
+              }
+
+              // 새로 생성된 프로필 사용
+              const finalProfile = newProfile;
+
+              // 승인되지 않은 사용자
+              if (!finalProfile.approved) {
+                setError("관리자 승인 후 이용하실 수 있습니다. 승인 대기 중입니다.");
+                setLoading(false);
+                return;
+              }
+
+              // 관리자인 경우 회원관리 페이지로 이동
+              if (finalProfile.is_admin) {
+                router.push("/member/dashboard");
+              } else {
+                // 일반 회원 로그인 성공 - 설계사 교육방으로 이동
+                router.push("/member/education");
+              }
+              return;
+            } catch (createErr: any) {
+              setError(`프로필 생성 중 오류가 발생했습니다: ${createErr.message}`);
+              setLoading(false);
+              return;
+            }
+          }
+
+          setError(`프로필을 불러올 수 없습니다: ${profileError?.message || '알 수 없는 오류'}`);
+          setLoading(false);
+          return;
+        }
+
+        // 승인되지 않은 사용자
+        if (!profile.approved) {
+          setError("관리자 승인 후 이용하실 수 있습니다. 승인 대기 중입니다.");
+          setLoading(false);
+          return;
+        }
+
+        // 관리자인 경우 회원관리 페이지로 이동
+        if (profile.is_admin) {
+          router.push("/member/dashboard");
+        } else {
+          // 일반 회원 로그인 성공 - 설계사 교육방으로 이동
+          router.push("/member/education");
+        }
+      }
+    } catch (err: any) {
+      setError(err.message || "로그인 중 오류가 발생했습니다.");
+    } finally {
+      setLoading(false);
+    }
+  };
   return (
     <main className="min-h-screen bg-gradient-to-b from-white to-cool-gray">
       <Header />
-      <div className="max-w-4xl mx-auto px-6 lg:px-8 py-32 pt-32">
+      <div className="max-w-6xl mx-auto px-6 lg:px-8 py-32 pt-32">
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
@@ -92,16 +275,17 @@ export default function MemberPage() {
         </div>
 
         {/* 로그인 폼 영역 */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.4 }}
-          className="glass rounded-3xl p-10 shadow-soft border border-slate-200/50"
-        >
+        <div className="max-w-md mx-auto">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.4 }}
+            className="glass rounded-3xl p-10 shadow-soft border border-slate-200/50"
+          >
           <h3 className="text-2xl font-bold text-slate-900 mb-6 text-center">
             로그인
           </h3>
-          <form className="space-y-4">
+          <form onSubmit={handleSubmit} className="space-y-4">
             <div>
               <label
                 htmlFor="username"
@@ -112,6 +296,9 @@ export default function MemberPage() {
               <input
                 type="text"
                 id="username"
+                required
+                value={username}
+                onChange={(e) => setUsername(e.target.value)}
                 className="w-full px-4 py-3 rounded-xl border border-slate-200 bg-white focus:outline-none focus:ring-2 focus:ring-electric-blue focus:border-transparent transition-all"
                 placeholder="아이디를 입력하세요"
               />
@@ -126,20 +313,38 @@ export default function MemberPage() {
               <input
                 type="password"
                 id="password"
+                required
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
                 className="w-full px-4 py-3 rounded-xl border border-slate-200 bg-white focus:outline-none focus:ring-2 focus:ring-electric-blue focus:border-transparent transition-all"
                 placeholder="비밀번호를 입력하세요"
               />
             </div>
+            {error && (
+              <div className="bg-red-50 border border-red-200 text-red-700 px-4 py-3 rounded-xl">
+                {error}
+              </div>
+            )}
             <motion.button
               type="submit"
-              whileHover={{ scale: 1.02 }}
-              whileTap={{ scale: 0.98 }}
-              className="w-full bg-gradient-to-r from-electric-blue to-blue-600 text-white font-semibold py-4 rounded-xl shadow-lg hover:shadow-xl transition-all"
+              disabled={loading}
+              whileHover={{ scale: loading ? 1 : 1.02 }}
+              whileTap={{ scale: loading ? 1 : 0.98 }}
+              className="w-full bg-gradient-to-r from-electric-blue to-blue-600 text-white font-semibold py-4 rounded-xl shadow-lg hover:shadow-xl transition-all disabled:opacity-50 disabled:cursor-not-allowed"
             >
-              로그인
+              {loading ? "로그인 중..." : "로그인"}
             </motion.button>
           </form>
-        </motion.div>
+          <div className="mt-6 text-center">
+            <Link
+              href="/member/signup"
+              className="text-electric-blue hover:text-blue-700 font-medium transition-colors"
+            >
+              회원가입
+            </Link>
+          </div>
+          </motion.div>
+        </div>
 
         {/* 홈으로 돌아가기 */}
         <motion.div

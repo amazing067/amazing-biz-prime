@@ -2,10 +2,11 @@
 
 import { useState, useEffect, useRef } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { Menu, X, LogIn, Home, ChevronDown } from "lucide-react";
+import { Menu, X, LogIn, Home, ChevronDown, Users, Video } from "lucide-react";
 import Link from "next/link";
 import Image from "next/image";
 import { usePathname } from "next/navigation";
+import { supabase } from "@/lib/supabase";
 
 export default function Header() {
   const pathname = usePathname();
@@ -13,6 +14,9 @@ export default function Header() {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [openDropdown, setOpenDropdown] = useState<string | null>(null);
   const dropdownRef = useRef<HTMLDivElement>(null);
+  const [isAdmin, setIsAdmin] = useState(false);
+  const [userProfile, setUserProfile] = useState<any>(null);
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
 
   // 하단 바 제거됨 - 탭 구조로 변경
 
@@ -35,6 +39,50 @@ export default function Header() {
     };
     document.addEventListener("mousedown", handleClickOutside);
     return () => document.removeEventListener("mousedown", handleClickOutside);
+  }, []);
+
+  // 사용자 로그인 상태 및 프로필 확인
+  useEffect(() => {
+    const checkUser = async () => {
+      try {
+        const { data: { user } } = await supabase.auth.getUser();
+        if (user) {
+          const { data: profile } = await supabase
+            .from('profiles')
+            .select('*')
+            .eq('id', user.id)
+            .single();
+          
+          if (profile && profile.approved) {
+            setIsLoggedIn(true);
+            // email에서 아이디 추출 (@ 앞부분)
+            const username = user.email?.split('@')[0] || '';
+            setUserProfile({ ...profile, username });
+            if (profile.is_admin) {
+              setIsAdmin(true);
+            }
+          }
+        }
+      } catch (error) {
+        // 에러 무시
+      }
+    };
+    checkUser();
+
+    // 인증 상태 변경 감지
+    const { data: { subscription } } = supabase.auth.onAuthStateChange((event, session) => {
+      if (session) {
+        checkUser();
+      } else {
+        setIsLoggedIn(false);
+        setUserProfile(null);
+        setIsAdmin(false);
+      }
+    });
+
+    return () => {
+      subscription.unsubscribe();
+    };
   }, []);
 
 
@@ -73,39 +121,32 @@ export default function Header() {
           : "bg-transparent"
       }`}
     >
-      <nav className="max-w-7xl mx-auto px-6 lg:px-8">
-        <div className="flex items-center justify-between h-20">
+      <nav className="max-w-7xl mx-auto px-4 lg:px-6">
+        <div className="flex items-center justify-between h-20 gap-2">
           <motion.a
             href="/"
             whileHover={{ scale: 1.05 }}
-            className="text-2xl font-bold text-gradient flex items-center space-x-2"
+            className="text-xl font-bold text-gradient flex items-center space-x-2 flex-shrink-0"
             onClick={(e) => {
               e.preventDefault();
               window.scrollTo({ top: 0, behavior: "smooth" });
             }}
           >
-            <span>
+            <span className="whitespace-nowrap">
               Prime Asset
               <span className="text-slate-600"> Amazing</span>
             </span>
           </motion.a>
 
           {/* Desktop Menu */}
-          <div className="hidden lg:flex items-center space-x-6">
+          <div className="hidden lg:flex items-center space-x-4 flex-shrink-0">
             {/* 홈 버튼 */}
             {pathname !== "/" && (
               <Link
                 href="/"
-                className="flex items-center space-x-2 text-slate-700 hover:text-electric-blue transition-colors font-medium"
+                className="flex items-center space-x-1 text-slate-700 hover:text-electric-blue transition-colors text-base font-medium whitespace-nowrap"
               >
-                <Image
-                  src="/prime-logo.png"
-                  alt="Prime Asset"
-                  width={100}
-                  height={32}
-                  className="h-8 w-auto"
-                />
-                <Home className="w-4 h-4" />
+                <Home className="w-5 h-5" />
                 <span>홈</span>
               </Link>
             )}
@@ -113,28 +154,28 @@ export default function Header() {
             {/* 프라임에셋 소개 */}
             <Link
               href="/prime-asset"
-              className={`flex items-center space-x-1 text-slate-700 hover:text-electric-blue transition-colors font-medium ${
+              className={`text-slate-700 hover:text-electric-blue transition-colors text-base font-medium whitespace-nowrap ${
                 pathname === "/prime-asset" ? "text-electric-blue" : ""
               }`}
             >
-              <span>프라임에셋 소개</span>
+              프라임에셋 소개
             </Link>
 
             {/* 어메이징 사업부 */}
             <Link
               href="/amazing"
-              className={`flex items-center space-x-1 text-slate-700 hover:text-electric-blue transition-colors font-medium ${
+              className={`text-slate-700 hover:text-electric-blue transition-colors text-base font-medium whitespace-nowrap ${
                 pathname === "/amazing" ? "text-electric-blue" : ""
               }`}
             >
-              <span>어메이징 사업부</span>
+              어메이징 사업부
             </Link>
 
             {/* 업무지원 드롭다운 */}
             <div className="relative" ref={dropdownRef}>
               <button
                 onClick={() => setOpenDropdown(openDropdown === "support" ? null : "support")}
-                className={`flex items-center space-x-1 text-slate-700 hover:text-electric-blue transition-colors font-medium ${
+                className={`flex items-center space-x-1 text-slate-700 hover:text-electric-blue transition-colors text-base font-medium whitespace-nowrap ${
                   openDropdown === "support" ? "text-electric-blue" : ""
                 }`}
               >
@@ -180,19 +221,53 @@ export default function Header() {
                 e.preventDefault();
                 handleMenuClick("#recruit");
               }}
-              className="text-slate-700 hover:text-electric-blue transition-colors font-medium"
+              className="text-slate-700 hover:text-electric-blue transition-colors text-base font-medium whitespace-nowrap"
             >
               입사문의
             </a>
 
-            {/* 회원전용방 버튼 */}
-            <a
-              href="/member"
-              className="flex items-center space-x-2 px-4 py-2 bg-electric-blue text-white rounded-lg hover:bg-blue-600 transition-colors font-medium"
-            >
-              <LogIn className="w-4 h-4" />
-              <span>회원전용</span>
-            </a>
+            {/* 로그인한 경우: 교육동영상 링크 및 사용자 정보 */}
+            {isLoggedIn && userProfile ? (
+              <>
+                <Link
+                  href="/member/education"
+                  className="flex items-center space-x-2 px-4 py-2 bg-gradient-to-r from-emerald-500 to-teal-500 text-white rounded-lg hover:from-emerald-600 hover:to-teal-600 transition-colors text-base font-medium whitespace-nowrap h-[42px]"
+                >
+                  <Video className="w-5 h-5" />
+                  <span>교육동영상</span>
+                </Link>
+                <div className="flex items-center px-4 py-2 animated-gradient-bg rounded-lg border border-slate-200 whitespace-nowrap h-[42px]">
+                  <div className="flex flex-col justify-center">
+                    <div className="text-sm font-semibold text-slate-900 leading-tight">
+                      {userProfile.name || '사용자'}
+                    </div>
+                    <div className="text-xs text-slate-600 truncate max-w-[140px] leading-tight">
+                      {userProfile.position || ''} | {userProfile.branch || ''}
+                    </div>
+                  </div>
+                </div>
+              </>
+            ) : (
+              /* 로그인하지 않은 경우: 회원전용 버튼 */
+              <a
+                href="/member"
+                className="flex items-center space-x-2 px-4 py-2 bg-electric-blue text-white rounded-lg hover:bg-blue-600 transition-colors text-base font-medium whitespace-nowrap"
+              >
+                <LogIn className="w-5 h-5" />
+                <span>회원전용</span>
+              </a>
+            )}
+
+            {/* 회원관리 버튼 (관리자만 표시) */}
+            {isAdmin && (
+              <Link
+                href="/member/dashboard"
+                className="flex items-center space-x-2 px-4 py-2 bg-purple-600 text-white rounded-lg hover:bg-purple-700 transition-colors text-base font-medium whitespace-nowrap"
+              >
+                <Users className="w-5 h-5" />
+                <span>회원관리</span>
+              </Link>
+            )}
           </div>
 
           {/* Mobile Menu Button */}
@@ -291,14 +366,48 @@ export default function Header() {
                 입사문의
               </a>
 
-              {/* 회원전용방 */}
-              <a
-                href="/member"
-                className="flex items-center justify-center space-x-2 px-4 py-2 bg-electric-blue text-white rounded-lg hover:bg-blue-600 transition-colors font-medium"
-              >
-                <LogIn className="w-4 h-4" />
-                <span>회원전용</span>
-              </a>
+              {/* 로그인한 경우: 교육동영상 링크 및 사용자 정보 */}
+              {isLoggedIn && userProfile ? (
+                <>
+                  <Link
+                    href="/member/education"
+                    onClick={() => setIsMobileMenuOpen(false)}
+                    className="flex items-center justify-center space-x-2 px-4 py-2 bg-gradient-to-r from-emerald-500 to-teal-500 text-white rounded-lg hover:from-emerald-600 hover:to-teal-600 transition-colors font-medium"
+                  >
+                    <Video className="w-4 h-4" />
+                    <span>교육동영상</span>
+                  </Link>
+                  <div className="px-4 py-3 bg-slate-50 rounded-lg border border-slate-200">
+                    <div className="text-sm font-semibold text-slate-900 mb-1">
+                      {userProfile.name || '사용자'}
+                    </div>
+                    <div className="text-xs text-slate-600">
+                      {userProfile.position || ''} | {userProfile.branch || ''}
+                    </div>
+                  </div>
+                </>
+              ) : (
+                /* 로그인하지 않은 경우: 회원전용 버튼 */
+                <a
+                  href="/member"
+                  className="flex items-center justify-center space-x-2 px-4 py-2 bg-electric-blue text-white rounded-lg hover:bg-blue-600 transition-colors font-medium"
+                >
+                  <LogIn className="w-4 h-4" />
+                  <span>회원전용</span>
+                </a>
+              )}
+
+              {/* 회원관리 버튼 (관리자만 표시) */}
+              {isAdmin && (
+                <Link
+                  href="/member/dashboard"
+                  onClick={() => setIsMobileMenuOpen(false)}
+                  className="flex items-center justify-center space-x-2 px-4 py-2 bg-purple-600 text-white rounded-lg hover:bg-purple-700 transition-colors font-medium"
+                >
+                  <Users className="w-4 h-4" />
+                  <span>회원관리</span>
+                </Link>
+              )}
             </div>
           </motion.div>
         )}

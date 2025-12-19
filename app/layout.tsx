@@ -1,5 +1,13 @@
 import type { Metadata } from "next";
+import { Noto_Serif_KR } from "next/font/google";
 import "./globals.css";
+
+const notoSerifKR = Noto_Serif_KR({
+  weight: ["400", "500", "600", "700"],
+  subsets: ["latin"],
+  display: "swap",
+  variable: "--font-noto-serif",
+});
 
 export const metadata: Metadata = {
   title: "Prime Asset Amazing Division",
@@ -15,7 +23,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="ko">
+    <html lang="ko" className={notoSerifKR.variable}>
       <body>{children}</body>
     </html>
   );
