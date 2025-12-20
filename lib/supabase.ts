@@ -10,5 +10,12 @@ if (typeof window !== 'undefined' && (!supabaseUrl || !supabaseAnonKey)) {
 
 // 환경 변수가 없을 때도 더미 클라이언트를 생성하여 빌드 오류 방지
 export const supabase = supabaseUrl && supabaseAnonKey
-  ? createClient(supabaseUrl, supabaseAnonKey)
+  ? createClient(supabaseUrl, supabaseAnonKey, {
+      auth: {
+        storage: typeof window !== 'undefined' ? window.sessionStorage : undefined,
+        autoRefreshToken: true,
+        persistSession: true,
+        detectSessionInUrl: true
+      }
+    })
   : createClient('https://placeholder.supabase.co', 'placeholder-key')
