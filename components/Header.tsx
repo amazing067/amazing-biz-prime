@@ -1,8 +1,8 @@
 "use client";
 
-import { useState, useEffect, useRef } from "react";
+import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { Menu, X, LogIn, Home, ChevronDown, Users, Video } from "lucide-react";
+import { Menu, X, LogIn, Home, Users, Video } from "lucide-react";
 import Link from "next/link";
 import Image from "next/image";
 import { usePathname } from "next/navigation";
@@ -12,8 +12,6 @@ export default function Header() {
   const pathname = usePathname();
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
-  const [openDropdown, setOpenDropdown] = useState<string | null>(null);
-  const dropdownRef = useRef<HTMLDivElement>(null);
   const [isAdmin, setIsAdmin] = useState(false);
   const [userProfile, setUserProfile] = useState<any>(null);
   const [isLoggedIn, setIsLoggedIn] = useState(false);
@@ -28,18 +26,6 @@ export default function Header() {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
-  useEffect(() => {
-    const handleClickOutside = (event: MouseEvent) => {
-      if (
-        dropdownRef.current &&
-        !dropdownRef.current.contains(event.target as Node)
-      ) {
-        setOpenDropdown(null);
-      }
-    };
-    document.addEventListener("mousedown", handleClickOutside);
-    return () => document.removeEventListener("mousedown", handleClickOutside);
-  }, []);
 
   // 사용자 로그인 상태 및 프로필 확인
   useEffect(() => {
@@ -88,7 +74,6 @@ export default function Header() {
 
   const handleMenuClick = (href: string) => {
     setIsMobileMenuOpen(false);
-    setOpenDropdown(null);
     
     // 메인 페이지가 아니면 메인 페이지로 이동
     if (pathname !== "/") {
@@ -170,49 +155,6 @@ export default function Header() {
             >
               어메이징 사업부
             </Link>
-
-            {/* 업무지원 드롭다운 */}
-            <div className="relative" ref={dropdownRef}>
-              <button
-                onClick={() => setOpenDropdown(openDropdown === "support" ? null : "support")}
-                className={`flex items-center space-x-1 text-slate-700 hover:text-electric-blue transition-colors text-base font-medium whitespace-nowrap ${
-                  openDropdown === "support" ? "text-electric-blue" : ""
-                }`}
-              >
-                <span>업무지원</span>
-                <ChevronDown 
-                  className={`w-4 h-4 transition-transform ${
-                    openDropdown === "support" ? "rotate-180" : ""
-                  }`}
-                />
-              </button>
-
-              <AnimatePresence>
-                {openDropdown === "support" && (
-                  <motion.div
-                    initial={{ opacity: 0, y: -10 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    exit={{ opacity: 0, y: -10 }}
-                    className="absolute top-full left-0 mt-2 w-48 bg-white rounded-lg shadow-lg border border-slate-200 overflow-hidden"
-                  >
-                    <Link
-                      href="/support/business-card"
-                      onClick={() => setOpenDropdown(null)}
-                      className="block px-4 py-3 text-slate-700 hover:bg-slate-50 hover:text-electric-blue transition-colors"
-                    >
-                      명함신청
-                    </Link>
-                    <Link
-                      href="/support/badge"
-                      onClick={() => setOpenDropdown(null)}
-                      className="block px-4 py-3 text-slate-700 hover:bg-slate-50 hover:text-electric-blue transition-colors border-t border-slate-100"
-                    >
-                      명찰신청
-                    </Link>
-                  </motion.div>
-                )}
-              </AnimatePresence>
-            </div>
 
             {/* 입사문의 */}
             <a
@@ -307,52 +249,6 @@ export default function Header() {
               >
                 어메이징 사업부
               </Link>
-
-              {/* 업무지원 */}
-              <div className="mb-2">
-                <button
-                  onClick={() => setOpenDropdown(openDropdown === "support-mobile" ? null : "support-mobile")}
-                  className="flex items-center justify-between w-full font-semibold text-slate-900 hover:text-electric-blue transition-colors"
-                >
-                  <span>업무지원</span>
-                  <ChevronDown 
-                    className={`w-4 h-4 transition-transform ${
-                      openDropdown === "support-mobile" ? "rotate-180" : ""
-                    }`}
-                  />
-                </button>
-                <AnimatePresence>
-                  {openDropdown === "support-mobile" && (
-                    <motion.div
-                      initial={{ opacity: 0, height: 0 }}
-                      animate={{ opacity: 1, height: "auto" }}
-                      exit={{ opacity: 0, height: 0 }}
-                      className="mt-2 ml-4 space-y-2"
-                    >
-                      <Link
-                        href="/support/business-card"
-                        onClick={() => {
-                          setIsMobileMenuOpen(false);
-                          setOpenDropdown(null);
-                        }}
-                        className="block text-slate-700 hover:text-electric-blue transition-colors"
-                      >
-                        명함신청
-                      </Link>
-                      <Link
-                        href="/support/badge"
-                        onClick={() => {
-                          setIsMobileMenuOpen(false);
-                          setOpenDropdown(null);
-                        }}
-                        className="block text-slate-700 hover:text-electric-blue transition-colors"
-                      >
-                        명찰신청
-                      </Link>
-                    </motion.div>
-                  )}
-                </AnimatePresence>
-              </div>
 
               {/* 입사문의 */}
               <a
