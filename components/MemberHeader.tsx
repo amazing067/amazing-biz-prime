@@ -2,7 +2,7 @@
 
 import { useState, useEffect, useRef } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { Menu, X, Home, LogOut } from "lucide-react";
+import { Menu, X, Home, LogOut, Users } from "lucide-react";
 import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
 import { supabase } from "@/lib/supabase";
@@ -98,6 +98,19 @@ export default function MemberHeader() {
               회원라운지
             </Link>
 
+            {/* 회원관리 버튼 (관리자만 표시) */}
+            {userProfile?.is_admin && (
+              <Link
+                href="/member/dashboard"
+                className={`flex items-center space-x-1 text-slate-700 hover:text-electric-blue transition-colors text-sm font-medium whitespace-nowrap ${
+                  pathname === "/member/dashboard" ? "text-electric-blue font-semibold" : ""
+                }`}
+              >
+                <Users className="w-3.5 h-3.5" />
+                <span>회원관리</span>
+              </Link>
+            )}
+
             {/* 사용자 정보 - 콤팩트 */}
             {userProfile && (
               <div className="flex items-center h-8 px-2.5 bg-gradient-to-r from-electric-blue/10 to-blue-50 rounded-md border border-electric-blue/20 whitespace-nowrap">
@@ -158,6 +171,18 @@ export default function MemberHeader() {
               >
                 회원라운지
               </Link>
+
+              {/* 회원관리 버튼 (관리자만 표시) */}
+              {userProfile?.is_admin && (
+                <Link
+                  href="/member/dashboard"
+                  onClick={() => setIsMobileMenuOpen(false)}
+                  className="flex items-center space-x-2 font-semibold text-slate-900 hover:text-electric-blue transition-colors"
+                >
+                  <Users className="w-4 h-4" />
+                  <span>회원관리</span>
+                </Link>
+              )}
 
               {userProfile && (
                 <div className="px-3 py-2 bg-slate-50 rounded-lg border border-slate-200">

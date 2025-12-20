@@ -168,17 +168,17 @@ export default function Header() {
               입사문의
             </a>
 
-            {/* 로그인한 경우: 회원전용 링크 및 사용자 정보 */}
+            {/* 로그인한 경우: 설계사 전용 링크 및 사용자 정보 */}
             {isLoggedIn && userProfile ? (
               <>
                 <Link
                   href="/member/lounge"
-                  className="flex items-center space-x-2 px-4 py-2 bg-gradient-to-r from-electric-blue to-blue-600 text-white rounded-lg hover:from-blue-600 hover:to-blue-700 transition-colors text-base font-medium whitespace-nowrap h-[42px]"
+                  className="flex items-center space-x-1.5 px-3 py-1.5 bg-gradient-to-r from-electric-blue to-blue-600 text-white rounded-md hover:from-blue-600 hover:to-blue-700 transition-colors text-sm font-medium whitespace-nowrap h-8"
                 >
-                  <LogIn className="w-5 h-5" />
-                  <span>회원전용</span>
+                  <LogIn className="w-4 h-4" />
+                  <span>설계사 전용</span>
                 </Link>
-                <div className="flex items-center px-4 py-2 animated-gradient-bg rounded-lg border border-slate-200 whitespace-nowrap h-[42px]">
+                <div className="flex items-center px-3 py-1.5 animated-gradient-bg rounded-md border border-slate-200 whitespace-nowrap h-8">
                   <div className="flex flex-col justify-center">
                     <div className="text-sm font-semibold text-slate-900 leading-tight">
                       {userProfile.name || '사용자'}
@@ -190,13 +190,13 @@ export default function Header() {
                 </div>
               </>
             ) : (
-              /* 로그인하지 않은 경우: 회원전용 버튼 */
+              /* 로그인하지 않은 경우: 설계사 전용 버튼 */
             <a
               href="/member"
-                className="flex items-center space-x-2 px-4 py-2 bg-electric-blue text-white rounded-lg hover:bg-blue-600 transition-colors text-base font-medium whitespace-nowrap"
+                className="flex items-center space-x-1.5 px-3 py-1.5 bg-electric-blue text-white rounded-md hover:bg-blue-600 transition-colors text-sm font-medium whitespace-nowrap h-8"
             >
-                <LogIn className="w-5 h-5" />
-              <span>회원전용</span>
+                <LogIn className="w-4 h-4" />
+              <span>설계사 전용</span>
             </a>
             )}
 
@@ -262,16 +262,16 @@ export default function Header() {
                 입사문의
               </a>
 
-              {/* 로그인한 경우: 회원전용 링크 및 사용자 정보 */}
+              {/* 로그인한 경우: 설계사 전용 링크 및 사용자 정보 */}
               {isLoggedIn && userProfile ? (
                 <>
                   <Link
                     href="/member/lounge"
                     onClick={() => setIsMobileMenuOpen(false)}
-                    className="flex items-center justify-center space-x-2 px-4 py-2 bg-gradient-to-r from-electric-blue to-blue-600 text-white rounded-lg hover:from-blue-600 hover:to-blue-700 transition-colors font-medium"
+                    className="flex items-center justify-center space-x-1.5 px-3 py-1.5 bg-gradient-to-r from-electric-blue to-blue-600 text-white rounded-md hover:from-blue-600 hover:to-blue-700 transition-colors text-sm font-medium"
                   >
-                    <LogIn className="w-4 h-4" />
-                    <span>회원전용</span>
+                    <LogIn className="w-3.5 h-3.5" />
+                    <span>설계사 전용</span>
                   </Link>
                   <div className="px-4 py-3 bg-slate-50 rounded-lg border border-slate-200">
                     <div className="text-sm font-semibold text-slate-900 mb-1">
@@ -283,13 +283,13 @@ export default function Header() {
                   </div>
                 </>
               ) : (
-                /* 로그인하지 않은 경우: 회원전용 버튼 */
+                /* 로그인하지 않은 경우: 설계사 전용 버튼 */
               <a
                 href="/member"
-                className="flex items-center justify-center space-x-2 px-4 py-2 bg-electric-blue text-white rounded-lg hover:bg-blue-600 transition-colors font-medium"
+                className="flex items-center justify-center space-x-1.5 px-3 py-1.5 bg-electric-blue text-white rounded-md hover:bg-blue-600 transition-colors text-sm font-medium"
               >
-                <LogIn className="w-4 h-4" />
-                <span>회원전용</span>
+                <LogIn className="w-3.5 h-3.5" />
+                <span>설계사 전용</span>
               </a>
               )}
 
