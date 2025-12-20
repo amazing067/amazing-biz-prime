@@ -243,7 +243,7 @@ export default function AmazingDivisionSection() {
                                         director.title
                                       )}
                                     </h5>
-                                  </div>
+                                </div>
                                 )}
                                 <p className="text-slate-700 leading-relaxed text-sm md:text-base lg:text-lg whitespace-pre-line mb-3 md:mb-4 font-medium tracking-wide">
                                   {director.description}

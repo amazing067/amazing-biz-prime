@@ -15,7 +15,7 @@ import {
   RefreshCw
 } from "lucide-react";
 import Link from "next/link";
-import Header from "@/components/Header";
+import MemberHeader from "@/components/MemberHeader";
 import { supabase } from "@/lib/supabase";
 
 interface Member {
@@ -209,7 +209,7 @@ export default function DashboardPage() {
 
   return (
     <main className="min-h-screen bg-gradient-to-b from-white to-cool-gray">
-      <Header />
+      <MemberHeader />
       <div className="max-w-7xl mx-auto px-6 lg:px-8 py-32 pt-32">
         {/* 헤더 */}
         <motion.div

@@ -10,11 +10,10 @@ import {
   Play, 
   Download,
   X,
-  LogOut,
   CheckCircle
 } from "lucide-react";
 import Link from "next/link";
-import Header from "@/components/Header";
+import MemberHeader from "@/components/MemberHeader";
 import { supabase } from "@/lib/supabase";
 
 interface EducationFile {
@@ -212,15 +211,11 @@ export default function EducationPage() {
     }
   };
 
-  const handleLogout = async () => {
-    await supabase.auth.signOut();
-    router.push("/member");
-  };
 
   if (loading) {
     return (
       <main className="min-h-screen bg-gradient-to-b from-white to-cool-gray">
-        <Header />
+        <MemberHeader />
         <div className="flex items-center justify-center min-h-screen">
           <div className="text-center">
             <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-electric-blue mx-auto mb-4"></div>
@@ -233,7 +228,7 @@ export default function EducationPage() {
 
   return (
     <main className="min-h-screen bg-gradient-to-b from-white to-cool-gray">
-      <Header />
+      <MemberHeader />
       <div className="max-w-7xl mx-auto px-6 lg:px-8 py-32 pt-32">
         {/* 헤더 */}
         <motion.div
@@ -251,30 +246,21 @@ export default function EducationPage() {
                 어메이징 사업부 설계사 전용 교육 콘텐츠
               </p>
             </div>
-            <div className="flex items-center space-x-4">
-              {userProfile?.is_admin && (
-                <button
-                  onClick={() => {
-                    if (!userProfile?.is_admin) {
-                      alert("업로드는 관리자만 가능합니다.");
-                      return;
-                    }
-                    setShowUploadModal(true);
-                  }}
-                  className="flex items-center space-x-2 bg-gradient-to-r from-electric-blue to-blue-600 text-white px-6 py-3 rounded-xl shadow-lg hover:shadow-xl transition-all"
-                >
-                  <Upload className="w-5 h-5" />
-                  <span>업로드</span>
-                </button>
-              )}
+            {userProfile?.is_admin && (
               <button
-                onClick={handleLogout}
-                className="flex items-center space-x-2 text-slate-600 hover:text-slate-900 px-4 py-2 rounded-xl border border-slate-300 hover:border-slate-400 transition-all"
+                onClick={() => {
+                  if (!userProfile?.is_admin) {
+                    alert("업로드는 관리자만 가능합니다.");
+                    return;
+                  }
+                  setShowUploadModal(true);
+                }}
+                className="flex items-center space-x-2 bg-gradient-to-r from-electric-blue to-blue-600 text-white px-6 py-3 rounded-xl shadow-lg hover:shadow-xl transition-all"
               >
-                <LogOut className="w-5 h-5" />
-                <span>로그아웃</span>
+                <Upload className="w-5 h-5" />
+                <span>업로드</span>
               </button>
-            </div>
+            )}
           </div>
         </motion.div>
 

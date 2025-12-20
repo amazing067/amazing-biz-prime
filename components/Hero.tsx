@@ -291,7 +291,7 @@ export default function Hero() {
                 </div>
               </div>
               <div className="absolute top-3 left-1/2 -translate-x-1/2 w-24 h-5 bg-slate-900 rounded-full" />
-            </div>
+          </div>
             <motion.div
               className="absolute inset-0 bg-purple-500/20 rounded-[2.5rem] blur-2xl -z-10"
               animate={{

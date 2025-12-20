@@ -226,15 +226,15 @@ export default function Header() {
               입사문의
             </a>
 
-            {/* 로그인한 경우: 교육동영상 링크 및 사용자 정보 */}
+            {/* 로그인한 경우: 회원전용 링크 및 사용자 정보 */}
             {isLoggedIn && userProfile ? (
               <>
                 <Link
-                  href="/member/education"
-                  className="flex items-center space-x-2 px-4 py-2 bg-gradient-to-r from-emerald-500 to-teal-500 text-white rounded-lg hover:from-emerald-600 hover:to-teal-600 transition-colors text-base font-medium whitespace-nowrap h-[42px]"
+                  href="/member/lounge"
+                  className="flex items-center space-x-2 px-4 py-2 bg-gradient-to-r from-electric-blue to-blue-600 text-white rounded-lg hover:from-blue-600 hover:to-blue-700 transition-colors text-base font-medium whitespace-nowrap h-[42px]"
                 >
-                  <Video className="w-5 h-5" />
-                  <span>교육동영상</span>
+                  <LogIn className="w-5 h-5" />
+                  <span>회원전용</span>
                 </Link>
                 <div className="flex items-center px-4 py-2 animated-gradient-bg rounded-lg border border-slate-200 whitespace-nowrap h-[42px]">
                   <div className="flex flex-col justify-center">
@@ -249,13 +249,13 @@ export default function Header() {
               </>
             ) : (
               /* 로그인하지 않은 경우: 회원전용 버튼 */
-              <a
-                href="/member"
+            <a
+              href="/member"
                 className="flex items-center space-x-2 px-4 py-2 bg-electric-blue text-white rounded-lg hover:bg-blue-600 transition-colors text-base font-medium whitespace-nowrap"
-              >
+            >
                 <LogIn className="w-5 h-5" />
-                <span>회원전용</span>
-              </a>
+              <span>회원전용</span>
+            </a>
             )}
 
             {/* 회원관리 버튼 (관리자만 표시) */}
@@ -366,16 +366,16 @@ export default function Header() {
                 입사문의
               </a>
 
-              {/* 로그인한 경우: 교육동영상 링크 및 사용자 정보 */}
+              {/* 로그인한 경우: 회원전용 링크 및 사용자 정보 */}
               {isLoggedIn && userProfile ? (
                 <>
                   <Link
-                    href="/member/education"
+                    href="/member/lounge"
                     onClick={() => setIsMobileMenuOpen(false)}
-                    className="flex items-center justify-center space-x-2 px-4 py-2 bg-gradient-to-r from-emerald-500 to-teal-500 text-white rounded-lg hover:from-emerald-600 hover:to-teal-600 transition-colors font-medium"
+                    className="flex items-center justify-center space-x-2 px-4 py-2 bg-gradient-to-r from-electric-blue to-blue-600 text-white rounded-lg hover:from-blue-600 hover:to-blue-700 transition-colors font-medium"
                   >
-                    <Video className="w-4 h-4" />
-                    <span>교육동영상</span>
+                    <LogIn className="w-4 h-4" />
+                    <span>회원전용</span>
                   </Link>
                   <div className="px-4 py-3 bg-slate-50 rounded-lg border border-slate-200">
                     <div className="text-sm font-semibold text-slate-900 mb-1">
@@ -388,13 +388,13 @@ export default function Header() {
                 </>
               ) : (
                 /* 로그인하지 않은 경우: 회원전용 버튼 */
-                <a
-                  href="/member"
-                  className="flex items-center justify-center space-x-2 px-4 py-2 bg-electric-blue text-white rounded-lg hover:bg-blue-600 transition-colors font-medium"
-                >
-                  <LogIn className="w-4 h-4" />
-                  <span>회원전용</span>
-                </a>
+              <a
+                href="/member"
+                className="flex items-center justify-center space-x-2 px-4 py-2 bg-electric-blue text-white rounded-lg hover:bg-blue-600 transition-colors font-medium"
+              >
+                <LogIn className="w-4 h-4" />
+                <span>회원전용</span>
+              </a>
               )}
 
               {/* 회원관리 버튼 (관리자만 표시) */}

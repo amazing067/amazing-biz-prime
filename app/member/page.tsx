@@ -63,8 +63,8 @@ export default function MemberPage() {
                 if (profile.is_admin) {
                   router.push("/member/dashboard");
                 } else {
-                  // 일반 회원 로그인 성공 - 설계사 교육방으로 이동
-                  router.push("/member/education");
+                  // 일반 회원 로그인 성공 - 회원 전용 라운지로 이동
+                  router.push("/member/lounge");
                 }
                 return;
               }
@@ -152,8 +152,8 @@ export default function MemberPage() {
               if (finalProfile.is_admin) {
                 router.push("/member/dashboard");
               } else {
-                // 일반 회원 로그인 성공 - 설계사 교육방으로 이동
-                router.push("/member/education");
+                // 일반 회원 로그인 성공 - 회원 전용 라운지로 이동
+                router.push("/member/lounge");
               }
               return;
             } catch (createErr: any) {
@@ -179,8 +179,8 @@ export default function MemberPage() {
         if (profile.is_admin) {
           router.push("/member/dashboard");
         } else {
-          // 일반 회원 로그인 성공 - 설계사 교육방으로 이동
-          router.push("/member/education");
+          // 일반 회원 로그인 성공 - 회원 전용 라운지로 이동
+          router.push("/member/lounge");
         }
       }
     } catch (err: any) {
@@ -276,12 +276,12 @@ export default function MemberPage() {
 
         {/* 로그인 폼 영역 */}
         <div className="max-w-md mx-auto">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.4 }}
-            className="glass rounded-3xl p-10 shadow-soft border border-slate-200/50"
-          >
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.4 }}
+          className="glass rounded-3xl p-10 shadow-soft border border-slate-200/50"
+        >
           <h3 className="text-2xl font-bold text-slate-900 mb-6 text-center">
             로그인
           </h3>
@@ -343,7 +343,7 @@ export default function MemberPage() {
               회원가입
             </Link>
           </div>
-          </motion.div>
+        </motion.div>
         </div>
 
         {/* 홈으로 돌아가기 */}
