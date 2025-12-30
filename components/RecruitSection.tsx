@@ -38,7 +38,13 @@ export default function RecruitSection() {
       if (!response.ok) {
         const errorData = await response.json();
         console.error("서버 에러 응답:", errorData);
-        throw new Error(errorData.details || errorData.error || "이메일 전송에 실패했습니다.");
+        
+        // 환경 변수 오류인 경우 더 명확한 메시지
+        if (errorData.details?.includes("EMAIL_USER") || errorData.details?.includes("EMAIL_PASS")) {
+          throw new Error("이메일 설정이 완료되지 않았습니다. 관리자에게 문의해주세요.");
+        }
+        
+        throw new Error(errorData.error || errorData.details || "이메일 전송에 실패했습니다.");
       }
 
       // 성공 메시지
@@ -56,7 +62,7 @@ export default function RecruitSection() {
     } catch (error: any) {
       console.error("이메일 전송 실패:", error);
       const errorMessage = error.message || "이메일 전송에 실패했습니다.";
-      alert(`${errorMessage}\n\n서버 콘솔에서 더 자세한 오류 정보를 확인해주세요.`);
+      alert(`프라임에셋.com 내용:\n\n${errorMessage}\n\n서버 콘솔에서 더 자세한 오류 정보를 확인해주세요.`);
     } finally {
       setIsSubmitting(false);
     }
