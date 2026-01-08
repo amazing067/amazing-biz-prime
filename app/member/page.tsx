@@ -10,6 +10,7 @@ import Header from "@/components/Header";
 // 어메이징사업부.com API URL (환경 변수 또는 하드코딩)
 // 개발 환경: http://localhost:3000/api
 // 프로덕션: https://어메이징사업부.com/api
+// 클라이언트 사이드에서는 환경 변수만 사용 (서버 사이드 API Route를 통해 프록시되므로 직접 사용하지 않음)
 const AMAZING_BIZ_API_URL = process.env.NEXT_PUBLIC_AMAZING_BIZ_API_URL || "http://localhost:3000/api";
 
 export default function MemberPage() {
