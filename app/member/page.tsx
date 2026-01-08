@@ -6,7 +6,11 @@ import { useRouter } from "next/navigation";
 import { LogIn, Lock, Video, BookOpen } from "lucide-react";
 import Link from "next/link";
 import Header from "@/components/Header";
-import { supabase } from "@/lib/supabase";
+
+// 어메이징사업부.com API URL (환경 변수 또는 하드코딩)
+// 개발 환경: http://localhost:3000/api
+// 프로덕션: https://어메이징사업부.com/api
+const AMAZING_BIZ_API_URL = process.env.NEXT_PUBLIC_AMAZING_BIZ_API_URL || "http://localhost:3000/api";
 
 export default function MemberPage() {
   const router = useRouter();
@@ -21,169 +25,77 @@ export default function MemberPage() {
     setLoading(true);
 
     try {
-      // 아이디를 이메일 형식으로 변환
-      const autoEmail = `${username}@amazing-biz.com`;
+      // 통합 회원 시스템: Next.js API Route를 통해 프록시 요청 (CORS 문제 해결)
+      console.log('로그인 시도:', { username });
       
-      const { data, error: signInError } = await supabase.auth.signInWithPassword({
-        email: autoEmail,
-        password,
+      const response = await fetch('/api/auth/login', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          username,
+          password,
+          // 통합 회원 시스템: service_type 파라미터 제거 (어디서 가입했든 로그인 가능)
+        }),
       });
 
-      if (signInError) {
-        // "Email not confirmed" 에러인 경우 이메일 확인 없이 직접 프로필 조회 시도
-        if (signInError.message.includes('Email not confirmed') || signInError.message.includes('email_not_confirmed')) {
-          // 이메일 확인 API 호출 (백그라운드, 결과 무시)
-          fetch('/api/confirm-email', {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ email: autoEmail }),
-          }).catch(() => {}); // 에러 무시
+      // 네트워크 오류 체크
+      if (!response) {
+        throw new Error('서버에 연결할 수 없습니다. 네트워크 연결을 확인해주세요.');
+      }
 
-          // 바로 프로필 조회 시도 (이메일 확인 없이)
-          try {
-            const profileResponse = await fetch('/api/get-profile', {
-              method: 'POST',
-              headers: { 'Content-Type': 'application/json' },
-              body: JSON.stringify({ 
-                email: autoEmail,
-                password: password,
-              }),
-            });
+      let data;
+      try {
+        data = await response.json();
+      } catch (jsonError) {
+        console.error('JSON 파싱 오류:', jsonError);
+        throw new Error('서버 응답을 처리할 수 없습니다.');
+      }
 
-            if (profileResponse.ok) {
-              const { profile } = await profileResponse.json();
-              
-              if (profile) {
-                if (!profile.approved) {
-                  setError("관리자 승인 후 이용하실 수 있습니다. 승인 대기 중입니다.");
-                  setLoading(false);
-                  return;
-                }
-
-                if (profile.is_admin) {
-                  router.push("/member/dashboard");
-                } else {
-                  // 일반 회원 로그인 성공 - 회원 전용 라운지로 이동
-                  router.push("/member/lounge");
-                }
-                return;
-              }
-            } else {
-              const errorData = await profileResponse.json().catch(() => ({}));
-              console.error('프로필 조회 실패:', errorData);
-              setError(errorData.error || "로그인에 실패했습니다. 비밀번호를 확인해주세요.");
-              setLoading(false);
-              return;
-            }
-          } catch (profileErr) {
-            console.error('프로필 조회 예외:', profileErr);
-            setError("로그인에 실패했습니다. 비밀번호를 확인해주세요.");
-            setLoading(false);
-            return;
-          }
+      if (!response.ok) {
+        console.error('로그인 오류:', data);
+        
+        // 네트워크 오류인 경우
+        if (!response.status) {
+          setError("서버에 연결할 수 없습니다. 네트워크 연결을 확인해주세요.");
+          setLoading(false);
+          return;
         }
         
-        // 다른 에러인 경우
-        setError(signInError.message);
+        // 서버 오류 메시지 표시
+        setError(data.error || "로그인에 실패했습니다. 아이디와 비밀번호를 확인해주세요.");
         setLoading(false);
         return;
       }
 
-      // 로그인 성공한 경우
-      if (data.user) {
-        // 사용자 프로필 가져오기
-        const { data: profile, error: profileError } = await supabase
-          .from('profiles')
-          .select('*')
-          .eq('id', data.user.id)
-          .single();
-
-        if (profileError || !profile) {
-          // 프로필이 없는 경우 (트리거가 작동하지 않았을 수 있음)
-          console.error('프로필 조회 에러:', profileError);
+        // 로그인 성공
+        if (data.ok && data.token && data.user) {
+          console.log('로그인 성공:', { username: data.user.username, role: data.user.role });
           
-          // 프로필이 없으면 자동 생성 시도
-          if (profileError?.code === 'PGRST116' || !profile) {
-            // auth.users의 metadata에서 정보 가져오기
-            const userMetadata = data.user.user_metadata || {};
-            
-            try {
-              // 서버 사이드 API를 통해 프로필 생성 (RLS 우회)
-              const createResponse = await fetch('/api/create-profile', {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({
-                  userId: data.user.id,
-                  name: userMetadata.name || '',
-                  phone: userMetadata.phone || '',
-                  branch: userMetadata.branch || '',
-                  office: userMetadata.office || '',
-                  position: userMetadata.position || '',
-                }),
-              });
-
-              if (!createResponse.ok) {
-                const errorData = await createResponse.json();
-                console.error('프로필 생성 에러:', errorData);
-                setError(`프로필 생성 중 오류가 발생했습니다: ${errorData.error || '알 수 없는 오류'}`);
-                setLoading(false);
-                return;
-              }
-
-              const { profile: newProfile } = await createResponse.json();
-
-              if (!newProfile) {
-                setError("프로필을 생성했지만 불러올 수 없습니다. 잠시 후 다시 시도해주세요.");
-                setLoading(false);
-                return;
-              }
-
-              // 새로 생성된 프로필 사용
-              const finalProfile = newProfile;
-
-              // 승인되지 않은 사용자
-              if (!finalProfile.approved) {
-                setError("관리자 승인 후 이용하실 수 있습니다. 승인 대기 중입니다.");
-                setLoading(false);
-                return;
-              }
-
-              // 관리자인 경우 회원관리 페이지로 이동
-              if (finalProfile.is_admin) {
-                router.push("/member/dashboard");
-              } else {
-                // 일반 회원 로그인 성공 - 회원 전용 라운지로 이동
-                router.push("/member/lounge");
-              }
-              return;
-            } catch (createErr: any) {
-              setError(`프로필 생성 중 오류가 발생했습니다: ${createErr.message}`);
-              setLoading(false);
-              return;
-            }
-          }
-
-          setError(`프로필을 불러올 수 없습니다: ${profileError?.message || '알 수 없는 오류'}`);
-          setLoading(false);
-          return;
-        }
+          // JWT 토큰과 사용자 정보를 localStorage에 저장
+          localStorage.setItem('token', data.token);
+          localStorage.setItem('user', JSON.stringify(data.user));
+          
+          // 다른 컴포넌트에 로그인 알림 (Header, MemberHeader 등)
+          window.dispatchEvent(new Event('auth-changed'));
 
         // 승인되지 않은 사용자
-        if (!profile.approved) {
+        if (data.user.status !== 'approved' || !data.user.is_active) {
           setError("관리자 승인 후 이용하실 수 있습니다. 승인 대기 중입니다.");
           setLoading(false);
           return;
         }
 
-        // 관리자인 경우 회원관리 페이지로 이동
-        if (profile.is_admin) {
-          router.push("/member/dashboard");
-        } else {
-          // 일반 회원 로그인 성공 - 회원 전용 라운지로 이동
-          router.push("/member/lounge");
-        }
+        // 통합 회원 시스템: 모든 사용자(관리자 포함)는 회원 라운지로 이동
+        // 회원 관리는 어메이징사업부.com에서만 가능
+        router.push("/member/lounge");
+      } else {
+        setError("로그인 응답 형식이 올바르지 않습니다. 관리자에게 문의해주세요.");
+        setLoading(false);
       }
     } catch (err: any) {
+      console.error('로그인 예외:', err);
       setError(err.message || "로그인 중 오류가 발생했습니다.");
     } finally {
       setLoading(false);
@@ -336,12 +248,21 @@ export default function MemberPage() {
             </motion.button>
           </form>
           <div className="mt-6 text-center">
-            <Link
-              href="/member/signup"
-              className="text-electric-blue hover:text-blue-700 font-medium transition-colors"
+            <a
+              href="https://어메이징사업부.com/register"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-electric-blue hover:text-blue-700 font-medium transition-colors inline-flex items-center gap-1"
             >
               회원가입
-            </Link>
+              <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
+              </svg>
+            </a>
+            <p className="text-xs text-slate-500 mt-2">
+              통합 회원 시스템: 어메이징사업부.com에서 가입하시면<br />
+              프라임에셋.com에서도 로그인하실 수 있습니다.
+            </p>
           </div>
         </motion.div>
         </div>

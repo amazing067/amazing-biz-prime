@@ -2,12 +2,11 @@
 
 import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { Menu, X, LogIn, Home, Users, Video } from "lucide-react";
+import { Menu, X, LogIn, Home, Video } from "lucide-react";
 import Link from "next/link";
 import Image from "next/image";
 import { usePathname } from "next/navigation";
-import { supabase } from "@/lib/supabase";
-
+// 통합 회원 시스템: Supabase 제거, localStorage 사용
 export default function Header() {
   const pathname = usePathname();
   const [isScrolled, setIsScrolled] = useState(false);
@@ -26,48 +25,68 @@ export default function Header() {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
-
-  // 사용자 로그인 상태 및 프로필 확인
+  // 통합 회원 시스템: localStorage에서 사용자 정보 확인
   useEffect(() => {
-    const checkUser = async () => {
+    const checkUser = () => {
       try {
-        const { data: { user } } = await supabase.auth.getUser();
-        if (user) {
-          const { data: profile } = await supabase
-            .from('profiles')
-            .select('*')
-            .eq('id', user.id)
-            .single();
+        const token = localStorage.getItem('token');
+        const userStr = localStorage.getItem('user');
+        
+        if (token && userStr) {
+          const user = JSON.parse(userStr);
           
-          if (profile && profile.approved) {
+          // 승인된 사용자만 로그인 상태로 표시
+          if (user.status === 'approved' && user.is_active) {
             setIsLoggedIn(true);
-            // email에서 아이디 추출 (@ 앞부분)
-            const username = user.email?.split('@')[0] || '';
-            setUserProfile({ ...profile, username });
-            if (profile.is_admin) {
+            setUserProfile({
+              username: user.username,
+              name: user.full_name,
+              position: user.role,
+              branch: user.branch_name_text || '',
+              is_admin: user.role === 'amazing' || user.role === 'admin',
+            });
+            if (user.role === 'amazing' || user.role === 'admin') {
               setIsAdmin(true);
             }
+          } else {
+            setIsLoggedIn(false);
+            setUserProfile(null);
+            setIsAdmin(false);
           }
+        } else {
+          setIsLoggedIn(false);
+          setUserProfile(null);
+          setIsAdmin(false);
         }
       } catch (error) {
-        // 에러 무시
-      }
-    };
-    checkUser();
-
-    // 인증 상태 변경 감지
-    const { data: { subscription } } = supabase.auth.onAuthStateChange((event, session) => {
-      if (session) {
-        checkUser();
-      } else {
+        console.error('사용자 정보 확인 오류:', error);
         setIsLoggedIn(false);
         setUserProfile(null);
         setIsAdmin(false);
       }
-    });
+    };
+
+    checkUser();
+
+    // localStorage 변경 감지 (다른 탭에서 로그인/로그아웃 시)
+    const handleStorageChange = (e: StorageEvent) => {
+      if (e.key === 'token' || e.key === 'user') {
+        checkUser();
+      }
+    };
+
+    window.addEventListener('storage', handleStorageChange);
+    
+    // 같은 탭에서의 변경 감지 (커스텀 이벤트)
+    const handleAuthChange = () => {
+      checkUser();
+    };
+    
+    window.addEventListener('auth-changed', handleAuthChange);
 
     return () => {
-      subscription.unsubscribe();
+      window.removeEventListener('storage', handleStorageChange);
+      window.removeEventListener('auth-changed', handleAuthChange);
     };
   }, []);
 
@@ -199,17 +218,6 @@ export default function Header() {
               <span>설계사 전용</span>
             </a>
             )}
-
-            {/* 회원관리 버튼 (관리자만 표시) */}
-            {isAdmin && (
-              <Link
-                href="/member/dashboard"
-                className="flex items-center space-x-2 px-4 py-2 bg-purple-600 text-white rounded-lg hover:bg-purple-700 transition-colors text-base font-medium whitespace-nowrap"
-              >
-                <Users className="w-5 h-5" />
-                <span>회원관리</span>
-              </Link>
-            )}
           </div>
 
           {/* Mobile Menu Button */}
@@ -291,18 +299,6 @@ export default function Header() {
                 <LogIn className="w-3.5 h-3.5" />
                 <span>설계사 전용</span>
               </a>
-              )}
-
-              {/* 회원관리 버튼 (관리자만 표시) */}
-              {isAdmin && (
-                <Link
-                  href="/member/dashboard"
-                  onClick={() => setIsMobileMenuOpen(false)}
-                  className="flex items-center justify-center space-x-2 px-4 py-2 bg-purple-600 text-white rounded-lg hover:bg-purple-700 transition-colors font-medium"
-                >
-                  <Users className="w-4 h-4" />
-                  <span>회원관리</span>
-                </Link>
               )}
             </div>
           </motion.div>

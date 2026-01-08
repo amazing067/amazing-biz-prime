@@ -7,7 +7,8 @@
     "dev:3000": "next dev -p 3000",
     "build": "next build",
     "start": "next start -p 3001",
-    "lint": "next lint"
+    "lint": "next lint",
+    "check-env": "node check-env.js"
   },
   "dependencies": {
     "@prisma/client": "^7.2.0",

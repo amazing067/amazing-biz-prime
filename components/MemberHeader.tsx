@@ -2,11 +2,10 @@
 
 import { useState, useEffect, useRef } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { Menu, X, Home, LogOut, Users } from "lucide-react";
+import { Menu, X, Home, LogOut } from "lucide-react";
 import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
-import { supabase } from "@/lib/supabase";
-
+// 통합 회원 시스템: Supabase 제거, localStorage 사용
 export default function MemberHeader() {
   const pathname = usePathname();
   const router = useRouter();
@@ -22,44 +21,69 @@ export default function MemberHeader() {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
-
+  // 통합 회원 시스템: localStorage에서 사용자 정보 확인
   useEffect(() => {
-    const checkUser = async () => {
+    const checkUser = () => {
       try {
-        const { data: { user } } = await supabase.auth.getUser();
-        if (user) {
-          const { data: profile } = await supabase
-            .from('profiles')
-            .select('*')
-            .eq('id', user.id)
-            .single();
+        const token = localStorage.getItem('token');
+        const userStr = localStorage.getItem('user');
+        
+        if (token && userStr) {
+          const user = JSON.parse(userStr);
           
-          if (profile && profile.approved) {
-            const username = user.email?.split('@')[0] || '';
-            setUserProfile({ ...profile, username });
+          // 승인된 사용자만 프로필 표시
+          if (user.status === 'approved' && user.is_active) {
+            setUserProfile({
+              username: user.username,
+              name: user.full_name,
+              position: user.role,
+              branch: user.branch_name_text || '',
+              is_admin: user.role === 'amazing' || user.role === 'admin',
+            });
+          } else {
+            setUserProfile(null);
           }
+        } else {
+          setUserProfile(null);
         }
       } catch (error) {
-        // 에러 무시
-      }
-    };
-    checkUser();
-
-    const { data: { subscription } } = supabase.auth.onAuthStateChange((event, session) => {
-      if (session) {
-        checkUser();
-      } else {
+        console.error('사용자 정보 확인 오류:', error);
         setUserProfile(null);
       }
-    });
+    };
+
+    checkUser();
+
+    // localStorage 변경 감지
+    const handleStorageChange = (e: StorageEvent) => {
+      if (e.key === 'token' || e.key === 'user') {
+        checkUser();
+      }
+    };
+
+    window.addEventListener('storage', handleStorageChange);
+    
+    // 같은 탭에서의 변경 감지
+    const handleAuthChange = () => {
+      checkUser();
+    };
+    
+    window.addEventListener('auth-changed', handleAuthChange);
 
     return () => {
-      subscription.unsubscribe();
+      window.removeEventListener('storage', handleStorageChange);
+      window.removeEventListener('auth-changed', handleAuthChange);
     };
   }, []);
 
-  const handleLogout = async () => {
-    await supabase.auth.signOut();
+  const handleLogout = () => {
+    // 통합 회원 시스템: localStorage에서 토큰과 사용자 정보 제거
+    localStorage.removeItem('token');
+    localStorage.removeItem('user');
+    
+    // 다른 컴포넌트에 로그아웃 알림
+    window.dispatchEvent(new Event('auth-changed'));
+    
     router.push("/member");
   };
 
@@ -97,19 +121,6 @@ export default function MemberHeader() {
             >
               회원라운지
             </Link>
-
-            {/* 회원관리 버튼 (관리자만 표시) */}
-            {userProfile?.is_admin && (
-              <Link
-                href="/member/dashboard"
-                className={`flex items-center space-x-1 text-slate-700 hover:text-electric-blue transition-colors text-sm font-medium whitespace-nowrap ${
-                  pathname === "/member/dashboard" ? "text-electric-blue font-semibold" : ""
-                }`}
-              >
-                <Users className="w-3.5 h-3.5" />
-                <span>회원관리</span>
-              </Link>
-            )}
 
             {/* 사용자 정보 - 콤팩트 */}
             {userProfile && (
@@ -171,18 +182,6 @@ export default function MemberHeader() {
               >
                 회원라운지
               </Link>
-
-              {/* 회원관리 버튼 (관리자만 표시) */}
-              {userProfile?.is_admin && (
-                <Link
-                  href="/member/dashboard"
-                  onClick={() => setIsMobileMenuOpen(false)}
-                  className="flex items-center space-x-2 font-semibold text-slate-900 hover:text-electric-blue transition-colors"
-                >
-                  <Users className="w-4 h-4" />
-                  <span>회원관리</span>
-                </Link>
-              )}
 
               {userProfile && (
                 <div className="px-3 py-2 bg-slate-50 rounded-lg border border-slate-200">

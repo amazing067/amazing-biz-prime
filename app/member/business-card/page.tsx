@@ -7,7 +7,6 @@ import Link from "next/link";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
 import MemberHeader from "@/components/MemberHeader";
-import { supabase } from "@/lib/supabase";
 
 export default function MemberBusinessCardPage() {
   const router = useRouter();
@@ -22,33 +21,32 @@ export default function MemberBusinessCardPage() {
     checkAuth();
   }, []);
 
-  const checkAuth = async () => {
+  // 통합 회원 시스템: localStorage 기반 인증
+  const checkAuth = () => {
     try {
-      const { data: { user }, error: authError } = await supabase.auth.getUser();
+      const token = localStorage.getItem('token');
+      const userStr = localStorage.getItem('user');
       
-      if (authError || !user) {
+      if (!token || !userStr) {
         router.push("/member");
         return;
       }
 
-      const { data: profile, error: profileError } = await supabase
-        .from('profiles')
-        .select('*')
-        .eq('id', user.id)
-        .single();
-
-      if (profileError || !profile) {
-        router.push("/member");
-        return;
-      }
-
-      if (!profile.approved) {
+      const user = JSON.parse(userStr);
+      
+      // 승인되지 않은 사용자는 접근 불가
+      if (user.status !== 'approved' || !user.is_active) {
         alert("관리자 승인 후 이용하실 수 있습니다.");
         router.push("/member");
         return;
       }
 
-      setUserProfile(profile);
+      setUserProfile({
+        name: user.full_name,
+        username: user.username,
+        branch: user.branch_name_text || '',
+        office: user.team_name_text || '',
+      });
     } catch (error) {
       console.error('인증 확인 오류:', error);
       router.push("/member");
