@@ -3,18 +3,11 @@ import { createClient } from '@supabase/supabase-js'
 const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL
 const supabaseAnonKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY
 
-// 환경 변수 검증 함수
+// 통합 회원 시스템: Supabase는 더 이상 사용하지 않으므로 환경 변수 검증 로그 제거
+// education 페이지의 파일 업로드/다운로드에서만 사용 (선택적)
 function validateSupabaseConfig() {
   if (!supabaseUrl || !supabaseAnonKey) {
-    const error = {
-      hasUrl: !!supabaseUrl,
-      hasKey: !!supabaseAnonKey,
-      url: supabaseUrl ? `${supabaseUrl.substring(0, 30)}...` : '없음'
-    }
-    
-    if (typeof window !== 'undefined') {
-      console.error('❌ Supabase 환경 변수 누락:', error)
-    }
+    // 통합 회원 시스템: 오류 로그 제거 (조용히 처리)
     return false
   }
 
@@ -22,19 +15,10 @@ function validateSupabaseConfig() {
   try {
     new URL(supabaseUrl)
   } catch (urlError) {
-    if (typeof window !== 'undefined') {
-      console.error('❌ 잘못된 Supabase URL 형식:', supabaseUrl)
-    }
+    // 통합 회원 시스템: 오류 로그 제거 (조용히 처리)
     return false
   }
 
-  // 통합 회원 시스템: Supabase는 더 이상 사용하지 않으므로 로그 제거
-  // if (typeof window !== 'undefined') {
-  //   console.log('✅ Supabase 클라이언트 초기화:', {
-  //     url: `${supabaseUrl.substring(0, 30)}...`,
-  //     keyLength: supabaseAnonKey.length
-  //   })
-  // }
   return true
 }
 
