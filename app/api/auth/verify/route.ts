@@ -44,17 +44,25 @@ export async function GET(request: NextRequest) {
     }
 
     // 어메이징사업부.com API로 토큰 검증 요청
+    console.log('[토큰 검증] API URL:', AMAZING_BIZ_API_URL);
+    console.log('[토큰 검증] 토큰 길이:', token?.length || 0);
+    
     let response: Response;
     try {
-      response = await fetch(`${AMAZING_BIZ_API_URL}/auth/me`, {
+      const verifyUrl = `${AMAZING_BIZ_API_URL}/auth/me`;
+      console.log('[토큰 검증] 요청 URL:', verifyUrl);
+      
+      response = await fetch(verifyUrl, {
         method: 'GET',
         headers: {
           'Authorization': `Bearer ${token}`,
           'Content-Type': 'application/json',
         },
       });
+      
+      console.log('[토큰 검증] 응답 상태:', response.status, response.statusText);
     } catch (fetchError: any) {
-      console.error('토큰 검증 API 연결 오류:', fetchError);
+      console.error('[토큰 검증] API 연결 오류:', fetchError);
       return NextResponse.json(
         { 
           ok: false, 
@@ -67,8 +75,13 @@ export async function GET(request: NextRequest) {
     let data: any;
     try {
       data = await response.json();
+      console.log('[토큰 검증] 응답 데이터:', { 
+        ok: data.ok, 
+        hasUser: !!data.user,
+        error: data.error 
+      });
     } catch (jsonError) {
-      console.error('토큰 검증 응답 파싱 오류:', jsonError);
+      console.error('[토큰 검증] 응답 파싱 오류:', jsonError);
       return NextResponse.json(
         { ok: false, error: '서버 응답을 처리할 수 없습니다.' },
         { status: 500 }
@@ -76,9 +89,11 @@ export async function GET(request: NextRequest) {
     }
 
     if (!response.ok) {
+      console.warn('[토큰 검증] 실패:', { status: response.status, data });
       return NextResponse.json(data, { status: response.status });
     }
 
+    console.log('[토큰 검증] 성공:', { username: data.user?.username });
     return NextResponse.json(data);
   } catch (error: any) {
     console.error('토큰 검증 오류:', error);
