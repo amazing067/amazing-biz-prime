@@ -25,8 +25,55 @@ export default function MemberLoungePage() {
     checkAuth();
   }, []);
 
-  const checkAuth = () => {
+  const checkAuth = async () => {
     try {
+      // 1. URL 파라미터에서 토큰 확인 (SSO)
+      const urlParams = new URLSearchParams(window.location.search);
+      const tokenFromUrl = urlParams.get('token');
+      const usernameFromUrl = urlParams.get('username');
+
+      if (tokenFromUrl) {
+        // SSO 토큰이 있으면 검증 및 저장
+        try {
+          const verifyResponse = await fetch(`/api/auth/verify?token=${encodeURIComponent(tokenFromUrl)}`);
+          const verifyData = await verifyResponse.json();
+
+          if (verifyData.ok && verifyData.user) {
+            // 토큰이 유효하면 localStorage에 저장
+            localStorage.setItem('token', tokenFromUrl);
+            localStorage.setItem('user', JSON.stringify(verifyData.user));
+            
+            // URL에서 토큰 파라미터 제거 (보안)
+            window.history.replaceState({}, '', '/member/lounge');
+            
+            // 사용자 정보 설정
+            const user = verifyData.user;
+            if (user.status !== 'approved' || !user.is_active) {
+              alert("관리자 승인 후 이용하실 수 있습니다.");
+              router.push("/member");
+              return;
+            }
+
+            setUserProfile({
+              name: user.full_name,
+              username: user.username,
+              role: user.role,
+              branch: user.branch_name_text || '',
+              office: user.team_name_text || '',
+            });
+            setLoading(false);
+            return;
+          } else {
+            console.warn('SSO 토큰 검증 실패:', verifyData);
+            // 토큰이 유효하지 않으면 기존 로직으로 진행
+          }
+        } catch (verifyError) {
+          console.error('SSO 토큰 검증 오류:', verifyError);
+          // 검증 실패 시 기존 로직으로 진행
+        }
+      }
+
+      // 2. 기존 localStorage에서 토큰 확인
       const token = localStorage.getItem('token');
       const userStr = localStorage.getItem('user');
       

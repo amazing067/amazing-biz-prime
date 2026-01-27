@@ -1,7 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
 import { LogIn, Lock, Video, BookOpen } from "lucide-react";
 import Link from "next/link";
@@ -19,6 +19,38 @@ export default function MemberPage() {
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
+
+  // 토큰이 있으면 자동 로그인 처리 (앱 재시작 시에도 로그인 유지)
+  useEffect(() => {
+    const checkAutoLogin = async () => {
+      const token = localStorage.getItem('token');
+      if (!token) return;
+
+      try {
+        // 토큰 유효성 확인
+        const verifyResponse = await fetch(`/api/auth/verify?token=${encodeURIComponent(token)}`);
+        const verifyData = await verifyResponse.json();
+        
+        if (verifyData?.ok && verifyData?.user) {
+          // 토큰이 유효하면 사용자 정보 업데이트하고 라운지로 이동
+          localStorage.setItem('user', JSON.stringify(verifyData.user));
+          window.dispatchEvent(new Event('auth-changed'));
+          
+          // 승인된 사용자만 라운지로 이동
+          if (verifyData.user.status === 'approved' && verifyData.user.is_active) {
+            router.push('/member/lounge');
+          }
+        }
+      } catch (error) {
+        // 토큰이 유효하지 않으면 삭제
+        console.warn('[자동 로그인] 토큰 유효성 확인 실패:', error);
+        localStorage.removeItem('token');
+        localStorage.removeItem('user');
+      }
+    };
+
+    checkAutoLogin();
+  }, [router]);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
