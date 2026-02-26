@@ -17,6 +17,7 @@ export default function BusinessCardPage() {
   const formRef = useRef<HTMLFormElement>(null);
   const [selectedOrientation, setSelectedOrientation] = useState<string>("");
   const [selectedShape, setSelectedShape] = useState<string>("");
+  const [selectedColor, setSelectedColor] = useState<string>("");
   const [selectedBranch, setSelectedBranch] = useState<string>("");
   const [selectedOffice, setSelectedOffice] = useState<string>("");
   const [taxOption, setTaxOption] = useState<"no" | "yes">("no");
@@ -29,6 +30,10 @@ export default function BusinessCardPage() {
     // 명함 디자인 선택 필수 확인
     if (!selectedOrientation) {
       alert("명함 디자인을 선택해주세요.");
+      return;
+    }
+    if (!selectedColor) {
+      alert("색상을 선택해주세요.");
       return;
     }
     if (taxOption === "yes" && !taxContact.trim()) {
@@ -62,7 +67,7 @@ export default function BusinessCardPage() {
           address: "서울 광진구 천호대로 561, 영창빌딩 8층 (군자역4번출구)",
           orientation: selectedOrientation === "horizontal" ? "가로형" : "세로형",
           shape: selectedShape === "round" ? "라운드형" : selectedShape === "square" ? "사각형" : "없음",
-          color: formObject.color,
+          color: selectedColor === "white" ? "흰색" : "금색",
           quantity: "200",
           taxOption: taxOption === "yes" ? "계산서발행" : "계산서미발행",
           taxContact: taxOption === "yes" ? taxContact : "",
@@ -377,18 +382,50 @@ export default function BusinessCardPage() {
               />
             </div>
             <div>
-              <label className="block text-sm font-medium text-slate-700 mb-2">
+              <label className="block text-sm font-medium text-slate-700 mb-3">
                 색상 선택
               </label>
-              <div className="flex flex-wrap gap-4">
-                <label className="flex items-center gap-2 cursor-pointer">
-                  <input type="radio" name="color" value="흰색" required className="text-electric-blue" />
-                  <span>흰색</span>
-                </label>
-                <label className="flex items-center gap-2 cursor-pointer">
-                  <input type="radio" name="color" value="금색" className="text-electric-blue" />
-                  <span>금색</span>
-                </label>
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <motion.button
+                  type="button"
+                  onClick={() => setSelectedColor(selectedColor === "white" ? "" : "white")}
+                  whileHover={{ scale: 1.02 }}
+                  whileTap={{ scale: 0.98 }}
+                  className={`relative p-4 rounded-xl border-2 transition-all ${
+                    selectedColor === "white"
+                      ? "border-electric-blue bg-electric-blue/5 shadow-lg"
+                      : "border-slate-200 bg-white hover:border-slate-300"
+                  }`}
+                >
+                  <div className="flex items-center justify-between">
+                    <span className="font-medium text-slate-900">흰색</span>
+                    {selectedColor === "white" && (
+                      <div className="w-6 h-6 bg-electric-blue rounded-full flex items-center justify-center">
+                        <Check className="w-4 h-4 text-white" />
+                      </div>
+                    )}
+                  </div>
+                </motion.button>
+                <motion.button
+                  type="button"
+                  onClick={() => setSelectedColor(selectedColor === "gold" ? "" : "gold")}
+                  whileHover={{ scale: 1.02 }}
+                  whileTap={{ scale: 0.98 }}
+                  className={`relative p-4 rounded-xl border-2 transition-all ${
+                    selectedColor === "gold"
+                      ? "border-electric-blue bg-electric-blue/5 shadow-lg"
+                      : "border-slate-200 bg-white hover:border-slate-300"
+                  }`}
+                >
+                  <div className="flex items-center justify-between">
+                    <span className="font-medium text-slate-900">금색</span>
+                    {selectedColor === "gold" && (
+                      <div className="w-6 h-6 bg-electric-blue rounded-full flex items-center justify-center">
+                        <Check className="w-4 h-4 text-white" />
+                      </div>
+                    )}
+                  </div>
+                </motion.button>
               </div>
             </div>
             <div>
