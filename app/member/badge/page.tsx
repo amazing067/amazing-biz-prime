@@ -2,10 +2,19 @@
 
 import { useState, useRef, useEffect } from "react";
 import { motion } from "framer-motion";
+import Image from "next/image";
 import { Badge, ArrowLeft, ExternalLink } from "lucide-react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import MemberHeader from "@/components/MemberHeader";
+
+// 전화번호 3-4-4 자동 포맷 (숫자만 11자리)
+function formatPhone(value: string): string {
+  const digits = value.replace(/\D/g, "").slice(0, 11);
+  if (digits.length <= 3) return digits;
+  if (digits.length <= 7) return `${digits.slice(0, 3)}-${digits.slice(3)}`;
+  return `${digits.slice(0, 3)}-${digits.slice(3, 7)}-${digits.slice(7, 11)}`;
+}
 
 const branchData = {
   "067본부": [
@@ -41,6 +50,7 @@ export default function MemberBadgePage() {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [userProfile, setUserProfile] = useState<any>(null);
   const [loading, setLoading] = useState(true);
+  const [phone, setPhone] = useState("");
 
   useEffect(() => {
     checkAuth();
@@ -74,6 +84,7 @@ export default function MemberBadgePage() {
       });
       setSelectedBranch(user.branch_name_text || "");
       setSelectedOffice(user.team_name_text || "");
+      setPhone(formatPhone(user.phone || ""));
     } catch (error) {
       console.error('인증 확인 오류:', error);
       router.push("/member");
@@ -109,6 +120,8 @@ export default function MemberBadgePage() {
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
           name: formObject.name,
+          englishName: formObject.englishName,
+          design: formObject.design,
           position: formObject.position,
           branch: selectedBranch,
           office: selectedOffice,
@@ -129,6 +142,7 @@ export default function MemberBadgePage() {
       }
       setSelectedBranch(userProfile?.branch || "");
       setSelectedOffice(userProfile?.office || "");
+      setPhone(formatPhone(userProfile?.phone || ""));
 
       alert("명찰 신청이 완료되었습니다!");
     } catch (error: any) {
@@ -183,7 +197,7 @@ export default function MemberBadgePage() {
             명찰 신청 양식
           </h3>
           <form ref={formRef} className="space-y-4" onSubmit={handleSubmit}>
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
               <div>
                 <label className="block text-sm font-medium text-slate-700 mb-2">
                   이름
@@ -192,9 +206,21 @@ export default function MemberBadgePage() {
                   type="text"
                   name="name"
                   required
-                  defaultValue={userProfile?.name || ""}
+                  defaultValue={userProfile?.name === "관리자" ? "" : (userProfile?.name || "")}
                   className="w-full px-4 py-3 rounded-xl border border-slate-200 bg-white focus:outline-none focus:ring-2 focus:ring-electric-blue"
                   placeholder="이름을 입력하세요"
+                />
+              </div>
+              <div>
+                <label className="block text-sm font-medium text-slate-700 mb-2">
+                  영어 이름
+                </label>
+                <input
+                  type="text"
+                  name="englishName"
+                  required
+                  className="w-full px-4 py-3 rounded-xl border border-slate-200 bg-white focus:outline-none focus:ring-2 focus:ring-electric-blue"
+                  placeholder="예: Hong Gildong"
                 />
               </div>
               <div>
@@ -304,11 +330,49 @@ export default function MemberBadgePage() {
                 type="tel"
                 name="phone"
                 required
-                defaultValue={userProfile?.phone || ""}
+                value={phone}
+                onChange={(e) => setPhone(formatPhone(e.target.value))}
+                maxLength={12}
                 className="w-full px-4 py-3 rounded-xl border border-slate-200 bg-white focus:outline-none focus:ring-2 focus:ring-electric-blue"
                 placeholder="010-1234-5678"
               />
-              <p className="mt-1 text-xs text-slate-500">프로필사진 전달을 위해 연락드릴 수 있습니다</p>
+              <p className="mt-1 text-xs text-slate-500">3자리-4자리-4자리 (예: 010-1234-5678)</p>
+            </div>
+            <div>
+              <label className="block text-sm font-medium text-slate-700 mb-2">
+                명찰 디자인 선택
+              </label>
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                <label className="flex flex-col rounded-xl border-2 border-slate-200 bg-white cursor-pointer hover:border-electric-blue transition-colors has-[:checked]:border-electric-blue has-[:checked]:ring-2 has-[:checked]:ring-electric-blue overflow-hidden">
+                  <input type="radio" name="design" value="1안" required className="sr-only peer" />
+                  <div className="relative aspect-[3/4] max-h-64 bg-slate-100">
+                    <Image src="/badge-design-1an.png" alt="명찰 1안" fill className="object-contain" sizes="(max-width: 640px) 100vw, 50vw" />
+                  </div>
+                  <div className="p-3 text-center border-t border-slate-100">
+                    <span className="font-semibold text-slate-800">1안</span>
+                    <span className="text-slate-600"> — 12,000원</span>
+                  </div>
+                </label>
+                <label className="flex flex-col rounded-xl border-2 border-slate-200 bg-white cursor-pointer hover:border-electric-blue transition-colors has-[:checked]:border-electric-blue has-[:checked]:ring-2 has-[:checked]:ring-electric-blue overflow-hidden">
+                  <input type="radio" name="design" value="2안" className="sr-only peer" />
+                  <div className="relative aspect-[3/4] max-h-64 bg-slate-100">
+                    <Image src="/badge-design-2an.png" alt="명찰 2안" fill className="object-contain" sizes="(max-width: 640px) 100vw, 50vw" />
+                  </div>
+                  <div className="p-3 text-center border-t border-slate-100">
+                    <span className="font-semibold text-slate-800">2안</span>
+                    <span className="text-slate-600"> — 10,000원</span>
+                  </div>
+                </label>
+              </div>
+            </div>
+            <div className="bg-amber-50 border border-amber-200 rounded-xl p-4">
+              <p className="text-sm text-amber-900 font-semibold mb-1">입금 안내</p>
+              <p className="text-sm text-amber-800">
+                계좌번호 <strong>3333-17-8153267</strong> 카카오뱅크 김성민
+              </p>
+              <p className="text-sm text-amber-800 mt-1">
+                위 계좌로 입금하시고 연락 부탁드립니다.
+              </p>
             </div>
             <div className="bg-blue-50 border border-blue-200 rounded-xl p-4">
               <p className="text-sm text-blue-800">

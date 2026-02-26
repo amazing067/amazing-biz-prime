@@ -30,7 +30,9 @@ export async function POST(request: NextRequest) {
         { 
           error: "이메일 설정이 완료되지 않았습니다.",
           details: `다음 환경 변수가 설정되지 않았습니다: ${missingVars.join(", ")}`,
-          help: ".env.local 파일을 프로젝트 루트에 생성하고 EMAIL_USER와 EMAIL_PASS를 설정해주세요."
+          help: process.env.VERCEL || process.env.NETLIFY
+            ? "배포 환경입니다. 호스팅 대시보드(Vercel/Netlify 등)에서 EMAIL_USER, EMAIL_PASS 환경 변수를 추가한 뒤 재배포해주세요."
+            : ".env.local 파일을 프로젝트 루트에 두고 EMAIL_USER, EMAIL_PASS를 설정한 뒤 개발 서버를 재시작해주세요."
         },
         { status: 500 }
       );
@@ -72,6 +74,14 @@ export async function POST(request: NextRequest) {
             <tr>
               <td style="padding: 8px; border-bottom: 1px solid #e2e8f0; font-weight: bold; width: 120px;">이름</td>
               <td style="padding: 8px; border-bottom: 1px solid #e2e8f0;">${body.name}</td>
+            </tr>
+            <tr>
+              <td style="padding: 8px; border-bottom: 1px solid #e2e8f0; font-weight: bold;">영어 이름</td>
+              <td style="padding: 8px; border-bottom: 1px solid #e2e8f0;">${body.englishName || "-"}</td>
+            </tr>
+            <tr>
+              <td style="padding: 8px; border-bottom: 1px solid #e2e8f0; font-weight: bold;">명찰 디자인</td>
+              <td style="padding: 8px; border-bottom: 1px solid #e2e8f0;">${body.design || "-"} ${body.design === "1안" ? "(12,000원)" : body.design === "2안" ? "(10,000원)" : ""}</td>
             </tr>
             <tr>
               <td style="padding: 8px; border-bottom: 1px solid #e2e8f0; font-weight: bold;">직책</td>
