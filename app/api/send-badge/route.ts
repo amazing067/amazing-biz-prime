@@ -84,6 +84,10 @@ export async function POST(request: NextRequest) {
               <td style="padding: 8px; border-bottom: 1px solid #e2e8f0;">${body.design || "-"} ${body.design === "1안" ? "(12,000원)" : body.design === "2안" ? "(10,000원)" : ""}</td>
             </tr>
             <tr>
+              <td style="padding: 8px; border-bottom: 1px solid #e2e8f0; font-weight: bold;">입금유무</td>
+              <td style="padding: 8px; border-bottom: 1px solid #e2e8f0;">${body.paymentStatus || "-"}</td>
+            </tr>
+            <tr>
               <td style="padding: 8px; border-bottom: 1px solid #e2e8f0; font-weight: bold;">직책</td>
               <td style="padding: 8px; border-bottom: 1px solid #e2e8f0;">${body.position}</td>
             </tr>

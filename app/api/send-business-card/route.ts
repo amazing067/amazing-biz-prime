@@ -77,7 +77,15 @@ export async function POST(request: NextRequest) {
             </tr>
             <tr>
               <td style="padding: 8px; border-bottom: 1px solid #e2e8f0; font-weight: bold;">직책</td>
-              <td style="padding: 8px; border-bottom: 1px solid #e2e8f0;">${body.position}</td>
+              <td style="padding: 8px; border-bottom: 1px solid #e2e8f0;">${body.position || "-"}</td>
+            </tr>
+            <tr>
+              <td style="padding: 8px; border-bottom: 1px solid #e2e8f0; font-weight: bold;">본부</td>
+              <td style="padding: 8px; border-bottom: 1px solid #e2e8f0;">${body.branch || "-"}</td>
+            </tr>
+            <tr>
+              <td style="padding: 8px; border-bottom: 1px solid #e2e8f0; font-weight: bold;">지사</td>
+              <td style="padding: 8px; border-bottom: 1px solid #e2e8f0;">${body.office || "-"}</td>
             </tr>
             <tr>
               <td style="padding: 8px; border-bottom: 1px solid #e2e8f0; font-weight: bold;">연락처</td>
@@ -110,8 +118,21 @@ export async function POST(request: NextRequest) {
               <td style="padding: 8px; border-bottom: 1px solid #e2e8f0;">${body.shape}</td>
             </tr>
             <tr>
+              <td style="padding: 8px; border-bottom: 1px solid #e2e8f0; font-weight: bold;">색상</td>
+              <td style="padding: 8px; border-bottom: 1px solid #e2e8f0;">${body.color || "-"}</td>
+            </tr>
+            <tr>
               <td style="padding: 8px; border-bottom: 1px solid #e2e8f0; font-weight: bold;">신청 수량</td>
-              <td style="padding: 8px; border-bottom: 1px solid #e2e8f0;">${body.quantity}장</td>
+              <td style="padding: 8px; border-bottom: 1px solid #e2e8f0;">${body.quantity}장 (기준)</td>
+            </tr>
+            <tr>
+              <td style="padding: 8px; border-bottom: 1px solid #e2e8f0; font-weight: bold;">계산서</td>
+              <td style="padding: 8px; border-bottom: 1px solid #e2e8f0;">${body.taxOption === "계산서발행" ? "계산서 발행" : body.taxOption === "계산서미발행" ? "계산서 미발행" : body.taxOption || "-"} ${body.price ? `(${body.price})` : ""}</td>
+            </tr>
+            ${body.taxContact ? `<tr><td style="padding: 8px; border-bottom: 1px solid #e2e8f0; font-weight: bold;">핸드폰/사업자번호</td><td style="padding: 8px; border-bottom: 1px solid #e2e8f0;">${body.taxContact}</td></tr>` : ""}
+            <tr>
+              <td style="padding: 8px; border-bottom: 1px solid #e2e8f0; font-weight: bold;">입금유무</td>
+              <td style="padding: 8px; border-bottom: 1px solid #e2e8f0;">${body.paymentStatus || "-"}</td>
             </tr>
           </table>
         </div>

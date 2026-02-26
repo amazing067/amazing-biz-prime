@@ -81,6 +81,7 @@ export default function BadgePage() {
           name: formObject.name,
           englishName: formObject.englishName,
           design: formObject.design,
+          paymentStatus: formObject.paymentStatus,
           position: formObject.position,
           branch: selectedBranch,
           office: selectedOffice,
@@ -172,7 +173,7 @@ export default function BadgePage() {
                   name="englishName"
                   required
                   className="w-full px-4 py-3 rounded-xl border border-slate-200 bg-white focus:outline-none focus:ring-2 focus:ring-electric-blue focus:border-transparent transition-all"
-                  placeholder="예: Hong Gildong"
+                  placeholder="예: Hong Gil Dong"
                 />
               </div>
               <div>
@@ -341,6 +342,21 @@ export default function BadgePage() {
                     <span className="font-semibold text-slate-800">2안</span>
                     <span className="text-slate-600"> — 10,000원</span>
                   </div>
+                </label>
+              </div>
+            </div>
+            <div>
+              <label className="block text-sm font-medium text-slate-700 mb-2">
+                입금유무
+              </label>
+              <div className="flex flex-wrap gap-4">
+                <label className="flex items-center gap-2 cursor-pointer">
+                  <input type="radio" name="paymentStatus" value="입금완료" required className="text-electric-blue" />
+                  <span>입금완료</span>
+                </label>
+                <label className="flex items-center gap-2 cursor-pointer">
+                  <input type="radio" name="paymentStatus" value="입금예정" className="text-electric-blue" />
+                  <span>입금예정</span>
                 </label>
               </div>
             </div>
