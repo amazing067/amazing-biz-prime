@@ -4,6 +4,7 @@ import { motion } from "framer-motion";
 import { ArrowDown, Sparkles, FileText, BarChart3, Video, Calendar, Zap } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
+import HeroEcosystemTour from "@/components/HeroEcosystemTour";
 
 // YouTube watch URL을 embed URL로 변환
 function getEmbedVideoUrl(url: string | undefined): string | null {
@@ -82,7 +83,7 @@ export default function Hero() {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.7, delay: 0.25 }}
         >
-          AI 콘텐츠·투명한 DB·프로 스튜디오까지. 영업에만 집중하세요.
+          포털 OS·AI·청구닷컴·치매검사까지. 영업에만 집중하세요.
         </motion.p>
 
         {/* Proof stat */}
@@ -93,7 +94,7 @@ export default function Hero() {
           transition={{ duration: 0.5, delay: 0.4 }}
         >
           <Sparkles className="w-4 h-4 text-amber-400" />
-          <span>3개 본부 · 통합 영업지원 시스템</span>
+          <span>실제 운영 중인 4개 서비스 + 포털 OS</span>
         </motion.div>
 
         {/* CTA - 한 줄 CTA 강화 */}
@@ -145,144 +146,7 @@ export default function Hero() {
                   allowFullScreen
                 />
               ) : (
-                <div className="grid grid-cols-3 gap-3 p-4 md:p-5 w-full h-full min-h-0">
-                  {/* AI 블로그 생성 - 문서·타이핑·그래픽 */}
-                  <div className="rounded-xl bg-gradient-to-b from-white/10 to-white/5 border border-white/10 p-3 md:p-4 flex flex-col gap-2 overflow-hidden relative">
-                    <div className="absolute top-0 right-0 w-16 h-16 rounded-full bg-electric-blue/10 blur-2xl" />
-                    <div className="absolute bottom-2 left-2 opacity-20">
-                      <FileText className="w-8 h-8 text-electric-blue" />
-                    </div>
-                    <div className="flex items-center gap-2 text-xs font-semibold text-electric-blue/95">
-                      <Zap className="w-4 h-4" />
-                      AI 블로그 생성
-                    </div>
-                    <div className="flex-1 flex flex-col gap-2 min-h-0">
-                      {/* 문서 라인 시각화 */}
-                      <div className="flex-1 rounded-lg bg-black/20 border border-white/10 p-2 space-y-1.5">
-                        {[90, 70, 55, 85].map((w, i) => (
-                          <motion.div
-                            key={i}
-                            className="h-1.5 rounded-full bg-white/20"
-                            initial={{ width: 0 }}
-                            animate={{ width: `${w}%` }}
-                            transition={{ duration: 0.8, delay: i * 0.15, repeat: Infinity, repeatType: "reverse", repeatDelay: 0.3 }}
-                          />
-                        ))}
-                        <div className="flex items-center gap-1 pt-0.5">
-                          <span className="text-[9px] text-slate-500">생성 중</span>
-                          <motion.span className="w-0.5 h-2.5 bg-electric-blue rounded" animate={{ opacity: [1, 0] }} transition={{ duration: 0.5, repeat: Infinity }} />
-                        </div>
-                      </div>
-                      <div className="rounded bg-white/5 px-2 py-1.5 flex items-center justify-between gap-2">
-                        <span className="text-[10px] text-slate-400">상위 노출</span>
-                        <div className="flex-1 max-w-[60px] h-1.5 rounded-full bg-white/10 overflow-hidden">
-                          <motion.div
-                            className="h-full rounded-full bg-gradient-to-r from-electric-blue to-violet-500"
-                            animate={{ width: ["0%", "100%"] }}
-                            transition={{ duration: 2.5, repeat: Infinity, repeatDelay: 0.5 }}
-                          />
-                        </div>
-                        <span className="text-[9px] text-electric-blue/90">30초</span>
-                      </div>
-                    </div>
-                  </div>
-
-                  {/* DB 현황판 - 차트·그리드·데이터 시각화 */}
-                  <div className="rounded-xl bg-gradient-to-b from-cyan-500/10 to-white/5 border border-white/10 p-3 md:p-4 flex flex-col gap-2 overflow-hidden relative">
-                    <div className="absolute top-1 right-1 opacity-30">
-                      <BarChart3 className="w-10 h-10 text-cyan-400" />
-                    </div>
-                    <div className="flex items-center gap-2 text-xs font-semibold text-cyan-400/95">
-                      <BarChart3 className="w-4 h-4" />
-                      DB 현황판
-                    </div>
-                    <div className="flex-1 flex flex-col gap-2 min-h-0">
-                      {/* 미니 차트 영역 */}
-                      <div className="flex-1 rounded-lg bg-black/20 border border-white/10 p-2 flex flex-col justify-end">
-                        <div className="flex items-end justify-between gap-1 h-10">
-                          {[0.5, 0.8, 0.6, 0.9, 0.7, 0.85, 0.55].map((h, i) => (
-                            <motion.div
-                              key={i}
-                              className="flex-1 min-w-[4px] rounded-t bg-cyan-400/70"
-                              animate={{ height: [`${h * 100}%`, `${(1 - h * 0.4) * 100}%`, `${h * 100}%`] }}
-                              transition={{ duration: 1.2 + i * 0.1, repeat: Infinity, ease: "easeInOut" }}
-                            />
-                          ))}
-                        </div>
-                        <div className="flex gap-0.5 mt-1 justify-center">
-                          {[1, 2, 3].map((i) => (
-                            <motion.div
-                              key={i}
-                              className="w-1 h-1 rounded-full bg-cyan-400/60"
-                              animate={{ opacity: [0.3, 1, 0.3] }}
-                              transition={{ duration: 1, repeat: Infinity, delay: i * 0.25 }}
-                            />
-                          ))}
-                        </div>
-                      </div>
-                      <div className="rounded bg-white/5 px-2 py-1.5 flex items-center gap-2 relative overflow-hidden">
-                        <span className="text-[10px] text-slate-400">이력 조회</span>
-                        <motion.div
-                          className="absolute top-0 bottom-0 w-0.5 bg-cyan-400/50 rounded left-0"
-                          animate={{ x: [0, 72] }}
-                          transition={{ duration: 2, repeat: Infinity, repeatType: "reverse" }}
-                        />
-                      </div>
-                    </div>
-                  </div>
-
-                  {/* 스튜디오 예약 - 카메라·캘린더·미디어 그래픽 */}
-                  <div className="rounded-xl bg-gradient-to-b from-violet-500/10 to-white/5 border border-white/10 p-3 md:p-4 flex flex-col gap-2 overflow-hidden relative">
-                    <div className="absolute top-0 right-0 w-14 h-14 rounded-full bg-violet-500/10 blur-xl" />
-                    <div className="absolute bottom-2 left-2 opacity-20">
-                      <Video className="w-8 h-8 text-violet-400" />
-                    </div>
-                    <div className="flex items-center gap-2 text-xs font-semibold text-violet-400/95">
-                      <motion.span className="w-1.5 h-1.5 rounded-full bg-red-500" animate={{ opacity: [1, 0.3] }} transition={{ duration: 0.8, repeat: Infinity }} />
-                      스튜디오 예약
-                    </div>
-                    <div className="flex-1 flex flex-col gap-2 min-h-0">
-                      {/* 필름/프레임 시각화 */}
-                      <div className="flex-1 rounded-lg bg-black/20 border border-white/10 p-2 flex flex-col gap-2">
-                        <div className="flex gap-1 flex-1">
-                          {[1, 2, 3, 4].map((i) => (
-                            <motion.div
-                              key={i}
-                              className="flex-1 rounded bg-white/10 border border-white/10 flex items-center justify-center min-h-[24px]"
-                              animate={{ opacity: [0.6, 1, 0.6] }}
-                              transition={{ duration: 1.5, repeat: Infinity, delay: i * 0.2 }}
-                            >
-                              <Video className="w-3 h-3 text-violet-400/70" />
-                            </motion.div>
-                          ))}
-                        </div>
-                        <div className="flex justify-between items-center">
-                          <span className="text-[9px] text-slate-500">4K · DiGiCo</span>
-                          <motion.span className="text-[8px] text-red-400/90 font-medium" animate={{ opacity: [0.7, 1] }} transition={{ duration: 0.8, repeat: Infinity }}>REC</motion.span>
-                        </div>
-                      </div>
-                      {/* 캘린더 그리드 */}
-                      <div className="rounded bg-white/5 px-2 py-1.5">
-                        <div className="flex items-center gap-1.5 mb-1">
-                          <Calendar className="w-3.5 h-3.5 text-violet-400/80" />
-                          <span className="text-[10px] text-slate-400">날짜 예약</span>
-                        </div>
-                        <div className="grid grid-cols-5 gap-0.5">
-                          {[1, 2, 3, 4, 5, 6, 7, 8, 9, 10].map((d, i) => (
-                            <motion.div
-                              key={d}
-                              className="aspect-square rounded-sm bg-white/10 flex items-center justify-center text-[8px] text-slate-500"
-                              animate={i === 4 ? { backgroundColor: ["rgba(255,255,255,0.1)", "rgba(139, 92, 246, 0.45)", "rgba(255,255,255,0.1)"] } : {}}
-                              transition={{ duration: 2.5, repeat: Infinity, repeatType: "reverse" }}
-                            >
-                              {d}
-                            </motion.div>
-                          ))}
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
+                <HeroEcosystemTour />
               )}
             </div>
             <p className="text-center text-slate-500 text-xs py-3">어메이징 영업지원 시스템</p>

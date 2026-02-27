@@ -9,7 +9,7 @@ const chips = [
   "실전 스크립트",
   "촬영 지원",
   "청구 도구",
-  "리드마그넷",
+  "치매검사",
 ];
 
 export default function SocialProofSection() {
@@ -59,10 +59,16 @@ export default function SocialProofSection() {
               <div className="mt-1 text-base md:text-lg font-semibold text-slate-800">
                 함께 성장 중인 설계사
               </div>
-              <ul className="mt-4 space-y-2 text-base text-slate-600 leading-relaxed">
-                <li>동일한 루틴/템플릿으로 “재현 가능한” 성과 구조</li>
-                <li>신입도 따라오는 온보딩 + 실전 피드백 루프</li>
-                <li>개인 플레이가 아닌, 팀 단위 지원 체계</li>
+              <ul className="mt-4 space-y-2 text-sm md:text-sm font-medium text-slate-800 leading-relaxed">
+                <li className="md:whitespace-nowrap">
+                  <span className="text-electric-blue">동일한 루틴·템플릿</span>으로 재현 가능한 성과 구조
+                </li>
+                <li className="md:whitespace-nowrap">
+                  <span className="text-electric-blue">신입도 따라오는 온보딩</span>과 실전 피드백 루프
+                </li>
+                <li className="md:whitespace-nowrap">
+                  개인 플레이가 아닌 <span className="text-electric-blue">팀 단위 지원 체계</span>
+                </li>
               </ul>
             </div>
           </motion.div>
@@ -82,10 +88,16 @@ export default function SocialProofSection() {
               <div className="mt-1 text-base md:text-lg font-semibold text-slate-800">
                 교육·지원 프로그램
               </div>
-              <ul className="mt-4 space-y-2 text-base text-slate-600 leading-relaxed">
-                <li>상담 흐름(질문/진단/제안) 표준 스크립트 제공</li>
-                <li>콘텐츠/촬영/운영까지 한 번에 연결되는 지원</li>
-                <li>실제 사례 기반의 피드백 중심 교육</li>
+              <ul className="mt-4 space-y-2 text-sm md:text-sm font-medium text-slate-800 leading-relaxed">
+                <li className="md:whitespace-nowrap">
+                  <span className="text-electric-blue">상담 흐름(질문·진단·제안)</span> 표준 스크립트 제공
+                </li>
+                <li className="md:whitespace-nowrap">
+                  <span className="text-electric-blue">콘텐츠·촬영·운영</span>까지 한 번에 이어지는 지원
+                </li>
+                <li className="md:whitespace-nowrap">
+                  <span className="text-electric-blue">실제 사례 기반</span>의 피드백 중심 교육
+                </li>
               </ul>
             </div>
           </motion.div>
@@ -105,10 +117,16 @@ export default function SocialProofSection() {
               <div className="mt-1 text-base md:text-lg font-semibold text-slate-800">
                 운영 거점 + 스튜디오
               </div>
-              <ul className="mt-4 space-y-2 text-base text-slate-600 leading-relaxed">
-                <li>촬영/편집/기획까지 이어지는 콘텐츠 생산 환경</li>
-                <li>현장 상담 동행/코칭을 위한 운영 기반</li>
-                <li>개인 역량이 아니라 “환경”으로 성장을 밀어줌</li>
+              <ul className="mt-4 space-y-2 text-sm md:text-sm font-medium text-slate-800 leading-relaxed">
+                <li className="md:whitespace-nowrap">
+                  <span className="text-electric-blue">촬영·편집·기획</span>까지 이어지는 콘텐츠 생산 환경
+                </li>
+                <li className="md:whitespace-nowrap">
+                  <span className="text-electric-blue">현장 상담 동행·코칭</span>을 위한 운영 기반
+                </li>
+                <li className="md:whitespace-nowrap">
+                  개인 역량이 아니라 <span className="text-electric-blue">환경</span>으로 성장을 밀어줌
+                </li>
               </ul>
             </div>
           </motion.div>

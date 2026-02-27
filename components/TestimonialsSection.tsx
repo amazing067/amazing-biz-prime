@@ -6,13 +6,13 @@ import { Quote } from "lucide-react";
 const testimonials = [
   {
     quote: "예전에는 DB 분배 때문에 스트레스가 많았는데, 여기 오니까 투명하게 다 공개돼 있어서 영업에만 집중하게 됐어요. 상담만 잘하면 되니까 체감이 완전히 달라요.",
-    author: "김*민",
+    author: "한*진",
     role: "067본부",
     detail: "영업 3년차",
   },
   {
     quote: "AI로 블로그 초안이랑 Q&A 자동 생성해 주니까 밤새 자료 만들 일이 없어졌어요. 스튜디오 예약해서 유튜브도 찍고, 타 본부 동기들한테 자랑하고 다닙니다.",
-    author: "이*준",
+    author: "윤*호",
     role: "290본부",
     detail: "온라인 영업 주력",
   },
@@ -24,7 +24,7 @@ const testimonials = [
   },
   {
     quote: "교육이 체계적이에요. 원수사 교육, 특별교육 받으면서 실력이 쑥쑥 느는 게 느껴져요. 지점 분위기도 좋고요.",
-    author: "최*영",
+    author: "정*우",
     role: "067본부",
     detail: "영업 1년차",
   },
