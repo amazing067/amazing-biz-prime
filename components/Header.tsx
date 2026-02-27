@@ -130,7 +130,9 @@ export default function Header() {
           <motion.a
             href="/"
             whileHover={{ scale: 1.05 }}
-            className="text-xl font-bold text-gradient flex items-center space-x-2 flex-shrink-0"
+            className={`text-xl font-bold flex items-center space-x-2 flex-shrink-0 transition-colors ${
+              pathname === "/" && !isScrolled ? "text-white" : "text-gradient"
+            }`}
             onClick={(e) => {
               e.preventDefault();
               window.scrollTo({ top: 0, behavior: "smooth" });
@@ -138,7 +140,7 @@ export default function Header() {
           >
             <span className="whitespace-nowrap">
               Prime Asset
-              <span className="text-slate-600"> Amazing</span>
+              <span className={pathname === "/" && !isScrolled ? "text-slate-300" : "text-slate-600"}> Amazing</span>
             </span>
           </motion.a>
 
@@ -148,7 +150,9 @@ export default function Header() {
             {pathname !== "/" && (
               <Link
                 href="/"
-                className="flex items-center space-x-1 text-slate-700 hover:text-electric-blue transition-colors text-base font-medium whitespace-nowrap"
+                className={`flex items-center space-x-1 transition-colors text-base font-medium whitespace-nowrap ${
+                pathname === "/" && !isScrolled ? "text-slate-300 hover:text-white" : "text-slate-700 hover:text-electric-blue"
+              }`}
               >
                 <Home className="w-5 h-5" />
                 <span>홈</span>
@@ -158,8 +162,8 @@ export default function Header() {
             {/* 프라임에셋 소개 */}
             <Link
               href="/prime-asset"
-              className={`text-slate-700 hover:text-electric-blue transition-colors text-base font-medium whitespace-nowrap ${
-                pathname === "/prime-asset" ? "text-electric-blue" : ""
+              className={`transition-colors text-base font-medium whitespace-nowrap ${
+                pathname === "/prime-asset" ? "text-electric-blue" : pathname === "/" && !isScrolled ? "text-slate-300 hover:text-white" : "text-slate-700 hover:text-electric-blue"
               }`}
             >
               프라임에셋 소개
@@ -168,8 +172,8 @@ export default function Header() {
             {/* 어메이징 사업부 */}
             <Link
               href="/amazing"
-              className={`text-slate-700 hover:text-electric-blue transition-colors text-base font-medium whitespace-nowrap ${
-                pathname === "/amazing" ? "text-electric-blue" : ""
+              className={`transition-colors text-base font-medium whitespace-nowrap ${
+                pathname === "/amazing" ? "text-electric-blue" : pathname === "/" && !isScrolled ? "text-slate-300 hover:text-white" : "text-slate-700 hover:text-electric-blue"
               }`}
             >
               어메이징 사업부
@@ -182,7 +186,9 @@ export default function Header() {
                 e.preventDefault();
                 handleMenuClick("#recruit");
               }}
-              className="text-slate-700 hover:text-electric-blue transition-colors text-base font-medium whitespace-nowrap"
+              className={`transition-colors text-base font-medium whitespace-nowrap ${
+                pathname === "/" && !isScrolled ? "text-slate-300 hover:text-white" : "text-slate-700 hover:text-electric-blue"
+              }`}
             >
               입사문의
             </a>

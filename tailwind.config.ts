@@ -8,18 +8,32 @@ const config: Config = {
   ],
   theme: {
     extend: {
+      fontFamily: {
+        sans: ['var(--font-sans-kr)', 'Pretendard', 'system-ui', 'sans-serif'],
+      },
       colors: {
         'electric-blue': '#2563EB',
         'titanium-silver': '#E2E8F0',
         'cool-gray': '#F8FAFC',
+        'navy-deep': '#0f172a',
+        'navy-mid': '#1e293b',
+      },
+      borderRadius: {
+        'card': '16px',
       },
       backgroundImage: {
         'gradient-radial': 'radial-gradient(var(--tw-gradient-stops))',
         'gradient-conic': 'conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))',
+        'mesh-gradient': 'radial-gradient(at 40% 20%, rgba(37, 99, 235, 0.25) 0px, transparent 50%), radial-gradient(at 80% 0%, rgba(139, 92, 246, 0.2) 0px, transparent 50%), radial-gradient(at 0% 50%, rgba(37, 99, 235, 0.15) 0px, transparent 50%)',
       },
       boxShadow: {
         'soft': '0 20px 60px -12px rgba(0, 0, 0, 0.08)',
         'soft-lg': '0 25px 80px -12px rgba(0, 0, 0, 0.1)',
+        'glow-blue': '0 0 60px -12px rgba(37, 99, 235, 0.4)',
+      },
+      spacing: {
+        '18': '4.5rem',
+        '22': '5.5rem',
       },
     },
   },

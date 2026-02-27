@@ -1,12 +1,12 @@
 import type { Metadata } from "next";
-import { Noto_Serif_KR } from "next/font/google";
+import { Noto_Sans_KR } from "next/font/google";
 import "./globals.css";
 
-const notoSerifKR = Noto_Serif_KR({
+const notoSansKR = Noto_Sans_KR({
   weight: ["400", "500", "600", "700"],
   subsets: ["latin"],
   display: "swap",
-  variable: "--font-noto-serif",
+  variable: "--font-sans-kr",
 });
 
 const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://프라임에셋.com";
@@ -50,8 +50,8 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="ko" className={notoSerifKR.variable}>
-      <body>{children}</body>
+    <html lang="ko" className={notoSansKR.variable}>
+      <body className="font-sans">{children}</body>
     </html>
   );
 }

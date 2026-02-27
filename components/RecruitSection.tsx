@@ -1,8 +1,10 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { Send, Gift, Key } from "lucide-react";
+import { Send, Gift, Key, CheckCircle2, AlertCircle } from "lucide-react";
 import { useState } from "react";
+
+type SubmitStatus = "idle" | "loading" | "success" | "error";
 
 export default function RecruitSection() {
   const [formData, setFormData] = useState({
@@ -13,14 +15,21 @@ export default function RecruitSection() {
     experience: "",
     message: "",
   });
-  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [agreePrivacy, setAgreePrivacy] = useState(false);
+  const [submitStatus, setSubmitStatus] = useState<SubmitStatus>("idle");
+  const [submitMessage, setSubmitMessage] = useState("");
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    setIsSubmitting(true);
+    if (!agreePrivacy) {
+      setSubmitStatus("error");
+      setSubmitMessage("개인정보 수집·이용에 동의해 주세요.");
+      return;
+    }
+    setSubmitStatus("loading");
+    setSubmitMessage("");
 
     try {
-      // API Route를 통해 이메일 전송
       const response = await fetch("/api/send-recruit", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
@@ -38,19 +47,14 @@ export default function RecruitSection() {
       if (!response.ok) {
         const errorData = await response.json();
         console.error("서버 에러 응답:", errorData);
-        
-        // 환경 변수 오류인 경우 더 명확한 메시지
         if (errorData.details?.includes("EMAIL_USER") || errorData.details?.includes("EMAIL_PASS")) {
           throw new Error("이메일 설정이 완료되지 않았습니다. 관리자에게 문의해주세요.");
         }
-        
         throw new Error(errorData.error || errorData.details || "이메일 전송에 실패했습니다.");
       }
 
-      // 성공 메시지
-      alert("지원해주셔서 감사합니다. 지원서가 성공적으로 전송되었습니다. 곧 연락드리겠습니다.");
-      
-      // 폼 초기화
+      setSubmitStatus("success");
+      setSubmitMessage("지원해 주셔서 감사합니다. 지원서가 전송되었습니다. 곧 연락드리겠습니다.");
       setFormData({
         name: "",
         phone: "",
@@ -59,12 +63,12 @@ export default function RecruitSection() {
         experience: "",
         message: "",
       });
-    } catch (error: any) {
+      setAgreePrivacy(false);
+    } catch (error: unknown) {
+      const errorMessage = error instanceof Error ? error.message : "이메일 전송에 실패했습니다.";
       console.error("이메일 전송 실패:", error);
-      const errorMessage = error.message || "이메일 전송에 실패했습니다.";
-      alert(`프라임에셋.com 내용:\n\n${errorMessage}\n\n서버 콘솔에서 더 자세한 오류 정보를 확인해주세요.`);
-    } finally {
-      setIsSubmitting(false);
+      setSubmitStatus("error");
+      setSubmitMessage(errorMessage);
     }
   };
 
@@ -287,17 +291,51 @@ export default function RecruitSection() {
               />
             </div>
 
+            {/* 개인정보 처리방침 동의 (필수) */}
+            <div className="flex items-start gap-3">
+              <input
+                type="checkbox"
+                id="agreePrivacy"
+                checked={agreePrivacy}
+                onChange={(e) => setAgreePrivacy(e.target.checked)}
+                className="mt-1 w-4 h-4 rounded border-slate-300 text-electric-blue focus:ring-electric-blue"
+              />
+              <label htmlFor="agreePrivacy" className="text-sm text-slate-700 cursor-pointer">
+                <span className="font-medium">개인정보 수집·이용에 동의합니다.</span>
+                <span className="text-slate-500"> (필수) 지원 문의 응대 및 보관 기간 내 관리에만 사용됩니다.</span>
+              </label>
+            </div>
+
+            {/* 연락 빈도·보관기간·파기 안내 */}
+            <p className="text-xs text-slate-500">
+              연락 빈도: 지원 문의에 대한 회신 위주 · 보관기간: 채용 관련 목적 달성 시까지 (별도 동의 시 연장 가능) · 파기: 목적 달성 후 지체 없이 파기
+            </p>
+
+            {/* 전송 상태 메시지 */}
+            {submitStatus === "success" && (
+              <div className="flex items-center gap-2 p-4 rounded-xl bg-emerald-50 border border-emerald-200 text-emerald-800 text-sm">
+                <CheckCircle2 className="w-5 h-5 flex-shrink-0" />
+                <span>{submitMessage}</span>
+              </div>
+            )}
+            {submitStatus === "error" && submitMessage && (
+              <div className="flex items-center gap-2 p-4 rounded-xl bg-red-50 border border-red-200 text-red-800 text-sm">
+                <AlertCircle className="w-5 h-5 flex-shrink-0" />
+                <span>{submitMessage}</span>
+              </div>
+            )}
+
             <motion.button
               type="submit"
-              disabled={isSubmitting}
-              whileHover={{ scale: isSubmitting ? 1 : 1.02 }}
-              whileTap={{ scale: isSubmitting ? 1 : 0.98 }}
+              disabled={submitStatus === "loading"}
+              whileHover={{ scale: submitStatus === "loading" ? 1 : 1.02 }}
+              whileTap={{ scale: submitStatus === "loading" ? 1 : 0.98 }}
               className={`w-full bg-gradient-to-r from-electric-blue to-blue-600 text-white font-semibold py-4 rounded-xl shadow-lg hover:shadow-xl transition-all flex items-center justify-center space-x-2 ${
-                isSubmitting ? "opacity-70 cursor-not-allowed" : ""
+                submitStatus === "loading" ? "opacity-70 cursor-not-allowed" : ""
               }`}
             >
-              <span>{isSubmitting ? "전송 중..." : "지원하기"}</span>
-              {!isSubmitting && <Send className="w-5 h-5" />}
+              <span>{submitStatus === "loading" ? "전송 중..." : "지원하기"}</span>
+              {submitStatus !== "loading" && <Send className="w-5 h-5" />}
             </motion.button>
           </form>
         </motion.div>
