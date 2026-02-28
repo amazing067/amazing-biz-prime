@@ -27,17 +27,17 @@ const steps = [
 export default function ProcessSection() {
   return (
     <section className="py-16 md:py-24 bg-slate-50/80">
-      <div className="max-w-7xl mx-auto px-6 lg:px-8">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 min-w-0">
         <motion.div
           initial={{ opacity: 0, y: 24 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, margin: "-80px" }}
           className="text-center mb-12 md:mb-16"
         >
-          <h2 className="text-3xl md:text-4xl font-bold text-slate-900 mb-3 tracking-tight">
+          <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-slate-900 mb-3 tracking-tight break-words">
             어떻게 진행되나요?
           </h2>
-          <p className="text-lg text-slate-600 max-w-xl mx-auto">
+          <p className="text-base sm:text-lg text-slate-600 max-w-xl mx-auto break-words">
             세 단계로 시작하는 어메이징 사업부
           </p>
         </motion.div>
@@ -52,7 +52,7 @@ export default function ProcessSection() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ delay: i * 0.1 }}
-                className="relative"
+                className="relative min-w-0"
               >
                 {i < steps.length - 1 && (
                   <div className="hidden md:block absolute top-12 left-[60%] w-[80%] h-0.5 bg-slate-200" aria-hidden />

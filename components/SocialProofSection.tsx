@@ -14,8 +14,8 @@ const chips = [
 
 export default function SocialProofSection() {
   return (
-    <section className="py-24 md:py-32 bg-white">
-      <div className="max-w-6xl mx-auto px-6 lg:px-8">
+    <section className="py-24 md:py-32 bg-white overflow-hidden">
+      <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 min-w-0">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -23,10 +23,10 @@ export default function SocialProofSection() {
           transition={{ duration: 0.6 }}
           className="text-center mb-12 md:mb-16"
         >
-          <h2 className="text-3xl md:text-5xl font-extrabold tracking-tight text-slate-900">
+          <h2 className="text-2xl sm:text-3xl md:text-5xl font-extrabold tracking-tight text-slate-900 break-words">
             이미 많은 설계사가 선택한 이유
           </h2>
-          <p className="mt-4 text-lg md:text-xl text-slate-600 leading-relaxed max-w-3xl mx-auto">
+          <p className="mt-4 text-base sm:text-lg md:text-xl text-slate-600 leading-relaxed max-w-3xl mx-auto break-words">
             “좋아 보인다”가 아니라, 실제로 굴러가는 시스템과 루틴이 있으니까 선택됩니다.
           </p>
 
@@ -49,7 +49,7 @@ export default function SocialProofSection() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, margin: "-80px" }}
             transition={{ duration: 0.55, delay: 0.0 }}
-            className="rounded-3xl border border-slate-200 bg-white shadow-soft p-7"
+            className="rounded-3xl border border-slate-200 bg-white shadow-soft p-7 min-w-0"
           >
             <div className="w-12 h-12 rounded-2xl bg-gradient-to-br from-electric-blue to-blue-600 flex items-center justify-center shadow-lg">
               <Users className="w-6 h-6 text-white" />
@@ -78,7 +78,7 @@ export default function SocialProofSection() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, margin: "-80px" }}
             transition={{ duration: 0.55, delay: 0.05 }}
-            className="rounded-3xl border border-slate-200 bg-white shadow-soft p-7"
+            className="rounded-3xl border border-slate-200 bg-white shadow-soft p-7 min-w-0"
           >
             <div className="w-12 h-12 rounded-2xl bg-gradient-to-br from-amber-400 to-orange-500 flex items-center justify-center shadow-lg">
               <TrendingUp className="w-6 h-6 text-white" />
@@ -107,7 +107,7 @@ export default function SocialProofSection() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, margin: "-80px" }}
             transition={{ duration: 0.55, delay: 0.1 }}
-            className="rounded-3xl border border-slate-200 bg-white shadow-soft p-7"
+            className="rounded-3xl border border-slate-200 bg-white shadow-soft p-7 min-w-0"
           >
             <div className="w-12 h-12 rounded-2xl bg-gradient-to-br from-slate-700 to-slate-900 flex items-center justify-center shadow-lg">
               <Award className="w-6 h-6 text-white" />

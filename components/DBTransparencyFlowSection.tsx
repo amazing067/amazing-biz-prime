@@ -24,17 +24,17 @@ const steps = [
 export default function DBTransparencyFlowSection() {
   return (
     <section id="flow" className="py-16 md:py-24 bg-white">
-      <div className="max-w-5xl mx-auto px-6 lg:px-8">
+      <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 min-w-0">
         <motion.div
           initial={{ opacity: 0, y: 16 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           className="text-center mb-12"
         >
-          <h2 className="text-2xl md:text-3xl font-bold text-slate-900 mb-2">
+          <h2 className="text-xl sm:text-2xl md:text-3xl font-bold text-slate-900 mb-2 break-words">
             DB 투명 분배 흐름
           </h2>
-          <p className="text-slate-600 text-sm md:text-base">
+          <p className="text-slate-600 text-sm md:text-base break-words">
             입력부터 확인까지 한눈에
           </p>
         </motion.div>
@@ -43,13 +43,13 @@ export default function DBTransparencyFlowSection() {
           {steps.map((step, i) => {
             const Icon = step.icon;
             return (
-              <div key={step.title} className="flex items-center gap-2 md:gap-0 flex-1">
+              <div key={step.title} className="flex items-center gap-2 md:gap-0 flex-1 min-w-0">
                 <motion.div
                   initial={{ opacity: 0, y: 12 }}
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true }}
                   transition={{ delay: i * 0.1 }}
-                  className="flex-1 rounded-2xl border-2 border-slate-200 bg-slate-50/50 p-6 text-center relative overflow-hidden"
+                  className="flex-1 min-w-0 rounded-2xl border-2 border-slate-200 bg-slate-50/50 p-6 text-center relative overflow-hidden"
                 >
                   <motion.div
                     className="absolute inset-0 opacity-30"
@@ -63,8 +63,8 @@ export default function DBTransparencyFlowSection() {
                     <div className="w-12 h-12 rounded-xl bg-cyan-500/10 flex items-center justify-center mx-auto mb-3">
                       <Icon className="w-6 h-6 text-cyan-600" />
                     </div>
-                    <h3 className="font-bold text-slate-900 mb-1">{step.title}</h3>
-                    <p className="text-xs text-slate-500">{step.desc}</p>
+                    <h3 className="font-bold text-slate-900 mb-1 break-words">{step.title}</h3>
+                    <p className="text-xs text-slate-500 break-words">{step.desc}</p>
                   </div>
                 </motion.div>
                 {i < steps.length - 1 && (

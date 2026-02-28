@@ -113,7 +113,7 @@ export default function RecruitSection() {
 
   return (
     <section id="recruit" className="py-32 bg-gradient-to-b from-white to-cool-gray">
-      <div className="max-w-4xl mx-auto px-6 lg:px-8">
+      <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 min-w-0">
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}

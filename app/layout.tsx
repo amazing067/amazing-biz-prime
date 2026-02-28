@@ -51,7 +51,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="ko" className={notoSansKR.variable}>
-      <body className="font-sans">{children}</body>
+      <body className="font-sans min-w-0">{children}</body>
     </html>
   );
 }

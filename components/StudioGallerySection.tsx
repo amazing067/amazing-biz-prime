@@ -39,7 +39,7 @@ export default function StudioGallerySection() {
 
   return (
     <section id="studio" className="py-16 md:py-24 bg-slate-50/80">
-      <div className="max-w-5xl mx-auto px-6 lg:px-8">
+      <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 min-w-0">
         <motion.div
           initial={{ opacity: 0, y: 16 }}
           whileInView={{ opacity: 1, y: 0 }}

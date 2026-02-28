@@ -16,17 +16,17 @@ const days = [
 export default function OnboardingTimelineSection() {
   return (
     <section id="onboarding" className="py-16 md:py-24 bg-white">
-      <div className="max-w-4xl mx-auto px-6 lg:px-8">
+      <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 min-w-0">
         <motion.div
           initial={{ opacity: 0, y: 16 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           className="text-center mb-12"
         >
-          <h2 className="text-2xl md:text-3xl font-bold text-slate-900 mb-2">
+          <h2 className="text-xl sm:text-2xl md:text-3xl font-bold text-slate-900 mb-2 break-words">
             7일 온보딩 로드맵
           </h2>
-          <p className="text-slate-600 text-sm md:text-base">
+          <p className="text-slate-600 text-sm md:text-base break-words">
             초보도 따라올 수 있는 단계별 진행
           </p>
         </motion.div>
@@ -60,9 +60,9 @@ export default function OnboardingTimelineSection() {
                 >
                   <div className="flex items-start gap-3">
                     <CheckCircle2 className="w-5 h-5 text-emerald-500 flex-shrink-0 mt-0.5" />
-                    <div>
-                      <h3 className="font-bold text-slate-900 mb-1">Day {item.day} · {item.title}</h3>
-                      <p className="text-slate-600 text-sm">{item.desc}</p>
+                    <div className="min-w-0">
+                      <h3 className="font-bold text-slate-900 mb-1 break-words">Day {item.day} · {item.title}</h3>
+                      <p className="text-slate-600 text-sm break-words">{item.desc}</p>
                     </div>
                   </div>
                 </div>

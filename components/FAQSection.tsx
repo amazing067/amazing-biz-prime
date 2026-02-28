@@ -146,7 +146,7 @@ export default function FAQSection() {
 
   return (
     <section id="faq" className="py-16 md:py-24 bg-white">
-      <div className="max-w-3xl mx-auto px-6 lg:px-8">
+      <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 min-w-0">
         <motion.div
           initial={{ opacity: 0, y: 24 }}
           whileInView={{ opacity: 1, y: 0 }}

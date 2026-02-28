@@ -34,7 +34,7 @@ export default function StatsSection() {
 
   return (
     <section ref={ref} className="py-16 md:py-24 bg-white border-b border-slate-100">
-      <div className="max-w-7xl mx-auto px-6 lg:px-8">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 min-w-0">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -48,13 +48,13 @@ export default function StatsSection() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ delay: i * 0.1 }}
-              className="text-center"
+              className="text-center min-w-0"
             >
               <div className="text-4xl md:text-5xl font-bold text-electric-blue mb-1">
                 <CountUp to={stat.value} inView={inView} />
                 {stat.suffix}
               </div>
-              <div className="text-slate-600 font-medium">{stat.label}</div>
+              <div className="text-slate-600 font-medium text-sm sm:text-base break-words">{stat.label}</div>
             </motion.div>
           ))}
         </motion.div>

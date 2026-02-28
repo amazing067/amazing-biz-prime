@@ -7,7 +7,7 @@ import { Shield, ArrowRight } from "lucide-react";
 export default function FinalCTASection() {
   return (
     <section className="py-16 md:py-24 bg-navy-deep">
-      <div className="max-w-3xl mx-auto px-6 lg:px-8 text-center">
+      <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 text-center min-w-0">
         <motion.div
           initial={{ opacity: 0, y: 24 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -25,10 +25,10 @@ export default function FinalCTASection() {
             </span>
           </div>
 
-          <h2 className="text-3xl md:text-4xl font-bold text-white tracking-tight">
+          <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-white tracking-tight break-words">
             지금 무료 상담 받기
           </h2>
-          <p className="text-slate-400 text-lg">
+          <p className="text-slate-400 text-base sm:text-lg break-words">
             1분만에 문의 남기시면 맞춤 상담을 진행해 드립니다.
           </p>
 

@@ -125,7 +125,7 @@ export default function Header() {
           : "bg-transparent"
       }`}
     >
-      <nav className="max-w-7xl mx-auto px-4 lg:px-6">
+      <nav className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 min-w-0">
         <div className="flex items-center justify-between h-20 gap-2">
           <motion.a
             href="/"

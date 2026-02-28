@@ -31,17 +31,17 @@ const cards = [
 export default function ProofPackSection() {
   return (
     <section id="proof-pack" className="py-16 md:py-24 bg-slate-50/80">
-      <div className="max-w-6xl mx-auto px-6 lg:px-8">
+      <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 min-w-0">
         <motion.div
           initial={{ opacity: 0, y: 16 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           className="text-center mb-12"
         >
-          <h2 className="text-2xl md:text-3xl font-bold text-slate-900 mb-2">
+          <h2 className="text-xl sm:text-2xl md:text-3xl font-bold text-slate-900 mb-2 break-words">
             실제로 제공되는 것들
           </h2>
-          <p className="text-slate-600 text-sm md:text-base">
+          <p className="text-slate-600 text-sm md:text-base break-words">
             리포트·대시보드·교육 체크리스트 샘플
           </p>
         </motion.div>
@@ -56,15 +56,15 @@ export default function ProofPackSection() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ delay: i * 0.1 }}
-                className="rounded-2xl border border-slate-200 bg-white p-6 shadow-soft hover:shadow-soft-lg transition-shadow"
+                className="rounded-2xl border border-slate-200 bg-white p-6 shadow-soft hover:shadow-soft-lg transition-shadow min-w-0"
               >
-                <div className="flex items-center gap-3 mb-4">
-                  <div className="w-10 h-10 rounded-xl bg-electric-blue/10 flex items-center justify-center">
+                <div className="flex items-center gap-3 mb-4 min-w-0">
+                  <div className="w-10 h-10 rounded-xl bg-electric-blue/10 flex items-center justify-center flex-shrink-0">
                     <Icon className="w-5 h-5 text-electric-blue" />
                   </div>
-                  <div>
-                    <h3 className="font-bold text-slate-900">{card.title}</h3>
-                    <p className="text-xs text-slate-500">{card.subtitle}</p>
+                  <div className="min-w-0">
+                    <h3 className="font-bold text-slate-900 break-words">{card.title}</h3>
+                    <p className="text-xs text-slate-500 break-words">{card.subtitle}</p>
                   </div>
                 </div>
                 <div className="min-h-[160px] flex flex-col gap-2">
@@ -77,7 +77,7 @@ export default function ProofPackSection() {
                       sizes="(max-width: 768px) 100vw, 33vw"
                     />
                   </div>
-                  <p className="text-[11px] text-slate-500 leading-snug">{card.caption}</p>
+                  <p className="text-[11px] text-slate-500 leading-snug break-words">{card.caption}</p>
                 </div>
               </motion.div>
             );

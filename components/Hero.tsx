@@ -47,7 +47,7 @@ export default function Hero() {
         transition={{ duration: 8, repeat: Infinity, repeatDelay: 3, ease: "linear" }}
       />
 
-      <div className="relative z-10 max-w-7xl mx-auto px-6 lg:px-8 text-center">
+      <div className="relative z-10 w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center min-w-0">
         <motion.div
           initial={{ opacity: 0, y: 24 }}
           animate={{ opacity: 1, y: 0 }}
@@ -65,7 +65,7 @@ export default function Hero() {
         </motion.div>
 
         <motion.h1
-          className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold mb-6 leading-tight tracking-tight text-white"
+          className="text-3xl sm:text-5xl md:text-6xl lg:text-7xl font-bold mb-6 leading-tight tracking-tight text-white break-words"
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.7, delay: 0.1 }}
@@ -78,7 +78,7 @@ export default function Hero() {
         </motion.h1>
 
         <motion.p
-          className="text-lg md:text-xl text-slate-300 mb-4 max-w-2xl mx-auto"
+          className="text-base sm:text-lg md:text-xl text-slate-300 mb-4 max-w-2xl mx-auto break-words"
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.7, delay: 0.25 }}
@@ -88,7 +88,7 @@ export default function Hero() {
 
         {/* Proof stat */}
         <motion.div
-          className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/5 border border-white/10 text-slate-300 text-sm mb-10"
+          className="inline-flex flex-wrap items-center justify-center gap-2 px-4 py-2 rounded-full bg-white/5 border border-white/10 text-slate-300 text-xs sm:text-sm mb-10 text-center max-w-full"
           initial={{ opacity: 0, scale: 0.95 }}
           animate={{ opacity: 1, scale: 1 }}
           transition={{ duration: 0.5, delay: 0.4 }}
@@ -123,14 +123,14 @@ export default function Hero() {
 
         {/* 영상/이미지 히어로: 소개 영상 또는 시스템 미리보기 */}
         <motion.div
-          className="mt-16 md:mt-20 flex justify-center px-2"
+          className="mt-16 md:mt-20 flex justify-center px-2 min-w-0 w-full"
           initial={{ opacity: 0, y: 40, rotateX: 8 }}
           animate={{ opacity: 1, y: 0, rotateX: 0 }}
           transition={{ duration: 1, delay: 0.6, ease: "easeOut" }}
           style={{ perspective: "1000px" }}
         >
           <motion.div
-            className="relative w-full max-w-3xl rounded-2xl border border-white/10 bg-white/5 backdrop-blur-xl overflow-hidden shadow-2xl"
+            className="relative w-full max-w-3xl rounded-2xl border border-white/10 bg-white/5 backdrop-blur-xl overflow-hidden shadow-2xl min-w-0"
             style={{ transform: "rotateX(5deg) rotateZ(-1deg)" }}
             whileHover={{ transform: "rotateX(2deg) rotateZ(0deg) scale(1.02)" }}
             transition={{ type: "spring", stiffness: 200 }}

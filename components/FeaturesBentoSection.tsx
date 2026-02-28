@@ -51,9 +51,9 @@ const bentoItems = [
   {
     id: "dementia-lead",
     title: "치매검사",
-    benefit: "검사 → 미래 간병비 예측 → 상담 연결",
+    benefit: "게임처럼 즐겁고 쉽게 검사 → 간병비 예측 → 상담 연결",
     description:
-      "15가지 인지검사와 10년 후 간병비 예측으로, 부담 없이 상담으로 이어지는 도구를 제공합니다.",
+      "15가지 인지검사를 게임하듯 즐겁고 쉽게 진행할 수 있어요. 10년 후 간병비 예측까지 보고, 자연스럽게 상담으로 이어집니다.",
     icon: BrainCircuit,
     gradient: "from-emerald-500 to-teal-500",
     size: "col-span-1",
@@ -66,17 +66,17 @@ const bentoItems = [
 export default function FeaturesBentoSection() {
   return (
     <section id="offer" className="py-16 md:py-24 bg-slate-50/80">
-      <div className="max-w-7xl mx-auto px-6 lg:px-8">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 min-w-0">
         <motion.div
           initial={{ opacity: 0, y: 24 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, margin: "-80px" }}
           className="text-center mb-12 md:mb-16"
         >
-          <h2 className="text-3xl md:text-4xl font-bold text-slate-900 mb-3 tracking-tight">
+          <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-slate-900 mb-3 tracking-tight break-words">
             타 본부를 압도하는 지원 인프라
           </h2>
-          <p className="text-lg text-slate-600 max-w-2xl mx-auto">
+          <p className="text-base sm:text-lg text-slate-600 max-w-2xl mx-auto break-words">
             유입(블로그·검사) → 상담·운영(포털/DB) → 신뢰·유지(청구)까지, 입사 즉시 쓰는 영업 OS입니다.
           </p>
         </motion.div>
@@ -91,9 +91,9 @@ export default function FeaturesBentoSection() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true, margin: "-40px" }}
                 transition={{ duration: 0.5, delay: item.delay }}
-                className={`${item.size} group`}
+                className={`${item.size} group min-w-0`}
               >
-                <div className="h-full rounded-2xl border border-white/60 bg-white/70 backdrop-blur-xl shadow-soft hover:shadow-soft-lg transition-all duration-300 p-6 md:p-8 flex flex-col justify-between min-h-[220px] md:min-h-[240px]">
+                <div className="h-full rounded-2xl border border-white/60 bg-white/70 backdrop-blur-xl shadow-soft hover:shadow-soft-lg transition-all duration-300 p-6 md:p-8 flex flex-col justify-between min-h-[220px] md:min-h-[240px] min-w-0">
                   <div>
                     <div className="flex items-center justify-between mb-3">
                       <div
@@ -108,10 +108,10 @@ export default function FeaturesBentoSection() {
                     <h3 className="text-xl md:text-2xl font-bold text-slate-900 mb-2">
                       {item.title}
                     </h3>
-                    <p className="text-electric-blue font-semibold text-sm md:text-base mb-2">
+                    <p className="text-electric-blue font-semibold text-sm md:text-base mb-2 break-words">
                       {item.benefit}
                     </p>
-                    <p className="text-slate-600 text-sm md:text-base leading-relaxed">
+                    <p className="text-slate-600 text-sm md:text-base leading-relaxed break-words">
                       {item.description}
                     </p>
                   </div>

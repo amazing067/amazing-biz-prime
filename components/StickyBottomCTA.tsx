@@ -32,10 +32,10 @@ export default function StickyBottomCTA() {
           transition={{ type: "spring", stiffness: 300, damping: 30 }}
           className="fixed bottom-0 left-0 right-0 z-40 md:hidden"
         >
-          <div className="flex items-center justify-center gap-3 px-4 py-3 bg-white/95 backdrop-blur-lg border-t border-slate-200 shadow-soft-lg safe-area-pb">
+          <div className="flex items-center justify-center gap-3 px-4 py-3 bg-white/95 backdrop-blur-lg border-t border-slate-200 shadow-soft-lg safe-area-pb min-w-0">
             <Link
               href="#recruit"
-              className="flex-1 flex items-center justify-center gap-2 py-3.5 rounded-2xl font-semibold text-white bg-gradient-to-r from-electric-blue to-violet-600 shadow-lg"
+              className="flex-1 min-w-0 flex items-center justify-center gap-2 py-3.5 rounded-2xl font-semibold text-white bg-gradient-to-r from-electric-blue to-violet-600 shadow-lg"
               aria-label="무료 상담 신청"
             >
               <MessageCircle className="w-5 h-5" />

@@ -53,7 +53,7 @@ const services: Service[] = [
     id: "dementia-test",
     anchorId: "proof-dementia-test",
     title: "치매검사 서비스",
-    tagline: "무료 온라인 검사로 뇌 건강과 간병비를 미리 확인",
+    tagline: "게임처럼 즐겁고 쉬운 온라인 검사로 뇌 건강·간병비를 미리 확인",
     icon: BrainCircuit,
     href: "https://치매검사.com",
     previews: ["/proof/dementia-1.png", "/proof/dementia-2.png"],
@@ -76,14 +76,14 @@ export default function EcosystemSection() {
 
   return (
     <section id="ecosystem" className="py-16 md:py-24 bg-white">
-      <div className="max-w-6xl mx-auto px-6 lg:px-8">
+      <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 min-w-0">
         <motion.div
           initial={{ opacity: 0, y: 16 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, margin: "-80px" }}
           className="text-center mb-12 md:mb-16"
         >
-          <h2 className="text-2xl md:text-3xl font-bold text-slate-900 mb-2">
+          <h2 className="text-xl sm:text-2xl md:text-3xl font-bold text-slate-900 mb-2 break-words">
             실제 운영 화면 미리보기
           </h2>
           <p className="text-slate-600 text-sm md:text-base">
@@ -102,18 +102,18 @@ export default function EcosystemSection() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ delay: index * 0.08 }}
-                className="scroll-mt-28 rounded-2xl border border-slate-200 bg-slate-50/80 p-6 shadow-soft hover:shadow-soft-lg transition-shadow flex flex-col justify-between"
+                className="scroll-mt-28 rounded-2xl border border-slate-200 bg-slate-50/80 p-6 shadow-soft hover:shadow-soft-lg transition-shadow flex flex-col justify-between min-w-0"
               >
-                <div>
-                  <div className="flex items-center gap-3 mb-2">
-                    <div className="w-10 h-10 rounded-xl bg-electric-blue/10 flex items-center justify-center">
+                <div className="min-w-0">
+                  <div className="flex items-center gap-3 mb-2 min-w-0">
+                    <div className="w-10 h-10 rounded-xl bg-electric-blue/10 flex items-center justify-center flex-shrink-0">
                       <Icon className="w-5 h-5 text-electric-blue" />
                     </div>
-                    <div>
-                      <h3 className="font-bold text-slate-900 text-base md:text-lg">
+                    <div className="min-w-0">
+                      <h3 className="font-bold text-slate-900 text-base md:text-lg break-words">
                         {service.title}
                       </h3>
-                      <p className="text-xs md:text-sm text-slate-600">
+                      <p className="text-xs md:text-sm text-slate-600 break-words">
                         {service.tagline}
                       </p>
                     </div>

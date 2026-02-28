@@ -48,7 +48,7 @@ export default function WhyNowStrip() {
       <div className="absolute inset-0 opacity-20 bg-blueprint-grid" />
       <div className="absolute inset-0 bg-gradient-to-b from-transparent via-white/0 to-black/40" />
 
-      <div className="relative max-w-6xl mx-auto px-6 lg:px-8">
+      <div className="relative max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 min-w-0">
         <motion.div
           initial={{ opacity: 0, y: 18 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -56,10 +56,10 @@ export default function WhyNowStrip() {
           transition={{ duration: 0.6 }}
           className="text-center mb-10 md:mb-14"
         >
-          <h2 className="text-3xl md:text-5xl font-extrabold tracking-tight">
+          <h2 className="text-2xl sm:text-3xl md:text-5xl font-extrabold tracking-tight break-words">
             지금 여기서 시작하는 이유
           </h2>
-          <p className="mt-4 text-lg md:text-xl text-titanium-silver/90 leading-relaxed max-w-3xl mx-auto">
+          <p className="mt-4 text-base sm:text-lg md:text-xl text-titanium-silver/90 leading-relaxed max-w-3xl mx-auto break-words">
             “좋은 말”이 아니라, 실제로 확인 가능한 구조(흐름·도구·루틴)로 시작합니다.
           </p>
         </motion.div>
@@ -74,7 +74,7 @@ export default function WhyNowStrip() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true, margin: "-80px" }}
                 transition={{ duration: 0.55, delay: idx * 0.06 }}
-                className="rounded-3xl border border-white/10 bg-white/5 backdrop-blur-xl p-7 shadow-soft"
+                className="rounded-3xl border border-white/10 bg-white/5 backdrop-blur-xl p-7 shadow-soft min-w-0"
               >
                 <div className="w-12 h-12 rounded-2xl bg-white/10 flex items-center justify-center">
                   <Icon className="w-6 h-6 text-white" />

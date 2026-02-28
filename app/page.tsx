@@ -20,7 +20,7 @@ import StickyBottomCTA from "@/components/StickyBottomCTA";
 
 export default function Home() {
   return (
-    <main className="min-h-screen">
+    <main className="min-h-screen min-w-0 overflow-x-hidden">
       <Header />
       <Hero />
       <StatsSection />
