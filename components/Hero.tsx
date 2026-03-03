@@ -136,7 +136,7 @@ export default function Hero() {
             transition={{ type: "spring", stiffness: 200 }}
           >
             {/* .env.local에 NEXT_PUBLIC_HERO_VIDEO_URL 설정 시 영상 표시 (YouTube 링크 가능) */}
-            <div className="aspect-video rounded-t-2xl bg-navy-mid/90 border-b border-white/10 overflow-hidden flex items-center justify-center">
+            <div className="min-h-[420px] md:min-h-0 md:aspect-video rounded-t-2xl bg-navy-mid/90 border-b border-white/10 overflow-hidden flex items-center justify-center">
               {heroVideoUrl ? (
                 <iframe
                   src={heroVideoUrl}

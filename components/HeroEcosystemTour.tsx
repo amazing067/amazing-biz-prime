@@ -7,6 +7,8 @@ import {
   PenSquare,
   ClipboardList,
   BrainCircuit,
+  MessageSquare,
+  BookOpen,
   ArrowUpRight,
 } from "lucide-react";
 import Image from "next/image";
@@ -36,7 +38,7 @@ const tabs: Tab[] = [
       "고객·상담 이력과 일정·할 일을 한 곳에서 관리",
       "본부·개인 단위 실시간 성과 대시보드",
     ],
-    images: ["/proof/portal-1.png", "/proof/portal-2.png"],
+    images: ["/proof/portal-1.png", "/proof/portal-2.png", "/proof/portal-3.png"],
     proofHref: "#ecosystem",
     icon: LayoutDashboard,
   },
@@ -52,7 +54,7 @@ const tabs: Tab[] = [
       "보험카페 Q&A용 답변 문장 자동 생성",
       "설계서 이미지를 올리면 보장 분석 문장 자동 정리",
     ],
-    images: ["/proof/blogai-1.png"],
+    images: ["/proof/blogai-1.png", "/proof/blogai-2.png", "/proof/blogai-3.png"],
     proofHref: "#ecosystem",
     icon: PenSquare,
   },
@@ -68,7 +70,7 @@ const tabs: Tab[] = [
       "치과 확인서·고객센터·FAX 번호 정리",
       "보험나이·실손 등 필수 계산기 제공",
     ],
-    images: ["/proof/claim-1.png"],
+    images: ["/proof/claim-1.png", "/proof/claim-2.png", "/proof/claim-3.png"],
     proofHref: "#ecosystem",
     icon: ClipboardList,
   },
@@ -84,9 +86,41 @@ const tabs: Tab[] = [
       "10년 후 예상 간병비를 시나리오로 제시",
       "검사 결과를 바탕으로 무료 상담 연결",
     ],
-    images: ["/proof/dementia-1.png"],
+    images: ["/proof/dementia-1.png", "/proof/dementia-2.png", "/proof/dementia-3.png"],
     proofHref: "#ecosystem",
     icon: BrainCircuit,
+  },
+  {
+    id: "ins-report-cafe",
+    label: "보험리포트 네이버카페",
+    labelShort: "보험리포트 카페",
+    title: "보험 Q&A·정보 공유 네이버 카페",
+    summary:
+      "보험리포트 네이버카페로 설계사·고객이 소통하고, Q&A와 콘텐츠로 권위를 쌓는 채널입니다.",
+    bullets: [
+      "보험 관련 질의응답·정보 공유",
+      "카페 전용 콘텐츠·가이드 운영",
+      "블로그 AI와 연계한 답변·포스트 지원",
+    ],
+    images: ["/proof/cafe-1.png", "/proof/cafe-2.png", "/proof/cafe-3.png"],
+    proofHref: "#proof-ins-report-cafe",
+    icon: MessageSquare,
+  },
+  {
+    id: "ins-report-blog",
+    label: "보험리포트 블로그",
+    labelShort: "보험리포트 블로그",
+    title: "검색 유입·신뢰를 위한 보험리포트 블로그",
+    summary:
+      "보험리포트 블로그로 검색 유입을 늘리고, 꾸준한 콘텐츠로 신뢰를 쌓는 채널입니다.",
+    bullets: [
+      "SEO 맞춤 블로그 초안·구조 지원",
+      "지속 업데이트 루틴·템플릿 제공",
+      "블로그 AI와 연계한 콘텐츠 생산",
+    ],
+    images: ["/proof/blog-1.png", "/proof/blog-2.png", "/proof/blog-3.png"],
+    proofHref: "#proof-ins-report-blog",
+    icon: BookOpen,
   },
 ];
 
@@ -101,15 +135,15 @@ export default function HeroEcosystemTour() {
   };
 
   return (
-    <div className="w-full min-w-0 h-full flex flex-col bg-navy-mid/90">
+    <div className="w-full min-w-0 h-full min-h-[380px] md:min-h-0 flex flex-col bg-navy-mid/90 overflow-hidden">
       {/* 상단 바 + 실제 운영 화면 배지 */}
-      <div className="flex items-center justify-between gap-2 px-3 sm:px-4 pt-3 pb-2 border-b border-white/10 min-w-0">
+      <div className="flex items-center justify-between gap-2 px-3 sm:px-4 pt-3 pb-2 border-b border-white/10 min-w-0 flex-shrink-0">
         <div className="flex items-center gap-2 text-[11px] text-slate-300 min-w-0 flex-1">
           <span className="flex-shrink-0 px-2 py-0.5 rounded-full bg-emerald-500/15 border border-emerald-400/40 text-[10px] font-medium text-emerald-300">
             실제 운영 화면
           </span>
           <span className="hidden sm:inline text-slate-400 truncate">
-            포털 + AI + 청구 + 치매검사, 4종 실서비스
+            포털·AI·청구·치매·보험리포트 카페·블로그, 6종 실서비스
           </span>
         </div>
         <div className="flex gap-1.5 flex-shrink-0">
@@ -119,9 +153,9 @@ export default function HeroEcosystemTour() {
         </div>
       </div>
 
-      <div className="flex flex-1 flex-col md:flex-row min-w-0">
+      <div className="flex flex-1 flex-col md:flex-row min-w-0 overflow-auto">
         {/* 탭: 모바일 2x2 한눈에, 데스크톱 세로 목록 */}
-        <div className="md:w-40 lg:w-52 border-b md:border-b-0 md:border-r border-white/10 min-w-0">
+        <div className="md:w-40 lg:w-52 border-b md:border-b-0 md:border-r border-white/10 min-w-0 flex-shrink-0">
           <nav
             className="grid grid-cols-2 md:grid-cols-1 gap-2 md:gap-1 px-2.5 py-2 md:py-3 text-[11px] md:text-[13px]"
             aria-label="실제 운영 서비스 선택"
@@ -158,14 +192,14 @@ export default function HeroEcosystemTour() {
           </nav>
         </div>
 
-        {/* 우측: 설명 + 스크린샷 */}
-        <div className="flex-1 flex flex-col md:flex-row min-w-0">
-          <div className="md:w-1/2 p-3 md:p-4 flex flex-col justify-between gap-3 min-w-0">
+        {/* 우측: 설명 + 스크린샷 (모바일: 텍스트 우선, 이미지 고정 높이) */}
+        <div className="flex-1 flex flex-col md:flex-row min-w-0 min-h-0">
+          <div className="md:w-1/2 p-3 md:p-4 flex flex-col justify-between gap-3 min-w-0 flex-shrink-0 overflow-y-auto">
             <div className="min-w-0">
               <p className="text-[11px] uppercase tracking-wide text-sky-300/80 mb-1">
                 Amazing 영업 OS
               </p>
-              <h3 className="text-sm md:text-base font-semibold text-white break-words">
+              <h3 className="text-sm md:text-base font-semibold text-white break-words leading-snug">
                 {active.title}
               </h3>
               <p className="mt-1.5 text-xs md:text-[13px] text-slate-200/90 leading-relaxed break-words">
@@ -180,7 +214,7 @@ export default function HeroEcosystemTour() {
                 ))}
               </ul>
             </div>
-            <div className="mt-1">
+            <div className="mt-1 flex-shrink-0">
               <Link
                 href={active.proofHref}
                 className="inline-flex items-center gap-1.5 text-[11px] md:text-xs font-semibold text-electric-blue hover:text-blue-300 transition-colors"
@@ -191,8 +225,8 @@ export default function HeroEcosystemTour() {
             </div>
           </div>
 
-          <div className="md:w-1/2 border-t md:border-t-0 md:border-l border-white/10 bg-black/50 flex flex-col">
-            <div className="relative flex-1">
+          <div className="md:w-1/2 border-t md:border-t-0 md:border-l border-white/10 bg-black/50 flex flex-col min-h-[140px] md:min-h-0 flex-1">
+            <div className="relative flex-1 min-h-[140px] md:min-h-0">
               <motion.div
                 key={`${active.id}-${imageIndex}`}
                 className="absolute inset-0"

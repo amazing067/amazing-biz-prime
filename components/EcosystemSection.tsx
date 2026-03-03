@@ -6,6 +6,8 @@ import {
   PenSquare,
   ClipboardList,
   BrainCircuit,
+  MessageSquare,
+  BookOpen,
   ArrowUpRight,
 } from "lucide-react";
 import Image from "next/image";
@@ -29,7 +31,7 @@ const services: Service[] = [
     tagline: "DB·고객·일정을 한 번에 보는 올인원 포털",
     icon: LayoutDashboard,
     href: "https://어메이징사업부.com",
-    previews: ["/proof/portal-1.png", "/proof/portal-2.png"],
+    previews: ["/proof/portal-1.png", "/proof/portal-2.png", "/proof/portal-3.png"],
   },
   {
     id: "blog-ai",
@@ -38,7 +40,7 @@ const services: Service[] = [
     tagline: "블로그·카페 Q&A·설계서 분석까지 한 번에",
     icon: PenSquare,
     href: "https://blog.xn--2e0bu9h4vczzczpaq.com",
-    previews: ["/proof/blogai-1.png", "/proof/blogai-2.png"],
+    previews: ["/proof/blogai-1.png", "/proof/blogai-2.png", "/proof/blogai-3.png"],
   },
   {
     id: "claim-hub",
@@ -47,7 +49,7 @@ const services: Service[] = [
     tagline: "보험금 청구에 필요한 정보를 한 링크로",
     icon: ClipboardList,
     href: "https://청구.com",
-    previews: ["/proof/claim-1.png", "/proof/claim-2.png"],
+    previews: ["/proof/claim-1.png", "/proof/claim-2.png", "/proof/claim-3.png"],
   },
   {
     id: "dementia-test",
@@ -56,7 +58,25 @@ const services: Service[] = [
     tagline: "게임처럼 즐겁고 쉬운 온라인 검사로 뇌 건강·간병비를 미리 확인",
     icon: BrainCircuit,
     href: "https://치매검사.com",
-    previews: ["/proof/dementia-1.png", "/proof/dementia-2.png"],
+    previews: ["/proof/dementia-1.png", "/proof/dementia-2.png", "/proof/dementia-3.png"],
+  },
+  {
+    id: "ins-report-cafe",
+    anchorId: "proof-ins-report-cafe",
+    title: "보험리포트 네이버카페",
+    tagline: "보험 Q&A·정보 공유를 위한 네이버 카페 운영",
+    icon: MessageSquare,
+    href: "https://cafe.naver.com",
+    previews: ["/proof/cafe-1.png", "/proof/cafe-2.png", "/proof/cafe-3.png"],
+  },
+  {
+    id: "ins-report-blog",
+    anchorId: "proof-ins-report-blog",
+    title: "보험리포트 블로그",
+    tagline: "검색 유입·콘텐츠로 신뢰를 쌓는 블로그",
+    icon: BookOpen,
+    href: "https://blog.naver.com",
+    previews: ["/proof/blog-1.png", "/proof/blog-2.png", "/proof/blog-3.png"],
   },
 ];
 
@@ -119,8 +139,8 @@ export default function EcosystemSection() {
                     </div>
                   </div>
 
-                  <div className="mt-4 grid grid-cols-2 gap-3">
-                    {service.previews.slice(0, 2).map((src, i) => (
+                  <div className="mt-4 grid grid-cols-3 gap-2">
+                    {service.previews.slice(0, 3).map((src, i) => (
                       <button
                         key={src}
                         type="button"
