@@ -4,13 +4,56 @@ import { motion } from "framer-motion";
 import { CheckCircle2 } from "lucide-react";
 
 const days = [
-  { day: 1, title: "계정·시스템 세팅", desc: "접속 권한 부여, 대시보드 안내" },
-  { day: 2, title: "스크립트·상담 실습", desc: "상담 시나리오 및 실전 연습" },
-  { day: 3, title: "교육 자료 오리엔테이션", desc: "교육 커리큘럼·자료 안내" },
-  { day: 4, title: "동행·피드백", desc: "현장 동행 또는 원격 피드백" },
-  { day: 5, title: "첫 DB 운용 준비", desc: "배분 룰·확인 방법 안내" },
-  { day: 6, title: "상담 루틴 정립", desc: "일일·주간 루틴 세팅" },
-  { day: 7, title: "독립 운영 시작", desc: "지속 지원·문의 채널 안내" },
+  {
+    day: 1,
+    title: "보험영업 전체 프로세스 + 필수 용어",
+    desc: "DB 생성, 온라인 운영, 개척, 블로그/카페 유입 대응과 필수 용어를 2시간 집중 정리",
+  },
+  {
+    day: 2,
+    title: "TA 대본 + 거절 멘트 대응",
+    desc: "자주 나오는 거절 유형별 받아치기까지 읽기·쓰기·암기 훈련",
+  },
+  {
+    day: 3,
+    title: "자기소개 멘트 개인화",
+    desc: "기존 멘트를 개인 화법으로 다듬어 신뢰도 높은 1차 대화 오프닝 완성",
+  },
+  {
+    day: 4,
+    title: "실손 + 암보험 핵심",
+    desc: "실손 변천사와 암보험(고액암/일반암/소액암, 표적항암) 구조를 디테일하게 학습",
+  },
+  {
+    day: 5,
+    title: "뇌·심장 + 수술비·치료비",
+    desc: "보장 우선순위와 설계 포인트를 고객 설명 중심으로 훈련",
+  },
+  {
+    day: 6,
+    title: "운전자·상해·치아보험",
+    desc: "생활형 보장 상품 3종을 비교·설명·추천하는 실전형 학습",
+  },
+  {
+    day: 7,
+    title: "RP 1차 미팅 (대화/태도/질문)",
+    desc: "고객과 첫 만남에서 신뢰 형성부터 니즈 파악까지 대화 흐름을 디테일하게 연습",
+  },
+  {
+    day: 8,
+    title: "RP 2차 미팅 (설계/비교/마무리)",
+    desc: "필요 자료 제시, 설계 비교, 마무리 멘트까지 전 과정을 실전처럼 진행",
+  },
+  {
+    day: 9,
+    title: "모바일 청약 + 고지의무 + 사후관리",
+    desc: "모바일 청약 체험, 고지의무 설명, 모니터링/증권 전달까지 실무형으로 학습",
+  },
+  {
+    day: 10,
+    title: "전체 과정 종합 시뮬레이션",
+    desc: "첫 상담부터 청약/사후관리까지 1~9일차 전체 내용을 처음부터 끝까지 통합 실습",
+  },
 ];
 
 export default function OnboardingTimelineSection() {
@@ -24,10 +67,10 @@ export default function OnboardingTimelineSection() {
           className="text-center mb-12"
         >
           <h2 className="text-xl sm:text-2xl md:text-3xl font-bold text-slate-900 mb-2 break-words">
-            7일 온보딩 로드맵
+            10일 완성 온보딩 로드맵
           </h2>
           <p className="text-slate-600 text-sm md:text-base break-words">
-            초보도 따라올 수 있는 단계별 진행
+            신입 기준, 1일차부터 10일차까지 실전 투입을 목표로 한 디테일 교육 과정
           </p>
         </motion.div>
 

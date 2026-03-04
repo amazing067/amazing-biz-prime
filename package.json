@@ -3,7 +3,12 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "next dev -p 3001",
+    "dev": "node scripts/dev-safe.js",
+    "dev:strict": "next dev -p 7777",
+    "dev:7777": "next dev -p 7777",
+    "dev:2080": "next dev -p 2080",
+    "dev:3001": "next dev -p 3001",
+    "dev:3002": "next dev -p 3002",
     "dev:3000": "next dev -p 3000",
     "build": "next build",
     "start": "next start -p 3001",

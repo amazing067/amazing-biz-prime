@@ -145,14 +145,14 @@ export default function EcosystemSection() {
                         key={src}
                         type="button"
                         onClick={() => openPreview(service, i)}
-                        className="relative aspect-video rounded-xl overflow-hidden border border-slate-200 bg-slate-900/5 hover:shadow-soft transition-shadow"
+                        className="relative aspect-video rounded-xl overflow-hidden border border-slate-200 bg-slate-900/10 hover:shadow-soft transition-shadow"
                         aria-label={`${service.title} 미리보기 ${i + 1}`}
                       >
                         <Image
                           src={src}
                           alt={`${service.title} 미리보기 ${i + 1}`}
                           fill
-                          className="object-contain"
+                          className="object-contain p-1"
                           sizes="(max-width: 768px) 100vw, 50vw"
                         />
                       </button>

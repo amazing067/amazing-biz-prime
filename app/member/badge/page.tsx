@@ -123,6 +123,7 @@ export default function MemberBadgePage() {
           englishName: formObject.englishName,
           design: formObject.design,
           paymentStatus: formObject.paymentStatus,
+          depositorName: formObject.depositorName || "",
           position: formObject.position,
           branch: selectedBranch,
           office: selectedOffice,
@@ -380,6 +381,17 @@ export default function MemberBadgePage() {
                   <span>입금예정</span>
                 </label>
               </div>
+            </div>
+            <div>
+              <label className="block text-sm font-medium text-slate-700 mb-2">
+                입금자 성명
+              </label>
+              <input
+                type="text"
+                name="depositorName"
+                className="w-full px-4 py-3 rounded-xl border border-slate-200 bg-white focus:outline-none focus:ring-2 focus:ring-electric-blue"
+                placeholder="입금자명을 입력하세요 (예: 홍길동)"
+              />
             </div>
             <div className="bg-amber-50 border border-amber-200 rounded-xl p-4">
               <p className="text-sm text-amber-900 font-semibold mb-1">입금 안내</p>

@@ -13,7 +13,6 @@ const cases = [
       "포털(OS)로 고객/일정/알림 루틴화",
       "콘텐츠 초안으로 유입 채널 시작",
     ],
-    result: "예시: 월 수익 범위(실제 데이터로 교체)",
   },
   {
     id: "m2",
@@ -24,7 +23,6 @@ const cases = [
       "DB/고객관리로 파이프라인 관리",
       "청구 도구로 고객 신뢰/리텐션 강화",
     ],
-    result: "예시: 월 수익 범위(실제 데이터로 교체)",
   },
   {
     id: "m3",
@@ -35,7 +33,6 @@ const cases = [
       "운영 대시보드 기반 목표 관리",
       "소개/재접촉이 자연스럽게 발생",
     ],
-    result: "예시: 월 수익 범위(실제 데이터로 교체)",
   },
 ];
 
@@ -50,7 +47,7 @@ export default function EarningsProofSection() {
           className="text-center mb-12 md:mb-16"
         >
           <h2 className="text-3xl md:text-4xl font-bold text-slate-900 mb-3 tracking-tight">
-            신입 성과/정산 안내
+            신입 성과 안내
           </h2>
           <p className="text-lg text-slate-600 max-w-3xl mx-auto">
             과장 없이 “구조”로 설명합니다. 아래는 익명 사례 템플릿이며, 면담에서 개인 상황에 맞춰 투명하게 안내합니다.
@@ -86,10 +83,6 @@ export default function EarningsProofSection() {
                 ))}
               </ul>
 
-              <div className="mt-4 rounded-xl border border-slate-200 bg-slate-50 px-4 py-3 text-sm text-slate-700">
-                {c.result}
-              </div>
-
               <a
                 href="#recruit"
                 className="mt-5 inline-flex items-center text-sm font-semibold text-electric-blue hover:text-blue-700 transition-colors"
@@ -102,7 +95,7 @@ export default function EarningsProofSection() {
         </div>
 
         <div className="mt-10 text-center text-xs md:text-sm text-slate-500">
-          고지: 개인별 활동/상담/상품 구성 및 시장 상황에 따라 결과는 달라질 수 있습니다. 상세 정산 구조는 면담에서 투명하게 안내합니다.
+          고지: 개인별 활동/상담/상품 구성 및 시장 상황에 따라 결과는 달라질 수 있습니다. 상세 안내는 면담에서 투명하게 진행합니다.
         </div>
       </div>
     </section>

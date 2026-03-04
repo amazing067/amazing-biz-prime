@@ -262,6 +262,32 @@ export default function EducationPage() {
           </div>
         </motion.div>
 
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.15 }}
+          className="mb-12"
+        >
+          <div className="rounded-3xl border border-slate-200 bg-white shadow-soft p-6 md:p-8">
+            <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-4">
+              <div>
+                <h2 className="text-2xl md:text-3xl font-bold text-slate-900">가상 모바일청약 시뮬레이터</h2>
+                <p className="text-sm md:text-base text-slate-600 mt-2">
+                  실제 청약처럼 단계별 입력/고지/전자서명을 체험하는 실전 모드입니다.
+                </p>
+              </div>
+              <Link
+                href="/member/education/mobile-subscription"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center justify-center rounded-xl bg-gradient-to-r from-electric-blue to-blue-600 px-5 py-3 text-sm font-semibold text-white shadow-lg hover:shadow-xl transition-all"
+              >
+                청약 시작하기
+              </Link>
+            </div>
+          </div>
+        </motion.div>
+
         {/* 동영상 섹션 */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}

@@ -88,6 +88,10 @@ export async function POST(request: NextRequest) {
               <td style="padding: 8px; border-bottom: 1px solid #e2e8f0;">${body.paymentStatus || "-"}</td>
             </tr>
             <tr>
+              <td style="padding: 8px; border-bottom: 1px solid #e2e8f0; font-weight: bold;">입금자 성명</td>
+              <td style="padding: 8px; border-bottom: 1px solid #e2e8f0;">${body.depositorName || "-"}</td>
+            </tr>
+            <tr>
               <td style="padding: 8px; border-bottom: 1px solid #e2e8f0; font-weight: bold;">직책</td>
               <td style="padding: 8px; border-bottom: 1px solid #e2e8f0;">${body.position}</td>
             </tr>

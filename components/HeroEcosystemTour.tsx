@@ -229,7 +229,7 @@ export default function HeroEcosystemTour() {
             <div className="relative flex-1 min-h-[140px] md:min-h-0">
               <motion.div
                 key={`${active.id}-${imageIndex}`}
-                className="absolute inset-0"
+                className="absolute inset-0 p-2 md:p-3"
                 initial={{ opacity: 0, y: 8 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.3, ease: "easeOut" }}
@@ -238,7 +238,7 @@ export default function HeroEcosystemTour() {
                   src={active.images[imageIndex]}
                   alt={active.title}
                   fill
-                  className="object-contain"
+                  className="object-contain rounded-md bg-slate-900/40"
                   sizes="(max-width: 768px) 100vw, 50vw"
                 />
               </motion.div>
@@ -251,7 +251,7 @@ export default function HeroEcosystemTour() {
                     key={src}
                     type="button"
                     onClick={() => setImageIndex(idx)}
-                    className={`relative flex-1 aspect-video rounded-md overflow-hidden border transition-all ${
+                    className={`relative flex-1 aspect-video rounded-md overflow-hidden border bg-slate-900/40 transition-all ${
                       idx === imageIndex
                         ? "border-electric-blue ring-1 ring-electric-blue/60"
                         : "border-white/15 hover:border-electric-blue/50"
@@ -262,7 +262,7 @@ export default function HeroEcosystemTour() {
                       src={src}
                       alt={`${active.label} thumbnail ${idx + 1}`}
                       fill
-                      className="object-cover opacity-80"
+                      className="object-contain p-1 opacity-90"
                       sizes="(max-width: 768px) 100vw, 20vw"
                     />
                   </button>

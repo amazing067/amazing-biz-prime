@@ -19,8 +19,9 @@ export default function FloatingContactDock() {
   const shouldHide =
     hiddenOnRoutes.some((p) => pathname === p || pathname.startsWith(p + "/")) || false;
 
-  const phoneRaw = process.env.NEXT_PUBLIC_CONTACT_PHONE || "01056040424";
-  const kakaoUrl = process.env.NEXT_PUBLIC_KAKAO_CHAT_URL || "#";
+  const phoneRaw = process.env.NEXT_PUBLIC_CONTACT_PHONE || "010-5604-0424";
+  const kakaoBaseUrl = process.env.NEXT_PUBLIC_KAKAO_CHAT_URL || "http://pf.kakao.com/_JxmxaJn/chat";
+  const kakaoUrl = `${kakaoBaseUrl}${kakaoBaseUrl.includes("?") ? "&" : "?"}source=prime-asset-home`;
   const telHref = phoneRaw ? `tel:${sanitizeTel(phoneRaw)}` : "";
 
   const [visible, setVisible] = useState(false);
