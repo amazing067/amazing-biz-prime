@@ -10,7 +10,7 @@ const notoSansKR = Noto_Sans_KR({
 });
 
 const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://프라임에셋.com";
-const iconVersion = "20260319-1";
+const iconVersion = "20260319-2";
 
 export const metadata: Metadata = {
   metadataBase: new URL(siteUrl),
