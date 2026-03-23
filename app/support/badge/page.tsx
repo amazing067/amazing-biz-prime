@@ -312,7 +312,7 @@ export default function BadgePage() {
                 required
                 value={phone}
                 onChange={(e) => setPhone(formatPhone(e.target.value))}
-                maxLength={12}
+                maxLength={13}
                 className="w-full px-4 py-3 rounded-xl border border-slate-200 bg-white focus:outline-none focus:ring-2 focus:ring-electric-blue focus:border-transparent transition-all"
                 placeholder="010-1234-5678"
               />
