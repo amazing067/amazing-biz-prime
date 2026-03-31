@@ -4,6 +4,7 @@ import nodemailer from "nodemailer";
 export async function POST(request: NextRequest) {
   try {
     const body = await request.json();
+    const tracking = body.tracking || {};
 
     // 환경 변수에서 이메일 설정 가져오기
     const emailUser = process.env.EMAIL_USER || "";
@@ -90,6 +91,30 @@ export async function POST(request: NextRequest) {
             <tr>
               <td style="padding: 8px; border-bottom: 1px solid #e2e8f0; font-weight: bold;">경력</td>
               <td style="padding: 8px; border-bottom: 1px solid #e2e8f0;">${body.experience || "미입력"}</td>
+            </tr>
+          </table>
+        </div>
+
+        <div style="margin-top: 24px;">
+          <h3 style="color: #334155; margin-bottom: 15px;">유입 채널 정보</h3>
+          <table style="width: 100%; border-collapse: collapse;">
+            <tr>
+              <td style="padding: 8px; border-bottom: 1px solid #e2e8f0; font-weight: bold; width: 120px;">랜딩 경로</td>
+              <td style="padding: 8px; border-bottom: 1px solid #e2e8f0;">${tracking.landingPath || "미입력"}</td>
+            </tr>
+            <tr>
+              <td style="padding: 8px; border-bottom: 1px solid #e2e8f0; font-weight: bold;">랜딩 URL</td>
+              <td style="padding: 8px; border-bottom: 1px solid #e2e8f0; word-break: break-all;">${tracking.landingUrl || "미입력"}</td>
+            </tr>
+            <tr>
+              <td style="padding: 8px; border-bottom: 1px solid #e2e8f0; font-weight: bold;">Referrer</td>
+              <td style="padding: 8px; border-bottom: 1px solid #e2e8f0; word-break: break-all;">${tracking.referrer || "직접 유입"}</td>
+            </tr>
+            <tr>
+              <td style="padding: 8px; border-bottom: 1px solid #e2e8f0; font-weight: bold;">UTM</td>
+              <td style="padding: 8px; border-bottom: 1px solid #e2e8f0;">
+                source=${tracking.utmSource || "-"}, medium=${tracking.utmMedium || "-"}, campaign=${tracking.utmCampaign || "-"}, content=${tracking.utmContent || "-"}, term=${tracking.utmTerm || "-"}
+              </td>
             </tr>
           </table>
         </div>

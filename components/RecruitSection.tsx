@@ -2,11 +2,16 @@
 
 import { motion } from "framer-motion";
 import { Send, Gift, Key, CheckCircle2, AlertCircle } from "lucide-react";
-import { useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 
 type SubmitStatus = "idle" | "loading" | "success" | "error";
 
-export default function RecruitSection() {
+type RecruitSectionProps = {
+  variant?: "home" | "landing";
+  sectionId?: string;
+};
+
+export default function RecruitSection({ variant = "home", sectionId = "recruit" }: RecruitSectionProps) {
   const [formData, setFormData] = useState({
     name: "",
     phone: "",
@@ -18,6 +23,39 @@ export default function RecruitSection() {
   const [agreePrivacy, setAgreePrivacy] = useState(false);
   const [submitStatus, setSubmitStatus] = useState<SubmitStatus>("idle");
   const [submitMessage, setSubmitMessage] = useState("");
+  const [tracking, setTracking] = useState({
+    landingPath: "",
+    landingUrl: "",
+    referrer: "",
+    utmSource: "",
+    utmMedium: "",
+    utmCampaign: "",
+    utmContent: "",
+    utmTerm: "",
+  });
+
+  useEffect(() => {
+    if (typeof window === "undefined") return;
+    const params = new URLSearchParams(window.location.search);
+    setTracking({
+      landingPath: window.location.pathname || "/",
+      landingUrl: window.location.href || "",
+      referrer: document.referrer || "직접 유입",
+      utmSource: params.get("utm_source") || "",
+      utmMedium: params.get("utm_medium") || "",
+      utmCampaign: params.get("utm_campaign") || "",
+      utmContent: params.get("utm_content") || "",
+      utmTerm: params.get("utm_term") || "",
+    });
+  }, []);
+
+  const sectionClassName = useMemo(
+    () =>
+      variant === "landing"
+        ? "pt-28 pb-16 bg-gradient-to-b from-white to-cool-gray"
+        : "py-32 bg-gradient-to-b from-white to-cool-gray",
+    [variant]
+  );
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -40,6 +78,7 @@ export default function RecruitSection() {
           address: formData.address || "미입력",
           experience: formData.experience || "미입력",
           message: formData.message || "미입력",
+          tracking,
           subject: `[입사지원] ${formData.name}님의 지원서`,
         }),
       });
@@ -112,7 +151,7 @@ export default function RecruitSection() {
   };
 
   return (
-    <section id="recruit" className="py-32 bg-gradient-to-b from-white to-cool-gray">
+    <section id={sectionId} className={sectionClassName}>
       <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 min-w-0">
         <motion.div
           initial={{ opacity: 0, y: 30 }}
@@ -121,10 +160,8 @@ export default function RecruitSection() {
           transition={{ duration: 0.8 }}
           className="text-center mb-16"
         >
-          <h2 className="text-4xl md:text-5xl font-bold text-slate-900 mb-4">
-            Recruit
-          </h2>
-          <p className="text-xl text-slate-600 font-light">
+          <h2 className="text-3xl md:text-5xl font-bold text-slate-900 mb-4">입사지원</h2>
+          <p className="text-base md:text-xl text-slate-600 font-light">
             지원 즉시 제공되는 Welcome Kit & System Access 권한.
           </p>
         </motion.div>
