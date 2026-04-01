@@ -19,11 +19,8 @@ export default function RecruitLandingPage() {
             <br />
             빠르게 상담 받아보세요
           </h1>
-          <p className="mt-4 text-sm sm:text-base md:text-lg text-slate-600 max-w-2xl">
-            이 페이지는 입사지원 전용 랜딩 페이지입니다. 폼 제출 시 유입 경로(UTM/레퍼러)가 함께 수집되어 채널별 성과를 확인할 수 있습니다.
-          </p>
 
-          <div className="mt-6 flex flex-col sm:flex-row gap-3">
+          <div className="mt-8 flex flex-col sm:flex-row gap-3">
             <Link
               href="#recruit-form"
               className="inline-flex items-center justify-center gap-2 rounded-xl bg-gradient-to-r from-electric-blue to-blue-600 px-5 py-3 text-white font-semibold shadow-md hover:shadow-lg transition"
