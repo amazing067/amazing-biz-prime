@@ -10,6 +10,8 @@ const config: Config = {
     extend: {
       fontFamily: {
         sans: ['var(--font-sans-kr)', 'Pretendard', 'system-ui', 'sans-serif'],
+        mono: ['var(--font-mono)', 'SF Mono', 'ui-monospace', 'monospace'],
+        'serif-italic': ['var(--font-serif-italic)', 'Noto Sans KR', 'serif'],
       },
       colors: {
         'electric-blue': '#2563EB',
@@ -17,6 +19,10 @@ const config: Config = {
         'cool-gray': '#F8FAFC',
         'navy-deep': '#0f172a',
         'navy-mid': '#1e293b',
+        // v2 editorial tokens (exposed as Tailwind utilities)
+        'paper': '#FAFAF7',
+        'paper-2': '#F0EFEA',
+        'ink': '#0A0B10',
       },
       borderRadius: {
         'card': '16px',
@@ -40,4 +46,3 @@ const config: Config = {
   plugins: [],
 };
 export default config;
-

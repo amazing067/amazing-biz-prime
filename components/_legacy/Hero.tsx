@@ -4,7 +4,7 @@ import { motion } from "framer-motion";
 import { ArrowDown, Sparkles } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
-import HeroEcosystemTour from "@/components/HeroEcosystemTour";
+import HeroEcosystemTour from "@/components/_legacy/HeroEcosystemTour";
 
 // YouTube watch URL을 embed URL로 변환
 function getEmbedVideoUrl(url: string | undefined): string | null {

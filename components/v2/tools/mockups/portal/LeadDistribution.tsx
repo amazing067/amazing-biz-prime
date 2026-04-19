@@ -20,9 +20,9 @@ const FCS = [
 
 const RULES = [
   { name: "자동 라운드로빈", on: true, sub: "FC당 균등 배정" },
-  { name: "등급 우선", on: true, sub: "VIP → A → B → C" },
   { name: "지역 매칭", on: true, sub: "동일 시·구 우선" },
-  { name: "재배정 임계", on: false, sub: "48h 무응답 시" },
+  { name: "중복 자동 병합", on: true, sub: "전화·이름 동일 시" },
+  { name: "담당 FC 유지", on: true, sub: "재방문 고객 보존" },
 ];
 
 export default function LeadDistribution() {

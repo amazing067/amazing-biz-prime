@@ -284,7 +284,7 @@ export default function Tools() {
       <div className="relative max-w-[1400px] mx-auto">
         <div className="max-w-[880px] mb-16">
           <Eyebrow>SECTION 06 · SYSTEM STACK</Eyebrow>
-          <h2 className="mt-5 text-[clamp(40px,5.5vw,72px)] leading-[0.98] tracking-[-0.025em] font-medium text-[color:var(--ink)]">
+          <h2 className="mt-5 text-[clamp(40px,5.5vw,72px)] leading-[0.98] tracking-[-0.025em] font-semibold text-[color:var(--ink)]">
             설계사는 말만 하면 됩니다.
             <br />
             <span className="font-serif-italic text-[color:var(--dim)]">나머지는 시스템이.</span>
@@ -386,7 +386,7 @@ export default function Tools() {
         <div className="mt-24 rounded-3xl border border-[color:var(--line)] bg-[color:var(--bg-2)] p-10 md:p-14 relative overflow-hidden">
           <div className="relative max-w-[860px] mx-auto text-center">
             <Eyebrow className="justify-center">STACK · ARCHITECTURE</Eyebrow>
-            <h3 className="mt-4 text-[clamp(26px,3vw,38px)] leading-[1.15] tracking-tight font-medium text-[color:var(--ink)]">
+            <h3 className="mt-4 text-[clamp(26px,3vw,38px)] leading-[1.15] tracking-tight font-semibold text-[color:var(--ink)]">
               외주가 아닌,{" "}
               <span className="font-serif-italic text-[color:var(--accent)]">
                 직접 만든 시스템

@@ -1,12 +1,27 @@
 import type { Metadata } from "next";
-import { Noto_Sans_KR } from "next/font/google";
+import { Noto_Sans_KR, JetBrains_Mono, Instrument_Serif } from "next/font/google";
 import "./globals.css";
 
 const notoSansKR = Noto_Sans_KR({
-  weight: ["400", "500", "600", "700"],
+  weight: ["300", "400", "500", "600", "700"],
   subsets: ["latin"],
   display: "swap",
   variable: "--font-sans-kr",
+});
+
+const jetbrainsMono = JetBrains_Mono({
+  weight: ["400", "500"],
+  subsets: ["latin"],
+  display: "swap",
+  variable: "--font-mono",
+});
+
+const instrumentSerif = Instrument_Serif({
+  weight: ["400"],
+  style: ["normal", "italic"],
+  subsets: ["latin"],
+  display: "swap",
+  variable: "--font-serif-italic",
 });
 
 const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://프라임에셋.com";
@@ -58,8 +73,8 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="ko" className={notoSansKR.variable}>
-      <body className="font-sans min-w-0">{children}</body>
+    <html lang="ko" className={`${notoSansKR.variable} ${jetbrainsMono.variable} ${instrumentSerif.variable}`}>
+      <body className="font-sans min-w-0 bg-noise-v2">{children}</body>
     </html>
   );
 }

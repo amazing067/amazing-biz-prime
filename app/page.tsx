@@ -1,69 +1,40 @@
-import Header from "@/components/Header";
-import Hero from "@/components/Hero";
-import StatsSection from "@/components/StatsSection";
-import SectionDivider from "@/components/SectionDivider";
-import SocialProofSection from "@/components/SocialProofSection";
-import WhyNowStrip from "@/components/WhyNowStrip";
-import DBTransparencyFlowSection from "@/components/DBTransparencyFlowSection";
-import FeaturesBentoSection from "@/components/FeaturesBentoSection";
-import EcosystemSection from "@/components/EcosystemSection";
-import ChannelGrowthSection from "@/components/ChannelGrowthSection";
-import EarningsProofSection from "@/components/EarningsProofSection";
-import ProcessSection from "@/components/ProcessSection";
-import OnboardingTimelineSection from "@/components/OnboardingTimelineSection";
-import ProofPackSection from "@/components/ProofPackSection";
-import StudioGallerySection from "@/components/StudioGallerySection";
-import TestimonialsSection from "@/components/TestimonialsSection";
-import RecruitSection from "@/components/RecruitSection";
-import FAQSection from "@/components/FAQSection";
-import FinalCTASection from "@/components/FinalCTASection";
-import Footer from "@/components/Footer";
+import Nav from "@/components/v2/Nav";
+import Hero from "@/components/v2/Hero";
+import Manifesto from "@/components/v2/Manifesto";
+import ValueChain from "@/components/v2/ValueChain";
+import Pillars from "@/components/v2/Pillars";
+import Process from "@/components/v2/Process";
+import Voices from "@/components/v2/Voices";
+import Training from "@/components/v2/Training";
+import Tools from "@/components/v2/Tools";
+import FullAccess from "@/components/v2/FullAccess";
+import Benefits from "@/components/v2/Benefits";
+import CareerPath from "@/components/v2/CareerPath";
+import Partners from "@/components/v2/Partners";
+import FAQ from "@/components/v2/FAQ";
+import Apply from "@/components/v2/Apply";
+import FooterV2 from "@/components/v2/FooterV2";
 import FloatingContactDock from "@/components/FloatingContactDock";
 
 export default function Home() {
   return (
     <main className="min-h-screen min-w-0 overflow-x-hidden">
-      <Header />
+      <Nav />
       <Hero />
-
-      <StatsSection />
-      <SectionDivider variant="light" />
-
-      <SocialProofSection />
-      <WhyNowStrip />
-      <DBTransparencyFlowSection />
-      <SectionDivider variant="light" />
-
-      <FeaturesBentoSection />
-      <SectionDivider variant="light" />
-
-      <EcosystemSection />
-      <SectionDivider variant="light" />
-
-      <ChannelGrowthSection />
-      <SectionDivider variant="light" />
-
-      <EarningsProofSection />
-      <SectionDivider variant="light" />
-
-      <ProcessSection />
-      <SectionDivider variant="light" />
-
-      <OnboardingTimelineSection />
-      <SectionDivider variant="light" />
-
-      <ProofPackSection />
-      <SectionDivider variant="light" />
-
-      <StudioGallerySection />
-      <SectionDivider variant="light" />
-
-      <TestimonialsSection />
-      <RecruitSection />
-      <FAQSection />
-      <FinalCTASection />
-      <Footer />
-
+      <Manifesto />
+      <Pillars />
+      <Process />
+      <Voices />
+      <Training />
+      <Tools />
+      <FullAccess />
+      <Benefits />
+      <ValueChain />
+      <CareerPath />
+      <Partners />
+      <FAQ />
+      <Apply />
+      <FooterV2 />
       <FloatingContactDock />
     </main>
   );

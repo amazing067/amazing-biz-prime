@@ -3,33 +3,33 @@
 import { MOCKUP, TOOL_COLOR } from "../_shared/tokens";
 
 const KPIS = [
-  { label: "업로드", value: "142", sub: "+18 today" },
-  { label: "배정", value: "87", sub: "61% 진도" },
-  { label: "상담중", value: "31", sub: "TA·1·2차" },
-  { label: "계약", value: "18", sub: "월 목표 92%" },
-  { label: "월납", value: "12.4억", sub: "본부 합계", accent: true },
+  { label: "업로드", value: "580", sub: "월 누적 DB" },
+  { label: "배정", value: "422", sub: "73% 분배" },
+  { label: "상담중", value: "186", sub: "TA·1·2차" },
+  { label: "계약", value: "142", sub: "월 누적" },
+  { label: "월납", value: "1.38억", sub: "군자본부 합계", accent: true },
 ];
 
 const MONTHS = [
-  { m: "1월", current: 42, target: 60 },
-  { m: "2월", current: 58, target: 60 },
-  { m: "3월", current: 71, target: 65 },
-  { m: "4월", current: 92, target: 70, active: true },
+  { m: "1월", current: 80, target: 100 },
+  { m: "2월", current: 95, target: 110 },
+  { m: "3월", current: 118, target: 120 },
+  { m: "4월", current: 142, target: 140, active: true },
 ];
 
 const RANK = [
-  { name: "박지훈 FC", val: "2.8억", pct: 100, badge: "🏆" },
-  { name: "김민지 FC", val: "2.1억", pct: 75 },
-  { name: "이서윤 FC", val: "1.9억", pct: 68 },
-  { name: "정태현 FC", val: "1.4억", pct: 50 },
-  { name: "최예린 FC", val: "1.1억", pct: 39 },
+  { name: "최송이 (세종)", val: "762만", pct: 100, badge: "🏆" },
+  { name: "김소현 (원주)", val: "654만", pct: 86 },
+  { name: "이진아 (인천)", val: "482만", pct: 63 },
+  { name: "박지훈 (구로)", val: "375만", pct: 49 },
+  { name: "정유진 (세종)", val: "284만", pct: 37 },
 ];
 
 const FEED = [
-  { time: "09:42", who: "김민지", what: "삼성생명 종신 1억 계약 클로징", tone: TOOL_COLOR.consulting },
+  { time: "09:42", who: "최송이", what: "삼성생명 종신 5천만 계약 클로징", tone: TOOL_COLOR.consulting },
   { time: "09:21", who: "박지훈", what: "DB 신규 12건 자동 배정 완료", tone: MOCKUP.accent },
-  { time: "08:55", who: "AI", what: "이서윤 고객 보장분석 PDF 생성", tone: TOOL_COLOR.coaching },
-  { time: "08:30", who: "정태현", what: "한화 실손 갱신 알림톡 발송", tone: TOOL_COLOR.disclosure },
+  { time: "08:55", who: "AI", what: "이진아 고객 보장분석 PDF 생성", tone: TOOL_COLOR.coaching },
+  { time: "08:30", who: "정유진", what: "한화 실손 갱신 알림톡 28건 발송", tone: TOOL_COLOR.disclosure },
 ];
 
 export default function Dashboard() {
