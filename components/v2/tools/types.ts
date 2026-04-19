@@ -22,6 +22,6 @@ export type ToolGroup = {
 export type ShowcaseProps = {
   group: ToolGroup;
   index: number; // 0-based, 헤더 번호용
-  flip?: boolean; // true면 콜라주 우측·리스트 좌측
-  collage: ReactNode; // 그룹별 콜라주 노드(부모가 주입)
+  flip?: boolean; // true면 목업 우측·리스트 좌측
+  mockups: ReactNode[]; // group.items와 1:1 정렬된 도구별 목업
 };

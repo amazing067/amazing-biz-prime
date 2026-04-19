@@ -4,51 +4,75 @@ import { useState } from "react";
 import { Mono, Icon } from "../Core";
 import type { ShowcaseProps, ToolItem } from "./types";
 
-function ToolRow({ item, index }: { item: ToolItem; index: number }) {
-  const [open, setOpen] = useState(false);
+function ToolRow({
+  item,
+  index,
+  active,
+  onSelect,
+}: {
+  item: ToolItem;
+  index: number;
+  active: boolean;
+  onSelect: () => void;
+}) {
   const isAi = item.status === "AI";
   return (
-    <div
-      onMouseEnter={() => setOpen(true)}
-      onMouseLeave={() => setOpen(false)}
-      className="relative pl-5 py-4 border-b border-[color:var(--line)] cursor-default group"
+    <button
+      type="button"
+      onClick={onSelect}
+      className="relative w-full text-left pl-5 py-3.5 border-b cursor-pointer transition-colors duration-200"
+      style={{
+        borderColor: "var(--line)",
+        background: active ? "rgba(91,91,239,0.04)" : "transparent",
+      }}
     >
       <span
-        className="absolute left-0 top-4 bottom-4 w-px transition-colors duration-300"
-        style={{ background: open ? "var(--accent)" : "transparent" }}
+        className="absolute left-0 top-3.5 bottom-3.5 w-[3px] rounded-r transition-colors duration-200"
+        style={{ background: active ? "#5b5bef" : "transparent" }}
       />
       <div className="flex items-baseline gap-3">
-        <Mono className="text-[10px] text-[color:var(--dim-2)]">
+        <Mono
+          className="text-[10px]"
+          style={{ color: active ? "#5b5bef" : "var(--dim-2)" }}
+        >
           /{String(index + 1).padStart(2, "0")}
         </Mono>
-        <h4 className="text-[16px] font-medium tracking-tight text-[color:var(--ink)]">
+        <h4
+          className="text-[16px] tracking-tight"
+          style={{ color: "var(--ink)", fontWeight: active ? 700 : 500 }}
+        >
           {item.name}
         </h4>
         {isAi && (
           <span
             className="inline-flex items-center gap-1 px-1.5 py-px rounded-full text-[9px] font-medium tracking-[0.08em]"
-            style={{ background: "var(--accent)", color: "var(--accent-ink)" }}
+            style={{ background: "#5b5bef", color: "#fff" }}
           >
             <Icon name="sparkles" size={8} stroke={2} /> AI
           </span>
         )}
+        <span
+          className="ml-auto text-[10px] transition-opacity duration-200"
+          style={{ color: "#5b5bef", opacity: active ? 1 : 0 }}
+        >
+          ●
+        </span>
       </div>
-      <p className="mt-1.5 text-[13px] leading-[1.6] text-[color:var(--ink-2)]">
+      <p className="mt-1 text-[12.5px] leading-[1.55]" style={{ color: "var(--ink-2)" }}>
         {item.desc}
       </p>
-      <div
-        className="overflow-hidden transition-all duration-500"
-        style={{ maxHeight: open ? "200px" : "0px", opacity: open ? 1 : 0 }}
-      >
-        <div className="pt-3 text-[12px] leading-[1.65] text-[color:var(--dim)]">
-          {item.detail}
-        </div>
-      </div>
-    </div>
+    </button>
   );
 }
 
-export default function ShowcaseFrame({ group, index, flip = false, collage }: ShowcaseProps) {
+export default function ShowcaseFrame({
+  group,
+  index,
+  flip = false,
+  mockups,
+}: ShowcaseProps) {
+  const [selected, setSelected] = useState(0);
+
   return (
     <section aria-labelledby={`group-${group.tag}`}>
       <div className="flex items-end justify-between mb-3 pb-5 border-b border-[color:var(--line)]">
@@ -66,25 +90,51 @@ export default function ShowcaseFrame({ group, index, flip = false, collage }: S
             {group.desc}
           </p>
         </div>
-        <Mono className="text-[11px] whitespace-nowrap ml-6 text-[color:var(--dim)]">
-          {group.items.length} tools
-        </Mono>
+        <div className="text-right">
+          <Mono className="text-[11px] whitespace-nowrap text-[color:var(--dim)]">
+            {group.items.length} tools · 클릭해서 전환
+          </Mono>
+          <Mono
+            className="block mt-1 text-[10px] whitespace-nowrap"
+            style={{ color: "#5b5bef" }}
+          >
+            /{String(selected + 1).padStart(2, "0")} {group.items[selected]?.name}
+          </Mono>
+        </div>
       </div>
 
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 mt-8">
         <div
           className={`lg:col-span-7 ${flip ? "lg:order-2" : "lg:order-1"}`}
           role="img"
-          aria-label={`${group.label} 시각 요약`}
+          aria-label={`${group.label} · ${group.items[selected]?.name} 시각`}
         >
-          <div className="relative aspect-[4/3] rounded-2xl border border-[color:var(--line)] bg-[color:var(--bg-2)] overflow-hidden">
-            {collage}
+          <div
+            className="relative aspect-[4/3] rounded-2xl border overflow-hidden"
+            style={{
+              borderColor: "var(--line)",
+              background: "var(--bg-2)",
+              boxShadow:
+                "0 20px 48px -16px rgba(20,20,40,0.15), 0 8px 20px -8px rgba(20,20,40,0.08)",
+            }}
+          >
+            {mockups[selected] ?? (
+              <div className="absolute inset-0 flex items-center justify-center text-[color:var(--dim)]">
+                (목업 준비중)
+              </div>
+            )}
           </div>
         </div>
         <div className={`lg:col-span-5 ${flip ? "lg:order-1" : "lg:order-2"}`}>
           <div className="border-t border-[color:var(--line)]">
             {group.items.map((item, i) => (
-              <ToolRow key={item.name} item={item} index={i} />
+              <ToolRow
+                key={item.name}
+                item={item}
+                index={i}
+                active={i === selected}
+                onSelect={() => setSelected(i)}
+              />
             ))}
           </div>
         </div>

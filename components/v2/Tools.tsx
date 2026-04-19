@@ -4,9 +4,25 @@ import { useState } from "react";
 import { Eyebrow, GridOverlay, Icon, Mono } from "./Core";
 import type { ToolGroup, ToolItem } from "./tools/types";
 import ShowcaseFrame from "./tools/ShowcaseFrame";
-import ShowcasePortal from "./tools/ShowcasePortal";
-import ShowcaseStudio from "./tools/ShowcaseStudio";
-import ShowcaseTouchpoints from "./tools/ShowcaseTouchpoints";
+// Portal mockups
+import Dashboard from "./tools/mockups/portal/Dashboard";
+import LeadDistribution from "./tools/mockups/portal/LeadDistribution";
+import Customers from "./tools/mockups/portal/Customers";
+import Performance from "./tools/mockups/portal/Performance";
+import CalendarTool from "./tools/mockups/portal/CalendarTool";
+import Pension from "./tools/mockups/portal/Pension";
+// Studio mockups
+import CoverageCompare from "./tools/mockups/studio/CoverageCompare";
+import Disclosure from "./tools/mockups/studio/Disclosure";
+import Coaching from "./tools/mockups/studio/Coaching";
+import ConsultAuto from "./tools/mockups/studio/ConsultAuto";
+import BlogAI from "./tools/mockups/studio/BlogAI";
+import Cognitive from "./tools/mockups/studio/Cognitive";
+// Touchpoints mockups
+import ClaimHub from "./tools/mockups/touchpoints/ClaimHub";
+import RecordsLookup from "./tools/mockups/touchpoints/RecordsLookup";
+import BlogPlatform from "./tools/mockups/touchpoints/BlogPlatform";
+import Alimtalk from "./tools/mockups/touchpoints/Alimtalk";
 
 /**
  * 실제 운영 중인 사내 시스템
@@ -328,10 +344,31 @@ export default function Tools() {
               );
             }
 
-            const collage =
-              g.tag === "portal" ? <ShowcasePortal /> :
-              g.tag === "studio" ? <ShowcaseStudio /> :
-              <ShowcaseTouchpoints />;
+            const mockups =
+              g.tag === "portal"
+                ? [
+                    <Dashboard key="dashboard" />,
+                    <LeadDistribution key="leads" />,
+                    <Customers key="customers" />,
+                    <Performance key="performance" />,
+                    <CalendarTool key="calendar" />,
+                    <Pension key="pension" />,
+                  ]
+                : g.tag === "studio"
+                ? [
+                    <CoverageCompare key="compare" />,
+                    <Disclosure key="disclosure" />,
+                    <Coaching key="coaching" />,
+                    <ConsultAuto key="consult" />,
+                    <BlogAI key="blog-ai" />,
+                    <Cognitive key="cognitive" />,
+                  ]
+                : [
+                    <ClaimHub key="claim" />,
+                    <RecordsLookup key="records" />,
+                    <BlogPlatform key="blog" />,
+                    <Alimtalk key="alimtalk" />,
+                  ];
 
             return (
               <ShowcaseFrame
@@ -339,7 +376,7 @@ export default function Tools() {
                 group={g}
                 index={gi}
                 flip={g.tag === "studio"}
-                collage={collage}
+                mockups={mockups}
               />
             );
           })}
