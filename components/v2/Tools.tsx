@@ -383,7 +383,7 @@ export default function Tools() {
         </div>
 
         {/* Architecture pitch */}
-        <div className="mt-24 rounded-3xl border border-[color:var(--line)] bg-[color:var(--bg-2)] p-10 md:p-14 relative overflow-hidden">
+        <div className="mt-24 card-v2-strong p-10 md:p-14 relative overflow-hidden">
           <div className="relative max-w-[860px] mx-auto text-center">
             <Eyebrow className="justify-center">STACK · ARCHITECTURE</Eyebrow>
             <h3 className="mt-4 text-[clamp(26px,3vw,38px)] leading-[1.15] tracking-tight font-semibold text-[color:var(--ink)]">

@@ -84,7 +84,7 @@ function PillarMock({ kind }: { kind: MockKind }) {
     "치매검사.kr / cognitive";
 
   return (
-    <div className="relative rounded-2xl border border-[color:var(--line)] bg-[color:var(--bg-1)] overflow-hidden shadow-[0_40px_120px_-24px_rgba(0,0,0,0.18)]">
+    <div className="relative card-v2-strong overflow-hidden">
       {/* Browser chrome */}
       <div className="flex items-center gap-2 px-3 py-2 border-b border-[color:var(--line)] bg-[color:var(--bg-2)]">
         <div className="flex gap-1">

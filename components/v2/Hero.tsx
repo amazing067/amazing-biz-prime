@@ -49,7 +49,7 @@ function LivePreview() {
   ];
 
   return (
-    <div className="relative rounded-2xl border border-[color:var(--line)] bg-[color:var(--bg-2)] overflow-hidden shadow-[0_40px_120px_-24px_rgba(0,0,0,0.18)]">
+    <div className="relative card-v2-strong overflow-hidden">
       <div className="flex items-center justify-between px-4 py-3 border-b border-[color:var(--line)] bg-[color:var(--bg-1)]/50">
         <div className="flex items-center gap-1.5">
           <span className="w-2.5 h-2.5 rounded-full bg-[color:var(--line)]" />

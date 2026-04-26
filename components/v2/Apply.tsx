@@ -199,7 +199,7 @@ export default function Apply() {
           <div className="col-span-12 md:col-span-7">
             <form
               onSubmit={submit}
-              className="rounded-3xl border border-[color:var(--line)] bg-[color:var(--bg-2)] p-8 md:p-12 space-y-8"
+              className="card-v2-strong p-8 md:p-12 space-y-8"
             >
               {[
                 { k: "name" as const, l: "성함", p: "홍길동", type: "text" },
