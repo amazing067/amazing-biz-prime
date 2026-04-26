@@ -50,42 +50,69 @@ function LivePreview() {
 
   return (
     <div className="relative card-v2-strong overflow-hidden">
-      <div className="flex items-center justify-between px-4 py-3 border-b border-[color:var(--line)] bg-[color:var(--bg-1)]/50">
-        <div className="flex items-center gap-1.5">
-          <span className="w-2.5 h-2.5 rounded-full bg-[color:var(--line)]" />
-          <span className="w-2.5 h-2.5 rounded-full bg-[color:var(--line)]" />
-          <span className="w-2.5 h-2.5 rounded-full bg-[color:var(--line)]" />
+      <div className="flex items-center justify-between px-3 md:px-4 py-2.5 md:py-3 border-b border-[color:var(--line)] bg-[color:var(--bg-1)]/50 gap-2">
+        <div className="flex items-center gap-1 md:gap-1.5 shrink-0">
+          <span className="w-2 h-2 md:w-2.5 md:h-2.5 rounded-full bg-[color:var(--line)]" />
+          <span className="w-2 h-2 md:w-2.5 md:h-2.5 rounded-full bg-[color:var(--line)]" />
+          <span className="w-2 h-2 md:w-2.5 md:h-2.5 rounded-full bg-[color:var(--line)]" />
         </div>
-        <div className="flex-1 text-center">
-          <Mono className="text-[11px] text-[color:var(--dim)]">{tabs[tab].url}</Mono>
+        <div className="flex-1 min-w-0 text-center px-2">
+          <Mono className="text-[10px] md:text-[11px] text-[color:var(--dim)] truncate block">
+            {tabs[tab].url}
+          </Mono>
         </div>
-        <Status>REAL-TIME</Status>
+        <span className="shrink-0 inline-flex items-center gap-1.5 text-[9px] md:text-[10px] font-bold uppercase tracking-[0.12em] text-emerald-500">
+          <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse" />
+          <span className="hidden md:inline">REAL-TIME</span>
+          <span className="md:hidden">LIVE</span>
+        </span>
       </div>
 
-      <div className="flex gap-1 px-3 pt-3 border-b border-[color:var(--line)] overflow-x-auto">
-        {tabs.map((t, i) => (
-          <button
-            key={t.label}
-            onClick={() => setTab(i)}
-            className={`px-3 py-2 text-[12px] font-medium rounded-t-md transition-colors whitespace-nowrap ${
-              i === tab
-                ? "bg-[color:var(--bg-2)] text-[color:var(--ink)] border border-[color:var(--line)] border-b-transparent relative top-px"
-                : "text-[color:var(--dim)] hover:text-[color:var(--ink-2)]"
-            }`}
-          >
-            {t.label}
-          </button>
-        ))}
-      </div>
-
-      <div className="relative bg-[color:var(--bg-2)]">
-        <div className="overflow-x-auto overflow-y-hidden">
-          <div
-            className="relative w-full min-w-[760px] md:min-w-0"
-            style={{ aspectRatio: "16/10" }}
-          >
-            {tabs[tab].view}
+      <div className="relative px-2 md:px-3 pt-2 md:pt-3 border-b border-[color:var(--line)] bg-[color:var(--bg-1)]/30">
+        <div className="flex items-center justify-between mb-1.5 px-1">
+          <div className="inline-flex items-center gap-1.5 text-[9px] md:text-[10px] font-bold tracking-[0.16em] uppercase text-[color:var(--dim)]">
+            <Icon name="target" size={10} stroke={2} />
+            탭하여 시스템 보기
           </div>
+          <Mono className="hidden md:block text-[9px] text-[color:var(--dim-2)]">
+            {String(tab + 1).padStart(2, "0")} / {String(tabs.length).padStart(2, "0")}
+          </Mono>
+        </div>
+        <div className="flex gap-0 overflow-x-auto -mb-px">
+          {tabs.map((t, i) => (
+            <button
+              key={t.label}
+              onClick={() => setTab(i)}
+              aria-pressed={i === tab}
+              className={`relative px-3 md:px-4 py-2.5 text-[12px] md:text-[13px] font-semibold transition-colors whitespace-nowrap cursor-pointer ${
+                i === tab
+                  ? "text-[color:var(--ink)]"
+                  : "text-[color:var(--dim)] hover:text-[color:var(--ink)] active:scale-[0.98]"
+              }`}
+            >
+              {t.label}
+              <span
+                aria-hidden
+                className={`absolute left-2 right-2 bottom-0 h-[2px] rounded-full transition-all ${
+                  i === tab
+                    ? "bg-[color:var(--ink)] opacity-100"
+                    : "bg-[color:var(--ink)] opacity-0 group-hover:opacity-30"
+                }`}
+              />
+            </button>
+          ))}
+        </div>
+      </div>
+
+      <div
+        className="relative bg-[color:var(--bg-2)] overflow-hidden hero-mock-container"
+        style={{ aspectRatio: "16/10" }}
+      >
+        <div
+          className="absolute top-0 left-0 origin-top-left hero-mock-inner"
+          style={{ width: "760px", aspectRatio: "16/10" }}
+        >
+          {tabs[tab].view}
         </div>
       </div>
     </div>
@@ -144,7 +171,7 @@ export default function Hero() {
       />
       <GridOverlay opacity={0.5} />
 
-      <div className="relative mx-auto max-w-[1840px] px-6">
+      <div className="relative mx-auto max-w-[1760px] px-6">
         <div className="flex flex-wrap items-center justify-between gap-4 mb-16 text-[12px]">
           <div className="flex items-center gap-6">
             <Eyebrow>A Recruiting System · v2026.04</Eyebrow>
@@ -158,52 +185,43 @@ export default function Hero() {
           </span>
         </div>
 
-        <div className="grid grid-cols-12 gap-6 items-end mb-20">
-          <h1
-            className="col-span-12 md:col-span-10 font-bold leading-[0.92] tracking-[-0.03em]"
-            style={{ fontSize: "clamp(56px, 12vw, 220px)" }}
-          >
-            <span className="block text-[color:var(--ink)]">영업은</span>
-            <span className="block relative">
-              <span className="font-serif-italic font-light text-[color:var(--dim-2)]">
-                시스템
-              </span>
-              <span className="text-[color:var(--ink)]">이다.</span>
-              <span className="absolute -top-2 -right-2 md:-right-4 hidden md:inline-flex items-center gap-1.5 text-[11px] uppercase tracking-[0.18em] text-[color:var(--accent)] bg-[color:var(--bg-1)] px-2 py-1 rounded-full border border-[color:var(--accent)]/30">
-                <Icon name="bolt" size={10} stroke={2} /> since 2019
-              </span>
-            </span>
-          </h1>
-
-          <div className="col-span-12 md:col-span-2 md:text-right space-y-2">
-            <div className="inline-block text-[11px] uppercase tracking-[0.18em] text-[color:var(--dim)] border-t border-[color:var(--line)] pt-2">
-              — Philosophy
-            </div>
-            <p className="text-[13px] text-[color:var(--ink-2)] leading-relaxed">
-              감정을 배제한
-              <br />
-              완벽한 영업 지원.
-            </p>
-          </div>
-        </div>
-
-        <div className="grid grid-cols-12 gap-8 pb-20">
-          <div className="col-span-12 md:col-span-5">
-            <Eyebrow className="mb-4">01 — The Offer</Eyebrow>
-            <p
-              className="text-[22px] md:text-[26px] leading-[1.35] text-[color:var(--ink)] font-semibold tracking-[-0.01em]"
-              style={{ textWrap: "balance" } as React.CSSProperties}
+        <div className="grid grid-cols-12 gap-8 md:gap-12 items-center pb-20">
+          {/* LEFT: Slogan + 4가지 carry */}
+          <div className="col-span-12 md:col-span-6 space-y-6 md:space-y-7">
+            <h1
+              className="font-bold leading-[0.92] tracking-[-0.03em] relative"
+              style={{ fontSize: "clamp(48px, 7vw, 110px)" }}
             >
-              보장분석 <span className="text-[color:var(--dim-2)]">·</span> AI 코칭{" "}
-              <span className="text-[color:var(--dim-2)]">·</span> 청구 자동화{" "}
-              <span className="text-[color:var(--dim-2)]">·</span> 치매검사.
-              <br />
-              <span className="text-[color:var(--ink-2)] font-normal">
-                네 가지가 설계사의 시간을 영업으로 되돌려 드립니다.
+              <span className="block text-[color:var(--ink)]">영업은</span>
+              <span className="block relative">
+                <span className="font-serif-italic font-semibold text-[color:var(--dim-2)]">
+                  시스템
+                </span>
+                <span className="text-[color:var(--ink)]">이다.</span>
+                <span className="absolute -top-2 -right-1 md:relative md:top-auto md:right-auto md:ml-3 inline-flex items-center gap-1.5 text-[10px] md:text-[11px] uppercase tracking-[0.18em] text-[color:var(--accent)] bg-[color:var(--bg-1)] px-2 py-1 rounded-full border border-[color:var(--accent)]/30 align-middle">
+                  <Icon name="bolt" size={10} stroke={2} /> since 2019
+                </span>
               </span>
-            </p>
+            </h1>
 
-            <div className="mt-6 flex flex-wrap gap-2">
+            <div>
+              <Eyebrow className="mb-3">01 — The Offer</Eyebrow>
+              <p
+                className="text-[20px] md:text-[26px] leading-[1.35] text-[color:var(--ink)] font-bold tracking-[-0.01em]"
+                style={{ textWrap: "balance" } as React.CSSProperties}
+              >
+                보장분석 <span className="text-[color:var(--accent)]">·</span> AI 코칭{" "}
+                <span className="text-[color:var(--accent)]">·</span> 청구 자동화{" "}
+                <span className="text-[color:var(--accent)]">·</span> 치매검사.
+              </p>
+              <p className="mt-3 text-[15px] md:text-[17px] leading-[1.55] text-[color:var(--ink-2)]">
+                네 가지가 설계사의{" "}
+                <strong className="text-[color:var(--ink)] font-bold">시간을 영업으로</strong>{" "}
+                되돌려 드립니다.
+              </p>
+            </div>
+
+            <div className="flex flex-wrap gap-2">
               {[
                 { t: "32개사 보장분석 자동", a: true },
                 { t: "AI 세일즈 코칭", a: true },
@@ -212,7 +230,7 @@ export default function Hero() {
               ].map((c) => (
                 <span
                   key={c.t}
-                  className={`inline-flex items-center gap-1.5 text-[11.5px] px-2.5 py-1.5 rounded-full border transition-colors ${
+                  className={`inline-flex items-center gap-1.5 text-[12px] px-3 py-1.5 rounded-full border font-bold transition-colors ${
                     c.a
                       ? "border-[color:var(--accent)] text-[color:var(--accent)] bg-[color:var(--accent)]/5"
                       : "border-[color:var(--line)] text-[color:var(--ink-2)]"
@@ -228,30 +246,34 @@ export default function Hero() {
               ))}
             </div>
 
-            <div className="flex flex-wrap items-center gap-3 mt-8">
-              <BtnV2
-                variant="accent"
-                size="lg"
-                icon={<Icon name="arrowRight" size={16} stroke={2} />}
-                onClick={scrollToApply}
-              >
-                1분 무료 상담
-              </BtnV2>
-              <BtnV2
-                variant="ghost"
-                size="lg"
-                icon={<Icon name="arrowDown" size={16} stroke={2} />}
-                onClick={scrollToPillars}
-              >
-                시스템 먼저 보기
-              </BtnV2>
+            <div>
+              <div className="flex flex-wrap items-center gap-3">
+                <BtnV2
+                  variant="accent"
+                  size="lg"
+                  icon={<Icon name="arrowRight" size={16} stroke={2} />}
+                  onClick={scrollToApply}
+                >
+                  1분 무료 상담
+                </BtnV2>
+                <BtnV2
+                  variant="ghost"
+                  size="lg"
+                  icon={<Icon name="arrowDown" size={16} stroke={2} />}
+                  onClick={scrollToPillars}
+                >
+                  시스템 먼저 보기
+                </BtnV2>
+              </div>
+              <p className="mt-3 text-[12px] text-[color:var(--dim)]">
+                상담 후 원치 않으시면 추가 연락 없습니다.{" "}
+                <span className="text-[color:var(--ink-2)]">— 감정을 배제한 완벽한 영업 지원.</span>
+              </p>
             </div>
-            <p className="mt-4 text-[12px] text-[color:var(--dim)]">
-              상담 후 원치 않으시면 추가 연락 없습니다.
-            </p>
           </div>
 
-          <div className="col-span-12 md:col-span-7">
+          {/* RIGHT: Mockup */}
+          <div className="col-span-12 md:col-span-6">
             <LivePreview />
           </div>
         </div>

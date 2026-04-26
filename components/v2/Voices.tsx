@@ -28,7 +28,7 @@ export default function Voices() {
       className="relative py-28 md:py-40 border-t border-[color:var(--line)] bg-[color:var(--bg-2)]"
       style={{ ["--card-accent" as string]: "#4aaa6e" } as React.CSSProperties}
     >
-      <div className="mx-auto max-w-[1840px] px-6">
+      <div className="mx-auto max-w-[1760px] px-6">
         <Eyebrow>05 — Voices</Eyebrow>
 
         <blockquote className="mt-10 mb-20 max-w-5xl">
@@ -40,7 +40,7 @@ export default function Voices() {
             <span className="text-[color:var(--dim-2)]">&ldquo;</span>예전엔 감정 때문에 지쳤어요.
             <br />
             지금은{" "}
-            <span className="font-serif-italic font-light text-[#4aaa6e]">
+            <span className="font-serif-italic font-semibold text-[#4aaa6e]">
               시스템이 나를 지켜줍니다
             </span>
             .<span className="text-[color:var(--dim-2)]">&rdquo;</span>
@@ -56,36 +56,34 @@ export default function Voices() {
           </footer>
         </blockquote>
 
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-6">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-2.5 md:gap-4">
           {TESTIMONIALS.map((x, i) => (
             <div
               key={i}
-              className="group relative card-v2 card-v2-hover p-6 md:p-8 pt-8 min-h-[280px] flex flex-col"
+              className="group relative card-v2 card-v2-hover p-4 md:p-5 flex flex-col"
             >
               <span
                 aria-hidden
-                className="absolute top-4 right-5 font-serif-italic text-[88px] leading-none text-[color:var(--card-accent)]/25 select-none pointer-events-none"
+                className="absolute top-1.5 right-2.5 font-serif-italic text-[42px] leading-none text-[color:var(--card-accent)]/25 select-none pointer-events-none"
               >
                 &ldquo;
               </span>
-              <Mono className="text-[11px] tracking-[0.14em] text-[color:var(--dim)]">
-                0{i + 1} / 03
+              <Mono className="text-[10px] tracking-[0.14em] text-[color:var(--dim)] font-bold">
+                0{i + 1}
               </Mono>
-              <p className="mt-4 text-[16px] md:text-[17px] leading-[1.6] flex-1 text-[color:var(--ink-2)] relative">
+              <p className="mt-2 text-[14px] md:text-[15px] leading-[1.5] text-[color:var(--ink-2)] relative">
                 &ldquo;{x.q}&rdquo;
               </p>
-              <div className="mt-6 flex items-center justify-between">
-                <div className="text-[13px]">
-                  <div className="font-semibold text-[color:var(--ink)]">{x.a}</div>
-                  <div className="text-[color:var(--dim)]">
-                    {x.r} · {x.y}
-                  </div>
+              <div className="mt-3 pt-3 border-t border-[color:var(--line)] flex items-center justify-between gap-2">
+                <div className="text-[12px] min-w-0 flex-1">
+                  <span className="font-bold text-[color:var(--ink)]">{x.a}</span>
+                  <span className="text-[color:var(--dim)]"> · {x.r} · {x.y}</span>
                 </div>
                 <Icon
                   name="arrowUpRight"
-                  size={16}
+                  size={14}
                   stroke={2}
-                  className="text-[color:var(--dim)] group-hover:text-[#4aaa6e] transition-colors"
+                  className="text-[color:var(--dim)] group-hover:text-[#4aaa6e] transition-colors shrink-0"
                 />
               </div>
             </div>

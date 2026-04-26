@@ -95,17 +95,18 @@ function PillarMock({ kind }: { kind: MockKind }) {
         <Mono className="ml-3 text-[10px] text-[color:var(--dim)]">{url}</Mono>
       </div>
 
-      <div className="relative bg-[color:var(--bg-2)]">
-        <div className="overflow-x-auto overflow-y-hidden">
-          <div
-            className="relative w-full min-w-[760px] md:min-w-0"
-            style={{ aspectRatio: "16/10" }}
-          >
-            {kind === "portal" && <Dashboard />}
-            {kind === "ai" && <CoverageCompare />}
-            {kind === "claim" && <ClaimHub />}
-            {kind === "cog" && <Cognitive />}
-          </div>
+      <div
+        className="relative bg-[color:var(--bg-2)] overflow-hidden hero-mock-container"
+        style={{ aspectRatio: "16/10" }}
+      >
+        <div
+          className="absolute top-0 left-0 origin-top-left hero-mock-inner"
+          style={{ width: "760px", aspectRatio: "16/10" }}
+        >
+          {kind === "portal" && <Dashboard />}
+          {kind === "ai" && <CoverageCompare />}
+          {kind === "claim" && <ClaimHub />}
+          {kind === "cog" && <Cognitive />}
         </div>
       </div>
 
@@ -136,14 +137,14 @@ export default function Pillars() {
         ["--card-accent" as string]: "#39a2b8",
       } as React.CSSProperties}
     >
-      <div className="mx-auto max-w-[1840px] px-6">
+      <div className="mx-auto max-w-[1760px] px-6">
         <div className="flex items-end justify-between mb-16 gap-8 flex-wrap">
           <div>
             <Eyebrow>03 — The Four Pillars</Eyebrow>
-            <h2 className="mt-5 text-[40px] md:text-[56px] leading-[1] tracking-[-0.025em] font-semibold text-[color:var(--ink)]">
+            <h2 className="mt-5 text-[44px] md:text-[72px] leading-[1] tracking-[-0.025em] font-semibold text-[color:var(--ink)]">
               네 개의 기둥,
               <br />
-              <span className="text-[color:var(--dim-2)] font-serif-italic font-light">
+              <span className="text-[color:var(--dim-2)] font-serif-italic font-semibold">
                 하나의 운영체제.
               </span>
             </h2>
@@ -154,34 +155,61 @@ export default function Pillars() {
           </p>
         </div>
 
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-0 border-y border-[color:var(--line)]">
+        <div className="mb-3 inline-flex items-center gap-2 text-[11px] md:text-[12px] font-bold tracking-[0.16em] uppercase text-[color:var(--accent)]">
+          <Icon name="target" size={14} stroke={2} />
+          <span>탭하여 시스템 보기</span>
+        </div>
+        <div className="grid grid-cols-1 md:grid-cols-4 gap-0 border-y-2 border-[color:var(--accent)]/30">
           {PILLARS.map((p, i) => (
             <button
               key={p.k}
               onClick={() => setActive(i)}
-              className={`relative text-left p-6 md:p-8 border-r last:border-r-0 border-[color:var(--line)] transition-all duration-500 ${
+              aria-pressed={i === active}
+              className={`group relative text-left p-5 md:p-8 border-b md:border-b-0 md:border-r last:border-b-0 md:last:border-r-0 border-[color:var(--line)] transition-all duration-500 flex md:block items-center gap-5 md:gap-0 cursor-pointer ${
                 i === active
                   ? "bg-[color:var(--ink)] text-[color:var(--bg-1)]"
-                  : "hover:bg-[color:var(--bg-1)] text-[color:var(--ink)]"
+                  : "hover:bg-[color:var(--bg-1)] text-[color:var(--ink)] active:scale-[0.98]"
               }`}
             >
               <Mono
-                className={`text-[56px] md:text-[80px] leading-none font-medium ${
-                  i === active ? "text-[color:var(--accent)]" : "text-[color:var(--dim-2)]"
+                className={`text-[48px] md:text-[80px] leading-none font-bold shrink-0 md:shrink transition-colors ${
+                  i === active ? "text-[color:var(--accent)]" : "text-[color:var(--dim-2)] group-hover:text-[color:var(--accent)]"
                 }`}
               >
                 {p.k}
               </Mono>
-              <div
-                className={`mt-3 text-[11px] uppercase tracking-[0.18em] ${
-                  i === active ? "text-[color:var(--accent)]" : "text-[color:var(--dim)]"
-                }`}
-              >
-                {p.tag}
+              <div className="flex-1 md:mt-3">
+                <div
+                  className={`text-[11px] uppercase tracking-[0.18em] font-bold ${
+                    i === active ? "text-[color:var(--accent)]" : "text-[color:var(--dim)]"
+                  }`}
+                >
+                  {p.tag}
+                </div>
+                <div className="mt-1.5 text-[17px] md:text-[18px] font-bold tracking-[-0.01em] whitespace-nowrap md:whitespace-normal overflow-hidden text-ellipsis">
+                  {p.t}
+                </div>
               </div>
-              <div className="mt-1 text-[18px] font-semibold tracking-[-0.01em]">{p.t}</div>
+              {i !== active && (
+                <span
+                  className="md:absolute md:top-3 md:right-3 inline-flex items-center justify-center w-7 h-7 rounded-full border border-[color:var(--dim-2)] text-[color:var(--dim)] group-hover:border-[color:var(--accent)] group-hover:text-[color:var(--accent)] group-hover:bg-[color:var(--accent)]/10 transition-all shrink-0"
+                  aria-hidden
+                >
+                  <Icon name="plus" size={12} stroke={2.5} />
+                </span>
+              )}
               {i === active && (
-                <span className="absolute -top-px left-0 right-0 h-px bg-[color:var(--accent)]" />
+                <>
+                  <span className="absolute -top-px left-0 right-0 h-[3px] bg-[color:var(--accent)] hidden md:block" />
+                  <span className="absolute top-0 bottom-0 left-0 w-1 bg-[color:var(--accent)] md:hidden" />
+                  <span
+                    className="md:absolute md:top-3 md:right-3 inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-[9px] font-bold tracking-[0.14em] uppercase bg-[color:var(--accent)] text-white shrink-0"
+                    aria-hidden
+                  >
+                    <span className="w-1.5 h-1.5 rounded-full bg-white animate-pulse" />
+                    선택됨
+                  </span>
+                </>
               )}
             </button>
           ))}

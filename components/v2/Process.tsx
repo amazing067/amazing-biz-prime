@@ -21,14 +21,14 @@ export default function Process() {
       className="relative py-28 md:py-40 border-t border-[color:var(--line)]"
       style={{ ["--card-accent" as string]: "#d8a040" } as React.CSSProperties}
     >
-      <div className="mx-auto max-w-[1840px] px-6">
+      <div className="mx-auto max-w-[1760px] px-6">
         <div className="grid grid-cols-12 gap-8 mb-16">
           <div className="col-span-12 md:col-span-5">
             <Eyebrow>04 — Onboarding</Eyebrow>
-            <h2 className="mt-5 text-[40px] md:text-[56px] leading-[1] tracking-[-0.025em] font-semibold text-[color:var(--ink)]">
+            <h2 className="mt-5 text-[44px] md:text-[72px] leading-[1] tracking-[-0.025em] font-semibold text-[color:var(--ink)]">
               10일,
               <br />
-              <span className="text-[color:var(--dim-2)] font-serif-italic font-light">
+              <span className="text-[color:var(--dim-2)] font-serif-italic font-semibold">
                 그리고 풀 가동.
               </span>
             </h2>
@@ -42,8 +42,9 @@ export default function Process() {
         </div>
 
         <div className="relative">
-          {/* Connecting line — only on wide screens where single row fits */}
-          <div className="hidden lg:block absolute left-0 right-0 top-[34px] h-px bg-[color:var(--card-accent)]/40" />
+          {/* Connecting line — track + animated progress fill */}
+          <div className="hidden lg:block absolute left-0 right-0 top-[34px] h-[2px] bg-[color:var(--card-accent)]/20 rounded-full" />
+          <div className="hidden lg:block absolute left-0 top-[34px] h-[2px] bg-[color:var(--card-accent)] rounded-full process-line-anim shadow-[0_0_8px_color-mix(in_srgb,var(--card-accent)_60%,transparent)]" />
 
           <div className="grid grid-cols-3 sm:grid-cols-4 md:grid-cols-6 lg:grid-cols-11 gap-x-3 gap-y-10 lg:gap-y-0">
             {DAYS.map((x, i) => {
