@@ -283,7 +283,7 @@ export default function Training() {
             </Mono>
           </div>
 
-          <div className="rounded-2xl border border-[color:var(--line)] bg-[color:var(--bg-2)] overflow-hidden">
+          <div className="card-v2 overflow-hidden">
             {/* Book-style header */}
             <div className="flex items-center gap-2 px-5 py-3 border-b border-[color:var(--line)] bg-[color:var(--bg-1)]">
               <div className="flex gap-1.5">
@@ -454,7 +454,7 @@ export default function Training() {
           </div>
 
           <div className="md:col-span-7">
-            <div className="sticky top-24 rounded-2xl border border-[color:var(--line)] bg-[color:var(--bg-2)] p-8 md:p-10">
+            <div className="sticky top-24 card-v2 p-8 md:p-10">
               <div className="flex items-start justify-between gap-4">
                 <div>
                   <Mono className="text-[11px] tracking-[0.16em] text-[color:var(--dim)]">

@@ -67,7 +67,7 @@ export default function ValueChain() {
 
         {/* Two principles */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-12 mb-24">
-          <div className="rounded-2xl border border-[color:var(--line)] bg-[color:var(--bg-2)] p-8 md:p-10">
+          <div className="card-v2 p-8 md:p-10">
             <Mono className="text-[11px] tracking-[0.18em] text-[color:var(--accent)]">
               PRINCIPLE / 01
             </Mono>
@@ -96,7 +96,7 @@ export default function ValueChain() {
             </div>
           </div>
 
-          <div className="rounded-2xl border border-[color:var(--line)] bg-[color:var(--bg-2)] p-8 md:p-10">
+          <div className="card-v2 p-8 md:p-10">
             <Mono className="text-[11px] tracking-[0.18em] text-[color:var(--accent)]">
               PRINCIPLE / 02
             </Mono>

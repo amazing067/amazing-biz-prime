@@ -92,7 +92,7 @@ export default function Partners() {
           한 회사 상품만 파는 전속이 아닙니다. 생·손보 {ALL.length}개사 상품을 동시에 비교해 고객에게 정말 필요한 상품을 조합합니다. 이것이 우리가 &ldquo;비교 가능한 설계&rdquo;를 할 수 있는 이유입니다.
         </p>
 
-        <div className="relative rounded-2xl border border-[color:var(--line)] overflow-hidden">
+        <div className="relative card-v2 overflow-hidden">
           <div
             className="grid grid-cols-3 sm:grid-cols-4 md:grid-cols-6 lg:grid-cols-8 xl:grid-cols-9 gap-px"
             style={{ background: "var(--line)" }}
