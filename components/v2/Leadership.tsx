@@ -39,10 +39,10 @@ export default function Leadership() {
       id="leadership"
       className="relative py-32 px-6 bg-[color:var(--bg-1)]"
     >
-      <div className="max-w-[1840px] mx-auto">
+      <div className="max-w-[1760px] mx-auto">
         <div className="max-w-[880px] mb-16">
           <Eyebrow>SECTION 08 · ORGANIZATION</Eyebrow>
-          <h2 className="mt-5 text-[clamp(40px,5.5vw,72px)] leading-[0.98] tracking-[-0.025em] font-semibold text-[color:var(--ink)]">
+          <h2 className="mt-5 text-[clamp(44px,6.2vw,96px)] leading-[0.98] tracking-[-0.025em] font-semibold text-[color:var(--ink)]">
             본부 3곳, <span className="font-serif-italic text-[color:var(--dim)]">각기 다른 방식.</span>
           </h2>
           <p className="mt-6 text-[15px] leading-[1.7] max-w-[620px] text-[color:var(--ink-2)]">

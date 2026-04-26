@@ -118,10 +118,13 @@ export default function ShowcaseFrame({
                 "0 20px 48px -16px rgba(20,20,40,0.15), 0 8px 20px -8px rgba(20,20,40,0.08)",
             }}
           >
-            <div className="overflow-x-auto overflow-y-hidden">
+            <div
+              className="relative overflow-hidden showcase-mock-container"
+              style={{ aspectRatio: "4/3" }}
+            >
               <div
-                className="relative w-full min-w-[700px] md:min-w-0"
-                style={{ aspectRatio: "4/3" }}
+                className="absolute top-0 left-0 origin-top-left showcase-mock-inner"
+                style={{ width: "700px", aspectRatio: "4/3" }}
               >
                 {mockups[selected] ?? (
                   <div className="absolute inset-0 flex items-center justify-center text-[color:var(--dim)]">
@@ -129,10 +132,6 @@ export default function ShowcaseFrame({
                   </div>
                 )}
               </div>
-            </div>
-            {/* Mobile scroll hint */}
-            <div className="md:hidden absolute bottom-2 right-3 pointer-events-none text-[9px] font-semibold tracking-[0.12em] uppercase opacity-60 bg-[color:var(--bg-1)] px-2 py-0.5 rounded-full" style={{ color: "var(--dim)" }}>
-              ← 스와이프
             </div>
           </div>
         </div>

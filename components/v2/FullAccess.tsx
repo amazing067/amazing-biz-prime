@@ -41,7 +41,7 @@ export default function FullAccess() {
         style={{ background: BURGUNDY }}
       />
 
-      <div className="relative mx-auto max-w-[1840px] px-6">
+      <div className="relative mx-auto max-w-[1760px] px-6">
         <div className="grid grid-cols-12 gap-8 md:gap-10 items-end">
           <div className="col-span-12 md:col-span-8">
             <div
@@ -67,7 +67,7 @@ export default function FullAccess() {
             >
               지금까지 본 이 모든 시스템,
               <br />
-              <span className="font-serif-italic font-light" style={{ color: BURGUNDY }}>
+              <span className="font-serif-italic font-semibold" style={{ color: BURGUNDY }}>
                 입사 첫날 전부 오픈됩니다.
               </span>
             </h2>
@@ -175,7 +175,7 @@ export default function FullAccess() {
                 {x.l}
               </Mono>
               <div
-                className="mt-2 text-[40px] md:text-[56px] leading-none tabular-nums font-medium tracking-[-0.03em]"
+                className="mt-2 text-[44px] md:text-[72px] leading-none tabular-nums font-medium tracking-[-0.03em]"
                 style={{ color: BURGUNDY_DARK }}
               >
                 {x.n}

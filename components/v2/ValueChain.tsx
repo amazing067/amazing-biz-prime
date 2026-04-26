@@ -44,14 +44,14 @@ export default function ValueChain() {
         }}
       />
 
-      <div className="relative mx-auto max-w-[1840px] px-6">
+      <div className="relative mx-auto max-w-[1760px] px-6">
         {/* Header */}
         <div className="max-w-[880px] mb-20">
           <Eyebrow>SECTION 03 · VALUE CHAIN</Eyebrow>
-          <h2 className="mt-5 text-[clamp(40px,5.5vw,80px)] leading-[0.98] tracking-[-0.03em] font-semibold text-[color:var(--ink)]">
+          <h2 className="mt-5 text-[clamp(44px,6.2vw,100px)] leading-[0.98] tracking-[-0.03em] font-semibold text-[color:var(--ink)]">
             성장과 분할.
             <br />
-            <span className="font-serif-italic font-light text-[color:var(--accent)]">
+            <span className="font-serif-italic font-semibold text-[color:var(--accent)]">
               한계를 뛰어넘는 구조.
             </span>
           </h2>
@@ -73,7 +73,7 @@ export default function ValueChain() {
               PRINCIPLE / 01
             </Mono>
             <h3 className="mt-3 text-[26px] md:text-[30px] font-medium text-[color:var(--ink)] tracking-[-0.01em]">
-              공정기준 — <span className="font-serif-italic font-light">종속이 아닌 기준</span>
+              공정기준 — <span className="font-serif-italic font-semibold">종속이 아닌 기준</span>
             </h3>
             <p className="mt-4 text-[14px] leading-[1.75] text-[color:var(--ink-2)]">
               팀 승격은 분기 전환성적 5천만 원, 지사는 2분기 합산 4억 원·FC 5명, 본부는 12억 원·FC 20명. 숫자만 달성하면 누구든 올라갑니다. 본부장의 재량이 아니라 문서화된 기준이 결정합니다.
@@ -103,7 +103,7 @@ export default function ValueChain() {
             </Mono>
             <h3 className="mt-3 text-[26px] md:text-[30px] font-medium text-[color:var(--ink)] tracking-[-0.01em]">
               가치공유 —{" "}
-              <span className="font-serif-italic font-light">조직 성장이 곧 수익</span>
+              <span className="font-serif-italic font-semibold">조직 성장이 곧 수익</span>
             </h3>
             <p className="mt-4 text-[14px] leading-[1.75] text-[color:var(--ink-2)]">
               조직이 커지면 관리수수료(지급률 차액)로, 조직이 분할되면 분할수수료(정액)로 환원됩니다. 성장 전에는 관리자와 설계사가, 분할 후에는 회사와 관리자가 그 가치를 나눕니다.
@@ -178,7 +178,7 @@ export default function ValueChain() {
             <h3 className="mt-6 font-semibold leading-[0.95] tracking-[-0.03em]" style={{ fontSize: "clamp(40px, 7vw, 104px)" }}>
               <span className="text-[color:var(--ink)]">Springboard</span>
               <br />
-              <span className="font-serif-italic font-light text-[color:var(--accent)]">to Opportunity</span>
+              <span className="font-serif-italic font-semibold text-[color:var(--accent)]">to Opportunity</span>
               <span className="text-[color:var(--ink)]">.</span>
             </h3>
             <p className="mt-6 text-[18px] md:text-[20px] text-[color:var(--ink-2)] font-medium">

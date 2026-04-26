@@ -42,6 +42,18 @@
     font-feature-settings: 'ss01', 'ss02';
     -webkit-font-smoothing: antialiased;
     overflow-x: hidden;
+    /* Korean line-break: only break on whitespace, never split a word in the middle.
+       Long Latin tokens still break via overflow-wrap. */
+    word-break: keep-all;
+    overflow-wrap: anywhere;
+  }
+  /* Headings: stronger preference for clean wrapping */
+  h1, h2, h3, h4 {
+    word-break: keep-all;
+    text-wrap: balance;
+  }
+  p, li, span, div {
+    word-break: keep-all;
   }
   ::selection {
     background: var(--accent);
@@ -53,23 +65,24 @@
   /* Layered card system — left side strip + top strip + tinted background */
   .card-v2 {
     position: relative;
-    background: color-mix(in srgb, var(--card-accent) 5%, var(--card-bg));
+    background: color-mix(in srgb, var(--card-accent) 9%, var(--card-bg));
     border-radius: 1rem;
     box-shadow:
       inset 0 1px 0 var(--card-highlight),
-      0 0 0 1px var(--card-ring),
-      0 12px 32px -12px color-mix(in srgb, var(--card-accent) 30%, rgba(10,11,16,0.18));
+      0 0 0 1px color-mix(in srgb, var(--card-accent) 25%, var(--card-ring)),
+      0 20px 48px -16px color-mix(in srgb, var(--card-accent) 45%, rgba(10,11,16,0.22)),
+      0 4px 12px -4px color-mix(in srgb, var(--card-accent) 30%, rgba(10,11,16,0.15));
     transition: box-shadow .3s ease, transform .3s ease;
     overflow: hidden;
   }
-  /* Top thin strip */
+  /* Top accent strip */
   .card-v2::before {
     content: '';
     position: absolute;
     top: 0;
     left: 0;
     right: 0;
-    height: 3px;
+    height: 4px;
     background: var(--card-accent);
     pointer-events: none;
     z-index: 2;
@@ -81,7 +94,7 @@
     top: 0;
     left: 0;
     bottom: 0;
-    width: 6px;
+    width: 7px;
     background: var(--card-accent);
     pointer-events: none;
     z-index: 2;
@@ -92,24 +105,26 @@
   .card-v2-hover:hover {
     box-shadow:
       inset 0 1px 0 var(--card-highlight),
-      0 0 0 1px var(--card-ring),
-      0 24px 48px -16px color-mix(in srgb, var(--card-accent) 45%, rgba(10,11,16,0.22));
-    transform: translateY(-4px);
+      0 0 0 1px color-mix(in srgb, var(--card-accent) 40%, var(--card-ring)),
+      0 36px 64px -20px color-mix(in srgb, var(--card-accent) 60%, rgba(10,11,16,0.28)),
+      0 8px 16px -4px color-mix(in srgb, var(--card-accent) 35%, rgba(10,11,16,0.18));
+    transform: translateY(-6px);
   }
   .card-v2-hover:hover::after {
-    width: 10px;
+    width: 12px;
     transition: width .3s ease;
   }
 
   /* Strong cards — bigger, heavier shadow */
   .card-v2-strong {
     position: relative;
-    background: color-mix(in srgb, var(--card-accent) 4%, var(--card-bg));
+    background: color-mix(in srgb, var(--card-accent) 8%, var(--card-bg));
     border-radius: 1.25rem;
     box-shadow:
       inset 0 1px 0 var(--card-highlight),
-      0 0 0 1px var(--card-ring),
-      0 40px 80px -20px color-mix(in srgb, var(--card-accent) 35%, rgba(10,11,16,0.28));
+      0 0 0 1px color-mix(in srgb, var(--card-accent) 30%, var(--card-ring)),
+      0 56px 112px -24px color-mix(in srgb, var(--card-accent) 55%, rgba(10,11,16,0.32)),
+      0 8px 24px -8px color-mix(in srgb, var(--card-accent) 40%, rgba(10,11,16,0.22));
     overflow: hidden;
   }
   .card-v2-strong::before {
@@ -118,7 +133,7 @@
     top: 0;
     left: 0;
     right: 0;
-    height: 4px;
+    height: 5px;
     background: var(--card-accent);
     pointer-events: none;
     z-index: 2;
@@ -129,7 +144,7 @@
     top: 0;
     left: 0;
     bottom: 0;
-    width: 8px;
+    width: 10px;
     background: var(--card-accent);
     pointer-events: none;
     z-index: 2;
@@ -138,10 +153,10 @@
   /* Flat (nested) cards keep simple — left strip only, thinner */
   .card-v2-flat {
     position: relative;
-    background: var(--bg-1);
-    border: 1px solid var(--card-ring);
+    background: color-mix(in srgb, var(--card-accent) 5%, var(--bg-1));
+    border: 1px solid color-mix(in srgb, var(--card-accent) 25%, var(--card-ring));
     border-radius: 0.5rem;
-    border-left: 3px solid var(--card-accent);
+    border-left: 4px solid var(--card-accent);
   }
 
   /* ----------------------------------------------------------
@@ -157,6 +172,65 @@
   section[id] h2 + p + ul,
   section[id] h2 ~ p + .grid {
     margin-top: 1.5rem;
+  }
+
+  /* ----------------------------------------------------------
+     Hero LivePreview mockup — scale to fit container width
+     so mobile shows full mockup with no horizontal scroll.
+     The inner is rendered at 760px (desktop spec) and scaled
+     down based on container's inline width.
+     ---------------------------------------------------------- */
+  /* Hero/PillarMock — always fill container width.
+     Inner is rendered at 760px design spec; transform scales it
+     to match the container's actual inline-size (up or down). */
+  .hero-mock-container {
+    container-type: inline-size;
+  }
+  .hero-mock-inner {
+    transform: scale(calc(100cqw / 760px));
+  }
+
+  /* Tools ShowcaseFrame — same pattern but 700px source */
+  .showcase-mock-container {
+    container-type: inline-size;
+  }
+  .showcase-mock-inner {
+    transform: scale(calc(100cqw / 700px));
+  }
+
+  /* Process 10일 timeline — START → GOAL step-by-step line progress */
+  @keyframes process-line-progress {
+    0%, 8%   { width: 0%; }
+    18%      { width: 10%; }
+    27%      { width: 20%; }
+    36%      { width: 30%; }
+    45%      { width: 40%; }
+    54%      { width: 50%; }
+    63%      { width: 60%; }
+    72%      { width: 70%; }
+    81%      { width: 80%; }
+    90%      { width: 90%; }
+    96%, 100%{ width: 100%; }
+  }
+  .process-line-anim {
+    width: 0%;
+    animation: process-line-progress 13s steps(40, jump-none) infinite;
+  }
+  @keyframes process-dot-pulse {
+    0%, 100% { transform: scale(1); opacity: 0.8; }
+    50% { transform: scale(1.18); opacity: 1; }
+  }
+  .process-dot-active {
+    animation: process-dot-pulse 1.6s ease-in-out infinite;
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .process-line-anim {
+      width: 100%;
+      animation: none;
+    }
+    .process-dot-active {
+      animation: none;
+    }
   }
 }
 

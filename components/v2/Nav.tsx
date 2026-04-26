@@ -28,7 +28,7 @@ export default function Nav() {
         scrolled ? "py-3" : "py-5"
       }`}
     >
-      <div className="mx-auto max-w-[1840px] px-6">
+      <div className="mx-auto max-w-[1760px] px-6">
         <div
           className={`flex items-center justify-between rounded-full px-5 py-2.5 transition-all duration-500 ${
             scrolled

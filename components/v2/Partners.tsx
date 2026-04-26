@@ -55,11 +55,11 @@ const ALL: Partner[] = [
 export default function Partners() {
   return (
     <section id="partners" className="relative py-28 px-6 bg-[color:var(--bg-1)]">
-      <div className="max-w-[1840px] mx-auto">
+      <div className="max-w-[1760px] mx-auto">
         <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-6 mb-12">
           <div>
             <Eyebrow>SECTION 10 · PARTNERS</Eyebrow>
-            <h2 className="mt-5 text-[clamp(32px,4.5vw,56px)] leading-[1] tracking-[-0.025em] font-semibold text-[color:var(--ink)]">
+            <h2 className="mt-5 text-[clamp(36px,5vw,72px)] leading-[1] tracking-[-0.025em] font-semibold text-[color:var(--ink)]">
               생보 {LIFE.length} <span className="text-[color:var(--dim-2)]">·</span> 손보{" "}
               {NON_LIFE.length}{" "}
               <span className="text-[color:var(--dim)] text-[0.6em]">= </span>

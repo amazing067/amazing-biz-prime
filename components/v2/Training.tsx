@@ -203,30 +203,42 @@ export default function Training() {
       id="training"
       className="relative py-28 md:py-40 border-t border-[color:var(--line)] bg-[color:var(--bg-1)]"
       style={{
-        ["--accent" as string]: "#d8a040",
-        ["--accent-ink" as string]: "#ffffff",
-        ["--accent-glow" as string]: "rgba(216,160,64,0.3)",
-        ["--bg-1" as string]: "#FAF6E8",
-        ["--bg-2" as string]: "#F2ECD5",
-        ["--card-accent" as string]: "#d8a040",
+        ["--bg-1" as string]: "#0F0907",
+        ["--bg-2" as string]: "#1A100A",
+        ["--ink" as string]: "#FAF1DA",
+        ["--ink-2" as string]: "rgba(250,241,218,0.92)",
+        ["--dim" as string]: "rgba(250,241,218,0.78)",
+        ["--dim-2" as string]: "rgba(250,241,218,0.58)",
+        ["--line" as string]: "rgba(250,235,200,0.32)",
+        ["--accent" as string]: "#FFB860",
+        ["--accent-ink" as string]: "#1A0F00",
+        ["--accent-glow" as string]: "rgba(255,184,96,0.4)",
+        ["--card-bg" as string]: "#1A100A",
+        ["--card-ring" as string]: "rgba(255,220,160,0.32)",
+        ["--card-highlight" as string]: "rgba(255,200,140,0.06)",
+        ["--card-accent" as string]: "#FFB860",
+        ["--card-shadow" as string]: "0 1px 2px rgba(20,8,0,0.5), 0 16px 40px -12px rgba(20,8,0,0.7)",
+        ["--card-shadow-hover" as string]: "0 2px 4px rgba(20,8,0,0.55), 0 28px 56px -16px rgba(20,8,0,0.8)",
+        ["--card-shadow-strong" as string]: "0 2px 4px rgba(20,8,0,0.5), 0 48px 96px -20px rgba(20,8,0,0.85)",
       } as React.CSSProperties}
     >
-      <GridOverlay opacity={0.04} />
-      <div className="relative mx-auto max-w-[1840px] px-6">
+      <GridOverlay opacity={0.06} />
+      <div className="relative mx-auto max-w-[1760px] px-6">
         <div className="grid grid-cols-1 md:grid-cols-12 gap-6 md:gap-12 mb-16 md:mb-24">
-          <div className="md:col-span-5">
+          <div className="md:col-span-7">
             <Eyebrow>06 — Training Academy</Eyebrow>
             <h2
-              className="mt-8 text-[40px] md:text-[64px] leading-[1.02] tracking-[-0.03em] font-semibold text-[color:var(--ink)]"
+              className="mt-8 text-[clamp(44px,5.6vw,88px)] leading-[1.02] tracking-[-0.03em] font-bold text-[color:var(--ink)]"
               style={{ textWrap: "balance" } as React.CSSProperties}
             >
-              신입도 <span className="font-serif-italic font-light text-[color:var(--accent)]">10일이면</span>
-              <br />
-              현장에서{" "}
-              <span className="font-serif-italic font-light">말문이 트입니다</span>.
+              신입도{" "}
+              <span className="font-serif-italic font-bold text-[color:var(--accent)]">
+                10일이면
+              </span>{" "}
+              현장에서 말문이 트입니다.
             </h2>
           </div>
-          <div className="md:col-span-6 md:col-start-7 flex items-end">
+          <div className="md:col-span-5 md:col-start-8 flex items-end">
             <div>
               <p className="text-[17px] md:text-[19px] leading-[1.55] text-[color:var(--ink-2)]">
                 감으로 배우던 시대는 끝났습니다. 프라임에셋 아카데미는
@@ -258,7 +270,7 @@ export default function Training() {
               } ${i === 2 ? "md:border-r" : ""} border-[color:var(--line)]`}
             >
               <div className="flex items-baseline gap-2">
-                <div className="text-[40px] md:text-[56px] leading-none tracking-[-0.03em] font-semibold text-[color:var(--ink)]">
+                <div className="text-[44px] md:text-[72px] leading-none tracking-[-0.03em] font-semibold text-[color:var(--ink)]">
                   {s.k}
                 </div>
                 <div className="text-[14px] text-[color:var(--dim)]">{s.l}</div>
@@ -300,13 +312,13 @@ export default function Training() {
               </Mono>
             </div>
 
-            <div className="p-6 md:p-10 space-y-10">
+            <div className="p-6 md:p-10 space-y-12">
               {/* Eight-stage sales cycle */}
               <div>
-                <Mono className="text-[10px] tracking-[0.16em] text-[color:var(--dim)]">
-                  영업 사이클 8단계
+                <Mono className="text-[12px] tracking-[0.18em] text-[color:var(--accent)] font-bold">
+                  영업 사이클 · 8단계
                 </Mono>
-                <div className="mt-5 grid grid-cols-2 md:grid-cols-4 gap-px rounded-xl overflow-hidden" style={{ background: "var(--line)" }}>
+                <div className="mt-6 grid grid-cols-2 md:grid-cols-4 gap-px rounded-xl overflow-hidden" style={{ background: "var(--line)" }}>
                   {[
                     { n: "01", t: "고객 발굴", d: "DB · 블로그 · 개척 · 소개" },
                     { n: "02", t: "TA 접촉", d: "전화 첫 통화 · 미팅 약속" },
@@ -319,41 +331,45 @@ export default function Training() {
                   ].map((s, i) => (
                     <div
                       key={s.n}
-                      className="bg-[color:var(--bg-2)] p-4 md:p-5 flex flex-col gap-2"
+                      className="bg-[color:var(--bg-2)] p-5 md:p-7 flex flex-col gap-3 relative"
                     >
-                      <div className="flex items-center gap-2">
-                        <Mono className="text-[11px] text-[color:var(--accent)] font-medium">
+                      <div className="flex items-baseline justify-between">
+                        <Mono className="text-[32px] md:text-[40px] leading-none text-[color:var(--accent)] font-bold tabular-nums tracking-[-0.02em]">
                           {s.n}
                         </Mono>
                         {i < 7 && (
-                          <span className="text-[color:var(--dim-2)] text-[11px]">→</span>
+                          <span className="text-[color:var(--accent)] text-[18px] font-bold">→</span>
                         )}
                       </div>
-                      <div className="text-[14px] font-medium text-[color:var(--ink)]">
+                      <div className="text-[20px] md:text-[22px] font-bold text-[color:var(--ink)] tracking-[-0.01em]">
                         {s.t}
                       </div>
-                      <div className="text-[11px] text-[color:var(--dim)] leading-[1.4]">
+                      <div className="text-[14px] text-[color:var(--ink-2)] leading-[1.5]">
                         {s.d}
                       </div>
                     </div>
                   ))}
                 </div>
-                <p className="mt-4 text-[11px] text-[color:var(--dim)] leading-[1.6]">
-                  TIP. 계약이 끝난 고객이 가장 좋은 소개 채널입니다. 증권 전달 시 &ldquo;좋은 분 한 분만 소개해주세요&rdquo;라고 자연스럽게 요청하세요.
+                <p className="mt-5 text-[14px] text-[color:var(--ink-2)] leading-[1.65]">
+                  <strong className="text-[color:var(--accent)] font-bold">TIP.</strong>{" "}
+                  계약이 끝난 고객이 가장 좋은 소개 채널입니다. 증권 전달 시 &ldquo;좋은 분 한 분만 소개해주세요&rdquo;라고 자연스럽게 요청하세요.
                 </p>
               </div>
 
               {/* DB quality grades */}
-              <div className="grid grid-cols-1 md:grid-cols-[2fr_3fr] gap-6 pt-8 border-t border-[color:var(--line)]">
+              <div className="grid grid-cols-1 md:grid-cols-[2fr_3fr] gap-8 pt-10 border-t border-[color:var(--line)]">
                 <div>
-                  <Mono className="text-[10px] tracking-[0.16em] text-[color:var(--dim)]">
-                    DB 품질 3등급 (골든타임 10분)
+                  <Mono className="text-[12px] tracking-[0.18em] text-[color:var(--accent)] font-bold">
+                    DB 품질 3등급 · 골든타임 10분
                   </Mono>
-                  <p className="mt-3 text-[13px] leading-[1.7] text-[color:var(--ink-2)]">
-                    DB 수신 후 <strong className="text-[color:var(--ink)]">10분 이내 연락 필수</strong>. 30분 초과 시 성약률이 70% 떨어집니다.
+                  <p className="mt-4 text-[16px] md:text-[18px] leading-[1.6] text-[color:var(--ink)] font-semibold">
+                    DB 수신 후 <span className="text-[color:var(--accent)] font-bold">10분 이내 연락 필수</span>.
+                  </p>
+                  <p className="mt-2 text-[14px] leading-[1.6] text-[color:var(--ink-2)]">
+                    30분 초과 시 성약률이 <strong className="text-[color:var(--ink)] font-bold">70% 떨어집니다</strong>.
                   </p>
                 </div>
-                <div className="space-y-2">
+                <div className="space-y-3">
                   {[
                     { g: "HOT", c: "당일 신청", pct: 92, color: "var(--accent)" },
                     { g: "WARM", c: "3일 이내", pct: 58, color: "#FBBF24" },
@@ -361,22 +377,22 @@ export default function Training() {
                   ].map((r) => (
                     <div
                       key={r.g}
-                      className="flex items-center gap-4 card-v2-flat px-4 py-3"
+                      className="flex items-center gap-4 card-v2-flat px-5 py-4"
                     >
                       <Mono
-                        className="text-[12px] font-semibold w-16"
+                        className="text-[16px] font-bold w-20 tracking-[0.08em]"
                         style={{ color: r.color }}
                       >
                         {r.g}
                       </Mono>
-                      <div className="text-[12px] text-[color:var(--ink-2)] w-24">{r.c}</div>
-                      <div className="flex-1 h-1.5 rounded-full bg-[color:var(--line)] overflow-hidden">
+                      <div className="text-[14px] text-[color:var(--ink-2)] w-28 font-medium">{r.c}</div>
+                      <div className="flex-1 h-2.5 rounded-full bg-[color:var(--line)] overflow-hidden">
                         <div
                           className="h-full transition-all duration-700"
                           style={{ width: `${r.pct}%`, background: r.color }}
                         />
                       </div>
-                      <Mono className="text-[11px] text-[color:var(--dim)] w-12 text-right">
+                      <Mono className="text-[16px] font-bold w-14 text-right tabular-nums" style={{ color: r.color }}>
                         {r.pct}%
                       </Mono>
                     </div>
@@ -385,11 +401,11 @@ export default function Training() {
               </div>
 
               {/* Callout: full curriculum tease */}
-              <div className="flex items-center justify-between gap-4 pt-6 border-t border-[color:var(--line)]">
-                <p className="text-[12px] text-[color:var(--dim)] leading-[1.6] max-w-[480px]">
-                  * 교재 74쪽 중 1부 일부 샘플입니다. 실제 교육에서는 DB 5가지 생성 경로, 블로그/카페 운영 3단계, 개척 5유형, 필수 용어 50+개까지 전부 다룹니다.
+              <div className="flex items-center justify-between gap-4 pt-8 border-t border-[color:var(--line)]">
+                <p className="text-[14px] text-[color:var(--ink-2)] leading-[1.65] max-w-[640px]">
+                  * 교재 74쪽 중 1부 일부 샘플입니다. 실제 교육에서는 <strong className="text-[color:var(--ink)] font-bold">DB 5가지 생성 경로 · 블로그/카페 운영 3단계 · 개척 5유형 · 필수 용어 50+개</strong>까지 전부 다룹니다.
                 </p>
-                <Mono className="text-[11px] tracking-[0.16em] text-[color:var(--accent)] whitespace-nowrap">
+                <Mono className="text-[14px] tracking-[0.18em] text-[color:var(--accent)] whitespace-nowrap font-bold">
                   74p · 전체 커리큘럼 →
                 </Mono>
               </div>

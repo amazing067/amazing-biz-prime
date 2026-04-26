@@ -285,10 +285,10 @@ export default function Tools() {
       style={{ ["--card-accent" as string]: "#8577d1" } as React.CSSProperties}
     >
       <GridOverlay opacity={0.035} />
-      <div className="relative max-w-[1840px] mx-auto">
+      <div className="relative max-w-[1760px] mx-auto">
         <div className="max-w-[880px] mb-16">
           <Eyebrow>SECTION 06 · SYSTEM STACK</Eyebrow>
-          <h2 className="mt-5 text-[clamp(40px,5.5vw,72px)] leading-[0.98] tracking-[-0.025em] font-semibold text-[color:var(--ink)]">
+          <h2 className="mt-5 text-[clamp(44px,6.2vw,96px)] leading-[0.98] tracking-[-0.025em] font-semibold text-[color:var(--ink)]">
             설계사는 말만 하면 됩니다.
             <br />
             <span className="font-serif-italic text-[color:var(--dim)]">나머지는 시스템이.</span>

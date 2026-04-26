@@ -46,7 +46,7 @@ export default function FAQ() {
       <div className="max-w-[1500px] mx-auto grid md:grid-cols-[420px_1fr] gap-16">
         <div className="md:sticky md:top-28 self-start">
           <Eyebrow>SECTION 11 · FAQ</Eyebrow>
-          <h2 className="mt-5 text-[clamp(36px,4vw,56px)] leading-[0.98] tracking-[-0.025em] font-semibold text-[color:var(--ink)]">
+          <h2 className="mt-5 text-[clamp(40px,4.6vw,72px)] leading-[0.98] tracking-[-0.025em] font-semibold text-[color:var(--ink)]">
             자주 묻는 <br />
             <span className="font-serif-italic text-[color:var(--dim)]">질문들.</span>
           </h2>

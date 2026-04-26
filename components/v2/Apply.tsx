@@ -140,7 +140,7 @@ export default function Apply() {
         ["--card-shadow-strong" as string]: "0 2px 4px rgba(20,8,0,0.45), 0 40px 80px -20px rgba(20,8,0,0.75)",
       } as React.CSSProperties}
     >
-      <div className="mx-auto max-w-[1840px] px-6">
+      <div className="mx-auto max-w-[1760px] px-6">
         <div className="grid grid-cols-12 gap-8">
           {/* Left col */}
           <div className="col-span-12 md:col-span-5">
@@ -148,12 +148,12 @@ export default function Apply() {
               <span className="w-4 h-px bg-current opacity-40" />
               12 — Apply
             </div>
-            <h2 className="mt-5 text-[40px] md:text-[56px] leading-[1] tracking-[-0.025em] font-semibold text-[color:var(--ink)]">
+            <h2 className="mt-5 text-[44px] md:text-[72px] leading-[1] tracking-[-0.025em] font-semibold text-[color:var(--ink)]">
               지원은
               <br />
               1분이면
               <br />
-              <span className="font-serif-italic font-light text-[color:var(--accent)]">
+              <span className="font-serif-italic font-semibold text-[color:var(--accent)]">
                 충분합니다.
               </span>
             </h2>
@@ -171,7 +171,7 @@ export default function Apply() {
             </div>
             <div className="mt-14 grid grid-cols-2 gap-4 max-w-xs">
               <a
-                href="tel:01056040424"
+                href="tel:02-2038-4379"
                 className="group card-v2 card-v2-hover p-4"
               >
                 <Icon
@@ -182,10 +182,10 @@ export default function Apply() {
                 <div className="mt-3 text-[11px] uppercase tracking-[0.14em] text-[color:var(--dim)]">
                   전화
                 </div>
-                <Mono className="text-[13px] text-[color:var(--ink)]">010 5604 0424</Mono>
+                <Mono className="text-[13px] text-[color:var(--ink)]">02 2038 4379</Mono>
               </a>
               <a
-                href="http://pf.kakao.com/_xjXxjfn"
+                href="https://pf.kakao.com/_JxmxaJn/chat?utm_source=naver_blog&utm_medium=post&utm_campaign=content&utm_content="
                 target="_blank"
                 rel="noopener noreferrer"
                 className="group card-v2 card-v2-hover p-4"

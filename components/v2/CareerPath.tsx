@@ -53,10 +53,10 @@ export default function CareerPath() {
       className="relative py-32 px-6 bg-[color:var(--bg-2)]"
       style={{ ["--card-accent" as string]: "#5a8bd8" } as React.CSSProperties}
     >
-      <div className="max-w-[1840px] mx-auto">
+      <div className="max-w-[1760px] mx-auto">
         <div className="max-w-[880px] mb-12">
           <Eyebrow>SECTION 09 · 승격 단계</Eyebrow>
-          <h2 className="mt-5 text-[clamp(40px,5.5vw,72px)] leading-[0.98] tracking-[-0.025em] font-semibold text-[color:var(--ink)]">
+          <h2 className="mt-5 text-[clamp(44px,6.2vw,96px)] leading-[0.98] tracking-[-0.025em] font-semibold text-[color:var(--ink)]">
             수수료에{" "}
             <span className="font-serif-italic text-[color:var(--accent)]">장난이</span> 없습니다.
           </h2>

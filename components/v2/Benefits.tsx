@@ -58,10 +58,10 @@ export default function Benefits() {
       className="relative py-32 px-6 bg-[color:var(--bg-2)]"
       style={{ ["--card-accent" as string]: "#5a8bd8" } as React.CSSProperties}
     >
-      <div className="relative max-w-[1840px] mx-auto">
+      <div className="relative max-w-[1760px] mx-auto">
         <div className="max-w-[880px] mb-16">
           <Eyebrow>SECTION 07 · COMPENSATION & SUPPORT</Eyebrow>
-          <h2 className="mt-5 text-[clamp(40px,5.5vw,72px)] leading-[0.98] tracking-[-0.025em] font-semibold text-[color:var(--ink)]">
+          <h2 className="mt-5 text-[clamp(44px,6.2vw,96px)] leading-[0.98] tracking-[-0.025em] font-semibold text-[color:var(--ink)]">
             우리가 주는 것은
             <br />
             <span className="font-serif-italic text-[color:var(--accent)]">돈만이 아닙니다.</span>
