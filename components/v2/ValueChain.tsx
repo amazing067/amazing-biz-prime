@@ -85,7 +85,7 @@ export default function ValueChain() {
               ].map(([n, l]) => (
                 <div
                   key={l}
-                  className="rounded-lg border border-[color:var(--line)] bg-[color:var(--bg-1)] p-3"
+                  className="card-v2-flat p-3"
                 >
                   <Mono className="text-[18px] font-medium text-[color:var(--accent)] block">
                     {n}원
@@ -115,7 +115,7 @@ export default function ValueChain() {
               ].map(([n, l]) => (
                 <div
                   key={n}
-                  className="flex items-center justify-between rounded-lg border border-[color:var(--line)] bg-[color:var(--bg-1)] px-3 py-2.5"
+                  className="flex items-center justify-between card-v2-flat px-3 py-2.5"
                 >
                   <Mono className="text-[12px] text-[color:var(--ink)]">{n}</Mono>
                   <span className="text-[11px] text-[color:var(--dim)]">{l}</span>

@@ -360,7 +360,7 @@ export default function Training() {
                   ].map((r) => (
                     <div
                       key={r.g}
-                      className="flex items-center gap-4 rounded-lg border border-[color:var(--line)] bg-[color:var(--bg-1)] px-4 py-3"
+                      className="flex items-center gap-4 card-v2-flat px-4 py-3"
                     >
                       <Mono
                         className="text-[12px] font-semibold w-16"
@@ -472,7 +472,7 @@ export default function Training() {
                 </div>
               </div>
 
-              <div className="mt-8 rounded-xl border border-[color:var(--line)] bg-[color:var(--bg-1)] overflow-hidden">
+              <div className="mt-8 card-v2-flat overflow-hidden">
                 <div className="flex items-center gap-2 px-4 py-3 border-b border-[color:var(--line)]">
                   <div className="flex gap-1.5">
                     <span className="w-2.5 h-2.5 rounded-full bg-[#FF5F57]" />
@@ -503,7 +503,7 @@ export default function Training() {
                       {cur.parts.map((p, i) => (
                         <div
                           key={i}
-                          className="rounded-lg border border-[color:var(--line)] bg-[color:var(--bg-2)] px-3.5 py-2.5 flex items-start gap-3"
+                          className="card-v2-flat px-3.5 py-2.5 flex items-start gap-3"
                         >
                           <span className="shrink-0 inline-flex items-center justify-center w-5 h-5 rounded-md bg-[color:var(--accent)] text-[color:var(--accent-ink)] text-[10px] font-bold tabular-nums mt-0.5">
                             {i + 1}
@@ -530,7 +530,7 @@ export default function Training() {
                       {cur.numbers.map((n, i) => (
                         <div
                           key={i}
-                          className="rounded-lg border border-[color:var(--line)] bg-[color:var(--bg-2)] px-3 py-2.5"
+                          className="card-v2-flat px-3 py-2.5"
                         >
                           <div className="text-[clamp(16px,1.8vw,20px)] tabular-nums font-semibold leading-none text-[color:var(--accent)] tracking-[-0.02em]">
                             {n.n}
@@ -570,7 +570,7 @@ export default function Training() {
                 ].map((x, i) => (
                   <div
                     key={i}
-                    className="rounded-xl border border-[color:var(--line)] bg-[color:var(--bg-1)] p-3"
+                    className="card-v2-flat p-3"
                   >
                     <Mono className="text-[10px] tracking-[0.14em] text-[color:var(--dim)]">
                       {x.l}
