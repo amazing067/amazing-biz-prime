@@ -60,12 +60,18 @@ export default function Voices() {
           {TESTIMONIALS.map((x, i) => (
             <div
               key={i}
-              className="group relative card-v2 card-v2-hover p-6 md:p-8 min-h-[260px] flex flex-col"
+              className="group relative card-v2 card-v2-hover p-6 md:p-8 pt-8 min-h-[280px] flex flex-col"
             >
+              <span
+                aria-hidden
+                className="absolute top-4 right-5 font-serif-italic text-[88px] leading-none text-[color:var(--card-accent)]/25 select-none pointer-events-none"
+              >
+                &ldquo;
+              </span>
               <Mono className="text-[11px] tracking-[0.14em] text-[color:var(--dim)]">
                 0{i + 1} / 03
               </Mono>
-              <p className="mt-4 text-[16px] md:text-[17px] leading-[1.6] flex-1 text-[color:var(--ink-2)]">
+              <p className="mt-4 text-[16px] md:text-[17px] leading-[1.6] flex-1 text-[color:var(--ink-2)] relative">
                 &ldquo;{x.q}&rdquo;
               </p>
               <div className="mt-6 flex items-center justify-between">

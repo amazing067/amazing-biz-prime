@@ -79,17 +79,22 @@ export default function Benefits() {
           {TIERS.map((t) => (
             <div
               key={t.rank}
-              className="p-8 transition-all bg-[color:var(--bg-2)] hover:bg-[color:var(--bg-1)]"
+              className="relative p-8 pt-6 transition-all bg-[color:var(--bg-2)] hover:bg-[color:var(--bg-1)]"
             >
-              <div className="flex items-start justify-between mb-5">
-                <Mono className="text-[11px] text-[color:var(--dim)]">
-                  {t.rank} · {t.tag.toUpperCase()}
-                </Mono>
-                <span className="inline-flex items-center px-2.5 py-1 rounded-full text-[10px] font-medium bg-[color:var(--bg-1)] text-[color:var(--accent)] border border-[color:var(--line)]">
+              <div className="flex items-start justify-between mb-3">
+                <div>
+                  <Mono className="block text-[64px] md:text-[80px] leading-none font-medium text-[color:var(--card-accent)] tracking-[-0.04em]">
+                    {t.rank}
+                  </Mono>
+                  <Mono className="mt-1 block text-[10px] tracking-[0.18em] text-[color:var(--dim)]">
+                    {t.tag.toUpperCase()}
+                  </Mono>
+                </div>
+                <span className="inline-flex items-center px-2.5 py-1 rounded-full text-[10px] font-medium bg-[color:var(--bg-1)] text-[color:var(--card-accent)] border border-[color:var(--card-accent)]/30">
                   {t.stat}
                 </span>
               </div>
-              <h3 className="text-[24px] font-medium tracking-tight mb-3 text-[color:var(--ink)]">
+              <h3 className="mt-5 text-[24px] font-semibold tracking-tight mb-3 text-[color:var(--ink)]">
                 {t.title}
               </h3>
               <p className="text-[13px] leading-[1.65] mb-5 text-[color:var(--ink-2)]">{t.desc}</p>

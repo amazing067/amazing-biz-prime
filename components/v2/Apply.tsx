@@ -125,19 +125,19 @@ export default function Apply() {
       id="apply"
       className="relative py-28 md:py-40 border-t border-[color:var(--line)] bg-[color:var(--bg-1)]"
       style={{
-        ["--bg-1" as string]: "#0A0B10",
-        ["--bg-2" as string]: "#15171F",
-        ["--ink" as string]: "#FAFAF7",
-        ["--ink-2" as string]: "rgba(250,250,247,0.92)",
-        ["--dim" as string]: "rgba(250,250,247,0.78)",
-        ["--dim-2" as string]: "rgba(250,250,247,0.58)",
-        ["--line" as string]: "rgba(250,250,247,0.32)",
-        ["--card-bg" as string]: "#15171F",
-        ["--card-ring" as string]: "rgba(250,250,247,0.32)",
-        ["--card-highlight" as string]: "rgba(250,250,247,0.05)",
-        ["--card-shadow" as string]: "0 1px 2px rgba(0,0,0,0.4), 0 12px 32px -12px rgba(0,0,0,0.6)",
-        ["--card-shadow-hover" as string]: "0 2px 4px rgba(0,0,0,0.45), 0 24px 48px -16px rgba(0,0,0,0.65)",
-        ["--card-shadow-strong" as string]: "0 2px 4px rgba(0,0,0,0.4), 0 40px 80px -20px rgba(0,0,0,0.7)",
+        ["--bg-1" as string]: "#100C09",
+        ["--bg-2" as string]: "#1C1612",
+        ["--ink" as string]: "#FAF6EC",
+        ["--ink-2" as string]: "rgba(250,246,236,0.92)",
+        ["--dim" as string]: "rgba(250,246,236,0.78)",
+        ["--dim-2" as string]: "rgba(250,246,236,0.58)",
+        ["--line" as string]: "rgba(250,240,220,0.34)",
+        ["--card-bg" as string]: "#1C1612",
+        ["--card-ring" as string]: "rgba(250,240,220,0.34)",
+        ["--card-highlight" as string]: "rgba(255,236,200,0.06)",
+        ["--card-shadow" as string]: "0 1px 2px rgba(20,8,0,0.45), 0 12px 32px -12px rgba(20,8,0,0.65)",
+        ["--card-shadow-hover" as string]: "0 2px 4px rgba(20,8,0,0.5), 0 24px 48px -16px rgba(20,8,0,0.7)",
+        ["--card-shadow-strong" as string]: "0 2px 4px rgba(20,8,0,0.45), 0 40px 80px -20px rgba(20,8,0,0.75)",
       } as React.CSSProperties}
     >
       <div className="mx-auto max-w-[1700px] px-6">

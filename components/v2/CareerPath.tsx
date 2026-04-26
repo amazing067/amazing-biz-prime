@@ -103,7 +103,6 @@ export default function CareerPath() {
         </div>
 
         <div className="relative">
-          <div className="absolute top-[22px] left-0 right-0 h-px bg-[color:var(--line)]" />
           <div
             className="grid grid-cols-1 md:grid-cols-4 gap-px"
             style={{ background: "var(--line)" }}
@@ -114,13 +113,31 @@ export default function CareerPath() {
                 className="relative p-8 transition-colors bg-[color:var(--bg-2)] hover:bg-[color:var(--bg-1)]"
               >
                 <div className="relative flex items-center mb-8 h-[44px]">
-                  <div className="relative w-11 h-11 rounded-full flex items-center justify-center z-10 border-2 bg-[color:var(--bg-2)] border-[color:var(--accent)] text-[color:var(--accent)]">
-                    <Mono className="text-[11px] font-medium">
+                  <div
+                    className={`relative w-12 h-12 rounded-full flex items-center justify-center z-10 border-[2.5px] shadow-[0_0_0_4px_color-mix(in_srgb,var(--card-accent)_15%,transparent)] ${
+                      i === TRACKS.length - 1
+                        ? "bg-[color:var(--card-accent)] border-[color:var(--card-accent)] text-white"
+                        : "bg-[color:var(--bg-2)] border-[color:var(--card-accent)] text-[color:var(--card-accent)]"
+                    }`}
+                  >
+                    <Mono className="text-[12px] font-bold">
                       {String(i + 1).padStart(2, "0")}
                     </Mono>
                   </div>
                   {i < TRACKS.length - 1 && (
-                    <div className="flex-1 h-px ml-3 bg-[color:var(--line)]" />
+                    <div
+                      className="hidden md:flex flex-1 ml-3 mr-[-2.5rem] items-center pointer-events-none z-0"
+                      aria-hidden
+                    >
+                      <div className="flex-1 h-[3px] rounded-full bg-gradient-to-r from-[color:var(--card-accent)] to-[color:var(--card-accent)]/40" />
+                      <svg
+                        viewBox="0 0 16 16"
+                        className="w-4 h-4 -ml-[2px] text-[color:var(--card-accent)]/80"
+                        fill="currentColor"
+                      >
+                        <path d="M3 2 L13 8 L3 14 Z" />
+                      </svg>
+                    </div>
                   )}
                 </div>
 

@@ -133,29 +133,34 @@ export default function ValueChain() {
             {STAGES.map((s, i) => (
               <div
                 key={s.k}
-                className="relative p-8 bg-[color:var(--bg-2)] min-h-[240px] flex flex-col"
+                className="relative p-8 pt-7 bg-[color:var(--bg-2)] min-h-[260px] flex flex-col"
               >
-                <div className="flex items-center justify-between mb-6">
-                  <Mono className="text-[11px] tracking-[0.18em] text-[color:var(--dim)]">
-                    STEP / {s.k}
-                  </Mono>
-                  <Mono className="text-[10px] tracking-[0.14em] text-[color:var(--accent)]">
+                <div className="flex items-start justify-between mb-4">
+                  <div>
+                    <Mono className="block text-[64px] md:text-[80px] leading-none font-medium text-[color:var(--card-accent)] tracking-[-0.04em]">
+                      {s.k}
+                    </Mono>
+                    <Mono className="mt-1 block text-[10px] tracking-[0.18em] text-[color:var(--dim)]">
+                      STEP
+                    </Mono>
+                  </div>
+                  <span className="inline-flex items-center px-2.5 py-1 rounded-full text-[10px] font-medium bg-[color:var(--bg-1)] text-[color:var(--card-accent)] border border-[color:var(--card-accent)]/30 tracking-[0.14em]">
                     {s.caption}
-                  </Mono>
+                  </span>
                 </div>
-                <h4 className="text-[22px] md:text-[24px] font-medium text-[color:var(--ink)] tracking-[-0.01em] leading-[1.2]">
+                <h4 className="mt-4 text-[22px] md:text-[24px] font-semibold text-[color:var(--ink)] tracking-[-0.01em] leading-[1.2]">
                   {s.title}
                 </h4>
                 <p className="mt-4 text-[13px] leading-[1.7] text-[color:var(--ink-2)] flex-1">
                   {s.body}
                 </p>
                 {i < STAGES.length - 1 && (
-                  <div className="absolute right-0 top-1/2 -translate-y-1/2 translate-x-1/2 hidden md:block z-10 bg-[color:var(--bg-2)] rounded-full p-2 border border-[color:var(--line)]">
+                  <div className="absolute right-0 top-1/2 -translate-y-1/2 translate-x-1/2 hidden md:flex z-10 items-center justify-center w-10 h-10 rounded-full bg-[color:var(--card-accent)] shadow-lg">
                     <Icon
                       name="arrowRight"
-                      size={14}
-                      stroke={2}
-                      className="text-[color:var(--accent)]"
+                      size={18}
+                      stroke={2.5}
+                      className="text-white"
                     />
                   </div>
                 )}

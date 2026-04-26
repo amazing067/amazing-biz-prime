@@ -43,33 +43,61 @@ export default function Process() {
 
         <div className="relative">
           {/* Connecting line — only on wide screens where single row fits */}
-          <div className="hidden lg:block absolute left-0 right-0 top-[34px] h-px bg-[color:var(--line)]" />
+          <div className="hidden lg:block absolute left-0 right-0 top-[34px] h-px bg-[color:var(--card-accent)]/40" />
 
           <div className="grid grid-cols-3 sm:grid-cols-4 md:grid-cols-6 lg:grid-cols-11 gap-x-3 gap-y-10 lg:gap-y-0">
-            {DAYS.map((x, i) => (
-              <div key={x.d} className="min-w-0">
-                <Mono className="text-[10px] lg:text-[10.5px] text-[color:var(--dim)] tracking-[0.12em] block truncate">
-                  {x.d}
-                </Mono>
-                <div className="relative mt-2.5 h-6 flex items-center">
-                  <span
-                    className={`relative z-10 w-2.5 h-2.5 rounded-full ${
-                      i === 0
-                        ? "bg-[color:var(--accent)] shadow-[0_0_0_4px_var(--accent-glow)]"
-                        : i <= 3
-                        ? "bg-[color:var(--ink)]"
-                        : "bg-[color:var(--line)] border border-[color:var(--dim-2)]"
+            {DAYS.map((x, i) => {
+              const isStart = i === 1; // Day 01
+              const isEnd = i === DAYS.length - 1; // Day 10
+              const isAnchor = isStart || isEnd;
+              return (
+                <div key={x.d} className={`min-w-0 ${isAnchor ? "relative" : ""}`}>
+                  {isAnchor && (
+                    <span className="absolute -top-5 left-0 inline-flex items-center px-1.5 py-0.5 rounded text-[9px] font-semibold tracking-[0.18em] bg-[color:var(--card-accent)] text-white">
+                      {isStart ? "START" : "GOAL"}
+                    </span>
+                  )}
+                  <Mono
+                    className={`text-[10px] lg:text-[10.5px] tracking-[0.12em] block truncate ${
+                      isAnchor
+                        ? "text-[color:var(--card-accent)] font-bold"
+                        : "text-[color:var(--dim)]"
                     }`}
-                  />
+                  >
+                    {x.d}
+                  </Mono>
+                  <div className="relative mt-2.5 h-6 flex items-center">
+                    <span
+                      className={`relative z-10 rounded-full ${
+                        isAnchor
+                          ? "w-4 h-4 bg-[color:var(--card-accent)] shadow-[0_0_0_5px_color-mix(in_srgb,var(--card-accent)_25%,transparent)]"
+                          : i === 0
+                          ? "w-2.5 h-2.5 bg-[color:var(--card-accent)]/70"
+                          : "w-2.5 h-2.5 bg-[color:var(--bg-2)] border border-[color:var(--dim-2)]"
+                      }`}
+                    />
+                  </div>
+                  <div
+                    className={`mt-3 tracking-[-0.01em] leading-[1.2] ${
+                      isAnchor
+                        ? "text-[15px] lg:text-[16px] font-bold text-[color:var(--ink)]"
+                        : "text-[13px] lg:text-[13.5px] font-semibold text-[color:var(--ink)]"
+                    }`}
+                  >
+                    {x.t}
+                  </div>
+                  <div
+                    className={`mt-1.5 leading-[1.45] ${
+                      isAnchor
+                        ? "text-[12px] lg:text-[12.5px] text-[color:var(--ink-2)]"
+                        : "text-[11px] lg:text-[11.5px] text-[color:var(--dim)]"
+                    }`}
+                  >
+                    {x.b}
+                  </div>
                 </div>
-                <div className="mt-3 text-[13px] lg:text-[13.5px] font-semibold text-[color:var(--ink)] tracking-[-0.01em] leading-[1.25]">
-                  {x.t}
-                </div>
-                <div className="mt-1.5 text-[11px] lg:text-[11.5px] text-[color:var(--dim)] leading-[1.45]">
-                  {x.b}
-                </div>
-              </div>
-            ))}
+              );
+            })}
           </div>
         </div>
       </div>
