@@ -19,8 +19,10 @@ export default function FloatingContactDock() {
   const shouldHide =
     hiddenOnRoutes.some((p) => pathname === p || pathname.startsWith(p + "/")) || false;
 
-  const phoneRaw = process.env.NEXT_PUBLIC_CONTACT_PHONE || "010-5604-0424";
-  const kakaoBaseUrl = process.env.NEXT_PUBLIC_KAKAO_CHAT_URL || "http://pf.kakao.com/_JxmxaJn/chat";
+  const phoneRaw = process.env.NEXT_PUBLIC_CONTACT_PHONE || "02-2038-4379";
+  const kakaoBaseUrl =
+    process.env.NEXT_PUBLIC_KAKAO_CHAT_URL ||
+    "https://pf.kakao.com/_JxmxaJn/chat?utm_source=naver_blog&utm_medium=post&utm_campaign=content&utm_content=";
   const kakaoUrl = `${kakaoBaseUrl}${kakaoBaseUrl.includes("?") ? "&" : "?"}source=prime-asset-home`;
   const telHref = phoneRaw ? `tel:${sanitizeTel(phoneRaw)}` : "";
 
