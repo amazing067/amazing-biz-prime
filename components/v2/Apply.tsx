@@ -128,10 +128,16 @@ export default function Apply() {
         ["--bg-1" as string]: "#0A0B10",
         ["--bg-2" as string]: "#15171F",
         ["--ink" as string]: "#FAFAF7",
-        ["--ink-2" as string]: "rgba(250,250,247,0.78)",
-        ["--dim" as string]: "rgba(250,250,247,0.55)",
-        ["--dim-2" as string]: "rgba(250,250,247,0.35)",
-        ["--line" as string]: "rgba(250,250,247,0.12)",
+        ["--ink-2" as string]: "rgba(250,250,247,0.92)",
+        ["--dim" as string]: "rgba(250,250,247,0.78)",
+        ["--dim-2" as string]: "rgba(250,250,247,0.58)",
+        ["--line" as string]: "rgba(250,250,247,0.32)",
+        ["--card-bg" as string]: "#15171F",
+        ["--card-ring" as string]: "rgba(250,250,247,0.32)",
+        ["--card-highlight" as string]: "rgba(250,250,247,0.05)",
+        ["--card-shadow" as string]: "0 1px 2px rgba(0,0,0,0.4), 0 12px 32px -12px rgba(0,0,0,0.6)",
+        ["--card-shadow-hover" as string]: "0 2px 4px rgba(0,0,0,0.45), 0 24px 48px -16px rgba(0,0,0,0.65)",
+        ["--card-shadow-strong" as string]: "0 2px 4px rgba(0,0,0,0.4), 0 40px 80px -20px rgba(0,0,0,0.7)",
       } as React.CSSProperties}
     >
       <div className="mx-auto max-w-[1400px] px-6">

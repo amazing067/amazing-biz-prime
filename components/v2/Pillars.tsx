@@ -128,10 +128,11 @@ export default function Pillars() {
         ["--bg-1" as string]: "#0F1428",
         ["--bg-2" as string]: "#1A2138",
         ["--ink" as string]: "#E8ECF5",
-        ["--ink-2" as string]: "rgba(232,236,245,0.78)",
-        ["--dim" as string]: "rgba(232,236,245,0.55)",
-        ["--dim-2" as string]: "rgba(232,236,245,0.35)",
-        ["--line" as string]: "rgba(232,236,245,0.12)",
+        ["--ink-2" as string]: "rgba(232,236,245,0.92)",
+        ["--dim" as string]: "rgba(232,236,245,0.78)",
+        ["--dim-2" as string]: "rgba(232,236,245,0.58)",
+        ["--line" as string]: "rgba(232,236,245,0.32)",
+        ["--card-ring" as string]: "rgba(232,236,245,0.32)",
       } as React.CSSProperties}
     >
       <div className="mx-auto max-w-[1400px] px-6">
