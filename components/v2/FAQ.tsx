@@ -43,7 +43,7 @@ export default function FAQ() {
 
   return (
     <section id="faq" className="relative py-32 px-6 bg-[color:var(--bg-1)]">
-      <div className="max-w-[1200px] mx-auto grid md:grid-cols-[360px_1fr] gap-16">
+      <div className="max-w-[1500px] mx-auto grid md:grid-cols-[420px_1fr] gap-16">
         <div className="md:sticky md:top-28 self-start">
           <Eyebrow>SECTION 11 · FAQ</Eyebrow>
           <h2 className="mt-5 text-[clamp(36px,4vw,56px)] leading-[0.98] tracking-[-0.025em] font-semibold text-[color:var(--ink)]">

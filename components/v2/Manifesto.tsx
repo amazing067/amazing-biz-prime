@@ -21,7 +21,7 @@ const PRINCIPLES = [
 export default function Manifesto() {
   return (
     <section id="system" className="relative py-28 md:py-40 border-t border-[color:var(--line)]">
-      <div className="mx-auto max-w-[1700px] px-6">
+      <div className="mx-auto max-w-[1840px] px-6">
         <div className="grid grid-cols-12 gap-8">
           <div className="col-span-12 md:col-span-4">
             <Eyebrow>02 — Manifesto</Eyebrow>

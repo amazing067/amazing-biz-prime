@@ -144,7 +144,7 @@ export default function Hero() {
       />
       <GridOverlay opacity={0.5} />
 
-      <div className="relative mx-auto max-w-[1700px] px-6">
+      <div className="relative mx-auto max-w-[1840px] px-6">
         <div className="flex flex-wrap items-center justify-between gap-4 mb-16 text-[12px]">
           <div className="flex items-center gap-6">
             <Eyebrow>A Recruiting System · v2026.04</Eyebrow>
@@ -161,7 +161,7 @@ export default function Hero() {
         <div className="grid grid-cols-12 gap-6 items-end mb-20">
           <h1
             className="col-span-12 md:col-span-10 font-bold leading-[0.92] tracking-[-0.03em]"
-            style={{ fontSize: "clamp(56px, 11vw, 176px)" }}
+            style={{ fontSize: "clamp(56px, 12vw, 220px)" }}
           >
             <span className="block text-[color:var(--ink)]">영업은</span>
             <span className="block relative">

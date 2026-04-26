@@ -212,7 +212,7 @@ export default function Training() {
       } as React.CSSProperties}
     >
       <GridOverlay opacity={0.04} />
-      <div className="relative mx-auto max-w-[1700px] px-6">
+      <div className="relative mx-auto max-w-[1840px] px-6">
         <div className="grid grid-cols-1 md:grid-cols-12 gap-6 md:gap-12 mb-16 md:mb-24">
           <div className="md:col-span-5">
             <Eyebrow>06 — Training Academy</Eyebrow>

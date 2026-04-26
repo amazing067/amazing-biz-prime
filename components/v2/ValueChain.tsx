@@ -44,7 +44,7 @@ export default function ValueChain() {
         }}
       />
 
-      <div className="relative mx-auto max-w-[1700px] px-6">
+      <div className="relative mx-auto max-w-[1840px] px-6">
         {/* Header */}
         <div className="max-w-[880px] mb-20">
           <Eyebrow>SECTION 03 · VALUE CHAIN</Eyebrow>
