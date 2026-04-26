@@ -59,7 +59,7 @@ export default function Voices() {
           {TESTIMONIALS.map((x, i) => (
             <div
               key={i}
-              className="group relative rounded-2xl border border-[color:var(--line)] bg-[color:var(--bg-1)] p-6 md:p-8 transition-colors duration-300 min-h-[260px] flex flex-col hover:border-[#4aaa6e]"
+              className="group relative card-v2 card-v2-hover p-6 md:p-8 min-h-[260px] flex flex-col"
             >
               <Mono className="text-[11px] tracking-[0.14em] text-[color:var(--dim)]">
                 0{i + 1} / 03

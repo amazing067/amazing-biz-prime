@@ -166,7 +166,7 @@ export default function Apply() {
             <div className="mt-14 grid grid-cols-2 gap-4 max-w-xs">
               <a
                 href="tel:01056040424"
-                className="group rounded-xl border border-[color:var(--line)] p-4 hover:border-[color:var(--ink)] transition-colors"
+                className="group card-v2 card-v2-hover p-4"
               >
                 <Icon
                   name="phone"
@@ -182,7 +182,7 @@ export default function Apply() {
                 href="http://pf.kakao.com/_xjXxjfn"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="group rounded-xl border border-[color:var(--line)] p-4 hover:border-[color:var(--ink)] transition-colors"
+                className="group card-v2 card-v2-hover p-4"
               >
                 <div className="w-4 h-4 rounded-sm bg-[#FEE500] flex items-center justify-center text-[8px] text-[#191919]">
                   💬
