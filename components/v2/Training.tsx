@@ -208,10 +208,11 @@ export default function Training() {
         ["--accent-glow" as string]: "rgba(216,160,64,0.3)",
         ["--bg-1" as string]: "#FAF6E8",
         ["--bg-2" as string]: "#F2ECD5",
+        ["--card-accent" as string]: "#d8a040",
       } as React.CSSProperties}
     >
       <GridOverlay opacity={0.04} />
-      <div className="relative mx-auto max-w-[1400px] px-6">
+      <div className="relative mx-auto max-w-[1700px] px-6">
         <div className="grid grid-cols-1 md:grid-cols-12 gap-6 md:gap-12 mb-16 md:mb-24">
           <div className="md:col-span-5">
             <Eyebrow>06 — Training Academy</Eyebrow>

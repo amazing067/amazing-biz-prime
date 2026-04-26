@@ -26,8 +26,9 @@ export default function Voices() {
     <section
       id="voices"
       className="relative py-28 md:py-40 border-t border-[color:var(--line)] bg-[color:var(--bg-2)]"
+      style={{ ["--card-accent" as string]: "#4aaa6e" } as React.CSSProperties}
     >
-      <div className="mx-auto max-w-[1400px] px-6">
+      <div className="mx-auto max-w-[1700px] px-6">
         <Eyebrow>05 — Voices</Eyebrow>
 
         <blockquote className="mt-10 mb-20 max-w-5xl">

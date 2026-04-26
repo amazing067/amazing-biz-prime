@@ -41,7 +41,7 @@ export default function FullAccess() {
         style={{ background: BURGUNDY }}
       />
 
-      <div className="relative mx-auto max-w-[1400px] px-6">
+      <div className="relative mx-auto max-w-[1700px] px-6">
         <div className="grid grid-cols-12 gap-8 md:gap-10 items-end">
           <div className="col-span-12 md:col-span-8">
             <div

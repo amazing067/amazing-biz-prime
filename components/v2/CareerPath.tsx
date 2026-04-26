@@ -48,8 +48,12 @@ const TRACKS = [
 
 export default function CareerPath() {
   return (
-    <section id="career" className="relative py-32 px-6 bg-[color:var(--bg-2)]">
-      <div className="max-w-[1400px] mx-auto">
+    <section
+      id="career"
+      className="relative py-32 px-6 bg-[color:var(--bg-2)]"
+      style={{ ["--card-accent" as string]: "#5a8bd8" } as React.CSSProperties}
+    >
+      <div className="max-w-[1700px] mx-auto">
         <div className="max-w-[880px] mb-12">
           <Eyebrow>SECTION 09 · 승격 단계</Eyebrow>
           <h2 className="mt-5 text-[clamp(40px,5.5vw,72px)] leading-[0.98] tracking-[-0.025em] font-semibold text-[color:var(--ink)]">

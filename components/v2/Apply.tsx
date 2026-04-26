@@ -140,7 +140,7 @@ export default function Apply() {
         ["--card-shadow-strong" as string]: "0 2px 4px rgba(0,0,0,0.4), 0 40px 80px -20px rgba(0,0,0,0.7)",
       } as React.CSSProperties}
     >
-      <div className="mx-auto max-w-[1400px] px-6">
+      <div className="mx-auto max-w-[1700px] px-6">
         <div className="grid grid-cols-12 gap-8">
           {/* Left col */}
           <div className="col-span-12 md:col-span-5">

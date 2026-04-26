@@ -144,7 +144,7 @@ export default function Hero() {
       />
       <GridOverlay opacity={0.5} />
 
-      <div className="relative mx-auto max-w-[1400px] px-6">
+      <div className="relative mx-auto max-w-[1700px] px-6">
         <div className="flex flex-wrap items-center justify-between gap-4 mb-16 text-[12px]">
           <div className="flex items-center gap-6">
             <Eyebrow>A Recruiting System · v2026.04</Eyebrow>

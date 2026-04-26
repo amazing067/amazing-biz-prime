@@ -279,9 +279,13 @@ export default function Tools() {
   );
 
   return (
-    <section id="tools" className="relative py-32 px-6 bg-[color:var(--bg-1)]">
+    <section
+      id="tools"
+      className="relative py-32 px-6 bg-[color:var(--bg-1)]"
+      style={{ ["--card-accent" as string]: "#8577d1" } as React.CSSProperties}
+    >
       <GridOverlay opacity={0.035} />
-      <div className="relative max-w-[1400px] mx-auto">
+      <div className="relative max-w-[1700px] mx-auto">
         <div className="max-w-[880px] mb-16">
           <Eyebrow>SECTION 06 · SYSTEM STACK</Eyebrow>
           <h2 className="mt-5 text-[clamp(40px,5.5vw,72px)] leading-[0.98] tracking-[-0.025em] font-semibold text-[color:var(--ink)]">

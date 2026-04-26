@@ -16,8 +16,12 @@ const DAYS = [
 
 export default function Process() {
   return (
-    <section id="process" className="relative py-28 md:py-40 border-t border-[color:var(--line)]">
-      <div className="mx-auto max-w-[1400px] px-6">
+    <section
+      id="process"
+      className="relative py-28 md:py-40 border-t border-[color:var(--line)]"
+      style={{ ["--card-accent" as string]: "#d8a040" } as React.CSSProperties}
+    >
+      <div className="mx-auto max-w-[1700px] px-6">
         <div className="grid grid-cols-12 gap-8 mb-16">
           <div className="col-span-12 md:col-span-5">
             <Eyebrow>04 — Onboarding</Eyebrow>

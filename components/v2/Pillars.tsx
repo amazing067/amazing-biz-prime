@@ -133,9 +133,10 @@ export default function Pillars() {
         ["--dim-2" as string]: "rgba(232,236,245,0.58)",
         ["--line" as string]: "rgba(232,236,245,0.32)",
         ["--card-ring" as string]: "rgba(232,236,245,0.32)",
+        ["--card-accent" as string]: "#39a2b8",
       } as React.CSSProperties}
     >
-      <div className="mx-auto max-w-[1400px] px-6">
+      <div className="mx-auto max-w-[1700px] px-6">
         <div className="flex items-end justify-between mb-16 gap-8 flex-wrap">
           <div>
             <Eyebrow>03 — The Four Pillars</Eyebrow>

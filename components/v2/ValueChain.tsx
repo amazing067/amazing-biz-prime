@@ -30,6 +30,7 @@ export default function ValueChain() {
     <section
       id="value-chain"
       className="relative py-28 md:py-40 border-t border-[color:var(--line)] bg-[color:var(--bg-1)] overflow-hidden"
+      style={{ ["--card-accent" as string]: "#4aaa6e" } as React.CSSProperties}
     >
       {/* Ambient grid bg */}
       <div
@@ -43,7 +44,7 @@ export default function ValueChain() {
         }}
       />
 
-      <div className="relative mx-auto max-w-[1400px] px-6">
+      <div className="relative mx-auto max-w-[1700px] px-6">
         {/* Header */}
         <div className="max-w-[880px] mb-20">
           <Eyebrow>SECTION 03 · VALUE CHAIN</Eyebrow>

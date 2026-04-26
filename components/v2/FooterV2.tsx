@@ -3,7 +3,7 @@ import { Mono } from "./Core";
 export default function FooterV2() {
   return (
     <footer className="relative border-t border-[color:var(--line)] py-14">
-      <div className="mx-auto max-w-[1400px] px-6">
+      <div className="mx-auto max-w-[1700px] px-6">
         <div className="border-b border-[color:var(--line)] pb-10">
           <div className="text-[16vw] md:text-[13vw] leading-[0.85] font-semibold tracking-[-0.04em] text-[color:var(--ink)]">
             PRIME{" "}
