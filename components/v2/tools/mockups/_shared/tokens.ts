@@ -25,9 +25,9 @@ export const MOCKUP = {
   fg2: "#6e6e80",
   fg3: "#a8a8b8",
 
-  border: "rgba(20,20,40,0.07)",
-  borderStrong: "rgba(20,20,40,0.13)",
+  border: "rgba(20,20,40,0.12)",
+  borderStrong: "rgba(20,20,40,0.18)",
 
-  shadowSm: "0 1px 2px rgba(20,20,40,0.04)",
-  shadowMd: "0 4px 16px -4px rgba(20,20,40,0.08), 0 2px 6px rgba(20,20,40,0.04)",
+  shadowSm: "0 1px 2px rgba(20,20,40,0.06), 0 0 0 1px rgba(20,20,40,0.05)",
+  shadowMd: "0 8px 24px -8px rgba(20,20,40,0.12), 0 0 0 1px rgba(20,20,40,0.06)",
 } as const;
