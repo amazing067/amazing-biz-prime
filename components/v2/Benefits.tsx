@@ -72,7 +72,7 @@ export default function Benefits() {
         </div>
 
         <div
-          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-px rounded-2xl overflow-hidden"
+          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-px card-v2 overflow-hidden"
           style={{ background: "var(--line)" }}
         >
           {TIERS.map((t) => (

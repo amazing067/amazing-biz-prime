@@ -128,7 +128,7 @@ export default function ValueChain() {
         {/* Timeline: FC → 팀 → 지사 → 본부 */}
         <div className="mb-16">
           <Eyebrow className="mb-10">GROWTH & DIVISION FLOW</Eyebrow>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-px rounded-2xl overflow-hidden" style={{ background: "var(--line)" }}>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-px card-v2 overflow-hidden" style={{ background: "var(--line)" }}>
             {STAGES.map((s, i) => (
               <div
                 key={s.k}

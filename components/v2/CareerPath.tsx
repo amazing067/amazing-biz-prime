@@ -64,7 +64,7 @@ export default function CareerPath() {
 
         {/* Transparency proof strip */}
         <div
-          className="mb-16 grid grid-cols-1 md:grid-cols-3 gap-px rounded-2xl overflow-hidden border border-[color:var(--line)]"
+          className="mb-16 grid grid-cols-1 md:grid-cols-3 gap-px card-v2 overflow-hidden"
           style={{ background: "var(--line)" }}
         >
           {[
