@@ -16,18 +16,17 @@ function formatPhone(value: string): string {
   return `${digits.slice(0, 3)}-${digits.slice(3, 7)}-${digits.slice(7, 11)}`;
 }
 
+// 2026-05 분할: 067 → 067(엄정화/김유겸/본부직할) + 374(류명화/류화자) + 378(이주은/이빈)
+// amazing-biz-server BRANCH_TEAM_MAP 과 동기화
 const branchData = {
   "067본부": [
-    "067본부 직할지사",
+    "본부직할지사",
     "김유겸 지사",
-    "류명화 지사",
-    "류화자 지사",
-    "이주은 지사",
     "엄정화 지사",
     "한채은 지사",
   ],
   "290본부": [
-    "290본부 직할지사",
+    "본부직할지사",
     "김미라 지사",
     "한희영 지사",
     "채혜빈 지사",
@@ -37,8 +36,16 @@ const branchData = {
     "류진순 지사",
   ],
   "292본부": [
-    "292본부 직할지사",
+    "본부직할지사",
     "신정민 지사",
+  ],
+  "374본부": [
+    "본부직할지사",
+    "류화자 지사",
+  ],
+  "378본부": [
+    "본부직할지사",
+    "이빈 지사",
   ],
 };
 
@@ -236,9 +243,10 @@ export default function MemberBadgePage() {
                   className="w-full px-4 py-3 rounded-xl border border-slate-200 bg-white focus:outline-none focus:ring-2 focus:ring-electric-blue"
                 >
                   <option value="">직책을 선택하세요</option>
-                  <option value="FC">FC</option>
-                  <option value="팀장">팀장</option>
+                  <option value="본부장">본부장</option>
                   <option value="지사장">지사장</option>
+                  <option value="팀장">팀장</option>
+                  <option value="FC">FC</option>
                 </select>
               </div>
             </div>
@@ -260,6 +268,8 @@ export default function MemberBadgePage() {
                   <option value="067본부">067본부</option>
                   <option value="290본부">290본부</option>
                   <option value="292본부">292본부</option>
+                  <option value="374본부">374본부</option>
+                  <option value="378본부">378본부</option>
                 </select>
               </div>
               <div>

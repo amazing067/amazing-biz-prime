@@ -2,7 +2,10 @@
 
 import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { Menu, X, LogIn, Home, Video } from "lucide-react";
+import { Menu, X, LogIn, Home, Video, ExternalLink } from "lucide-react";
+
+// 설계사 영업지원 포털 (별도 웹앱: 자체 로그인/회원가입 사용)
+const SUPPORT_PORTAL_URL = "https://xn--oi2b19pfvd21bx33a.com/member/lounge";
 import Link from "next/link";
 import Image from "next/image";
 import { usePathname } from "next/navigation";
@@ -193,6 +196,17 @@ export default function Header() {
               입사문의
             </a>
 
+            {/* 영업지원 시스템 (외부 웹앱) - 항상 노출 */}
+            <a
+              href={SUPPORT_PORTAL_URL}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="flex items-center space-x-1.5 px-3 py-1.5 bg-white text-electric-blue border border-electric-blue rounded-md hover:bg-electric-blue hover:text-white transition-colors text-sm font-medium whitespace-nowrap h-8"
+            >
+              <ExternalLink className="w-4 h-4" />
+              <span>설계사 영업지원</span>
+            </a>
+
             {/* 로그인한 경우: 설계사 전용 링크 및 사용자 정보 */}
             {isLoggedIn && userProfile ? (
               <>
@@ -274,6 +288,18 @@ export default function Header() {
                 className="block text-slate-700 hover:text-electric-blue transition-colors font-medium"
               >
                 입사문의
+              </a>
+
+              {/* 영업지원 시스템 (외부 웹앱) - 항상 노출 */}
+              <a
+                href={SUPPORT_PORTAL_URL}
+                target="_blank"
+                rel="noopener noreferrer"
+                onClick={() => setIsMobileMenuOpen(false)}
+                className="flex items-center justify-center space-x-1.5 px-3 py-1.5 bg-white text-electric-blue border border-electric-blue rounded-md hover:bg-electric-blue hover:text-white transition-colors text-sm font-medium"
+              >
+                <ExternalLink className="w-3.5 h-3.5" />
+                <span>설계사 영업지원</span>
               </a>
 
               {/* 로그인한 경우: 설계사 전용 링크 및 사용자 정보 */}

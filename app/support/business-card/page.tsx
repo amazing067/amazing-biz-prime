@@ -6,11 +6,26 @@ import { CreditCard, ArrowLeft, Check } from "lucide-react";
 import Link from "next/link";
 import Image from "next/image";
 import Header from "@/components/Header";
+const COLOR_LABEL_MAP: Record<string, string> = { white: "흰색", gold: "금색" };
 
+// 2026-05 분할: 067 → 067(엄정화/김유겸/본부직할) + 374(류명화/류화자) + 378(이주은/이빈)
+// amazing-biz-server BRANCH_TEAM_MAP 과 동기화
 const branchData: Record<string, string[]> = {
-  "067본부": ["067본부 직할지사", "김유겸 지사", "류명화 지사", "류화자 지사", "이주은 지사", "엄정화 지사", "한채은 지사"],
-  "290본부": ["290본부 직할지사", "김미라 지사", "한희영 지사", "채혜빈 지사", "천민아 지사", "이수진 지사", "송경호 지사", "류진순 지사"],
-  "292본부": ["292본부 직할지사", "신정민 지사"],
+  "067본부": ["본부직할지사", "김유겸 지사", "엄정화 지사", "한채은 지사"],
+  "290본부": ["본부직할지사", "김미라 지사", "한희영 지사", "채혜빈 지사", "천민아 지사", "이수진 지사", "송경호 지사", "류진순 지사"],
+  "292본부": ["본부직할지사", "신정민 지사"],
+  "374본부": ["본부직할지사", "류화자 지사"],
+  "378본부": ["본부직할지사", "이빈 지사"],
+};
+
+// 본부별 사무실 주소 (명함 인쇄에 들어감)
+const HEADQUARTER_ADDRESS = "서울 광진구 천호대로 561, 영창빌딩 8층 (군자역4번출구)";
+const branchAddressMap: Record<string, string> = {
+  "067본부": HEADQUARTER_ADDRESS,
+  "290본부": HEADQUARTER_ADDRESS,
+  "292본부": HEADQUARTER_ADDRESS,
+  "374본부": "서울 동작구 신대방1가길 38 동작상떼빌오피스상가 106동 201호",
+  "378본부": "서울 금천구 디지털로9길 47 한신IT타워2차4층 403-2호",
 };
 
 export default function BusinessCardPage() {
@@ -23,6 +38,14 @@ export default function BusinessCardPage() {
   const [taxOption, setTaxOption] = useState<"no" | "yes">("no");
   const [taxContact, setTaxContact] = useState("");
   const [isSubmitting, setIsSubmitting] = useState(false);
+  // 미리보기용 controlled 입력
+  const [name, setName] = useState("");
+  const [position, setPosition] = useState("");
+  const [phone, setPhone] = useState("");
+  const [fax, setFax] = useState("");
+  const [email, setEmail] = useState("");
+
+  const address = selectedBranch ? branchAddressMap[selectedBranch] || "" : "";
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -64,10 +87,10 @@ export default function BusinessCardPage() {
           phone: formObject.phone,
           fax: formObject.fax,
           email: formObject.email,
-          address: "서울 광진구 천호대로 561, 영창빌딩 8층 (군자역4번출구)",
+          address,
           orientation: selectedOrientation === "horizontal" ? "가로형" : "세로형",
           shape: selectedShape === "round" ? "라운드형" : selectedShape === "square" ? "사각형" : "없음",
-          color: selectedColor === "white" ? "흰색" : "금색",
+          color: COLOR_LABEL_MAP[selectedColor] || selectedColor,
           quantity: "200",
           taxOption: taxOption === "yes" ? "계산서발행" : "계산서미발행",
           taxContact: taxOption === "yes" ? taxContact : "",
@@ -90,10 +113,16 @@ export default function BusinessCardPage() {
       }
       setSelectedOrientation("");
       setSelectedShape("");
+      setSelectedColor("");
       setSelectedBranch("");
       setSelectedOffice("");
       setTaxOption("no");
       setTaxContact("");
+      setName("");
+      setPosition("");
+      setPhone("");
+      setFax("");
+      setEmail("");
 
       // 성공 메시지
       alert("명함 신청이 완료되었습니다!");
@@ -136,6 +165,7 @@ export default function BusinessCardPage() {
           <h3 className="text-2xl font-bold text-slate-900 mb-6 text-center">
             명함 신청 양식
           </h3>
+
           <form ref={formRef} className="space-y-4" onSubmit={handleSubmit}>
             {/* 이름 / 직책 */}
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
@@ -143,16 +173,33 @@ export default function BusinessCardPage() {
                 <label htmlFor="name" className="block text-sm font-medium text-slate-700 mb-2">
                   이름
                 </label>
-                <input type="text" id="name" name="name" required className="w-full px-4 py-3 rounded-xl border border-slate-200 bg-white focus:outline-none focus:ring-2 focus:ring-electric-blue focus:border-transparent transition-all" placeholder="이름을 입력하세요" />
+                <input
+                  type="text"
+                  id="name"
+                  name="name"
+                  required
+                  value={name}
+                  onChange={(e) => setName(e.target.value)}
+                  className="w-full px-4 py-3 rounded-xl border border-slate-200 bg-white focus:outline-none focus:ring-2 focus:ring-electric-blue focus:border-transparent transition-all"
+                  placeholder="이름을 입력하세요"
+                />
               </div>
               <div>
                 <label htmlFor="position" className="block text-sm font-medium text-slate-700 mb-2">
                   직책
                 </label>
-                <select id="position" name="position" required className="w-full px-4 py-3 rounded-xl border border-slate-200 bg-white focus:outline-none focus:ring-2 focus:ring-electric-blue focus:border-transparent transition-all">
+                <select
+                  id="position"
+                  name="position"
+                  required
+                  value={position}
+                  onChange={(e) => setPosition(e.target.value)}
+                  className="w-full px-4 py-3 rounded-xl border border-slate-200 bg-white focus:outline-none focus:ring-2 focus:ring-electric-blue focus:border-transparent transition-all"
+                >
                   <option value="">직책을 선택하세요</option>
-                  <option value="팀장">팀장</option>
+                  <option value="본부장">본부장</option>
                   <option value="지사장">지사장</option>
+                  <option value="팀장">팀장</option>
                 </select>
               </div>
             </div>
@@ -167,6 +214,8 @@ export default function BusinessCardPage() {
                   <option value="067본부">067본부</option>
                   <option value="290본부">290본부</option>
                   <option value="292본부">292본부</option>
+                  <option value="374본부">374본부</option>
+                  <option value="378본부">378본부</option>
                 </select>
               </div>
               <div>
@@ -195,6 +244,8 @@ export default function BusinessCardPage() {
                   id="phone"
                   name="phone"
                   required
+                  value={phone}
+                  onChange={(e) => setPhone(e.target.value)}
                   className="w-full px-4 py-3 rounded-xl border border-slate-200 bg-white focus:outline-none focus:ring-2 focus:ring-electric-blue focus:border-transparent transition-all"
                   placeholder="연락처를 입력하세요"
                 />
@@ -211,6 +262,8 @@ export default function BusinessCardPage() {
                   id="fax"
                   name="fax"
                   required
+                  value={fax}
+                  onChange={(e) => setFax(e.target.value)}
                   className="w-full px-4 py-3 rounded-xl border border-slate-200 bg-white focus:outline-none focus:ring-2 focus:ring-electric-blue focus:border-transparent transition-all"
                   placeholder="팩스번호를 입력하세요"
                 />
@@ -229,23 +282,26 @@ export default function BusinessCardPage() {
                 id="email"
                 name="email"
                 required
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
                 className="w-full px-4 py-3 rounded-xl border border-slate-200 bg-white focus:outline-none focus:ring-2 focus:ring-electric-blue focus:border-transparent transition-all"
                 placeholder="이메일을 입력하세요"
               />
             </div>
-            {/* 주소 */}
+            {/* 주소 (본부 선택 시 자동 입력) */}
             <div>
               <label
                 htmlFor="address"
                 className="block text-sm font-medium text-slate-700 mb-2"
               >
-                주소
+                주소 <span className="text-xs text-slate-500 font-normal">(본부 선택 시 자동 입력)</span>
               </label>
               <input
                 type="text"
                 id="address"
-                value="서울 광진구 천호대로 561, 영창빌딩 8층 (군자역4번출구)"
+                value={address}
                 readOnly
+                placeholder="본부를 먼저 선택해주세요"
                 className="w-full px-4 py-3 rounded-xl border border-slate-200 bg-slate-100 text-slate-700 cursor-not-allowed"
               />
             </div>
@@ -383,7 +439,7 @@ export default function BusinessCardPage() {
             </div>
             <div>
               <label className="block text-sm font-medium text-slate-700 mb-3">
-                색상 선택
+                색상 선택 <span className="text-red-500">*</span>
               </label>
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                 <motion.button

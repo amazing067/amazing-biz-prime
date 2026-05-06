@@ -65,6 +65,14 @@ export default function Nav() {
           <div className="flex items-center gap-2">
             <Status>LIVE · 3개 본부</Status>
             <a
+              href="https://xn--oi2b19pfvd21bx33a.com/member/lounge"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="hidden sm:inline-flex items-center gap-1.5 h-9 px-4 rounded-full border border-[color:var(--line)] bg-transparent text-[color:var(--ink)] text-[13px] font-medium hover:bg-[color:var(--bg-2)] transition"
+            >
+              설계사 영업지원 <Icon name="arrowUpRight" size={14} stroke={2} />
+            </a>
+            <a
               href="#apply"
               className="hidden sm:inline-flex items-center gap-1.5 h-9 px-4 rounded-full bg-[color:var(--accent)] text-[color:var(--accent-ink)] text-[13px] font-medium hover:brightness-110 transition"
             >
