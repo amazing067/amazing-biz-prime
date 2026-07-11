@@ -65,6 +65,11 @@ export const metadata: Metadata = {
     description: "당신의 비전이 현실이 되는 곳.",
     images: ["/og-image.png"],
   },
+  verification: {
+    other: {
+      "naver-site-verification": "ea4d63de392f36c07b6ad336ecb05c370011cd32",
+    },
+  },
 };
 
 export default function RootLayout({
