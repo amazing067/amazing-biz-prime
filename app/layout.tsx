@@ -29,9 +29,11 @@ const iconVersion = "20260319-2";
 
 export const metadata: Metadata = {
   metadataBase: new URL(siteUrl),
-  title: "Prime Asset Amazing Division | 프라임에셋 어메이징사업부",
+  // 제목 선두 일치: 네이버 「프라임에셋」 한글 검색을 위해 한글 브랜드명을 맨 앞에 (2026-07-24)
+  title: "프라임에셋 어메이징사업부 — 보험설계사 리쿠르팅 | Prime Asset Amazing Division",
   description:
-    "System makes Money. 감정을 배제한 완벽한 영업 지원 시스템. 당신의 비전이 현실이 되는 곳.",
+    "프라임에셋 어메이징사업부 보험설계사 모집. System makes Money — 진료내역 조회·AI 보장분석·실손 미청구 찾기 등 직접 개발한 영업 지원 시스템을 소속 설계사에게 무상 제공합니다.",
+  alternates: { canonical: "/" },
   icons: {
     icon: [
       { url: `/icons/favicon-16x16.png?v=${iconVersion}`, sizes: "16x16", type: "image/png" },
@@ -47,7 +49,7 @@ export const metadata: Metadata = {
     locale: "ko_KR",
     url: siteUrl,
     siteName: "프라임에셋 어메이징사업부",
-    title: "Prime Asset Amazing Division | 프라임에셋 어메이징사업부",
+    title: "프라임에셋 어메이징사업부 — 보험설계사 리쿠르팅",
     description:
       "당신의 비전이 현실이 되는 곳. System makes Money. 감정을 배제한 완벽한 영업 지원 시스템.",
     images: [
@@ -61,9 +63,14 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "Prime Asset Amazing Division | 프라임에셋 어메이징사업부",
+    title: "프라임에셋 어메이징사업부 — 보험설계사 리쿠르팅",
     description: "당신의 비전이 현실이 되는 곳.",
     images: ["/og-image.png"],
+  },
+  verification: {
+    other: {
+      "naver-site-verification": "ea4d63de392f36c07b6ad336ecb05c370011cd32",
+    },
   },
 };
 
