@@ -1,0 +1,254 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<meta name="robots" content="noindex" />
+<title>섹션 색 정리 — 라이트 2안</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700;900&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+<style>
+  *,*::before,*::after{box-sizing:border-box}
+  body{margin:0;font-family:'Noto Sans KR',system-ui,sans-serif;background:#EFEFEC;color:#14161A;-webkit-font-smoothing:antialiased}
+  .wrap{max-width:1280px;margin:0 auto;padding:48px 24px 96px}
+  .mono{font-family:'JetBrains Mono',monospace;font-variant-numeric:tabular-nums}
+
+  h1{font-size:26px;font-weight:900;letter-spacing:-.02em;margin:0 0 8px}
+  .lede{color:#5C6066;font-size:14px;line-height:1.7;max-width:74ch;margin:0 0 40px}
+  .lede b{color:#14161A;font-weight:700}
+
+  .opt{margin:0 0 56px;border:1px solid #D9D9D3;border-radius:16px;overflow:hidden;background:#F8F8F5}
+  .opt__head{padding:20px 24px;border-bottom:1px solid #E3E3DD;display:flex;gap:16px;align-items:flex-start;flex-wrap:wrap}
+  .opt__tag{font-size:11px;font-weight:800;letter-spacing:.1em;padding:5px 11px;border-radius:99px;background:#14161A;color:#fff;white-space:nowrap}
+  .opt__t{font-size:18px;font-weight:800;margin:0 0 4px;letter-spacing:-.01em}
+  .opt__d{font-size:13px;color:#5C6066;line-height:1.65;margin:0;max-width:76ch}
+  .opt__body{padding:0}
+
+  .sw{display:flex;flex-wrap:wrap;gap:8px;margin:14px 0 0}
+  .sw div{display:flex;align-items:center;gap:7px;font-size:11px;color:#5C6066;background:#EFEFEA;padding:5px 10px 5px 5px;border-radius:99px}
+  .sw i{width:18px;height:18px;border-radius:5px;display:block;box-shadow:inset 0 0 0 1px rgba(0,0,0,.14)}
+
+  /* 실제 페이지처럼 세로로 이어지는 스트립 */
+  .flow{display:block}
+  .sec{padding:30px 32px 32px;position:relative}
+  .sec + .sec{border-top:1px solid var(--edge,#E3E3DD)}
+  .eyebrow{font-size:10px;font-weight:800;letter-spacing:.14em;text-transform:uppercase;margin-bottom:12px}
+  .h{font-size:27px;font-weight:900;line-height:1.22;letter-spacing:-.025em;margin:0 0 12px}
+  .h span{display:block}
+  .p{font-size:12.5px;line-height:1.7;margin:0;max-width:52ch;opacity:.8}
+  .row{display:flex;gap:28px;align-items:flex-start;flex-wrap:wrap}
+  .row > .left{flex:1 1 300px;min-width:280px}
+  .row > .right{flex:1 1 340px;min-width:300px}
+  .btn{display:inline-block;font-size:12px;font-weight:700;padding:9px 16px;border-radius:99px;margin-top:16px}
+  .chip{display:inline-block;font-size:10.5px;font-weight:700;padding:5px 10px;border-radius:6px}
+  .kpi{display:grid;grid-template-columns:repeat(4,1fr);gap:0;margin-top:18px;border-radius:10px;overflow:hidden}
+  .kpi div{padding:14px 14px}
+  .kpi .n{font-size:24px;font-weight:900;letter-spacing:-.03em;line-height:1}
+  .kpi .l{font-size:9.5px;margin-top:4px;opacity:.7}
+  .tabs{display:grid;grid-template-columns:repeat(4,1fr);border-radius:10px;overflow:hidden;margin-top:6px}
+  .tabs div{padding:14px 12px}
+  .tabs .i{font-size:20px;font-weight:900;letter-spacing:-.03em;opacity:.5}
+  .tabs .t{font-size:11.5px;font-weight:700;margin-top:8px}
+  .card{border-radius:12px;padding:16px}
+  .field{font-size:11.5px;padding:9px 0;display:flex;gap:12px}
+  .field b{font-weight:600;min-width:52px;opacity:.65}
+
+  .note{font-size:12px;color:#5C6066;line-height:1.65;margin:0;padding:16px 24px 20px;background:#F1F1EC;border-top:1px solid #E3E3DD}
+  .note b{color:#14161A}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <h1>섹션 색 정리 — 라이트 2안</h1>
+  <p class="lede">
+    어두운 배경을 쓰지 않는 전제로 다시 짰습니다. 지금 다크인 세 구간(<b>핵심 서비스 · 교육 · 지원</b>)이 밝아지면
+    명도로 만들던 리듬이 사라지므로, 그걸 무엇으로 대신할지가 이 두 안의 차이입니다.
+    액센트는 8종 → <b>2종</b>(프라임에셋 틸 <b>#006580</b> · 어메이징 레드 <b>#EC1D27</b>)으로 줄이고, 레드는 <b>지원·제출에만</b> 씁니다.
+    아래는 네 구간이 실제처럼 세로로 이어지는 모습입니다.
+  </p>
+
+  <!-- ============ D ============ -->
+  <section class="opt">
+    <div class="opt__head">
+      <span class="opt__tag" style="background:#006580">D안</span>
+      <div>
+        <p class="opt__t">틴트 패널 — 밝기는 유지, 색으로 구간을 나눔</p>
+        <p class="opt__d">
+          회사·제도 이야기는 <b>흰 바탕</b>, 시스템·제품 이야기는 <b>아주 옅은 틸 바탕</b>(#EDF4F6).
+          다크였던 자리를 어둡게가 아니라 <b>색을 살짝 입혀</b> 대신합니다. 스크롤하다 바탕이 푸르스름해지면 "제품 이야기구나"를 알 수 있습니다.
+        </p>
+        <div class="sw">
+          <div><i style="background:#FFFFFF"></i>#FFFFFF 회사</div>
+          <div><i style="background:#EDF4F6"></i>#EDF4F6 시스템</div>
+          <div><i style="background:#006580"></i>#006580 주색</div>
+          <div><i style="background:#EC1D27"></i>#EC1D27 행동</div>
+        </div>
+      </div>
+    </div>
+    <div class="opt__body flow">
+
+      <div class="sec" style="background:#FFFFFF;--edge:#E6EAEC">
+        <div class="row">
+          <div class="left">
+            <div class="eyebrow" style="color:#006580">회사 · 도입</div>
+            <h3 class="h">영업은<span style="color:#006580">시스템이다.</span></h3>
+            <p class="p">직접 개발한 영업 지원 시스템을 소속 설계사에게 무상으로 드립니다. 서류와 반복 업무에 쓰던 시간을 고객 만나는 시간으로 되돌려 드립니다.</p>
+            <a class="btn" style="background:#EC1D27;color:#fff">1분 무료 상담 →</a>
+          </div>
+          <div class="right">
+            <div class="card" style="background:#F6F8F9;border:1px solid #E1E8EB">
+              <div style="font-size:10px;color:#7E8A90;margin-bottom:10px" class="mono">portal.amazing-biz.kr / dashboard</div>
+              <div class="kpi" style="margin-top:0;gap:8px;grid-template-columns:repeat(3,1fr)">
+                <div style="background:#fff;border:1px solid #E1E8EB;border-radius:8px"><div class="n" style="color:#0B1418">580</div><div class="l">월 누적 DB</div></div>
+                <div style="background:#fff;border:1px solid #E1E8EB;border-radius:8px"><div class="n" style="color:#0B1418">422</div><div class="l">73% 분배</div></div>
+                <div style="background:#006580;border-radius:8px"><div class="n" style="color:#fff">1.38억</div><div class="l" style="color:#B8DDE7">월납 합계</div></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="sec" style="background:#EDF4F6;--edge:#D7E4E9">
+        <div class="eyebrow" style="color:#006580">시스템 · 핵심 서비스</div>
+        <h3 class="h" style="color:#0B1418">네 개의 기둥,<span style="color:#006580">하나의 운영체제.</span></h3>
+        <div class="tabs" style="border:1px solid #CFDFE5;background:#fff">
+          <div style="background:#fff;border-right:1px solid #E3ECEF"><div class="i mono" style="color:#006580;opacity:1">01</div><div class="t" style="color:#0B1418">영업지원 포털</div></div>
+          <div style="border-right:1px solid #E3ECEF"><div class="i mono">02</div><div class="t" style="color:#4A5A61">AI 분석 스튜디오</div></div>
+          <div style="border-right:1px solid #E3ECEF"><div class="i mono">03</div><div class="t" style="color:#4A5A61">청구닷컴 허브</div></div>
+          <div><div class="i mono">04</div><div class="t" style="color:#4A5A61">치매검사 서비스</div></div>
+        </div>
+      </div>
+
+      <div class="sec" style="background:#EDF4F6;--edge:#D7E4E9">
+        <div class="eyebrow" style="color:#006580">시스템 · 입사 첫날</div>
+        <h3 class="h" style="color:#0B1418">지금까지 본 이 모든 시스템,<span style="color:#006580">입사 첫날 전부 오픈됩니다.</span></h3>
+        <div class="kpi" style="border:1px solid #CFDFE5;background:#fff">
+          <div style="border-right:1px solid #E3ECEF"><div class="n" style="color:#006580">16</div><div class="l">자체 시스템</div></div>
+          <div style="border-right:1px solid #E3ECEF"><div class="n" style="color:#006580">32</div><div class="l">제휴 보험사</div></div>
+          <div style="border-right:1px solid #E3ECEF"><div class="n" style="color:#006580">74p</div><div class="l">교육 교재</div></div>
+          <div><div class="n" style="color:#006580">₩0</div><div class="l">추가 결제</div></div>
+        </div>
+      </div>
+
+      <div class="sec" style="background:#FFFFFF;--edge:#E6EAEC">
+        <div class="row">
+          <div class="left">
+            <div class="eyebrow" style="color:#006580">회사 · 지원하기</div>
+            <h3 class="h">지원은 1분이면<span style="color:#006580">충분합니다.</span></h3>
+            <p class="p">지원 즉시 Welcome Kit 발송 · 24시간 내 1:1 연락 · 원치 않으시면 추가 연락 없음.</p>
+          </div>
+          <div class="right">
+            <div class="card" style="background:#F8FAFB;border:1px solid #E1E8EB">
+              <div class="field" style="border-bottom:1px solid #E6EDEF"><b>성함</b><span style="color:#0B1418;font-weight:600">홍길동</span></div>
+              <div class="field" style="border-bottom:1px solid #E6EDEF"><b>연락처</b><span style="color:#95A3A9">010 0000 0000</span></div>
+              <div class="field"><b>경력</b><span style="color:#95A3A9">선택</span></div>
+              <a class="btn" style="background:#EC1D27;color:#fff;width:100%;text-align:center">지원서 제출 →</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <p class="note">
+      <b>장점</b> — 어둡지 않으면서도 구간이 구분되고, 색이 "무슨 이야기인지"를 알려줍니다. 흰 바탕이라 폼·표·스크린샷이 모두 또렷합니다.<br>
+      <b>감수할 점</b> — 틴트가 옅어서 큰 화면에서는 구분이 은은합니다. 강한 대비를 원하시면 틴트를 한 단계 더 진하게 갈 수 있습니다.
+    </p>
+  </section>
+
+  <!-- ============ E ============ -->
+  <section class="opt">
+    <div class="opt__head">
+      <span class="opt__tag" style="background:#14161A">E안</span>
+      <div>
+        <p class="opt__t">한 장의 종이 — 색 대신 선과 여백으로</p>
+        <p class="opt__d">
+          배경을 <b>하나(#FBFAF8)</b>로 끝까지 통일하고, 구간은 <b>가는 선과 넉넉한 여백</b>으로만 나눕니다.
+          색은 틸을 제목·수치에만, 레드는 버튼에만. 전체가 잘 만든 인쇄물처럼 한 톤으로 흐릅니다.
+        </p>
+        <div class="sw">
+          <div><i style="background:#FBFAF8"></i>#FBFAF8 단일 배경</div>
+          <div><i style="background:#006580"></i>#006580 주색</div>
+          <div><i style="background:#EC1D27"></i>#EC1D27 행동</div>
+          <div><i style="background:#0B1418"></i>#0B1418 잉크</div>
+        </div>
+      </div>
+    </div>
+    <div class="opt__body flow">
+
+      <div class="sec" style="background:#FBFAF8;--edge:#DFDED7">
+        <div class="row">
+          <div class="left">
+            <div class="eyebrow" style="color:#8A8880">회사 · 도입</div>
+            <h3 class="h" style="color:#0B1418">영업은<span style="color:#006580">시스템이다.</span></h3>
+            <p class="p">직접 개발한 영업 지원 시스템을 소속 설계사에게 무상으로 드립니다. 서류와 반복 업무에 쓰던 시간을 고객 만나는 시간으로 되돌려 드립니다.</p>
+            <a class="btn" style="background:#EC1D27;color:#fff">1분 무료 상담 →</a>
+          </div>
+          <div class="right">
+            <div class="card" style="background:#fff;border:1px solid #E4E2DA">
+              <div style="font-size:10px;color:#8A8880;margin-bottom:10px" class="mono">portal.amazing-biz.kr / dashboard</div>
+              <div class="kpi" style="margin-top:0;gap:8px;grid-template-columns:repeat(3,1fr)">
+                <div style="border:1px solid #E4E2DA;border-radius:8px"><div class="n" style="color:#0B1418">580</div><div class="l">월 누적 DB</div></div>
+                <div style="border:1px solid #E4E2DA;border-radius:8px"><div class="n" style="color:#0B1418">422</div><div class="l">73% 분배</div></div>
+                <div style="border:1px solid #006580;border-radius:8px"><div class="n" style="color:#006580">1.38억</div><div class="l">월납 합계</div></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="sec" style="background:#FBFAF8;--edge:#DFDED7">
+        <div class="eyebrow" style="color:#8A8880">시스템 · 핵심 서비스</div>
+        <h3 class="h" style="color:#0B1418">네 개의 기둥,<span style="color:#006580">하나의 운영체제.</span></h3>
+        <div class="tabs" style="border-top:2px solid #0B1418">
+          <div style="border-right:1px solid #DFDED7;border-bottom:2px solid #006580"><div class="i mono" style="color:#006580;opacity:1">01</div><div class="t" style="color:#0B1418">영업지원 포털</div></div>
+          <div style="border-right:1px solid #DFDED7"><div class="i mono" style="color:#B4B1A8">02</div><div class="t" style="color:#5C5A54">AI 분석 스튜디오</div></div>
+          <div style="border-right:1px solid #DFDED7"><div class="i mono" style="color:#B4B1A8">03</div><div class="t" style="color:#5C5A54">청구닷컴 허브</div></div>
+          <div><div class="i mono" style="color:#B4B1A8">04</div><div class="t" style="color:#5C5A54">치매검사 서비스</div></div>
+        </div>
+      </div>
+
+      <div class="sec" style="background:#FBFAF8;--edge:#DFDED7">
+        <div class="eyebrow" style="color:#8A8880">시스템 · 입사 첫날</div>
+        <h3 class="h" style="color:#0B1418">지금까지 본 이 모든 시스템,<span style="color:#006580">입사 첫날 전부 오픈됩니다.</span></h3>
+        <div class="kpi" style="border-top:1px solid #0B1418;border-radius:0">
+          <div style="border-right:1px solid #DFDED7"><div class="n" style="color:#0B1418">16</div><div class="l">자체 시스템</div></div>
+          <div style="border-right:1px solid #DFDED7"><div class="n" style="color:#0B1418">32</div><div class="l">제휴 보험사</div></div>
+          <div style="border-right:1px solid #DFDED7"><div class="n" style="color:#0B1418">74p</div><div class="l">교육 교재</div></div>
+          <div><div class="n" style="color:#006580">₩0</div><div class="l">추가 결제</div></div>
+        </div>
+      </div>
+
+      <div class="sec" style="background:#FBFAF8;--edge:#DFDED7">
+        <div class="row">
+          <div class="left">
+            <div class="eyebrow" style="color:#8A8880">회사 · 지원하기</div>
+            <h3 class="h" style="color:#0B1418">지원은 1분이면<span style="color:#006580">충분합니다.</span></h3>
+            <p class="p">지원 즉시 Welcome Kit 발송 · 24시간 내 1:1 연락 · 원치 않으시면 추가 연락 없음.</p>
+          </div>
+          <div class="right">
+            <div class="card" style="background:#fff;border:1px solid #E4E2DA">
+              <div class="field" style="border-bottom:1px solid #EDEBE4"><b>성함</b><span style="color:#0B1418;font-weight:600">홍길동</span></div>
+              <div class="field" style="border-bottom:1px solid #EDEBE4"><b>연락처</b><span style="color:#B4B1A8">010 0000 0000</span></div>
+              <div class="field"><b>경력</b><span style="color:#B4B1A8">선택</span></div>
+              <a class="btn" style="background:#EC1D27;color:#fff;width:100%;text-align:center">지원서 제출 →</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <p class="note">
+      <b>장점</b> — 가장 조용하고 정돈돼 보입니다. 배경이 하나라 어느 섹션을 캡처해도 톤이 같아, 전단지·제안서 같은 인쇄물로 옮기기 쉽습니다.<br>
+      <b>감수할 점</b> — 20,000px 내내 바탕이 같아서, 지금 다크 섹션이 주던 "장면 전환" 느낌은 사라집니다. 선과 여백을 정밀하게 잡아야 밋밋해 보이지 않습니다.
+    </p>
+  </section>
+
+  <p class="note" style="background:#F8F8F5;border:1px solid #D9D9D3;border-radius:12px;padding:18px 22px">
+    <b>두 안의 공통</b> — 액센트를 틸·레드 2종으로 줄이고, 레드는 지원·제출에만 씁니다.
+    지금 흩어져 있는 카드 액센트 5종(시안·퍼플·그린·골드·라이트블루)과 다크 배경 3종, 크림+버건디 조합은 모두 없어집니다.
+    <b>D안은 구간 구분이 남고, E안은 완전히 한 톤</b>입니다.
+  </p>
+
+</div>
+</body>
+</html>
