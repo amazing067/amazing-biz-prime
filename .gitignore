@@ -38,3 +38,12 @@ next-env.d.ts
 /public/uploads
 
 verify-*.png
+
+# Playwright MCP 검증 산출물 (콘솔 로그 / 페이지 스냅샷)
+.playwright-mcp/
+
+# 디자인 반복하며 루트에 찍은 스크린샷·목업 이미지
+# (public/ 안의 실제 사용 이미지는 영향 없음)
+/*.png
+/*.jpg
+/*.jpeg
