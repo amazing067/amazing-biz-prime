@@ -14,11 +14,12 @@ import Partners from "@/components/v2/Partners";
 import FAQ from "@/components/v2/FAQ";
 import Apply from "@/components/v2/Apply";
 import FooterV2 from "@/components/v2/FooterV2";
-import FloatingContactDock from "@/components/FloatingContactDock";
+import ActionBar from "@/components/v2/ActionBar";
 
 export default function Home() {
   return (
-    <main className="min-h-screen min-w-0 overflow-x-hidden">
+    // 하단 여백: 모바일 ActionBar 가 페이지 마지막 줄을 가리지 않도록
+    <main className="min-h-screen min-w-0 overflow-x-hidden pb-[84px] md:pb-0">
       <Nav />
       <Hero />
       <Manifesto />
@@ -35,7 +36,7 @@ export default function Home() {
       <FAQ />
       <Apply />
       <FooterV2 />
-      <FloatingContactDock />
+      <ActionBar />
     </main>
   );
 }
