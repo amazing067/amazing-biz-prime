@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>디자인 방향 목업 — 3안</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700;800;900&family=Noto+Serif+KR:wght@600;700;900&display=swap" rel="stylesheet" />
+<style>
+  * { margin:0; padding:0; box-sizing:border-box; }
+  body { font-family:'Noto Sans KR', sans-serif; word-break:keep-all; }
+  .dir { min-height:100vh; position:relative; overflow:hidden; }
+  .serif { font-family:'Noto Serif KR', serif; }
+
+  /* ============ A. 에디토리얼 리포트 ============ */
+  #dirA { background:#F6F3EA; color:#15171F; padding:0; }
+  #dirA .frame { max-width:1360px; margin:0 auto; padding:28px 40px 64px; }
+  #dirA .masthead { display:flex; justify-content:space-between; align-items:baseline;
+    border-bottom:3px solid #15171F; padding-bottom:14px; }
+  #dirA .masthead .brand { font-weight:900; font-size:17px; letter-spacing:-0.02em; }
+  #dirA .masthead .issue { font-size:12.5px; color:#5B5D66; font-weight:500; }
+  #dirA .grid { display:grid; grid-template-columns: 1.25fr 0.9fr; gap:56px; margin-top:56px; align-items:start; }
+  #dirA .kicker { font-size:14px; font-weight:700; color:#1F3C88; }
+  #dirA h1 { font-family:'Noto Serif KR', serif; font-weight:900; font-size:88px; line-height:1.06;
+    letter-spacing:-0.02em; margin-top:18px; }
+  #dirA h1 .under { box-shadow: inset 0 -18px 0 rgba(31,60,136,0.16); }
+  #dirA .lede { margin-top:28px; font-size:18px; line-height:1.7; color:#3A3D48; max-width:520px; }
+  #dirA .lede strong { color:#15171F; }
+  #dirA .byline { margin-top:26px; padding-top:16px; border-top:1px solid rgba(21,23,31,0.25);
+    display:flex; gap:24px; font-size:13px; color:#5B5D66; font-weight:500; }
+  #dirA .cta-row { margin-top:34px; display:flex; gap:12px; }
+  #dirA .btn { display:inline-block; padding:16px 30px; font-size:15px; font-weight:700; text-decoration:none; }
+  #dirA .btn.pri { background:#15171F; color:#F6F3EA; }
+  #dirA .btn.sec { border:1.5px solid #15171F; color:#15171F; }
+  #dirA .ledger { border:1.5px solid #15171F; background:#FDFBF4; }
+  #dirA .ledger .head { display:flex; justify-content:space-between; padding:14px 20px;
+    border-bottom:1.5px solid #15171F; font-size:13px; font-weight:700; }
+  #dirA .ledger .head span:last-child { color:#1F3C88; }
+  #dirA .row { display:flex; justify-content:space-between; align-items:baseline;
+    padding:18px 20px; border-bottom:1px solid rgba(21,23,31,0.18); }
+  #dirA .row:last-child { border-bottom:none; }
+  #dirA .row .k { font-size:14px; color:#3A3D48; font-weight:500; }
+  #dirA .row .v { font-family:'Noto Serif KR', serif; font-weight:900; font-size:34px; letter-spacing:-0.02em; }
+  #dirA .row .v small { font-size:15px; font-weight:700; color:#5B5D66; margin-left:4px; }
+  #dirA .stampwrap { margin-top:22px; display:flex; justify-content:flex-end; }
+  #dirA .stamp { width:86px; height:86px; border:3px solid #B4372E; border-radius:50%;
+    color:#B4372E; display:flex; align-items:center; justify-content:center; text-align:center;
+    font-family:'Noto Serif KR', serif; font-weight:900; font-size:15px; line-height:1.25;
+    transform:rotate(-8deg); opacity:0.85; }
+</style>
+<style>
+  /* ============ B. 다크 오피스 · 앰버 ============ */
+  #dirB { background:#0B0F1E; color:#EDEAE2; }
+  #dirB .frame { max-width:1360px; margin:0 auto; padding:30px 40px 70px; }
+  #dirB .nav { display:flex; justify-content:space-between; align-items:center; font-size:14px; }
+  #dirB .nav .brand { font-weight:800; }
+  #dirB .nav .brand em { font-style:normal; color:#D9A441; }
+  #dirB .nav .apply { background:#D9A441; color:#141001; font-weight:700; padding:11px 22px; border-radius:8px; text-decoration:none; }
+  #dirB .grid { display:grid; grid-template-columns:1fr 1.05fr; gap:64px; align-items:center; margin-top:84px; }
+  #dirB .kicker { color:#D9A441; font-weight:700; font-size:14px; }
+  #dirB h1 { font-size:76px; font-weight:900; line-height:1.08; letter-spacing:-0.025em; margin-top:16px; }
+  #dirB h1 .serif { color:#D9A441; font-weight:900; }
+  #dirB .lede { margin-top:24px; font-size:17px; line-height:1.7; color:rgba(237,234,226,0.72); max-width:480px; }
+  #dirB .facts { margin-top:36px; display:flex; gap:0; border-top:1px solid rgba(237,234,226,0.18); }
+  #dirB .fact { padding:18px 28px 0 0; margin-right:28px; }
+  #dirB .fact b { display:block; font-size:26px; font-weight:800; }
+  #dirB .fact span { font-size:12.5px; color:rgba(237,234,226,0.55); }
+  #dirB .cta { margin-top:36px; display:inline-block; background:#D9A441; color:#141001;
+    font-weight:800; font-size:16px; padding:18px 36px; border-radius:10px; text-decoration:none; }
+  #dirB .ghost { margin-left:12px; display:inline-block; color:#EDEAE2; border:1px solid rgba(237,234,226,0.3);
+    font-weight:600; font-size:16px; padding:18px 30px; border-radius:10px; text-decoration:none; }
+  #dirB .console { background:linear-gradient(180deg,#121729,#0E1322); border:1px solid rgba(217,164,65,0.25);
+    border-radius:16px; padding:22px; box-shadow:0 40px 90px -30px rgba(0,0,0,0.8); }
+  #dirB .console .bar { display:flex; justify-content:space-between; font-size:12px;
+    color:rgba(237,234,226,0.5); padding-bottom:16px; border-bottom:1px solid rgba(237,234,226,0.1); }
+  #dirB .console .bar .live { color:#D9A441; font-weight:700; }
+  #dirB .kpis { display:grid; grid-template-columns:repeat(3,1fr); gap:12px; margin-top:16px; }
+  #dirB .kpi { background:rgba(237,234,226,0.05); border:1px solid rgba(237,234,226,0.09); border-radius:10px; padding:14px; }
+  #dirB .kpi b { display:block; font-size:24px; font-weight:800; color:#EDEAE2; }
+  #dirB .kpi.gold b { color:#D9A441; }
+  #dirB .kpi span { font-size:11.5px; color:rgba(237,234,226,0.5); }
+  #dirB .bars { display:flex; align-items:flex-end; gap:14px; height:130px; margin-top:20px; padding:0 6px; }
+  #dirB .bars i { flex:1; background:rgba(237,234,226,0.14); border-radius:4px 4px 0 0; }
+  #dirB .bars i.hot { background:linear-gradient(180deg,#E8BC62,#C08A2E); }
+  #dirB .legend { display:flex; justify-content:space-between; font-size:11px; color:rgba(237,234,226,0.4); margin-top:8px; padding:0 6px; }
+</style>
+<style>
+  /* ============ C. 프로덕트 라이트 (토스풍) ============ */
+  #dirC { background:#FFFFFF; color:#191F28; }
+  #dirC .frame { max-width:1200px; margin:0 auto; padding:26px 40px 80px; }
+  #dirC .nav { display:flex; justify-content:space-between; align-items:center; }
+  #dirC .nav .brand { font-weight:800; font-size:16px; }
+  #dirC .nav .brand i { display:inline-block; width:22px; height:22px; background:#1F3C88;
+    border-radius:6px; vertical-align:-4px; margin-right:8px; }
+  #dirC .nav .apply { background:#1F3C88; color:#fff; font-weight:700; font-size:14px;
+    padding:11px 20px; border-radius:12px; text-decoration:none; }
+  #dirC .hero { text-align:center; padding-top:88px; }
+  #dirC .chip { display:inline-block; background:#F2F4F8; color:#4E5968; font-weight:600;
+    font-size:14px; padding:9px 16px; border-radius:999px; }
+  #dirC h1 { font-size:68px; font-weight:900; letter-spacing:-0.03em; line-height:1.18; margin-top:22px; }
+  #dirC h1 .blue { color:#1F3C88; }
+  #dirC .lede { margin-top:18px; font-size:19px; line-height:1.65; color:#4E5968; }
+  #dirC .cta { margin-top:32px; display:inline-block; background:#1F3C88; color:#fff; font-weight:800;
+    font-size:17px; padding:18px 44px; border-radius:16px; text-decoration:none;
+    box-shadow:0 14px 30px -12px rgba(31,60,136,0.45); }
+  #dirC .sub { margin-top:14px; font-size:13.5px; color:#8B95A1; }
+  #dirC .float { position:relative; margin-top:70px; height:360px; }
+  #dirC .card { position:absolute; background:#fff; border:1px solid #EDF0F4; border-radius:20px;
+    box-shadow:0 24px 60px -20px rgba(25,31,40,0.18); padding:20px; }
+  #dirC .card h5 { font-size:13px; color:#8B95A1; font-weight:600; }
+  #dirC .card .big { font-size:30px; font-weight:900; letter-spacing:-0.02em; margin-top:6px; }
+  #dirC .card .up { color:#1F3C88; font-size:13px; font-weight:700; margin-top:4px; }
+  #dirC .c1 { left:6%; top:30px; width:250px; transform:rotate(-3deg); }
+  #dirC .c2 { left:50%; top:0; width:330px; transform:translateX(-50%); z-index:2; }
+  #dirC .c2 .rowline { display:flex; justify-content:space-between; padding:12px 0;
+    border-bottom:1px solid #F2F4F8; font-size:14px; }
+  #dirC .c2 .rowline b { font-weight:800; }
+  #dirC .c2 .tagok { color:#1F3C88; font-weight:700; }
+  #dirC .c3 { right:6%; top:44px; width:250px; transform:rotate(3deg); }
+  #dirC .bar-mini { height:8px; background:#F2F4F8; border-radius:4px; margin-top:14px; overflow:hidden; }
+  #dirC .bar-mini i { display:block; height:100%; width:73%; background:#1F3C88; border-radius:4px; }
+</style>
+</head>
+<body>
+
+<!-- ================= A ================= -->
+<section class="dir" id="dirA">
+  <div class="frame">
+    <div class="masthead">
+      <span class="brand">프라임에셋 어메이징사업부</span>
+      <span class="issue">채용 안내서 · 2026년판 · 서울 3개 본부</span>
+    </div>
+    <div class="grid">
+      <div>
+        <div class="kicker">제1장 · 우리가 일하는 방식</div>
+        <h1>영업은<br /><span class="under">시스템</span>이<br />합니다.</h1>
+        <p class="lede">보장분석·AI 코칭·청구 자동화·치매검사 — 직접 개발한 시스템을
+          소속 설계사에게 <strong>무상으로</strong> 제공합니다. 설계사는 고객만 만나면 됩니다.</p>
+        <div class="byline">
+          <span>2019년 설립</span><span>제휴 보험사 32개</span><span>신입 온보딩 10일</span>
+        </div>
+        <div class="cta-row">
+          <a class="btn pri" href="#">1분 무료 상담</a>
+          <a class="btn sec" href="#">시스템 먼저 보기</a>
+        </div>
+      </div>
+      <div>
+        <div class="ledger">
+          <div class="head"><span>어메이징사업부 · 운영 현황</span><span>실시간</span></div>
+          <div class="row"><span class="k">이번 달 누적 DB</span><span class="v">580<small>건</small></span></div>
+          <div class="row"><span class="k">자동 배정</span><span class="v">422<small>건</small></span></div>
+          <div class="row"><span class="k">상담 진행</span><span class="v">186<small>건</small></span></div>
+          <div class="row"><span class="k">이번 달 월납 합계</span><span class="v">1.38<small>억</small></span></div>
+        </div>
+        <div class="stampwrap"><div class="stamp">전량<br />공개</div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= B ================= -->
+<section class="dir" id="dirB">
+  <div class="frame">
+    <div class="nav">
+      <span class="brand">Prime Asset <em>— Amazing</em></span>
+      <a class="apply" href="#">지원하기</a>
+    </div>
+    <div class="grid">
+      <div>
+        <div class="kicker">보험영업의 운영체제</div>
+        <h1>퇴근한 뒤에도<br /><span class="serif">시스템은</span><br />일합니다.</h1>
+        <p class="lede">밤 사이 들어온 DB가 아침에 자동 배정되어 있습니다.
+          보장분석·코칭·청구까지 — 반복 업무는 시스템에게, 설계사는 고객에게.</p>
+        <div class="facts">
+          <div class="fact"><b>32개사</b><span>제휴 생·손보</span></div>
+          <div class="fact"><b>18개</b><span>자체 시스템</span></div>
+          <div class="fact"><b>10일</b><span>신입 온보딩</span></div>
+        </div>
+        <div>
+          <a class="cta" href="#">1분 무료 상담</a><a class="ghost" href="#">시스템 보기</a>
+        </div>
+      </div>
+      <div>
+        <div class="console">
+          <div class="bar"><span>portal.amazing-biz.kr / dashboard</span><span class="live">● 야간 자동 운영중</span></div>
+          <div class="kpis">
+            <div class="kpi"><b>580</b><span>월 누적 DB</span></div>
+            <div class="kpi"><b>422</b><span>자동 배정</span></div>
+            <div class="kpi gold"><b>1.38억</b><span>월납 합계</span></div>
+          </div>
+          <div class="bars">
+            <i style="height:38%"></i><i style="height:52%"></i><i style="height:64%"></i><i class="hot" style="height:92%"></i>
+          </div>
+          <div class="legend"><span>1월</span><span>2월</span><span>3월</span><span>4월</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= C ================= -->
+<section class="dir" id="dirC">
+  <div class="frame">
+    <div class="nav">
+      <span class="brand"><i></i>Prime Asset — Amazing</span>
+      <a class="apply" href="#">지원하기</a>
+    </div>
+    <div class="hero">
+      <span class="chip">보험설계사 리쿠르팅 · 서울 3개 본부</span>
+      <h1>서류 정리는 <span class="blue">시스템이</span>,<br />당신은 <span class="blue">고객만</span> 만나세요.</h1>
+      <p class="lede">보장분석부터 청구까지, 직접 개발한 18개 시스템을 무상 제공합니다.<br />입사 첫날 ID 하나로 전부 열립니다.</p>
+      <a class="cta" href="#">1분 무료 상담 받기</a>
+      <div class="sub">상담 후 원치 않으시면 추가 연락을 드리지 않습니다</div>
+      <div class="float">
+        <div class="card c1">
+          <h5>AI 보장분석</h5><div class="big">30초</div>
+          <div class="up">PDF 한 장 → 32개사 통합</div>
+          <div class="bar-mini"><i></i></div>
+        </div>
+        <div class="card c2">
+          <h5>오늘의 배정</h5>
+          <div class="rowline"><span>김○○ 고객 · 실손 상담</span><b class="tagok">배정됨</b></div>
+          <div class="rowline"><span>이○○ 고객 · 보장분석</span><b class="tagok">완료</b></div>
+          <div class="rowline"><span>박○○ 고객 · 청구 접수</span><b>진행중</b></div>
+        </div>
+        <div class="card c3">
+          <h5>이번 달 월납</h5><div class="big">1.38억</div>
+          <div class="up">▲ 전월 대비 12%</div>
+          <div class="bar-mini"><i style="width:88%"></i></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+</body>
+</html>

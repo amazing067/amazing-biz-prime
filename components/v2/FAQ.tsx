@@ -45,7 +45,7 @@ export default function FAQ() {
     <section id="faq" className="relative py-32 px-6 bg-[color:var(--bg-1)]">
       <div className="max-w-[1500px] mx-auto grid md:grid-cols-[420px_1fr] gap-16">
         <div className="md:sticky md:top-28 self-start">
-          <Eyebrow>SECTION 11 · FAQ</Eyebrow>
+          <Eyebrow>자주 묻는 질문</Eyebrow>
           <h2 className="mt-5 text-[clamp(40px,4.6vw,72px)] leading-[0.98] tracking-[-0.025em] font-semibold text-[color:var(--ink)]">
             자주 묻는 <br />
             <span className="font-serif-italic text-[color:var(--dim)]">질문들.</span>
@@ -61,7 +61,7 @@ export default function FAQ() {
             폼에서 직접 물어보세요.
           </p>
           <div className="mt-10 pt-8 border-t border-[color:var(--line)]">
-            <Mono className="text-[10px] block mb-3 text-[color:var(--dim)]">STILL CURIOUS?</Mono>
+            <span className="text-[12px] font-medium block mb-3 text-[color:var(--dim)]">더 궁금한 점이 있다면</span>
             <a
               href="#apply"
               className="inline-flex items-center gap-2 text-[14px] font-medium text-[color:var(--ink)]"
@@ -79,9 +79,6 @@ export default function FAQ() {
                 className="group w-full flex items-start justify-between gap-6 py-6 text-left transition-colors"
               >
                 <div className="flex items-start gap-4 flex-1">
-                  <Mono className="text-[11px] mt-1.5 flex-shrink-0 text-[color:var(--dim)]">
-                    /{String(i + 1).padStart(2, "0")}
-                  </Mono>
                   <span
                     className="text-[17px] md:text-[19px] font-medium tracking-tight leading-[1.4]"
                     style={{ color: open === i ? "var(--ink)" : "var(--ink-2)" }}

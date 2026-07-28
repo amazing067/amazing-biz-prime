@@ -24,7 +24,7 @@ export default function Process() {
       <div className="mx-auto max-w-[1760px] px-6">
         <div className="grid grid-cols-12 gap-8 mb-16">
           <div className="col-span-12 md:col-span-5">
-            <Eyebrow>04 — Onboarding</Eyebrow>
+            <Eyebrow>입사 후 10일</Eyebrow>
             <h2 className="mt-5 text-[44px] md:text-[72px] leading-[1] tracking-[-0.025em] font-semibold text-[color:var(--ink)]">
               10일,
               <br />

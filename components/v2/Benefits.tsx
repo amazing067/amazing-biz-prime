@@ -60,7 +60,7 @@ export default function Benefits() {
     >
       <div className="relative max-w-[1760px] mx-auto">
         <div className="max-w-[880px] mb-16">
-          <Eyebrow>SECTION 07 · COMPENSATION & SUPPORT</Eyebrow>
+          <Eyebrow>보상과 지원</Eyebrow>
           <h2 className="mt-5 text-[clamp(44px,6.2vw,96px)] leading-[0.98] tracking-[-0.025em] font-semibold text-[color:var(--ink)]">
             우리가 주는 것은
             <br />
@@ -85,9 +85,6 @@ export default function Benefits() {
                 <div>
                   <Mono className="block text-[64px] md:text-[80px] leading-none font-medium text-[color:var(--card-accent)] tracking-[-0.04em]">
                     {t.rank}
-                  </Mono>
-                  <Mono className="mt-1 block text-[10px] tracking-[0.18em] text-[color:var(--dim)]">
-                    {t.tag.toUpperCase()}
                   </Mono>
                 </div>
                 <span className="inline-flex items-center px-2.5 py-1 rounded-full text-[10px] font-medium bg-[color:var(--bg-1)] text-[color:var(--card-accent)] border border-[color:var(--card-accent)]/30">

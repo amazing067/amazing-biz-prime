@@ -41,7 +41,7 @@ export default function Leadership() {
     >
       <div className="max-w-[1760px] mx-auto">
         <div className="max-w-[880px] mb-16">
-          <Eyebrow>SECTION 08 · ORGANIZATION</Eyebrow>
+          <Eyebrow>조직 소개</Eyebrow>
           <h2 className="mt-5 text-[clamp(44px,6.2vw,96px)] leading-[0.98] tracking-[-0.025em] font-semibold text-[color:var(--ink)]">
             본부 3곳, <span className="font-serif-italic text-[color:var(--dim)]">각기 다른 방식.</span>
           </h2>

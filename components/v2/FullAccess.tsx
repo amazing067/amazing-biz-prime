@@ -1,6 +1,6 @@
 "use client";
 
-import { Icon, Mono } from "./Core";
+import { Icon } from "./Core";
 
 const BURGUNDY = "#6B1E2A";
 const BURGUNDY_DARK = "#4F1520";
@@ -45,21 +45,10 @@ export default function FullAccess() {
         <div className="grid grid-cols-12 gap-8 md:gap-10 items-end">
           <div className="col-span-12 md:col-span-8">
             <div
-              className="inline-flex items-center gap-2 text-[11px] font-semibold uppercase tracking-[0.2em] mb-6"
+              className="inline-flex items-center gap-2 text-[14px] font-bold mb-6"
               style={{ color: BURGUNDY }}
             >
-              <span className="w-4 h-px" style={{ background: BURGUNDY, opacity: 0.6 }} />
-              DAY 1 · FULL ACCESS
-              <span
-                className="inline-flex items-center gap-1 ml-2 px-2 py-0.5 rounded-full text-[10px] font-bold"
-                style={{
-                  background: BURGUNDY,
-                  color: IVORY_SOFT,
-                }}
-              >
-                <span className="w-1.5 h-1.5 rounded-full bg-emerald-300 shadow-[0_0_8px_rgba(110,231,183,0.9)]" />
-                LIVE
-              </span>
+              입사 첫날, 전부 오픈
             </div>
             <h2
               className="text-[clamp(36px,6vw,80px)] leading-[1.02] tracking-[-0.03em] font-semibold"
@@ -84,7 +73,7 @@ export default function FullAccess() {
 
           <div className="col-span-12 md:col-span-4 md:pl-4">
             <div
-              className="flex items-center justify-end gap-2 text-[11px] tracking-[0.16em] uppercase font-semibold"
+              className="flex items-center justify-end gap-2 text-[13px] font-semibold"
               style={{ color: BURGUNDY }}
             >
               <span>활성화 시점</span>
@@ -171,9 +160,9 @@ export default function FullAccess() {
               className="p-5 md:p-7"
               style={{ background: IVORY_SOFT }}
             >
-              <Mono className="text-[10px] tracking-[0.16em] uppercase" style={{ color: BURGUNDY }}>
+              <span className="text-[12px] font-semibold" style={{ color: BURGUNDY }}>
                 {x.l}
-              </Mono>
+              </span>
               <div
                 className="mt-2 text-[44px] md:text-[72px] leading-none tabular-nums font-medium tracking-[-0.03em]"
                 style={{ color: BURGUNDY_DARK }}

@@ -13,9 +13,9 @@
   --dim: rgba(10, 11, 16, 0.72);
   --dim-2: rgba(10, 11, 16, 0.55);
   --line: rgba(10, 11, 16, 0.3);
-  --accent: #2563EB;
+  --accent: #1F3C88;
   --accent-ink: #FFFFFF;
-  --accent-glow: rgba(37, 99, 235, 0.35);
+  --accent-glow: rgba(31, 60, 136, 0.22);
   /* Card elevation tokens (layered depth) */
   --card-bg: #FFFFFF;
   --card-ring: rgba(10, 11, 16, 0.24);
@@ -24,7 +24,7 @@
   --card-shadow-hover: 0 2px 4px rgba(10,11,16,0.05), 0 24px 48px -16px rgba(10,11,16,0.22);
   --card-shadow-strong: 0 2px 4px rgba(10,11,16,0.05), 0 40px 80px -20px rgba(10,11,16,0.28);
   /* Card top accent — defaults to brand, sections override */
-  --card-accent: #2563EB;
+  --card-accent: #1F3C88;
   --card-accent-strip: 3px;
 }
 
@@ -235,10 +235,11 @@
 }
 
 @layer utilities {
-  /* Editorial italic serif for tagline accents */
+  /* Editorial Korean serif for display accents — always bold, never italic/thin */
   .font-serif-italic {
-    font-family: 'Instrument Serif', 'Noto Sans KR', serif;
-    font-style: italic;
+    font-family: var(--font-serif-display), 'Noto Serif KR', serif;
+    font-style: normal;
+    font-weight: 700;
   }
 
   /* Monospace — for tabular numerics + code-like micro text */

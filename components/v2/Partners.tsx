@@ -58,7 +58,7 @@ export default function Partners() {
       <div className="max-w-[1760px] mx-auto">
         <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-6 mb-12">
           <div>
-            <Eyebrow>SECTION 10 · PARTNERS</Eyebrow>
+            <Eyebrow>제휴 보험사</Eyebrow>
             <h2 className="mt-5 text-[clamp(36px,5vw,72px)] leading-[1] tracking-[-0.025em] font-semibold text-[color:var(--ink)]">
               생보 {LIFE.length} <span className="text-[color:var(--dim-2)]">·</span> 손보{" "}
               {NON_LIFE.length}{" "}
@@ -124,7 +124,7 @@ export default function Partners() {
         </div>
 
         <p className="mt-6 text-[11px] text-[color:var(--dim)]">
-          * 2026 영업규정집 별표 5(생·손보 회차별 환수그룹) 기준. 제휴사 목록은 사업연도 중 변경될 수 있으며, 최신 현황은 설계사 전용방에서 확인하세요.
+          * 2026 영업규정집 별표 5(생·손보 회차별 환수그룹) 기준. 제휴사 목록은 사업연도 중 변경될 수 있습니다.
         </p>
       </div>
     </section>

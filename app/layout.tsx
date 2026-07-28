@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Noto_Sans_KR, JetBrains_Mono, Instrument_Serif } from "next/font/google";
+import { Noto_Sans_KR, JetBrains_Mono, Noto_Serif_KR } from "next/font/google";
 import "./globals.css";
 
 const notoSansKR = Noto_Sans_KR({
@@ -16,12 +16,11 @@ const jetbrainsMono = JetBrains_Mono({
   variable: "--font-mono",
 });
 
-const instrumentSerif = Instrument_Serif({
-  weight: ["400"],
-  style: ["normal", "italic"],
+const notoSerifKR = Noto_Serif_KR({
+  weight: ["600", "700", "900"],
   subsets: ["latin"],
   display: "swap",
-  variable: "--font-serif-italic",
+  variable: "--font-serif-display",
 });
 
 const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://프라임에셋.com";
@@ -31,8 +30,9 @@ export const metadata: Metadata = {
   metadataBase: new URL(siteUrl),
   // 제목 선두 일치: 네이버 「프라임에셋」 한글 검색을 위해 한글 브랜드명을 맨 앞에 (2026-07-24)
   title: "프라임에셋 어메이징사업부 — 보험설계사 리쿠르팅 | Prime Asset Amazing Division",
+  // 검색결과 노출 한도(네이버·구글 약 80자)에 맞춘 순한글 설명 — 영어 기술용어 금지 (2026-07-28)
   description:
-    "프라임에셋 어메이징사업부 보험설계사 모집. System makes Money — 진료내역 조회·AI 보장분석·실손 미청구 찾기 등 직접 개발한 영업 지원 시스템을 소속 설계사에게 무상 제공합니다.",
+    "프라임에셋 어메이징사업부 보험설계사 모집. 진료내역 조회·보장분석·실손 미청구 찾기 등 영업 시스템을 직접 개발해 소속 설계사에게 무상 제공합니다.",
   alternates: { canonical: "/" },
   icons: {
     icon: [
@@ -51,7 +51,7 @@ export const metadata: Metadata = {
     siteName: "프라임에셋 어메이징사업부",
     title: "프라임에셋 어메이징사업부 — 보험설계사 리쿠르팅",
     description:
-      "당신의 비전이 현실이 되는 곳. System makes Money. 감정을 배제한 완벽한 영업 지원 시스템.",
+      "당신의 비전이 현실이 되는 곳. 직접 개발한 영업 시스템으로 설계사가 상담에만 집중할 수 있게 합니다.",
     images: [
       {
         url: "/og-image.png",
@@ -80,7 +80,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="ko" className={`${notoSansKR.variable} ${jetbrainsMono.variable} ${instrumentSerif.variable}`}>
+    <html lang="ko" className={`${notoSansKR.variable} ${jetbrainsMono.variable} ${notoSerifKR.variable}`}>
       <body className="font-sans min-w-0 bg-noise-v2">{children}</body>
     </html>
   );

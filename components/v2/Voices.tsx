@@ -1,4 +1,4 @@
-import { Eyebrow, Icon, Mono } from "./Core";
+import { Eyebrow, Icon } from "./Core";
 
 const TESTIMONIALS = [
   {
@@ -29,7 +29,7 @@ export default function Voices() {
       style={{ ["--card-accent" as string]: "#4aaa6e" } as React.CSSProperties}
     >
       <div className="mx-auto max-w-[1760px] px-6">
-        <Eyebrow>05 — Voices</Eyebrow>
+        <Eyebrow>먼저 온 사람들</Eyebrow>
 
         <blockquote className="mt-10 mb-20 max-w-5xl">
           <Icon name="sparkles" size={28} className="text-[#4aaa6e]" />
@@ -68,10 +68,7 @@ export default function Voices() {
               >
                 &ldquo;
               </span>
-              <Mono className="text-[10px] tracking-[0.14em] text-[color:var(--dim)] font-bold">
-                0{i + 1}
-              </Mono>
-              <p className="mt-2 text-[14px] md:text-[15px] leading-[1.5] text-[color:var(--ink-2)] relative">
+              <p className="mt-4 text-[14px] md:text-[15px] leading-[1.5] text-[color:var(--ink-2)] relative">
                 &ldquo;{x.q}&rdquo;
               </p>
               <div className="mt-3 pt-3 border-t border-[color:var(--line)] flex items-center justify-between gap-2">

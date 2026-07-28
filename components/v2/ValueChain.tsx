@@ -47,7 +47,7 @@ export default function ValueChain() {
       <div className="relative mx-auto max-w-[1760px] px-6">
         {/* Header */}
         <div className="max-w-[880px] mb-20">
-          <Eyebrow>SECTION 03 · VALUE CHAIN</Eyebrow>
+          <Eyebrow>성장 구조</Eyebrow>
           <h2 className="mt-5 text-[clamp(44px,6.2vw,100px)] leading-[0.98] tracking-[-0.03em] font-semibold text-[color:var(--ink)]">
             성장과 분할.
             <br />
@@ -69,9 +69,7 @@ export default function ValueChain() {
         {/* Two principles */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-12 mb-24">
           <div className="card-v2 p-8 md:p-10">
-            <Mono className="text-[11px] tracking-[0.18em] text-[color:var(--accent)]">
-              PRINCIPLE / 01
-            </Mono>
+            <span className="text-[13px] font-bold text-[color:var(--accent)]">원칙 하나</span>
             <h3 className="mt-3 text-[26px] md:text-[30px] font-medium text-[color:var(--ink)] tracking-[-0.01em]">
               공정기준 — <span className="font-serif-italic font-semibold">종속이 아닌 기준</span>
             </h3>
@@ -98,9 +96,7 @@ export default function ValueChain() {
           </div>
 
           <div className="card-v2 p-8 md:p-10">
-            <Mono className="text-[11px] tracking-[0.18em] text-[color:var(--accent)]">
-              PRINCIPLE / 02
-            </Mono>
+            <span className="text-[13px] font-bold text-[color:var(--accent)]">원칙 둘</span>
             <h3 className="mt-3 text-[26px] md:text-[30px] font-medium text-[color:var(--ink)] tracking-[-0.01em]">
               가치공유 —{" "}
               <span className="font-serif-italic font-semibold">조직 성장이 곧 수익</span>
@@ -128,7 +124,7 @@ export default function ValueChain() {
 
         {/* Timeline: FC → 팀 → 지사 → 본부 */}
         <div className="mb-16">
-          <Eyebrow className="mb-10">GROWTH & DIVISION FLOW</Eyebrow>
+          <Eyebrow className="mb-10">본부 성장 흐름</Eyebrow>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-px card-v2 overflow-hidden" style={{ background: "var(--line)" }}>
             {STAGES.map((s, i) => (
               <div
@@ -139,9 +135,6 @@ export default function ValueChain() {
                   <div>
                     <Mono className="block text-[64px] md:text-[80px] leading-none font-medium text-[color:var(--card-accent)] tracking-[-0.04em]">
                       {s.k}
-                    </Mono>
-                    <Mono className="mt-1 block text-[10px] tracking-[0.18em] text-[color:var(--dim)]">
-                      STEP
                     </Mono>
                   </div>
                   <span className="inline-flex items-center px-2.5 py-1 rounded-full text-[10px] font-medium bg-[color:var(--bg-1)] text-[color:var(--card-accent)] border border-[color:var(--card-accent)]/30 tracking-[0.14em]">
@@ -172,9 +165,7 @@ export default function ValueChain() {
         {/* Slogan */}
         <div className="relative mt-24 pt-16 border-t border-[color:var(--line)]">
           <div className="text-center">
-            <Mono className="text-[11px] tracking-[0.2em] text-[color:var(--dim)] uppercase">
-              Official Slogan
-            </Mono>
+            <span className="text-[13px] font-bold text-[color:var(--accent)]">우리의 슬로건</span>
             <h3 className="mt-6 font-semibold leading-[0.95] tracking-[-0.03em]" style={{ fontSize: "clamp(40px, 7vw, 104px)" }}>
               <span className="text-[color:var(--ink)]">Springboard</span>
               <br />

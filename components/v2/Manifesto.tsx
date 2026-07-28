@@ -24,7 +24,7 @@ export default function Manifesto() {
       <div className="mx-auto max-w-[1760px] px-6">
         <div className="grid grid-cols-12 gap-8">
           <div className="col-span-12 md:col-span-4">
-            <Eyebrow>02 — Manifesto</Eyebrow>
+            <Eyebrow>일하는 원칙</Eyebrow>
             <h2 className="mt-6 text-[32px] md:text-[40px] leading-[1.1] tracking-[-0.02em] font-semibold text-[color:var(--ink)]">
               System <br />
               makes <br />

@@ -144,9 +144,8 @@ export default function Apply() {
         <div className="grid grid-cols-12 gap-8">
           {/* Left col */}
           <div className="col-span-12 md:col-span-5">
-            <div className="inline-flex items-center gap-2 text-[11px] font-medium uppercase tracking-[0.18em] text-[color:var(--dim)]">
-              <span className="w-4 h-px bg-current opacity-40" />
-              12 — Apply
+            <div className="inline-flex items-center text-[14px] font-bold text-[color:var(--accent)]">
+              지원하기
             </div>
             <h2 className="mt-5 text-[44px] md:text-[72px] leading-[1] tracking-[-0.025em] font-semibold text-[color:var(--ink)]">
               지원은
@@ -179,9 +178,7 @@ export default function Apply() {
                   size={16}
                   className="text-[color:var(--dim)] group-hover:text-[color:var(--accent)] transition-colors"
                 />
-                <div className="mt-3 text-[11px] uppercase tracking-[0.14em] text-[color:var(--dim)]">
-                  전화
-                </div>
+                <div className="mt-3 text-[12px] font-medium text-[color:var(--dim)]">전화</div>
                 <Mono className="text-[13px] text-[color:var(--ink)]">02 2038 4379</Mono>
               </a>
               <a
@@ -193,9 +190,7 @@ export default function Apply() {
                 <div className="w-4 h-4 rounded-sm bg-[#FEE500] flex items-center justify-center text-[8px] text-[#191919]">
                   💬
                 </div>
-                <div className="mt-3 text-[11px] uppercase tracking-[0.14em] text-[color:var(--dim)]">
-                  카카오
-                </div>
+                <div className="mt-3 text-[12px] font-medium text-[color:var(--dim)]">카카오</div>
                 <div className="text-[13px] text-[color:var(--ink)]">1:1 상담</div>
               </a>
             </div>
@@ -214,9 +209,9 @@ export default function Apply() {
               ].map((x) => (
                 <div key={x.k} className="border-b border-[color:var(--line)] pb-5">
                   <label className="flex items-baseline gap-4">
-                    <Mono className="text-[11px] text-[color:var(--dim)] tracking-[0.14em] w-24 shrink-0">
-                      {x.l.toUpperCase()}
-                    </Mono>
+                    <span className="text-[13px] font-medium text-[color:var(--dim)] w-24 shrink-0">
+                      {x.l}
+                    </span>
                     <input
                       type={x.type}
                       name={x.k}
@@ -233,9 +228,9 @@ export default function Apply() {
 
               <div className="border-b border-[color:var(--line)] pb-5">
                 <label className="flex items-baseline gap-4">
-                  <Mono className="text-[11px] text-[color:var(--dim)] tracking-[0.14em] w-24 shrink-0">
-                    EXPERIENCE
-                  </Mono>
+                  <span className="text-[13px] font-medium text-[color:var(--dim)] w-24 shrink-0">
+                    경력
+                  </span>
                   <select
                     name="experience"
                     value={f.experience}
@@ -254,9 +249,9 @@ export default function Apply() {
 
               <div className="border-b border-[color:var(--line)] pb-5">
                 <label className="flex items-baseline gap-4">
-                  <Mono className="text-[11px] text-[color:var(--dim)] tracking-[0.14em] w-24 shrink-0 pt-1.5">
-                    MESSAGE
-                  </Mono>
+                  <span className="text-[13px] font-medium text-[color:var(--dim)] w-24 shrink-0 pt-1.5">
+                    지원 동기
+                  </span>
                   <textarea
                     name="message"
                     value={f.message}
@@ -281,16 +276,13 @@ export default function Apply() {
                 </span>
               </label>
 
-              <div className="flex items-center justify-between pt-2">
-                <Mono className="text-[11px] text-[color:var(--dim)]">
-                  FORM_ID · AMZ-APPLY-2026
-                </Mono>
+              <div className="flex items-center justify-end pt-2">
                 <button
                   type="submit"
                   disabled={!agree || status === "loading"}
                   className={`group inline-flex items-center gap-2 h-14 px-8 rounded-full text-[14px] font-medium transition-all ${
                     agree && status !== "loading"
-                      ? "bg-[color:var(--accent)] text-[color:var(--accent-ink)] hover:brightness-110 shadow-[0_0_0_1px_var(--accent),0_16px_50px_-12px_var(--accent-glow)]"
+                      ? "bg-[color:var(--accent)] text-[color:var(--accent-ink)] hover:brightness-110 shadow-[0_10px_30px_-12px_var(--accent-glow)]"
                       : "bg-[color:var(--line)] text-[color:var(--dim)] cursor-not-allowed"
                   }`}
                 >

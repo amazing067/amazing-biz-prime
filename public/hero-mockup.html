@@ -1,0 +1,310 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>Hero V1 / V2 / V3 비교</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<style>
+  body { font-family: 'Pretendard', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; word-break: keep-all; }
+  .ink { color: #0A0B10; }
+  .ink-2 { color: rgba(10,11,16,0.88); }
+  .dim { color: rgba(10,11,16,0.72); }
+  .dim-2 { color: rgba(10,11,16,0.55); }
+  .accent { color: #2563EB; }
+  .bg-page { background: #FAFAF7; }
+  .bg-2 { background: #F0EFEA; }
+  .line { border-color: rgba(10,11,16,0.3); }
+  .italic-serif { font-family: 'Instrument Serif', 'Noto Sans KR', serif; font-style: italic; }
+  .mock-card {
+    background: linear-gradient(180deg, #fff 0%, #F7F8FA 100%);
+    border: 1px solid rgba(37,99,235,0.3);
+    border-radius: 14px;
+    box-shadow:
+      0 0 0 1px rgba(37,99,235,0.15),
+      0 24px 48px -16px rgba(37,99,235,0.35),
+      0 6px 16px -4px rgba(37,99,235,0.15);
+    overflow: hidden;
+  }
+  .accent-strip-top { position: absolute; top: 0; left: 0; right: 0; height: 5px; background: #2563EB; }
+  .accent-strip-left { position: absolute; top: 0; bottom: 0; left: 0; width: 8px; background: #2563EB; }
+  .label-section { font: 700 11px/1 'JetBrains Mono', monospace; letter-spacing: 0.18em; text-transform: uppercase; color: rgba(10,11,16,0.72); }
+  .version-tag { background: #0A0B10; color: #FAFAF7; padding: 4px 10px; border-radius: 999px; font: 700 11px/1 system-ui; letter-spacing: 0.12em; }
+</style>
+</head>
+<body class="bg-page py-10 px-6">
+
+<div class="max-w-[1760px] mx-auto space-y-20">
+
+  <header class="text-center pb-6 border-b line">
+    <h1 class="text-3xl font-bold ink">Hero 레이아웃 V1 / V2 / V3 비교</h1>
+    <p class="dim mt-2 text-sm">1920px 데스크톱 기준 / 좌우 80px 호흡</p>
+  </header>
+
+  <!-- ===================================================================== -->
+  <!-- V1: "영업은 시스템이다"는 작은 italic eyebrow / 4가지가 main headline -->
+  <!-- ===================================================================== -->
+  <section>
+    <div class="flex items-center gap-3 mb-6">
+      <span class="version-tag">V1</span>
+      <h2 class="text-xl font-bold ink">슬로건 작게, 4가지가 main headline + mockup 우측</h2>
+    </div>
+
+    <div class="grid grid-cols-12 gap-10 items-center bg-page py-12 px-8 rounded-3xl border line">
+      <!-- LEFT -->
+      <div class="col-span-7 space-y-6">
+        <!-- Slogan as eyebrow -->
+        <div class="inline-flex items-center gap-3">
+          <span class="w-8 h-px line border-t"></span>
+          <span class="italic-serif text-xl dim-2">영업은 시스템이다.</span>
+          <span class="text-[10px] tracking-[0.2em] uppercase dim font-bold">A Recruiting System · v2026.04</span>
+        </div>
+
+        <!-- Main headline: 4가지 -->
+        <h2 class="font-bold ink leading-[1.05] tracking-tight" style="font-size: clamp(40px, 5vw, 80px); text-wrap: balance;">
+          보장분석 · AI 코칭 ·<br>
+          청구 자동화 · 치매검사.
+        </h2>
+
+        <!-- Sub copy -->
+        <p class="ink-2 leading-relaxed" style="font-size: 19px; max-width: 560px;">
+          네 가지가 설계사의 <strong class="ink">시간을 영업으로</strong> 되돌려 드립니다.
+        </p>
+
+        <!-- Chips -->
+        <div class="flex flex-wrap gap-2">
+          <span class="inline-flex items-center gap-1.5 text-[12px] px-3 py-1.5 rounded-full border border-blue-500 text-blue-600 bg-blue-500/5 font-bold">
+            <span class="w-1 h-1 rounded-full bg-blue-500"></span>32개사 보장분석 자동
+          </span>
+          <span class="inline-flex items-center gap-1.5 text-[12px] px-3 py-1.5 rounded-full border border-blue-500 text-blue-600 bg-blue-500/5 font-bold">
+            <span class="w-1 h-1 rounded-full bg-blue-500"></span>AI 세일즈 코칭
+          </span>
+          <span class="inline-flex items-center gap-1.5 text-[12px] px-3 py-1.5 rounded-full border line ink-2 font-semibold">
+            <span class="w-1 h-1 rounded-full bg-gray-500"></span>고지의무 사전 점검
+          </span>
+          <span class="inline-flex items-center gap-1.5 text-[12px] px-3 py-1.5 rounded-full border line ink-2 font-semibold">
+            <span class="w-1 h-1 rounded-full bg-gray-500"></span>설계서 비교 30초
+          </span>
+        </div>
+
+        <!-- CTA -->
+        <div class="flex flex-wrap gap-3 pt-2">
+          <button class="px-5 py-3 rounded-lg bg-blue-600 text-white font-bold text-[14px]">1분 무료 상담 →</button>
+          <button class="px-5 py-3 rounded-lg border line ink font-bold text-[14px]">시스템 먼저 보기 ↓</button>
+        </div>
+      </div>
+
+      <!-- RIGHT: Mockup -->
+      <div class="col-span-5">
+        <div class="mock-card relative">
+          <div class="accent-strip-top"></div>
+          <div class="accent-strip-left"></div>
+          <div class="flex items-center px-4 py-3 border-b line bg-white/50 pl-6">
+            <div class="flex gap-1.5"><span class="w-2 h-2 rounded-full bg-gray-300"></span><span class="w-2 h-2 rounded-full bg-gray-300"></span><span class="w-2 h-2 rounded-full bg-gray-300"></span></div>
+            <span class="ml-3 text-[11px] dim font-mono">portal.amazing-biz.kr / dashboard</span>
+            <span class="ml-auto inline-flex items-center gap-1.5 text-[10px] font-bold uppercase tracking-wider text-emerald-600">
+              <span class="w-1.5 h-1.5 rounded-full bg-emerald-500"></span>LIVE
+            </span>
+          </div>
+          <div class="px-4 pt-3 pb-2 border-b line flex gap-1 pl-6">
+            <span class="px-3 py-2 text-[12px] font-bold ink relative">포털 OS<span class="absolute left-2 right-2 bottom-0 h-[2px] bg-black"></span></span>
+            <span class="px-3 py-2 text-[12px] font-semibold dim">AI 보장분석</span>
+            <span class="px-3 py-2 text-[12px] font-semibold dim">청구 허브</span>
+            <span class="px-3 py-2 text-[12px] font-semibold dim">치매검사</span>
+          </div>
+          <div class="p-5 pl-6 bg-2">
+            <div class="grid grid-cols-5 gap-2 mb-4">
+              <div class="bg-white rounded-lg p-2.5 border line"><div class="text-[9px] dim">업로드</div><div class="text-[20px] font-bold ink leading-none mt-1">580</div><div class="text-[9px] dim mt-1">월 누적</div></div>
+              <div class="bg-white rounded-lg p-2.5 border line"><div class="text-[9px] dim">배정</div><div class="text-[20px] font-bold ink leading-none mt-1">422</div><div class="text-[9px] dim mt-1">73%</div></div>
+              <div class="bg-white rounded-lg p-2.5 border line"><div class="text-[9px] dim">상담중</div><div class="text-[20px] font-bold ink leading-none mt-1">186</div><div class="text-[9px] dim mt-1">TA·1·2차</div></div>
+              <div class="bg-white rounded-lg p-2.5 border line"><div class="text-[9px] dim">계약</div><div class="text-[20px] font-bold ink leading-none mt-1">142</div><div class="text-[9px] dim mt-1">월 누적</div></div>
+              <div class="bg-blue-600 text-white rounded-lg p-2.5"><div class="text-[9px] opacity-80">월납</div><div class="text-[20px] font-bold leading-none mt-1">1.38억</div><div class="text-[9px] opacity-80 mt-1">군자본부</div></div>
+            </div>
+            <div class="bg-white rounded-lg p-3 border line">
+              <div class="text-[10px] dim mb-2">본부 월간 실적</div>
+              <div class="flex items-end gap-2 h-20">
+                <div class="flex-1 bg-gray-200 rounded" style="height: 55%;"></div>
+                <div class="flex-1 bg-gray-300 rounded" style="height: 65%;"></div>
+                <div class="flex-1 bg-gray-300 rounded" style="height: 80%;"></div>
+                <div class="flex-1 bg-blue-600 rounded" style="height: 95%;"></div>
+              </div>
+              <div class="flex justify-between mt-1 text-[9px] dim">
+                <span>1월</span><span>2월</span><span>3월</span><span>4월</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================================================================== -->
+  <!-- V2: "영업은 시스템이다" 줄이고 (대형) 좌측 mockup 우측 -->
+  <!-- ===================================================================== -->
+  <section>
+    <div class="flex items-center gap-3 mb-6">
+      <span class="version-tag">V2</span>
+      <h2 class="text-xl font-bold ink">"영업은 시스템이다" 줄여서 좌, mockup 우 (감정+기능)</h2>
+    </div>
+
+    <div class="grid grid-cols-12 gap-10 items-center bg-page py-12 px-8 rounded-3xl border line">
+      <!-- LEFT -->
+      <div class="col-span-6 space-y-5">
+        <span class="text-[10px] tracking-[0.2em] uppercase dim font-bold">— A Recruiting System · v2026.04</span>
+
+        <h2 class="font-bold ink leading-[0.92] tracking-[-0.03em]" style="font-size: clamp(56px, 7vw, 110px);">
+          영업은<br>
+          <span class="italic-serif font-bold dim-2">시스템이다.</span>
+        </h2>
+
+        <p class="ink-2 leading-relaxed font-semibold" style="font-size: 22px; max-width: 540px;">
+          보장분석 · AI 코칭 · 청구 자동화 · 치매검사.<br>
+          <span class="ink-2 font-normal">네 가지가 설계사의 시간을 영업으로 되돌려 드립니다.</span>
+        </p>
+
+        <div class="flex flex-wrap gap-2">
+          <span class="inline-flex items-center gap-1.5 text-[12px] px-3 py-1.5 rounded-full border border-blue-500 text-blue-600 bg-blue-500/5 font-bold">32개사 보장분석</span>
+          <span class="inline-flex items-center gap-1.5 text-[12px] px-3 py-1.5 rounded-full border border-blue-500 text-blue-600 bg-blue-500/5 font-bold">AI 세일즈 코칭</span>
+          <span class="inline-flex items-center gap-1.5 text-[12px] px-3 py-1.5 rounded-full border line ink-2 font-semibold">고지의무</span>
+          <span class="inline-flex items-center gap-1.5 text-[12px] px-3 py-1.5 rounded-full border line ink-2 font-semibold">30초 비교</span>
+        </div>
+
+        <div class="flex flex-wrap gap-3 pt-2">
+          <button class="px-5 py-3 rounded-lg bg-blue-600 text-white font-bold text-[14px]">1분 무료 상담 →</button>
+          <button class="px-5 py-3 rounded-lg border line ink font-bold text-[14px]">시스템 먼저 보기 ↓</button>
+        </div>
+      </div>
+
+      <!-- RIGHT: Mockup -->
+      <div class="col-span-6">
+        <div class="mock-card relative">
+          <div class="accent-strip-top"></div>
+          <div class="accent-strip-left"></div>
+          <div class="flex items-center px-4 py-3 border-b line bg-white/50 pl-6">
+            <div class="flex gap-1.5"><span class="w-2 h-2 rounded-full bg-gray-300"></span><span class="w-2 h-2 rounded-full bg-gray-300"></span><span class="w-2 h-2 rounded-full bg-gray-300"></span></div>
+            <span class="ml-3 text-[11px] dim font-mono">portal.amazing-biz.kr / dashboard</span>
+            <span class="ml-auto inline-flex items-center gap-1.5 text-[10px] font-bold uppercase tracking-wider text-emerald-600">
+              <span class="w-1.5 h-1.5 rounded-full bg-emerald-500"></span>LIVE
+            </span>
+          </div>
+          <div class="px-4 pt-3 pb-2 border-b line flex gap-1 pl-6">
+            <span class="px-3 py-2 text-[12px] font-bold ink relative">포털 OS<span class="absolute left-2 right-2 bottom-0 h-[2px] bg-black"></span></span>
+            <span class="px-3 py-2 text-[12px] font-semibold dim">AI 보장분석</span>
+            <span class="px-3 py-2 text-[12px] font-semibold dim">청구 허브</span>
+            <span class="px-3 py-2 text-[12px] font-semibold dim">치매검사</span>
+          </div>
+          <div class="p-5 pl-6 bg-2">
+            <div class="grid grid-cols-5 gap-2 mb-4">
+              <div class="bg-white rounded-lg p-3 border line"><div class="text-[10px] dim">업로드</div><div class="text-[24px] font-bold ink leading-none mt-1">580</div><div class="text-[10px] dim mt-1">월 누적</div></div>
+              <div class="bg-white rounded-lg p-3 border line"><div class="text-[10px] dim">배정</div><div class="text-[24px] font-bold ink leading-none mt-1">422</div><div class="text-[10px] dim mt-1">73%</div></div>
+              <div class="bg-white rounded-lg p-3 border line"><div class="text-[10px] dim">상담중</div><div class="text-[24px] font-bold ink leading-none mt-1">186</div><div class="text-[10px] dim mt-1">TA</div></div>
+              <div class="bg-white rounded-lg p-3 border line"><div class="text-[10px] dim">계약</div><div class="text-[24px] font-bold ink leading-none mt-1">142</div><div class="text-[10px] dim mt-1">월</div></div>
+              <div class="bg-blue-600 text-white rounded-lg p-3"><div class="text-[10px] opacity-80">월납</div><div class="text-[24px] font-bold leading-none mt-1">1.38억</div><div class="text-[10px] opacity-80 mt-1">합계</div></div>
+            </div>
+            <div class="bg-white rounded-lg p-3 border line">
+              <div class="text-[10px] dim mb-2">본부 월간 실적</div>
+              <div class="flex items-end gap-2 h-24">
+                <div class="flex-1 bg-gray-200 rounded" style="height: 55%;"></div>
+                <div class="flex-1 bg-gray-300 rounded" style="height: 65%;"></div>
+                <div class="flex-1 bg-gray-300 rounded" style="height: 80%;"></div>
+                <div class="flex-1 bg-blue-600 rounded" style="height: 95%;"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================================================================== -->
+  <!-- V3: 현재 그대로 + 4가지 카피만 키움 (헤드라인 유지, 좌측 더 풍성) -->
+  <!-- ===================================================================== -->
+  <section>
+    <div class="flex items-center gap-3 mb-6">
+      <span class="version-tag">V3</span>
+      <h2 class="text-xl font-bold ink">현재 헤드라인 유지 + 4가지 카피 키움 (보존적)</h2>
+    </div>
+
+    <div class="bg-page py-12 px-8 rounded-3xl border line">
+      <!-- Top: Big headline full width -->
+      <div class="grid grid-cols-12 gap-6 items-end mb-12">
+        <h2 class="col-span-10 font-bold ink leading-[0.92] tracking-[-0.03em]" style="font-size: clamp(56px, 12vw, 220px);">
+          영업은<br>
+          <span class="italic-serif font-bold dim-2">시스템</span><span class="ink">이다.</span>
+        </h2>
+        <div class="col-span-2 text-right">
+          <div class="text-[10px] tracking-[0.2em] uppercase dim font-bold border-t line pt-2 inline-block">— Philosophy</div>
+          <p class="text-[13px] ink-2 mt-2">감정을 배제한<br>완벽한 영업 지원.</p>
+        </div>
+      </div>
+
+      <!-- Bottom: 5/7 split -->
+      <div class="grid grid-cols-12 gap-8">
+        <div class="col-span-5">
+          <span class="text-[11px] tracking-[0.18em] uppercase dim font-bold">— 01 · The Offer</span>
+          <p class="ink mt-4 font-bold leading-[1.25] tracking-[-0.01em]" style="font-size: 32px;">
+            보장분석 · AI 코칭 ·<br>
+            청구 자동화 · 치매검사.
+          </p>
+          <p class="ink-2 mt-4 leading-relaxed" style="font-size: 18px;">
+            네 가지가 설계사의 <strong class="ink">시간을 영업으로</strong> 되돌려 드립니다.
+          </p>
+
+          <div class="flex flex-wrap gap-2 mt-6">
+            <span class="inline-flex items-center gap-1.5 text-[12px] px-3 py-1.5 rounded-full border border-blue-500 text-blue-600 bg-blue-500/5 font-bold">32개사 보장분석 자동</span>
+            <span class="inline-flex items-center gap-1.5 text-[12px] px-3 py-1.5 rounded-full border border-blue-500 text-blue-600 bg-blue-500/5 font-bold">AI 세일즈 코칭</span>
+            <span class="inline-flex items-center gap-1.5 text-[12px] px-3 py-1.5 rounded-full border line ink-2 font-semibold">고지의무 사전 점검</span>
+            <span class="inline-flex items-center gap-1.5 text-[12px] px-3 py-1.5 rounded-full border line ink-2 font-semibold">설계서 비교 30초</span>
+          </div>
+
+          <div class="flex flex-wrap gap-3 mt-8">
+            <button class="px-5 py-3 rounded-lg bg-blue-600 text-white font-bold text-[14px]">1분 무료 상담 →</button>
+            <button class="px-5 py-3 rounded-lg border line ink font-bold text-[14px]">시스템 먼저 보기 ↓</button>
+          </div>
+        </div>
+
+        <div class="col-span-7">
+          <div class="mock-card relative">
+            <div class="accent-strip-top"></div>
+            <div class="accent-strip-left"></div>
+            <div class="flex items-center px-4 py-3 border-b line bg-white/50 pl-6">
+              <div class="flex gap-1.5"><span class="w-2 h-2 rounded-full bg-gray-300"></span><span class="w-2 h-2 rounded-full bg-gray-300"></span><span class="w-2 h-2 rounded-full bg-gray-300"></span></div>
+              <span class="ml-3 text-[11px] dim font-mono">portal.amazing-biz.kr / dashboard</span>
+              <span class="ml-auto inline-flex items-center gap-1.5 text-[10px] font-bold uppercase tracking-wider text-emerald-600">
+                <span class="w-1.5 h-1.5 rounded-full bg-emerald-500"></span>LIVE
+              </span>
+            </div>
+            <div class="px-4 pt-3 pb-2 border-b line flex gap-1 pl-6">
+              <span class="px-3 py-2 text-[12px] font-bold ink relative">포털 OS<span class="absolute left-2 right-2 bottom-0 h-[2px] bg-black"></span></span>
+              <span class="px-3 py-2 text-[12px] font-semibold dim">AI 보장분석</span>
+              <span class="px-3 py-2 text-[12px] font-semibold dim">청구 허브</span>
+              <span class="px-3 py-2 text-[12px] font-semibold dim">치매검사</span>
+            </div>
+            <div class="p-5 pl-6 bg-2">
+              <div class="grid grid-cols-5 gap-2 mb-4">
+                <div class="bg-white rounded-lg p-3 border line"><div class="text-[10px] dim">업로드</div><div class="text-[26px] font-bold ink leading-none mt-1">580</div><div class="text-[10px] dim mt-1">월 누적</div></div>
+                <div class="bg-white rounded-lg p-3 border line"><div class="text-[10px] dim">배정</div><div class="text-[26px] font-bold ink leading-none mt-1">422</div><div class="text-[10px] dim mt-1">73%</div></div>
+                <div class="bg-white rounded-lg p-3 border line"><div class="text-[10px] dim">상담중</div><div class="text-[26px] font-bold ink leading-none mt-1">186</div><div class="text-[10px] dim mt-1">TA</div></div>
+                <div class="bg-white rounded-lg p-3 border line"><div class="text-[10px] dim">계약</div><div class="text-[26px] font-bold ink leading-none mt-1">142</div><div class="text-[10px] dim mt-1">월</div></div>
+                <div class="bg-blue-600 text-white rounded-lg p-3"><div class="text-[10px] opacity-80">월납</div><div class="text-[26px] font-bold leading-none mt-1">1.38억</div><div class="text-[10px] opacity-80 mt-1">합계</div></div>
+              </div>
+              <div class="bg-white rounded-lg p-3 border line">
+                <div class="text-[10px] dim mb-2">본부 월간 실적</div>
+                <div class="flex items-end gap-2 h-28">
+                  <div class="flex-1 bg-gray-200 rounded" style="height: 55%;"></div>
+                  <div class="flex-1 bg-gray-300 rounded" style="height: 65%;"></div>
+                  <div class="flex-1 bg-gray-300 rounded" style="height: 80%;"></div>
+                  <div class="flex-1 bg-blue-600 rounded" style="height: 95%;"></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+</div>
+
+</body>
+</html>

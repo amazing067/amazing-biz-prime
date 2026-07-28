@@ -104,9 +104,8 @@ export function Eyebrow({
 }) {
   return (
     <div
-      className={`inline-flex items-center gap-2 text-[11px] font-medium uppercase tracking-[0.18em] text-[color:var(--dim)] ${className}`}
+      className={`inline-flex items-center text-[14px] font-bold tracking-[-0.01em] text-[color:var(--accent)] ${className}`}
     >
-      <span className="w-4 h-px bg-current opacity-40" />
       {children}
     </div>
   );
@@ -134,7 +133,7 @@ export function BtnV2({
   };
   const variants: Record<BtnVariant, string> = {
     accent:
-      "bg-[color:var(--accent)] text-[color:var(--accent-ink)] hover:brightness-110 shadow-[0_0_0_1px_var(--accent),0_12px_40px_-12px_var(--accent-glow)]",
+      "bg-[color:var(--accent)] text-[color:var(--accent-ink)] hover:brightness-110 shadow-[0_8px_24px_-10px_var(--accent-glow)]",
     ghost:
       "border border-[color:var(--line)] text-[color:var(--ink)] hover:bg-[color:var(--bg-2)]",
     inverse: "bg-[color:var(--ink)] text-[color:var(--bg-1)] hover:opacity-90",
@@ -161,17 +160,10 @@ export function Status({
   children: ReactNode;
   tone?: "live" | "dim";
 }) {
-  const dot =
-    tone === "live"
-      ? "bg-emerald-400 shadow-[0_0_12px_rgba(52,211,153,0.8)]"
-      : "bg-[color:var(--dim)]";
+  const dot = tone === "live" ? "bg-emerald-500" : "bg-[color:var(--dim)]";
   return (
-    <span className="inline-flex items-center gap-2 text-[11px] uppercase tracking-[0.18em] text-[color:var(--dim)]">
-      <span className={`relative w-1.5 h-1.5 rounded-full ${dot}`}>
-        {tone === "live" && (
-          <span className="absolute inset-0 rounded-full bg-emerald-400 animate-ping opacity-60" />
-        )}
-      </span>
+    <span className="inline-flex items-center gap-2 text-[12px] font-medium text-[color:var(--dim)]">
+      <span className={`w-1.5 h-1.5 rounded-full ${dot}`} />
       {children}
     </span>
   );

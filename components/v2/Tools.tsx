@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { Eyebrow, GridOverlay, Icon, Mono } from "./Core";
+import { Eyebrow, Icon } from "./Core";
 import type { ToolGroup, ToolItem } from "./tools/types";
 import ShowcaseFrame from "./tools/ShowcaseFrame";
 // Portal mockups
@@ -72,7 +72,7 @@ const GROUPS: ToolGroup[] = [
         tag: "calendar",
         desc: "TA 콜·미팅·교육 일정 통합.",
         detail:
-          "본부 교육 일정 자동 동기화, 고객 미팅·갱신일 알림, 알림톡 발송 연동. 설계사 전용방에서 공지도 푸시.",
+          "본부 교육 일정 자동 동기화, 고객 미팅·갱신일 알림, 알림톡 발송 연동. 본부 공지 푸시까지 한 곳에서.",
         status: "LIVE",
       },
       {
@@ -196,14 +196,6 @@ const GROUPS: ToolGroup[] = [
         status: "LIVE",
       },
       {
-        name: "설계사 전용방",
-        tag: "channel",
-        desc: "실시간 공지·교육·수수료·상품 푸시.",
-        detail:
-          "본부장 공유 DB, 신상품, 수수료 변경, 약관 개정을 실시간으로. 오프라인 채널과 동기화.",
-        status: "LIVE",
-      },
-      {
         name: "TV 대시보드",
         tag: "tv-dashboard",
         desc: "지점 TV 출근·명언·공지 통합.",
@@ -225,10 +217,6 @@ function ToolCard({ item, index }: { item: ToolItem; index: number }) {
       className="relative group p-8 transition-all duration-500"
       style={{ background: hover ? "var(--bg-2)" : "var(--bg-1)" }}
     >
-      <Mono className="absolute top-5 right-6 text-[10px] text-[color:var(--dim-2)]">
-        /{String(index + 1).padStart(2, "0")}
-      </Mono>
-
       <div className="flex items-center gap-2 mb-6">
         {isAi ? (
           <span
@@ -238,9 +226,9 @@ function ToolCard({ item, index }: { item: ToolItem; index: number }) {
             <Icon name="sparkles" size={10} stroke={2} /> AI
           </span>
         ) : (
-          <span className="inline-flex items-center gap-1.5 text-[10px] uppercase tracking-[0.14em] text-[color:var(--dim)]">
-            <span className="w-1 h-1 rounded-full bg-emerald-400" />
-            {item.status}
+          <span className="inline-flex items-center gap-1.5 text-[11px] font-medium text-[color:var(--dim)]">
+            <span className="w-1 h-1 rounded-full bg-emerald-500" />
+            운영중
           </span>
         )}
       </div>
@@ -284,10 +272,9 @@ export default function Tools() {
       className="relative py-32 px-6 bg-[color:var(--bg-1)]"
       style={{ ["--card-accent" as string]: "#8577d1" } as React.CSSProperties}
     >
-      <GridOverlay opacity={0.035} />
       <div className="relative max-w-[1760px] mx-auto">
         <div className="max-w-[880px] mb-16">
-          <Eyebrow>SECTION 06 · SYSTEM STACK</Eyebrow>
+          <Eyebrow>전체 시스템</Eyebrow>
           <h2 className="mt-5 text-[clamp(44px,6.2vw,96px)] leading-[0.98] tracking-[-0.025em] font-semibold text-[color:var(--ink)]">
             설계사는 말만 하면 됩니다.
             <br />
@@ -300,11 +287,10 @@ export default function Tools() {
           </p>
           <div className="mt-8 flex flex-wrap gap-6 text-[12px] text-[color:var(--dim)]">
             <span className="inline-flex items-center gap-2">
-              <span className="w-1.5 h-1.5 rounded-full bg-emerald-400" /> {totalTools} Systems ·
-              LIVE
+              <span className="w-1.5 h-1.5 rounded-full bg-emerald-500" /> {totalTools}개 시스템 운영중
             </span>
             <span className="inline-flex items-center gap-2">
-              <span className="w-1.5 h-1.5 rounded-full bg-[color:var(--accent)]" /> {aiCount} AI · Native
+              <span className="w-1.5 h-1.5 rounded-full bg-[color:var(--accent)]" /> AI 시스템 {aiCount}개 자체 개발
             </span>
             <span className="inline-flex items-center gap-2">
               <span className="w-1.5 h-1.5 rounded-full bg-[color:var(--dim)]" /> 공공 API · 알림톡
@@ -322,19 +308,16 @@ export default function Tools() {
                 <div key={g.label}>
                   <div className="flex items-end justify-between mb-3 pb-5 border-b border-[color:var(--line)]">
                     <div>
-                      <Mono className="text-[11px] tracking-[0.14em] text-[color:var(--dim)]">
-                        0{gi + 1} / {g.sub.toUpperCase()}
-                      </Mono>
-                      <h3 className="mt-2 text-[28px] font-medium tracking-tight text-[color:var(--ink)]">
+                      <h3 className="text-[28px] font-medium tracking-tight text-[color:var(--ink)]">
                         {g.label}
                       </h3>
                       <p className="mt-2 text-[13px] max-w-[560px] text-[color:var(--ink-2)]">
                         {g.desc}
                       </p>
                     </div>
-                    <Mono className="text-[11px] whitespace-nowrap ml-6 text-[color:var(--dim)]">
-                      {g.items.length} tools
-                    </Mono>
+                    <span className="text-[12px] whitespace-nowrap ml-6 text-[color:var(--dim)]">
+                      {g.items.length}개
+                    </span>
                   </div>
                   <div
                     className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-px mt-8"
@@ -389,7 +372,7 @@ export default function Tools() {
         {/* Architecture pitch */}
         <div className="mt-24 card-v2-strong p-10 md:p-14 relative overflow-hidden">
           <div className="relative max-w-[860px] mx-auto text-center">
-            <Eyebrow className="justify-center">STACK · ARCHITECTURE</Eyebrow>
+            <Eyebrow className="justify-center">시스템 구성</Eyebrow>
             <h3 className="mt-4 text-[clamp(26px,3vw,38px)] leading-[1.15] tracking-tight font-semibold text-[color:var(--ink)]">
               외주가 아닌,{" "}
               <span className="font-serif-italic text-[color:var(--accent)]">
@@ -398,17 +381,16 @@ export default function Tools() {
               으로 운영합니다.
             </h3>
             <p className="mt-5 text-[14px] md:text-[15px] leading-[1.75] text-[color:var(--ink-2)]">
-              {totalTools}개 자체 서비스. React·TypeScript·PostgreSQL 기반으로 포털·보장분석 AI·청구 허브·설계사 워크벤치까지 전부 내부에서 돌아갑니다. 안드로이드 앱까지 같은 코드베이스로 운영하므로, 설계사 피드백이 곧 다음 주 업데이트가 되는 구조입니다.
+              {totalTools}개 자체 서비스. 포털·보장분석 AI·보험금 청구 도구·설계사 업무 시스템까지 외부 업체 없이 전부 직접 만들어 운영합니다. 안드로이드 앱까지 같은 시스템으로 돌아가므로, 설계사 피드백이 곧 다음 주 업데이트가 되는 구조입니다.
             </p>
             <div className="mt-7 flex flex-wrap justify-center gap-2 text-[11px] text-[color:var(--dim)]">
               {[
-                "React 18",
-                "TypeScript",
-                "Node / Express",
-                "PostgreSQL",
-                "공공 API",
-                "알림톡",
-                "PWA · Android",
+                "100% 자체 개발",
+                "보장분석 AI",
+                "공공데이터 연동",
+                "카카오 알림톡",
+                "안드로이드 앱",
+                "매주 업데이트",
               ].map((t) => (
                 <span
                   key={t}

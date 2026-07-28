@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { BtnV2, Eyebrow, GridOverlay, Icon, Mono } from "./Core";
+import { BtnV2, Eyebrow, Icon, Mono } from "./Core";
 
 type Day = {
   d: number;
@@ -222,11 +222,10 @@ export default function Training() {
         ["--card-shadow-strong" as string]: "0 2px 4px rgba(20,8,0,0.5), 0 48px 96px -20px rgba(20,8,0,0.85)",
       } as React.CSSProperties}
     >
-      <GridOverlay opacity={0.06} />
       <div className="relative mx-auto max-w-[1760px] px-6">
         <div className="grid grid-cols-1 md:grid-cols-12 gap-6 md:gap-12 mb-16 md:mb-24">
           <div className="md:col-span-7">
-            <Eyebrow>06 — Training Academy</Eyebrow>
+            <Eyebrow>교육 아카데미</Eyebrow>
             <h2
               className="mt-8 text-[clamp(44px,5.6vw,88px)] leading-[1.02] tracking-[-0.03em] font-bold text-[color:var(--ink)]"
               style={{ textWrap: "balance" } as React.CSSProperties}

@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { Mono, Icon } from "../Core";
+import { Icon } from "../Core";
 import type { ShowcaseProps, ToolItem } from "./types";
 
 function ToolRow({
@@ -31,12 +31,6 @@ function ToolRow({
         style={{ background: active ? "#5b5bef" : "transparent" }}
       />
       <div className="flex items-baseline gap-3">
-        <Mono
-          className="text-[10px]"
-          style={{ color: active ? "#5b5bef" : "var(--dim-2)" }}
-        >
-          /{String(index + 1).padStart(2, "0")}
-        </Mono>
         <h4
           className="text-[16px] tracking-tight"
           style={{ color: "var(--ink)", fontWeight: active ? 700 : 500 }}
@@ -77,12 +71,9 @@ export default function ShowcaseFrame({
     <section aria-labelledby={`group-${group.tag}`}>
       <div className="flex items-end justify-between mb-3 pb-5 border-b border-[color:var(--line)]">
         <div>
-          <Mono className="text-[11px] tracking-[0.14em] text-[color:var(--dim)]">
-            0{index + 1} / {group.sub.toUpperCase()}
-          </Mono>
           <h3
             id={`group-${group.tag}`}
-            className="mt-2 text-[28px] font-medium tracking-tight text-[color:var(--ink)]"
+            className="text-[28px] font-medium tracking-tight text-[color:var(--ink)]"
           >
             {group.label}
           </h3>
@@ -91,15 +82,15 @@ export default function ShowcaseFrame({
           </p>
         </div>
         <div className="text-right">
-          <Mono className="text-[11px] whitespace-nowrap text-[color:var(--dim)]">
-            {group.items.length} tools · 클릭해서 전환
-          </Mono>
-          <Mono
-            className="block mt-1 text-[10px] whitespace-nowrap"
-            style={{ color: "#5b5bef" }}
+          <span className="text-[12px] whitespace-nowrap text-[color:var(--dim)]">
+            {group.items.length}개 · 클릭해서 전환
+          </span>
+          <span
+            className="block mt-1 text-[12px] font-semibold whitespace-nowrap"
+            style={{ color: "var(--accent)" }}
           >
-            /{String(selected + 1).padStart(2, "0")} {group.items[selected]?.name}
-          </Mono>
+            {group.items[selected]?.name}
+          </span>
         </div>
       </div>
 

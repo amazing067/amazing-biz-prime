@@ -20,7 +20,7 @@ const PILLARS: Array<{
 }> = [
   {
     k: "01",
-    tag: "PORTAL OS",
+    tag: "포털 OS",
     t: "영업지원 포털",
     lead: "업로드·배정·상담·계약이 한 화면에서.",
     body: "입사 Day 1부터 포털 계정이 발급됩니다. DB 분배 센터가 리드를 규칙으로 배정하고, 목표·실적·캘린더가 실시간으로 롤업됩니다. 설계사는 \"오늘 누구를 만나야 하는가\"만 확인하면 됩니다.",
@@ -48,7 +48,7 @@ const PILLARS: Array<{
   },
   {
     k: "03",
-    tag: "CLAIM HUB",
+    tag: "청구 허브",
     t: "청구닷컴 허브",
     lead: "32개 보험사 청구 링크, 한 곳에서 바로.",
     body: "고객이 자주 묻는 \"어디에 뭐부터 해야 해요?\"에 대한 답. 32개 보험사 청구 링크·전산 접속·필요서류·보험금 청구서 PDF·치과치료확인서·인콜·FAX까지 한 페이지에 모아 고객에게 공유 링크 한 번으로 해결합니다.",
@@ -62,7 +62,7 @@ const PILLARS: Array<{
   },
   {
     k: "04",
-    tag: "COGNITION",
+    tag: "치매검사 · 인지케어",
     t: "치매검사 서비스",
     lead: "5분 검사 → 10년 뒤 간병비 리포트 → 상담 연결.",
     body: "15가지 인지기능 온라인 선별검사(기억·주의·계산 등 13개 뇌영역)를 게임처럼 5분 만에. 2026년 현재와 2036년 예상 간병비, 장기요양 등급 예측, 국가 지원금 안내까지 자동 리포트로 생성되어 자연스러운 상담으로 이어집니다.",
@@ -140,7 +140,7 @@ export default function Pillars() {
       <div className="mx-auto max-w-[1760px] px-6">
         <div className="flex items-end justify-between mb-16 gap-8 flex-wrap">
           <div>
-            <Eyebrow>03 — The Four Pillars</Eyebrow>
+            <Eyebrow>핵심 서비스</Eyebrow>
             <h2 className="mt-5 text-[44px] md:text-[72px] leading-[1] tracking-[-0.025em] font-semibold text-[color:var(--ink)]">
               네 개의 기둥,
               <br />
@@ -155,7 +155,7 @@ export default function Pillars() {
           </p>
         </div>
 
-        <div className="mb-3 inline-flex items-center gap-2 text-[11px] md:text-[12px] font-bold tracking-[0.16em] uppercase text-[color:var(--accent)]">
+        <div className="mb-3 inline-flex items-center gap-2 text-[13px] font-bold text-[color:var(--accent)]">
           <Icon name="target" size={14} stroke={2} />
           <span>탭하여 시스템 보기</span>
         </div>
@@ -180,7 +180,7 @@ export default function Pillars() {
               </Mono>
               <div className="flex-1 md:mt-3">
                 <div
-                  className={`text-[11px] uppercase tracking-[0.18em] font-bold ${
+                  className={`text-[11px] font-bold ${
                     i === active ? "text-[color:var(--accent)]" : "text-[color:var(--dim)]"
                   }`}
                 >
@@ -203,10 +203,9 @@ export default function Pillars() {
                   <span className="absolute -top-px left-0 right-0 h-[3px] bg-[color:var(--accent)] hidden md:block" />
                   <span className="absolute top-0 bottom-0 left-0 w-1 bg-[color:var(--accent)] md:hidden" />
                   <span
-                    className="md:absolute md:top-3 md:right-3 inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-[9px] font-bold tracking-[0.14em] uppercase bg-[color:var(--accent)] text-white shrink-0"
+                    className="md:absolute md:top-3 md:right-3 inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-[10px] font-bold bg-[color:var(--accent)] text-white shrink-0"
                     aria-hidden
                   >
-                    <span className="w-1.5 h-1.5 rounded-full bg-white animate-pulse" />
                     선택됨
                   </span>
                 </>
@@ -217,9 +216,7 @@ export default function Pillars() {
 
         <div className="grid grid-cols-12 gap-8 mt-14">
           <div className="col-span-12 md:col-span-5">
-            <Mono className="text-[11px] text-[color:var(--accent)] tracking-[0.18em]">
-              {cur.tag}
-            </Mono>
+            <span className="text-[12px] font-bold text-[color:var(--accent)]">{cur.tag}</span>
             <h3 className="mt-3 text-[28px] md:text-[36px] leading-[1.1] tracking-[-0.02em] font-semibold text-[color:var(--ink)]">
               {cur.lead}
             </h3>

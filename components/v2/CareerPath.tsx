@@ -55,7 +55,7 @@ export default function CareerPath() {
     >
       <div className="max-w-[1760px] mx-auto">
         <div className="max-w-[880px] mb-12">
-          <Eyebrow>SECTION 09 · 승격 단계</Eyebrow>
+          <Eyebrow>승격 단계</Eyebrow>
           <h2 className="mt-5 text-[clamp(44px,6.2vw,96px)] leading-[0.98] tracking-[-0.025em] font-semibold text-[color:var(--ink)]">
             수수료에{" "}
             <span className="font-serif-italic text-[color:var(--accent)]">장난이</span> 없습니다.
@@ -200,9 +200,9 @@ export default function CareerPath() {
             * 2026 영업규정집 제12조~제26조(승격) 및 제34조·별표 1(장기보험 지급률) 기준.
             지사·본부 승격에는 유지율 90% · 자기계약 10% 이하 · 민원 20~30점 미만 등 추가 기준이 적용됩니다.
           </p>
-          <Mono className="text-[11px] tracking-[0.14em] text-[color:var(--dim)] whitespace-nowrap">
-            PRIME ASSET · THE RULES 2026
-          </Mono>
+          <span className="text-[12px] text-[color:var(--dim)] whitespace-nowrap">
+            프라임에셋 영업규정집 2026 기준
+          </span>
         </div>
       </div>
     </section>
