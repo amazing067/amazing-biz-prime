@@ -74,6 +74,40 @@ export const metadata: Metadata = {
   },
 };
 
+// 구조화 데이터 — 검색엔진·AI 검색에 「프라임에셋.com = 어메이징사업부의 리쿠르팅 사이트」임을 명시.
+// sameAs 로 어메이징사업부.com(포털)과 상호 연결해 두 도메인이 같은 조직임을 알린다 (2026-08-07).
+const PORTAL = "https://xn--h32b21du9cf7grcy2k20f.com";
+const jsonLd = {
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Organization",
+      "@id": `${siteUrl}/#org`,
+      name: "프라임에셋 어메이징사업부",
+      alternateName: ["어메이징사업부", "Prime Asset Amazing Division"],
+      url: `${siteUrl}/`,
+      logo: `${siteUrl}/icons/icon-512.png`,
+      description:
+        "보험설계사 업무를 한 화면에서 처리하는 올인원 시스템을 직접 개발해 소속 설계사에게 무상 제공하는 프라임에셋 소속 보험 영업 조직(067·290·292본부).",
+      parentOrganization: { "@type": "Organization", name: "프라임에셋" },
+      sameAs: [
+        `${PORTAL}/`,
+        `${PORTAL}/about`,
+        "https://blog.naver.com/gsb067",
+        "https://talk.naver.com/profile/wj20ujg",
+      ],
+    },
+    {
+      "@type": "WebSite",
+      "@id": `${siteUrl}/#website`,
+      name: "프라임에셋 어메이징사업부 리쿠르팅",
+      url: `${siteUrl}/`,
+      publisher: { "@id": `${siteUrl}/#org` },
+      inLanguage: "ko",
+    },
+  ],
+};
+
 export default function RootLayout({
   children,
 }: Readonly<{
@@ -81,7 +115,13 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="ko" className={`${notoSansKR.variable} ${jetbrainsMono.variable} ${notoSerifKR.variable}`}>
-      <body className="font-sans min-w-0 bg-noise-v2">{children}</body>
+      <body className="font-sans min-w-0 bg-noise-v2">
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+        />
+        {children}
+      </body>
     </html>
   );
 }
