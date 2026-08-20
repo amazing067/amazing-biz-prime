@@ -1,3 +1,6 @@
+// 어메이징사업부 포털(어메이징사업부.com) — 한글 도메인은 punycode 로 적는다.
+const PORTAL = "https://xn--h32b21du9cf7grcy2k20f.com";
+
 export default function FooterV2() {
   return (
     <footer className="relative border-t border-[color:var(--line)] py-14">
@@ -31,10 +34,25 @@ export default function FooterV2() {
               카카오 1:1 상담
             </a>
           </div>
+          {/* 어메이징사업부.com(포털)로 나가는 실제 링크.
+              두 도메인은 같은 조직이지만 구조화 데이터(sameAs)만 있고 링크가 없으면
+              검색엔진·AI 는 별개 사이트로 본다. 링크가 가장 강한 연결 신호다. (2026-08-21) */}
           <div className="col-span-6 md:col-span-3 space-y-1.5">
-            <div className="text-[color:var(--ink-2)] font-semibold text-[12px] mb-2">서비스</div>
-            <div>포털 OS · AI Studio</div>
-            <div>청구닷컴 · 치매검사</div>
+            <div className="text-[color:var(--ink-2)] font-semibold text-[12px] mb-2">
+              어메이징사업부
+            </div>
+            <a className="block hover:text-[color:var(--ink)]" href={`${PORTAL}/`}>
+              업무 포털
+            </a>
+            <a className="block hover:text-[color:var(--ink)]" href={`${PORTAL}/about`}>
+              회사소개
+            </a>
+            <a className="block hover:text-[color:var(--ink)]" href={`${PORTAL}/magazine`}>
+              매거진
+            </a>
+            <a className="block hover:text-[color:var(--ink)]" href={`${PORTAL}/faq`}>
+              자주 묻는 질문
+            </a>
           </div>
           <div className="col-span-12 md:col-span-2 md:text-right space-y-1.5">
             <div className="text-[color:var(--ink-2)] font-semibold text-[12px] mb-2">법적 고지</div>

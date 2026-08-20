@@ -23,7 +23,12 @@ const notoSerifKR = Noto_Serif_KR({
   variable: "--font-serif-display",
 });
 
-const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://프라임에셋.com";
+// 한글 도메인은 반드시 punycode(origin)로 정규화한다.
+// metadataBase 는 new URL() 을 거쳐 canonical·og:url 이 punycode 로 나갔지만,
+// JSON-LD 는 이 문자열을 그대로 템플릿에 넣어 @id 가 "https://프라임에셋.com/#org" 로 나가고 있었다
+// (2026-08-21 실측). 검색엔진·AI 가 한글 URL 과 punycode URL 을 다른 주소로 볼 수 있어 정본이 갈린다.
+// sitemap.ts·robots.ts 와 같은 방식으로 통일한다.
+const siteUrl = new URL(process.env.NEXT_PUBLIC_SITE_URL || "https://프라임에셋.com").origin;
 const iconVersion = "20260319-2";
 
 export const metadata: Metadata = {
@@ -75,24 +80,55 @@ export const metadata: Metadata = {
 };
 
 // 구조화 데이터 — 검색엔진·AI 검색에 「프라임에셋.com = 어메이징사업부의 리쿠르팅 사이트」임을 명시.
-// sameAs 로 어메이징사업부.com(포털)과 상호 연결해 두 도메인이 같은 조직임을 알린다 (2026-08-07).
+//
+// ★2026-08-21: Organization 의 @id 를 포털(어메이징사업부.com) 것으로 통일했다.
+//   그전에는 두 사이트가 각자 `${siteUrl}/#org` 로 조직을 선언하고 sameAs 로만 이어져 있었다.
+//   그러면 검색엔진·AI 에게는 「이름이 같고 서로 링크하는 별개의 두 조직」으로 보여
+//   브랜드 신호가 둘로 쪼개진다. 같은 조직이 운영하는 여러 사이트는
+//   **하나의 Organization(공통 @id) + 사이트마다 WebSite** 로 표현하는 것이 schema.org 관례다.
+//   정본(canonical)은 포털이며, 이 사이트는 그 조직의 리쿠르팅 채널로 선언한다.
 const PORTAL = "https://xn--h32b21du9cf7grcy2k20f.com";
+const ORG_ID = `${PORTAL}/#org`; // ← 포털과 반드시 동일해야 한다(frontend/index.html 의 @id)
 const jsonLd = {
   "@context": "https://schema.org",
   "@graph": [
     {
       "@type": "Organization",
-      "@id": `${siteUrl}/#org`,
+      "@id": ORG_ID,
       name: "프라임에셋 어메이징사업부",
-      alternateName: ["어메이징사업부", "Prime Asset Amazing Division"],
-      url: `${siteUrl}/`,
-      logo: `${siteUrl}/icons/icon-512.png`,
+      alternateName: [
+        "어메이징사업부",
+        "프라임에셋 어메이징",
+        "어메이징사업부 067본부",
+        "Prime Asset Amazing Division",
+      ],
+      url: `${PORTAL}/`,
+      logo: `${PORTAL}/logo.png`,
       description:
         "보험설계사 업무를 한 화면에서 처리하는 올인원 시스템을 직접 개발해 소속 설계사에게 무상 제공하는 프라임에셋 소속 보험 영업 조직(067·290·292본부).",
       parentOrganization: { "@type": "Organization", name: "프라임에셋" },
+      areaServed: { "@type": "Country", name: "대한민국" },
+      knowsAbout: [
+        "보험설계사",
+        "법인보험대리점",
+        "GA 이직",
+        "보험설계사 채용",
+        "보험 보장분석",
+        "실손보험 미청구 보험금",
+      ],
+      contactPoint: [
+        {
+          "@type": "ContactPoint",
+          contactType: "보험설계사 입사 상담",
+          url: "https://talk.naver.com/profile/wj20ujg",
+          availableLanguage: ["ko"],
+        },
+      ],
       sameAs: [
+        `${siteUrl}/`,
         `${PORTAL}/`,
         `${PORTAL}/about`,
+        `${PORTAL}/faq`,
         "https://blog.naver.com/gsb067",
         "https://talk.naver.com/profile/wj20ujg",
       ],
@@ -102,8 +138,15 @@ const jsonLd = {
       "@id": `${siteUrl}/#website`,
       name: "프라임에셋 어메이징사업부 리쿠르팅",
       url: `${siteUrl}/`,
-      publisher: { "@id": `${siteUrl}/#org` },
+      publisher: { "@id": ORG_ID },
       inLanguage: "ko",
+      // 같은 조직의 다른 사이트 — 포털을 형제 채널로 명시한다.
+      isRelatedTo: {
+        "@type": "WebSite",
+        "@id": `${PORTAL}/#website`,
+        name: "어메이징사업부 포털",
+        url: `${PORTAL}/`,
+      },
     },
   ],
 };
