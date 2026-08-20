@@ -1,5 +1,7 @@
 import type { Metadata } from "next";
 import { Noto_Sans_KR, JetBrains_Mono, Noto_Serif_KR } from "next/font/google";
+// Vercel Web Analytics — 방문자·페이지뷰 집계. 쿠키를 쓰지 않아 별도 동의 배너가 필요 없다.
+import { Analytics } from "@vercel/analytics/next";
 import "./globals.css";
 
 const notoSansKR = Noto_Sans_KR({
@@ -164,6 +166,7 @@ export default function RootLayout({
           dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
         />
         {children}
+        <Analytics />
       </body>
     </html>
   );
