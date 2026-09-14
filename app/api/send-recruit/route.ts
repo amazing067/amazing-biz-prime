@@ -1,10 +1,83 @@
 import { NextRequest, NextResponse } from "next/server";
 import nodemailer from "nodemailer";
 
+/**
+ * ★봇 스팸 차단 (2026-09-14)
+ *
+ * 이 양식에는 방어가 하나도 없어서 봇이 무작위 값으로 계속 메일을 넣고 있었다.
+ * 실제로 받은 것: 이름 `zeSLacmwYGDhkROLnhFAUJEO` · 연락처 `863-5180-033`(한국 번호 아님)
+ * · 이메일 `a.q.i.x.i.piy.e.r9.0.9@gmail.com`(점 찍기 수법) · 주소 `Bhldalnxh`.
+ *
+ * 사람에게 보이는 화면은 그대로 두고 넷을 막는다.
+ *   ① 허니팟 — 사람 눈에 안 보이는 칸. 채워져 있으면 봇이다.
+ *   ② 형식 검증 — 이름·휴대폰·이메일이 최소한 사람이 쓸 수 있는 모양인지.
+ *   ③ HTML 이스케이프 — 입력이 메일 본문에 그대로 들어가 링크·이미지가 살아나던 것.
+ *   ④ 호출 제한 — 같은 IP 가 짧은 시간에 반복해 넣는 것.
+ */
+
+/** 메일 본문에 그대로 꽂히던 값들을 막는다 — 스패머가 낚시 링크를 심을 수 있었다 */
+function esc(v: unknown): string {
+  return String(v ?? "")
+    .replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;")
+    .replace(/"/g, "&quot;").replace(/'/g, "&#39;");
+}
+
+/** 같은 IP 의 연속 제출 — 서버 메모리로 충분하다(대량 투척만 막으면 된다) */
+const recent = new Map<string, number[]>();
+const WINDOW_MS = 10 * 60 * 1000;   // 10분
+const MAX_IN_WINDOW = 3;            // 10분에 3건까지
+
+function tooMany(ip: string): boolean {
+  const now = Date.now();
+  const hits = (recent.get(ip) ?? []).filter((t) => now - t < WINDOW_MS);
+  hits.push(now);
+  recent.set(ip, hits);
+  if (recent.size > 500) {          // 메모리가 무한정 늘지 않게
+    for (const [k, v] of recent) if (!v.some((t) => now - t < WINDOW_MS)) recent.delete(k);
+  }
+  return hits.length > MAX_IN_WINDOW;
+}
+
+/** 사람이 쓸 수 있는 모양인가 — 통과 못 하면 무엇이 틀렸는지 알려주지 않는다(봇에게 힌트가 된다) */
+function looksHuman(body: Record<string, unknown>): boolean {
+  const name = String(body.name ?? "").trim();
+  const phone = String(body.phone ?? "").replace(/[^0-9]/g, "");
+  const email = String(body.email ?? "").trim();
+
+  // 이름 — 한글·영문 2~20자. 무작위 대소문자 뒤섞인 긴 문자열을 막는다
+  if (!/^[가-힣a-zA-Z][가-힣a-zA-Z ."'-]{1,19}$/.test(name)) return false;
+  // 휴대폰 — 010 으로 시작하는 10~11자리
+  if (!/^01[016789][0-9]{7,8}$/.test(phone)) return false;
+  // 이메일 — 비워 둘 수 있지만, 쓴다면 모양은 맞아야 한다
+  if (email && email !== "미입력" && !/^[^\s@]+@[^\s@]+\.[a-zA-Z]{2,}$/.test(email)) return false;
+  return true;
+}
+
 export async function POST(request: NextRequest) {
   try {
     const body = await request.json();
     const tracking = body.tracking || {};
+
+    /* ① 허니팟 — 사람에겐 보이지 않는 칸이라, 채워져 있으면 봇이다.
+          봇이 눈치채지 못하게 **성공한 것처럼** 응답하고 메일만 보내지 않는다. */
+    if (String(body.website ?? "").trim() !== "") {
+      return NextResponse.json({ success: true });
+    }
+
+    /* ② 호출 제한 */
+    const ip = request.headers.get("x-forwarded-for")?.split(",")[0].trim()
+      || request.headers.get("x-real-ip") || "unknown";
+    if (tooMany(ip)) {
+      return NextResponse.json({ success: true });
+    }
+
+    /* ③ 형식 검증 */
+    if (!looksHuman(body)) {
+      return NextResponse.json(
+        { error: "이름과 연락처를 다시 확인해 주세요." },
+        { status: 400 }
+      );
+    }
 
     // 환경 변수에서 이메일 설정 가져오기
     const emailUser = process.env.EMAIL_USER || "";
@@ -74,23 +147,23 @@ export async function POST(request: NextRequest) {
           <table style="width: 100%; border-collapse: collapse;">
             <tr>
               <td style="padding: 8px; border-bottom: 1px solid #e2e8f0; font-weight: bold; width: 120px;">이름</td>
-              <td style="padding: 8px; border-bottom: 1px solid #e2e8f0;">${body.name}</td>
+              <td style="padding: 8px; border-bottom: 1px solid #e2e8f0;">${esc(body.name)}</td>
             </tr>
             <tr>
               <td style="padding: 8px; border-bottom: 1px solid #e2e8f0; font-weight: bold;">연락처</td>
-              <td style="padding: 8px; border-bottom: 1px solid #e2e8f0;">${body.phone}</td>
+              <td style="padding: 8px; border-bottom: 1px solid #e2e8f0;">${esc(body.phone)}</td>
             </tr>
             <tr>
               <td style="padding: 8px; border-bottom: 1px solid #e2e8f0; font-weight: bold;">이메일</td>
-              <td style="padding: 8px; border-bottom: 1px solid #e2e8f0;">${body.email}</td>
+              <td style="padding: 8px; border-bottom: 1px solid #e2e8f0;">${esc(body.email)}</td>
             </tr>
             <tr>
               <td style="padding: 8px; border-bottom: 1px solid #e2e8f0; font-weight: bold;">주소</td>
-              <td style="padding: 8px; border-bottom: 1px solid #e2e8f0;">${body.address || "미입력"}</td>
+              <td style="padding: 8px; border-bottom: 1px solid #e2e8f0;">${esc(body.address || "미입력")}</td>
             </tr>
             <tr>
               <td style="padding: 8px; border-bottom: 1px solid #e2e8f0; font-weight: bold;">경력</td>
-              <td style="padding: 8px; border-bottom: 1px solid #e2e8f0;">${body.experience || "미입력"}</td>
+              <td style="padding: 8px; border-bottom: 1px solid #e2e8f0;">${esc(body.experience || "미입력")}</td>
             </tr>
           </table>
         </div>
@@ -100,20 +173,20 @@ export async function POST(request: NextRequest) {
           <table style="width: 100%; border-collapse: collapse;">
             <tr>
               <td style="padding: 8px; border-bottom: 1px solid #e2e8f0; font-weight: bold; width: 120px;">랜딩 경로</td>
-              <td style="padding: 8px; border-bottom: 1px solid #e2e8f0;">${tracking.landingPath || "미입력"}</td>
+              <td style="padding: 8px; border-bottom: 1px solid #e2e8f0;">${esc(tracking.landingPath || "미입력")}</td>
             </tr>
             <tr>
               <td style="padding: 8px; border-bottom: 1px solid #e2e8f0; font-weight: bold;">랜딩 URL</td>
-              <td style="padding: 8px; border-bottom: 1px solid #e2e8f0; word-break: break-all;">${tracking.landingUrl || "미입력"}</td>
+              <td style="padding: 8px; border-bottom: 1px solid #e2e8f0; word-break: break-all;">${esc(tracking.landingUrl || "미입력")}</td>
             </tr>
             <tr>
               <td style="padding: 8px; border-bottom: 1px solid #e2e8f0; font-weight: bold;">Referrer</td>
-              <td style="padding: 8px; border-bottom: 1px solid #e2e8f0; word-break: break-all;">${tracking.referrer || "직접 유입"}</td>
+              <td style="padding: 8px; border-bottom: 1px solid #e2e8f0; word-break: break-all;">${esc(tracking.referrer || "직접 유입")}</td>
             </tr>
             <tr>
               <td style="padding: 8px; border-bottom: 1px solid #e2e8f0; font-weight: bold;">UTM</td>
               <td style="padding: 8px; border-bottom: 1px solid #e2e8f0;">
-                source=${tracking.utmSource || "-"}, medium=${tracking.utmMedium || "-"}, campaign=${tracking.utmCampaign || "-"}, content=${tracking.utmContent || "-"}, term=${tracking.utmTerm || "-"}
+                source=${esc(tracking.utmSource || "-")}, medium=${esc(tracking.utmMedium || "-")}, campaign=${esc(tracking.utmCampaign || "-")}, content=${esc(tracking.utmContent || "-")}, term=${esc(tracking.utmTerm || "-")}
               </td>
             </tr>
           </table>
@@ -122,12 +195,12 @@ export async function POST(request: NextRequest) {
         <div style="margin-top: 30px;">
           <h3 style="color: #334155; margin-bottom: 15px;">지원 동기</h3>
           <p style="padding: 15px; background-color: #f8fafc; border-radius: 8px; color: #475569; white-space: pre-wrap;">
-            ${body.message || "미입력"}
+            ${esc(body.message || "미입력")}
           </p>
         </div>
 
         <div style="margin-top: 30px; padding-top: 20px; border-top: 1px solid #e2e8f0; color: #64748b; font-size: 12px;">
-          <p>이 이메일은 ${body.name}님(${body.email})으로부터 전송되었습니다.</p>
+          <p>이 이메일은 ${esc(body.name)}님(${esc(body.email)})으로부터 전송되었습니다.</p>
         </div>
       </div>
     `;
@@ -137,7 +210,7 @@ export async function POST(request: NextRequest) {
       from: `"입사 지원 시스템" <${emailUser}>`,
       to: "induo@naver.com",
       replyTo: body.email,
-      subject: body.subject || `[입사지원] ${body.name}님의 지원서`,
+      subject: `[입사지원] ${String(body.name).slice(0, 20)}님의 지원서`,   // ★제목을 그대로 받지 않는다(헤더 주입)
       html: htmlContent,
     });
 

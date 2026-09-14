@@ -19,6 +19,8 @@ export default function RecruitSection({ variant = "home", sectionId = "recruit"
     address: "",
     experience: "",
     message: "",
+    /* ★허니팟 — 사람 눈에 보이지 않는 칸. 봇은 모든 칸을 채우므로 여기 값이 있으면 봇이다(2026-09-14) */
+    website: "",
   });
   const [agreePrivacy, setAgreePrivacy] = useState(false);
   const [submitStatus, setSubmitStatus] = useState<SubmitStatus>("idle");
@@ -75,6 +77,7 @@ export default function RecruitSection({ variant = "home", sectionId = "recruit"
           name: formData.name,
           email: formData.email,
           phone: formData.phone,
+          website: formData.website,   // ★허니팟 — 서버가 이 값이 차 있으면 버린다
           address: formData.address || "미입력",
           experience: formData.experience || "미입력",
           message: formData.message || "미입력",
@@ -95,6 +98,7 @@ export default function RecruitSection({ variant = "home", sectionId = "recruit"
       setSubmitStatus("success");
       setSubmitMessage("지원해 주셔서 감사합니다. 지원서가 전송되었습니다. 곧 연락드리겠습니다.");
       setFormData({
+        website: "",
         name: "",
         phone: "",
         email: "",
@@ -218,6 +222,18 @@ export default function RecruitSection({ variant = "home", sectionId = "recruit"
                 >
                   이름
                 </label>
+                {/* ★허니팟 — 사람에겐 보이지 않는다. display:none 대신 화면 밖으로 밀어
+                    자동입력 도구가 「숨겨진 칸」으로 눈치채지 못하게 한다. */}
+                <input
+                  type="text"
+                  name="website"
+                  value={formData.website}
+                  onChange={handleChange}
+                  tabIndex={-1}
+                  autoComplete="off"
+                  aria-hidden="true"
+                  style={{ position: "absolute", left: "-9999px", width: 1, height: 1, opacity: 0 }}
+                />
                 <input
                   type="text"
                   id="name"

@@ -11,6 +11,8 @@ type FormState = {
   email: string;
   experience: string;
   message: string;
+  /** ★허니팟 — 사람 눈에 보이지 않는 칸. 채워져 있으면 봇이다(2026-09-14) */
+  website: string;
 };
 
 type Tracking = {
@@ -30,6 +32,7 @@ const EMPTY_FORM: FormState = {
   email: "",
   experience: "",
   message: "",
+  website: "",
 };
 
 const EMPTY_TRACKING: Tracking = {
@@ -100,6 +103,7 @@ export default function Apply() {
           name: f.name,
           phone: f.phone,
           email: f.email || "미입력",
+          website: f.website,   // ★허니팟
           address: "미입력",
           experience: f.experience || "미입력",
           message: f.message || "미입력",
@@ -202,6 +206,17 @@ export default function Apply() {
               onSubmit={submit}
               className="card-v2-strong p-8 md:p-12 space-y-8"
             >
+              {/* ★허니팟 — 사람에겐 보이지 않는다. 화면 밖으로 밀어 둔다(2026-09-14) */}
+              <input
+                type="text"
+                name="website"
+                value={f.website}
+                onChange={(e) => setF((p) => ({ ...p, website: e.target.value }))}
+                tabIndex={-1}
+                autoComplete="off"
+                aria-hidden="true"
+                style={{ position: "absolute", left: "-9999px", width: 1, height: 1, opacity: 0 }}
+              />
               {[
                 { k: "name" as const, l: "성함", p: "홍길동", type: "text" },
                 { k: "phone" as const, l: "연락처", p: "010 0000 0000", type: "tel" },
