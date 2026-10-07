@@ -32,8 +32,11 @@
   * {
     @apply border-slate-200;
   }
+  /* 가로 넘침은 clip 으로 자른다. hidden 은 body 를 스크롤 상자로 만들어 position:sticky 를 죽인다
+     (2026-10-07 홈 개편 때 시연 구역 고정이 안 되던 원인). clip 을 모르는 옛 브라우저는 앞줄 hidden 을 쓴다. */
   html {
     overflow-x: hidden;
+    overflow-x: clip;
   }
   body {
     background: var(--bg-1);
@@ -42,6 +45,7 @@
     font-feature-settings: 'ss01', 'ss02';
     -webkit-font-smoothing: antialiased;
     overflow-x: hidden;
+    overflow-x: clip;
     /* Korean line-break: only break on whitespace, never split a word in the middle.
        Long Latin tokens still break via overflow-wrap. */
     word-break: keep-all;

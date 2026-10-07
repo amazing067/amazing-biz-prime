@@ -34,10 +34,6 @@ const branchData = {
     "송경호 지사",
     "류진순 지사",
   ],
-  "292본부": [
-    "본부직할지사",
-    "신정민 지사",
-  ],
   "374본부": [
     "본부직할지사",
     "류화자 지사",
@@ -224,7 +220,6 @@ export default function BadgePage() {
                   <option value="">본부를 선택하세요</option>
                   <option value="067본부">067본부</option>
                   <option value="290본부">290본부</option>
-                  <option value="292본부">292본부</option>
                   <option value="374본부">374본부</option>
                   <option value="378본부">378본부</option>
                 </select>

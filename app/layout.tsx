@@ -39,7 +39,7 @@ export const metadata: Metadata = {
   title: "프라임에셋 어메이징사업부 — 보험설계사 리쿠르팅 | Prime Asset Amazing Division",
   // 검색결과 노출 한도(네이버·구글 약 80자)에 맞춘 순한글 설명 — 영어 기술용어 금지 (2026-07-28)
   description:
-    "프라임에셋 어메이징사업부 보험설계사 모집. 진료내역 조회·보장분석·실손 미청구 찾기 등 영업 시스템을 직접 개발해 소속 설계사에게 무상 제공합니다.",
+    "프라임에셋 어메이징사업부 보험설계사 모집. 사업부 소속 개발자가 직접 만든 보메이트로 진료내역·실손 미청구·보장 비교까지 상담을 준비합니다.",
   alternates: { canonical: "/" },
   icons: {
     icon: [
@@ -107,7 +107,7 @@ const jsonLd = {
       url: `${PORTAL}/`,
       logo: `${PORTAL}/logo.png`,
       description:
-        "보험설계사 업무를 한 화면에서 처리하는 올인원 시스템을 직접 개발해 소속 설계사에게 무상 제공하는 프라임에셋 소속 보험 영업 조직(067·290·292본부).",
+        "상담 준비 프로그램 「보메이트」를 사업부 소속 개발자가 직접 개발·운영하는 프라임에셋 소속 보험 영업 조직(067·290본부).",
       parentOrganization: { "@type": "Organization", name: "프라임에셋" },
       areaServed: { "@type": "Country", name: "대한민국" },
       knowsAbout: [

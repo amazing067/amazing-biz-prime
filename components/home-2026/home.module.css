@@ -1,0 +1,61 @@
+/* 프라임에셋.com 2026 개편 — 시안 A(밝은 기사형) 바탕 + 시안 B 의 어두운 첫 화면.
+   색: 프라임에셋 로고의 페트롤 청록이 주색, 앰버는 「받을 돈」 같은 의미색으로만.
+   모양 규칙: 페이지 버튼 알약형(999px) · 페이지 패널 24px · 보메이트 화면 안 요소 14px · 휴대폰 48px */
+.root {
+  --sa-bg: #f2f4f3;
+  --sa-paper: #fbfcfb;
+  --sa-ink: #0f1e24;
+  --sa-ink2: #2b3a40;
+  --sa-dim: #56656b;
+  --sa-line: rgba(15, 30, 36, 0.13);
+  --sa-brand: #0b5a73;
+  --sa-brand-deep: #08465a;
+  --sa-brand-soft: #dcebee;
+  --sa-amber: #e39a2a;
+  --sa-amber-ink: #8a5300;
+  --sa-amber-soft: #fbefd9;
+  --sa-red: #b23a2e;
+  --sa-red-soft: #f7e4e1;
+  --sa-violet: #5b47a6;
+  --sa-violet-soft: #ebe8f6;
+  --sa-chat: #bccdd9;
+  --sa-bezel: #14232a;
+  /* 어두운 첫 화면 */
+  --sa-night: #0a1a1f;
+  --sa-night-2: #10252c;
+  --sa-on-night: #eef3f2;
+  --sa-on-night-dim: #a9bcbf;
+  --sa-glow: #8fd0dc;
+  position: relative;
+  z-index: 2;
+  background: var(--sa-bg);
+  color: var(--sa-ink);
+}
+
+.serif {
+  font-family: var(--font-serif-display), "Noto Serif KR", serif;
+  letter-spacing: -0.02em;
+}
+
+.num {
+  font-variant-numeric: tabular-nums;
+}
+
+/* 첫 화면 무대 — 휴대폰 뒤로 은은한 빛 하나. 네온·보라 그라데이션 금지 */
+.night {
+  background:
+    radial-gradient(60% 55% at 72% 52%, rgba(64, 150, 170, 0.22), transparent 70%),
+    linear-gradient(180deg, var(--sa-night) 0%, var(--sa-night-2) 100%);
+  color: var(--sa-on-night);
+}
+
+/* 자주 묻는 질문 — 기본 삼각형 숨김 */
+.faq summary::-webkit-details-marker {
+  display: none;
+}
+.faq summary {
+  list-style: none;
+}
+.faq[open] .chev {
+  transform: rotate(45deg);
+}

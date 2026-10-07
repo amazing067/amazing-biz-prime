@@ -13,7 +13,6 @@ const COLOR_LABEL_MAP: Record<string, string> = { white: "흰색", gold: "금색
 const branchData: Record<string, string[]> = {
   "067본부": ["본부직할지사", "김유겸 지사", "엄정화 지사", "한채은 지사"],
   "290본부": ["본부직할지사", "김미라 지사", "한희영 지사", "채혜빈 지사", "천민아 지사", "이수진 지사", "송경호 지사", "류진순 지사"],
-  "292본부": ["본부직할지사", "신정민 지사"],
   "374본부": ["본부직할지사", "류화자 지사"],
   "378본부": ["본부직할지사", "이빈 지사"],
 };
@@ -23,7 +22,6 @@ const HEADQUARTER_ADDRESS = "서울 광진구 천호대로 561, 영창빌딩 8�
 const branchAddressMap: Record<string, string> = {
   "067본부": HEADQUARTER_ADDRESS,
   "290본부": HEADQUARTER_ADDRESS,
-  "292본부": HEADQUARTER_ADDRESS,
   "374본부": "서울 동작구 신대방1가길 38 동작상떼빌오피스상가 106동 201호",
   "378본부": "서울 금천구 디지털로9길 47 한신IT타워2차4층 403-2호",
 };
@@ -213,7 +211,6 @@ export default function BusinessCardPage() {
                   <option value="">본부를 선택하세요</option>
                   <option value="067본부">067본부</option>
                   <option value="290본부">290본부</option>
-                  <option value="292본부">292본부</option>
                   <option value="374본부">374본부</option>
                   <option value="378본부">378본부</option>
                 </select>
