@@ -9,7 +9,7 @@ import { EASE } from "./Screens";
 // 포털로 나가는 실제 링크는 검색엔진에 「같은 조직」임을 알리는 가장 강한 신호라 지우지 않는다(2026-08-21).
 const PORTAL = "https://xn--h32b21du9cf7grcy2k20f.com";
 const KAKAO =
-  "https://pf.kakao.com/_JxmxaJn/chat?utm_source=naver_blog&utm_medium=post&utm_campaign=content&utm_content=";
+  "https://pf.kakao.com/_mSxkxgn/chat";
 
 export function Footer() {
   return (

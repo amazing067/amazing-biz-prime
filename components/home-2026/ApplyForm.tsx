@@ -36,7 +36,7 @@ function formatPhone(value: string) {
 }
 
 const KAKAO =
-  "https://pf.kakao.com/_JxmxaJn/chat?utm_source=naver_blog&utm_medium=post&utm_campaign=content&utm_content=";
+  "https://pf.kakao.com/_mSxkxgn/chat";
 
 const field =
   "mt-2 block w-full rounded-[12px] border border-[var(--sa-line)] bg-[var(--sa-paper)] px-4 py-3 text-[16px] text-[var(--sa-ink)] placeholder:text-[var(--sa-dim)] outline-none transition-[border-color,box-shadow] focus:border-[var(--sa-brand)] focus:shadow-[0_0_0_3px_rgba(11,90,115,0.15)]";

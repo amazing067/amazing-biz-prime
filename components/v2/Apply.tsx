@@ -186,7 +186,7 @@ export default function Apply() {
                 <Mono className="text-[13px] text-[color:var(--ink)]">02 2038 4379</Mono>
               </a>
               <a
-                href="https://pf.kakao.com/_JxmxaJn/chat?utm_source=naver_blog&utm_medium=post&utm_campaign=content&utm_content="
+                href="https://pf.kakao.com/_mSxkxgn/chat"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="group card-v2 card-v2-hover p-4"

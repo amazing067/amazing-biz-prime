@@ -7,7 +7,7 @@ import { NAV_LINKS } from "./nav-links";
 const PHONE = process.env.NEXT_PUBLIC_CONTACT_PHONE || "02-2038-4379";
 const KAKAO_BASE =
   process.env.NEXT_PUBLIC_KAKAO_CHAT_URL ||
-  "https://pf.kakao.com/_JxmxaJn/chat?utm_source=naver_blog&utm_medium=post&utm_campaign=content&utm_content=";
+  "https://pf.kakao.com/_mSxkxgn/chat";
 const KAKAO_URL = `${KAKAO_BASE}${KAKAO_BASE.includes("?") ? "&" : "?"}source=prime-asset-home`;
 const TEL_HREF = `tel:${PHONE.replace(/[^\d+]/g, "")}`;
 

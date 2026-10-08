@@ -27,7 +27,7 @@ export default function FooterV2() {
             </a>
             <a
               className="block hover:text-[color:var(--ink)]"
-              href="https://pf.kakao.com/_JxmxaJn/chat?utm_source=naver_blog&utm_medium=post&utm_campaign=content&utm_content="
+              href="https://pf.kakao.com/_mSxkxgn/chat"
               target="_blank"
               rel="noopener noreferrer"
             >
