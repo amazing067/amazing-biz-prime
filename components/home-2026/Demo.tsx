@@ -75,6 +75,32 @@ function DesktopStage({ step }: { step: number }) {
   );
 }
 
+/** 「어메이징사업부의 보메이트 영업지원시스템」 — 누가 만든 무엇인지 색·크기로 바로 보이게 */
+function SystemTitle({ compact = false }: { compact?: boolean }) {
+  if (compact) {
+    return (
+      <p className="mb-2 flex flex-wrap items-center gap-x-2 gap-y-1">
+        <span className="rounded-full bg-[var(--sa-brand-soft)] px-2.5 py-0.5 text-[12px] font-bold text-[var(--sa-brand)]">어메이징사업부</span>
+        <span className={`${s.serif} text-[20px] font-bold leading-tight text-[var(--sa-ink)]`}>
+          <span className="text-[var(--sa-brand)]">보메이트</span> 영업지원시스템
+        </span>
+      </p>
+    );
+  }
+  return (
+    <div className="pl-7">
+      <span className="inline-block rounded-full bg-[var(--sa-brand-soft)] px-3.5 py-1 text-[14px] font-bold text-[var(--sa-brand)]">
+        어메이징사업부의
+      </span>
+      <p className={`${s.serif} mt-3 text-[clamp(2rem,3vw,2.75rem)] font-bold leading-[1.15] text-[var(--sa-ink)]`}>
+        <span className="text-[var(--sa-brand)]">보메이트</span>
+        <br />
+        영업지원시스템
+      </p>
+    </div>
+  );
+}
+
 export function Demo() {
   const track = useRef<HTMLDivElement>(null);
   const [step, setStep] = useState(0);
@@ -109,8 +135,9 @@ export function Demo() {
       <div ref={track} className="relative" style={{ height: `${100 + (STEP_COUNT - 1) * 75}svh` }}>
         <div className="sticky top-0 h-[100svh] overflow-hidden">
           <div className="mx-auto grid h-full max-w-[1280px] grid-rows-[auto_1fr_auto] px-4 pb-5 pt-[76px] sm:px-6 lg:grid-cols-12 lg:grid-rows-1 lg:gap-8 lg:px-10 lg:pb-8 lg:pt-[88px]">
-            {/* 휴대폰 폭: 지금 단계 제목·설명 */}
+            {/* 휴대폰 폭: 무엇인지 한 줄 + 지금 단계 제목·설명 */}
             <div className="min-h-[124px] lg:hidden">
+              <SystemTitle compact />
               <AnimatePresence mode="wait" initial={false}>
                 <motion.div
                   key={step}
@@ -128,8 +155,10 @@ export function Demo() {
               </AnimatePresence>
             </div>
 
-            {/* PC: 단계 목록 */}
-            <ol className="hidden self-center lg:col-span-5 lg:block">
+            {/* PC: 무엇인지 큰 제목 + 단계 목록 — 섹션 제목이 스크롤로 사라진 뒤에도 무엇을 보는지 알게(10/8 사장님) */}
+            <div className="hidden self-center lg:col-span-5 lg:block">
+            <SystemTitle />
+            <ol className="mt-6">
               {STEPS.map((it, i) => {
                 const on = i === step;
                 return (
@@ -166,6 +195,7 @@ export function Demo() {
                 );
               })}
             </ol>
+            </div>
 
             {/* 무대 */}
             <div className="relative min-h-0 lg:col-span-7">
