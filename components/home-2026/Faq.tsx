@@ -1,9 +1,12 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { ArrowRight, Plus } from "lucide-react";
+import { ArrowRight, MessageCircle, Plus } from "lucide-react";
 import s from "./home.module.css";
 import { EASE } from "./Screens";
+
+// 어메이징사업부 카카오톡 채널 1:1 상담(Footer·ApplyForm 과 같은 주소)
+const KAKAO = "https://pf.kakao.com/_mSxkxgn/chat";
 
 const QUESTIONS = [
   {
@@ -73,15 +76,34 @@ export function Faq() {
           </div>
 
           <div className="mt-8 rounded-[24px] bg-[var(--sa-brand)] p-6 text-[var(--sa-paper)] sm:flex sm:items-center sm:justify-between sm:gap-6 sm:p-8">
+            {/* 전화·카카오톡을 바로 누를 수 있게(10/8 사장님 「카카오톡으로 문의해도 된다고」) */}
             <p className="max-w-[34em] text-[16px] font-medium leading-[1.65]">
-              더 궁금한 점은 지원서에 적어 주시거나 전화 02-2038-4379 로 물어보세요.
+              더 궁금한 점은 지원서에 적어 주시거나 전화{" "}
+              <a href="tel:02-2038-4379" className="whitespace-nowrap font-semibold underline decoration-white/50 underline-offset-4 hover:decoration-white">
+                02-2038-4379
+              </a>
+              , 또는{" "}
+              <a href={KAKAO} target="_blank" rel="noopener noreferrer" className="font-semibold underline decoration-white/50 underline-offset-4 hover:decoration-white">
+                카카오톡
+              </a>
+              으로 편하게 물어보세요.
             </p>
-            <a
-              href="#apply"
-              className="mt-5 inline-flex h-12 shrink-0 items-center gap-2 rounded-full bg-[var(--sa-paper)] px-6 text-[15px] font-semibold text-[var(--sa-brand-deep)] transition-transform duration-200 active:scale-[0.98] sm:mt-0"
-            >
-              지원서 쓰기 <ArrowRight size={17} strokeWidth={2.2} />
-            </a>
+            <div className="mt-5 flex shrink-0 flex-wrap gap-2 sm:mt-0">
+              <a
+                href={KAKAO}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex h-12 items-center gap-2 rounded-full bg-[#FEE500] px-6 text-[15px] font-semibold text-[#191919] transition-transform duration-200 active:scale-[0.98]"
+              >
+                <MessageCircle size={17} strokeWidth={2.2} /> 카카오톡 문의
+              </a>
+              <a
+                href="#apply"
+                className="inline-flex h-12 items-center gap-2 rounded-full bg-[var(--sa-paper)] px-6 text-[15px] font-semibold text-[var(--sa-brand-deep)] transition-transform duration-200 active:scale-[0.98]"
+              >
+                지원서 쓰기 <ArrowRight size={17} strokeWidth={2.2} />
+              </a>
+            </div>
           </div>
         </motion.div>
       </div>

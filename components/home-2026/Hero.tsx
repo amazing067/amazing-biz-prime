@@ -143,28 +143,32 @@ export function Hero() {
               <SinglePhone step={step} onEnded={reduce ? undefined : next} />
             </div>
           </FitBox>
+          {/* 단계 이름을 누르면 그 단계 영상으로 바로 넘어간다(10/8 사장님). 폰에서도 보이게 — 줄이 모자라면 두 줄로 */}
           <ol
-            className="relative mt-6 hidden justify-center gap-5 text-[13px] md:flex"
+            className="relative mt-5 flex flex-wrap justify-center gap-x-0.5 gap-y-1 text-[13px] md:mt-6 md:gap-x-2"
             aria-label="보메이트 상담 준비 순서"
           >
             {STEP_NAMES.map((n, i) => (
-              <li key={n} className="relative pb-2">
-                <span
-                  className={`transition-colors duration-300 ${
+              <li key={n}>
+                <button
+                  type="button"
+                  onClick={() => setStep(i)}
+                  aria-pressed={i === step}
+                  className={`relative whitespace-nowrap rounded-full px-1.5 pb-2.5 pt-1.5 transition-colors md:px-2.5 duration-300 hover:text-[var(--sa-on-night)] focus-visible:outline focus-visible:outline-2 focus-visible:outline-[var(--sa-glow)] ${
                     i === step
                       ? "font-semibold text-[var(--sa-on-night)]"
                       : "text-[var(--sa-on-night-dim)]"
                   }`}
                 >
                   {n}
-                </span>
-                {i === step && (
-                  <motion.span
-                    layoutId="hero-step"
-                    className="absolute inset-x-0 bottom-0 h-[2px] rounded-full bg-[var(--sa-glow)]"
-                    transition={{ duration: 0.4, ease: EASE }}
-                  />
-                )}
+                  {i === step && (
+                    <motion.span
+                      layoutId="hero-step"
+                      className="absolute inset-x-1.5 bottom-0.5 h-[2px] rounded-full bg-[var(--sa-glow)] md:inset-x-2.5"
+                      transition={{ duration: 0.4, ease: EASE }}
+                    />
+                  )}
+                </button>
               </li>
             ))}
           </ol>

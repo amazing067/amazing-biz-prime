@@ -10,6 +10,9 @@ import { EASE } from "./Screens";
 const PORTAL = "https://xn--h32b21du9cf7grcy2k20f.com";
 const KAKAO =
   "https://pf.kakao.com/_mSxkxgn/chat";
+// 사무실 주소(10/8 사장님) — 지도는 네이버 지도 검색으로 연다
+const ADDRESS = "서울 광진구 천호대로 561, 영창빌딩 8층";
+const MAP = `https://map.naver.com/p/search/${encodeURIComponent("서울 광진구 천호대로 561")}`;
 
 export function Footer() {
   return (
@@ -37,10 +40,16 @@ export function Footer() {
           <p className="font-semibold text-[var(--sa-ink2)]">법적 고지</p>
           <p>© 2026 Prime Asset</p>
         </div>
-        {/* 카카오 비즈니스 채널 심사 요건 — 사업자 정보 표기 (등록증 2026-07-07 발급본 기준) */}
-        <p className="col-span-2 border-t border-[var(--sa-line)] pt-6 text-[13px] lg:col-span-12">
-          상호: 어메이징사업부 · 대표자: 윤성옥 · 사업자등록번호: 244-03-02195
-        </p>
+        {/* 카카오 비즈니스 채널 심사 요건 — 사업자 정보 표기 (등록증 2026-07-07 발급본 기준) + 사무실 주소 */}
+        <div className="col-span-2 space-y-1.5 border-t border-[var(--sa-line)] pt-6 text-[13px] lg:col-span-12">
+          <p>
+            <span className="font-semibold text-[var(--sa-ink2)]">프라임에셋 어메이징사업부</span> · {ADDRESS} (군자역 4번 출구){" "}
+            <a className="whitespace-nowrap underline underline-offset-2 hover:text-[var(--sa-ink)]" href={MAP} target="_blank" rel="noopener noreferrer">
+              지도 보기
+            </a>
+          </p>
+          <p>상호: 어메이징사업부 · 대표자: 윤성옥 · 사업자등록번호: 244-03-02195</p>
+        </div>
       </div>
     </footer>
   );
