@@ -15,7 +15,9 @@ export const EASE = [0.16, 1, 0.3, 1] as const;
 export const PHONE_W = 320;
 export const PHONE_H = 660;
 
-type ClipName = "send" | "customer" | "data" | "analysis" | "report";
+// analysis-goji / analysis-claim = 분석 영상을 두 화면으로 자른 것(0~6.4초 가입 전 확인 · 6.8초~ 정밀 실손 미청구) —
+// PC 무대에서 분석 단계를 휴대폰 두 대로 갈라 보여 준다(10/9 사장님 「고객 인증처럼 갈라져서」)
+type ClipName = "send" | "customer" | "data" | "analysis" | "analysis-goji" | "analysis-claim" | "report";
 /** 단계별 영상과 길이(초). 첫 화면은 영상이 끝나면 다음 단계로 넘어간다 — 길이는 재생이 막혔을 때의 대비용. */
 const STEP_CLIP: ClipName[] = [
   "send",
@@ -32,6 +34,8 @@ const CLIP_TOP: Record<ClipName, string> = {
   customer: "#f0f5f8",
   data: "#ffffff",
   analysis: "#ffffff",
+  "analysis-goji": "#ffffff",
+  "analysis-claim": "#ffffff",
   report: "#f6f7fb",
 };
 const CLIP_LABEL: Record<ClipName, string> = {
@@ -40,6 +44,8 @@ const CLIP_LABEL: Record<ClipName, string> = {
     "고객이 링크를 열어 정보를 넣고, 세 기관의 인증 요청을 각각 승인하는 화면",
   data: "들어온 진료내역을 정리한 화면",
   analysis: "고지할 진료와 청구해 볼 진료를 살피는 화면",
+  "analysis-goji": "청약서에 알려야 할 진료를 정리한 가입 전 확인 화면",
+  "analysis-claim": "지급 기록이 없는 진료를 찾아 청구 여부를 확인할 금액을 보여 주는 정밀 실손 미청구 화면",
   report: "고객과 펴 놓고 이야기하는 상담 리포트 화면",
 };
 
@@ -135,17 +141,20 @@ function RealClip({
 
 /* ───────── 바깥에서 쓰는 화면 ───────── */
 
-/** 설계사 쪽 보메이트 화면. step 1(고객 인증 중)에는 설계사 화면이 링크 보내기 그대로 머문다. */
+/** 설계사 쪽 보메이트 화면. step 1(고객 인증 중)에는 설계사 화면이 링크 보내기 그대로 머문다.
+ *  split = PC 무대처럼 분석 단계를 두 대로 가를 때 — 이 휴대폰은 「가입 전 확인」 만, 「미청구」 는 ClaimScreen 이 맡는다. */
 export function AgentScreen({
   step,
   loop = true,
   onEnded,
+  split = false,
 }: {
   step: number;
   loop?: boolean;
   onEnded?: () => void;
+  split?: boolean;
 }) {
-  const name = STEP_CLIP[step <= 1 ? 0 : step];
+  const name: ClipName = split && step === 3 ? "analysis-goji" : STEP_CLIP[step <= 1 ? 0 : step];
   return (
     <AnimatePresence mode="wait" initial={false}>
       <motion.div
@@ -170,6 +179,11 @@ export function CustomerScreen({
   onEnded?: () => void;
 }) {
   return <RealClip name="customer" loop={loop} onEnded={onEnded} />;
+}
+
+/** 분석 단계 두 번째 휴대폰 — 정밀 실손 미청구(청구해 볼 진료) */
+export function ClaimScreen() {
+  return <RealClip name="analysis-claim" />;
 }
 
 /** 휴대폰 한 대로 전부 보여 줄 때(첫 화면·휴대폰 폭): step 1 만 고객 휴대폰.

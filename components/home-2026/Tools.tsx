@@ -5,7 +5,7 @@ import Image from "next/image";
 import { AnimatePresence, motion } from "framer-motion";
 import {
   BookOpen, ClipboardList, FileBarChart, FileCheck2, FileText, GitCompareArrows, HeartPulse, Library, Link2,
-  ListChecks, MessageSquareText, MessagesSquare, PieChart, Receipt, Scale, ScanLine, Search, Send, Stethoscope, Target,
+  ListChecks, MessageSquareText, MessagesSquare, PieChart, ReceiptText, Scale, ScanLine, Search, Send, Stethoscope, Target,
   type LucideIcon,
 } from "lucide-react";
 import s from "./home.module.css";
@@ -68,7 +68,7 @@ type Group = (typeof GROUPS)[number];
 
 // 폰 타일용 도구 아이콘(돈·동전 모양은 쓰지 않는다 — 보험 광고 심의 기준)
 const TOOL_ICON: Record<string, LucideIcon> = {
-  통합조회: Link2, "진료내역 조회": Stethoscope, "건강검진 리포트": HeartPulse, "의료비·실손 수령 조회": Receipt,
+  통합조회: Link2, "진료내역 조회": Stethoscope, "건강검진 리포트": HeartPulse, "의료비·실손 수령 조회": ReceiptText,
   "실손 지급내역 조회": FileText, "보험계약 조회": FileCheck2, "검사지 사진 분석": ScanLine,
   "의료비·실손 미청구": Search, "정밀 미청구": Target, "지급내역 대조": GitCompareArrows, "청구 누락 체크": ListChecks,
   "보험금 청구하기": Send, "청구 사례집": BookOpen,
