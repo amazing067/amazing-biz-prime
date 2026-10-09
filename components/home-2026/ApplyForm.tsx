@@ -171,6 +171,10 @@ export function ApplyForm() {
                 aria-hidden="true"
                 style={{ position: "absolute", left: "-9999px", width: 1, height: 1, opacity: 0 }}
               />
+              <p className="mb-5 text-[15px] leading-[1.6] text-[var(--sa-ink2)]">
+                {/* 필수 입력칸(required)은 성함·연락처 둘. 개인정보 동의 체크도 필수라 같이 알린다(Codex 10/9 검토) */}
+                <b className="text-[var(--sa-ink)]">적어야 하는 칸은 성함과 연락처 두 개</b>뿐입니다. 나머지는 적고 싶을 때만 적고, 보내기 전에 아래 개인정보 동의에 체크해 주세요.
+              </p>
               <div className="grid grid-cols-1 gap-5 sm:grid-cols-2">
                 <label className="block">
                   <span className={label}>성함</span>

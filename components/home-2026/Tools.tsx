@@ -81,13 +81,15 @@ export function Tools() {
   return (
     <section className="relative border-t border-[var(--sa-line)]">
       <div className="mx-auto max-w-[1280px] px-4 py-20 sm:px-6 lg:px-10 lg:py-28">
-        <h2 className={`${s.serif} text-[clamp(2rem,4.4vw,3.5rem)] font-bold leading-[1.2]`}>
-          사서 쓰는 프로그램이
+        {/* 이 섹션의 한 가지 임무: 사서 쓰는 제품이 아니라 현장 개발자와 같이 고치는 도구다(Codex 10/8 2차) */}
+        <p className="text-[14px] font-semibold text-[var(--sa-brand)]">들어오면 있는 것 · 현장 개발자</p>
+        <h2 className={`${s.serif} mt-3 text-[clamp(2rem,4.4vw,3.5rem)] font-bold leading-[1.2]`}>
+          개발자가 현장에서
           <br />
-          아닙니다
+          같이 고칩니다
         </h2>
         <p className="mt-5 max-w-[36em] text-[clamp(1rem,1.3vw,1.125rem)] leading-[1.65] text-[var(--sa-ink2)]">
-          보메이트는 어메이징사업부 소속 개발자가 직접 만들고 운영합니다. 설계사가 상담하며 불편했던 점을 듣고 고쳐 나갑니다. 입사하면 첫날부터 아래 도구를 휴대폰과 PC에서 씁니다.
+          보메이트는 사서 쓰는 프로그램이 아닙니다. 어메이징사업부 소속 개발자가 직접 만들고 운영하며, 설계사가 상담하며 불편했던 점을 듣고 고쳐 나갑니다. 입사하면 첫날부터 아래 도구를 휴대폰과 PC에서 씁니다.
         </p>
 
         <div className="lg:hidden">
@@ -97,16 +99,21 @@ export function Tools() {
           <ToolsCards />
         </div>
 
-        <p className="mt-4 text-[12px] text-[var(--sa-dim)]">화면 속 고객 이름과 숫자는 이해를 돕기 위한 예시입니다.</p>
+        <p className="mt-4 text-[13px] text-[var(--sa-dim)]">화면 속 고객 이름과 숫자는 이해를 돕기 위한 예시입니다.</p>
       </div>
     </section>
   );
 }
 
 /** 폰·태블릿 — 묶음 세 개를 색 탭으로, 고른 묶음의 화면(가운데 위)과 도구 2열 타일(아이콘)만 보인다(10/8 사장님 「나」) */
+/** 묶음마다 처음 보이는 도구 수 — 나머지는 「전체 보기」(기능 목록이 페이지를 지배하지 않게, Codex 10/8 2차) */
+const FIRST_TOOLS = 3;
+
 function ToolsTabs() {
   const [cur, setCur] = useState(0);
+  const [all, setAll] = useState(false);
   const g = GROUPS[cur];
+  const shown = all ? g.tools : g.tools.slice(0, FIRST_TOOLS);
   return (
     <div className="mt-12 grid grid-cols-1 gap-4 lg:grid-cols-12 lg:gap-8">
       <div role="tablist" aria-label="보메이트 도구 묶음" className="grid grid-cols-3 gap-2 lg:col-span-4 lg:grid-cols-1 lg:content-start lg:gap-3">
@@ -118,7 +125,7 @@ function ToolsTabs() {
               type="button"
               role="tab"
               aria-selected={on}
-              onClick={() => setCur(k)}
+              onClick={() => { setCur(k); setAll(false); }}
               className="relative rounded-[18px] border px-3 py-3 text-left transition-[background-color,border-color] duration-300 lg:rounded-[22px] lg:px-6 lg:py-5"
               style={{ background: on ? x.soft : "var(--sa-paper)", borderColor: on ? x.ink : "var(--sa-line)" }}
             >
@@ -151,21 +158,33 @@ function ToolsTabs() {
               <ToolShot g={g} className="w-[150px] sm:w-[176px]" />
             </div>
               <ul className="grid grid-cols-2 gap-2.5 p-4 sm:gap-3 sm:p-5">
-                {g.tools.map(([name, desc], k) => {
+                {shown.map(([name, desc], k) => {
                   const Icon = TOOL_ICON[name] ?? ClipboardList;
                   // 개수가 홀수면 마지막 칸은 두 칸 폭(혼자 남은 빈자리가 생기지 않게)
-                  const wide = g.tools.length % 2 === 1 && k === g.tools.length - 1;
+                  const wide = shown.length % 2 === 1 && k === shown.length - 1;
                   return (
                     <li key={name} className={`rounded-[16px] border border-[var(--sa-line)] bg-white p-3.5 ${wide ? "col-span-2" : ""}`}>
                       <span className="grid h-8 w-8 place-items-center rounded-full" style={{ background: g.soft, color: g.ink }}>
                         <Icon size={16} strokeWidth={2.2} aria-hidden="true" />
                       </span>
                       <p className="mt-2 text-[14.5px] font-bold leading-snug text-[var(--sa-ink)]">{name}</p>
-                      <p className="mt-1 text-[12.5px] leading-[1.5] text-[var(--sa-dim)]">{desc}</p>
+                      <p className="mt-1 text-[13.5px] leading-[1.5] text-[var(--sa-dim)]">{desc}</p>
                     </li>
                   );
                 })}
               </ul>
+              {g.tools.length > FIRST_TOOLS && (
+                <div className="px-4 pb-4 sm:px-5 sm:pb-5">
+                  <button
+                    type="button"
+                    onClick={() => setAll((v) => !v)}
+                    aria-expanded={all}
+                    className="h-11 w-full rounded-full border border-[var(--sa-line)] bg-white text-[15px] font-semibold text-[var(--sa-ink)]"
+                  >
+                    {all ? "접기" : `도구 ${g.tools.length}개 전체 보기`}
+                  </button>
+                </div>
+              )}
           </motion.div>
         </AnimatePresence>
       </div>
@@ -173,8 +192,11 @@ function ToolsTabs() {
   );
 }
 
-/** PC — 세 묶음을 나란히 세 칸 카드로, 카드마다 색 머리 + 휴대폰 화면 전체 + 도구 목록 */
+/** PC — 세 묶음을 나란히 세 칸 카드로, 카드마다 색 머리 + 휴대폰 화면 전체 + 대표 도구(나머지는 전체 보기) */
 function ToolsCards() {
+  // 카드마다 따로 펼친다(한 카드를 누르면 세 카드가 같이 펼쳐지던 것)
+  const [open, setOpen] = useState<boolean[]>(() => GROUPS.map(() => false));
+  const toggle = (k: number) => setOpen((o) => o.map((v, i) => (i === k ? !v : v)));
   return (
     <div className="mt-12 grid grid-cols-1 gap-5 md:grid-cols-3">
       {GROUPS.map((g, k) => (
@@ -195,13 +217,23 @@ function ToolsCards() {
             </div>
           </div>
           <ul className="flex-1 space-y-3 px-6 py-5">
-            {g.tools.map(([name, desc]) => (
+            {(open[k] ? g.tools : g.tools.slice(0, FIRST_TOOLS)).map(([name, desc]) => (
               <li key={name}>
                 <p className="text-[15.5px] font-bold text-[var(--sa-ink)]">{name}</p>
-                <p className="mt-0.5 text-[13.5px] leading-[1.55] text-[var(--sa-dim)]">{desc}</p>
+                <p className="mt-0.5 text-[14px] leading-[1.55] text-[var(--sa-dim)]">{desc}</p>
               </li>
             ))}
           </ul>
+          {g.tools.length > FIRST_TOOLS && (
+            <button
+              type="button"
+              onClick={() => toggle(k)}
+              aria-expanded={open[k]}
+              className="mx-6 mb-6 h-11 rounded-full border border-[var(--sa-line)] bg-white text-[15px] font-semibold text-[var(--sa-ink)] transition-colors hover:bg-[var(--sa-bg)]"
+            >
+              {open[k] ? "접기" : `도구 ${g.tools.length}개 전체 보기`}
+            </button>
+          )}
         </motion.div>
       ))}
     </div>

@@ -21,7 +21,7 @@ const DAYS = [
   "첫 통화 대본과 거절 대응",
   "고객 역할극으로 1차 미팅 연습",
   "2차 미팅, 설계와 비교와 마무리",
-  "모바일 청약, 고지의무, 증권 전달",
+  "모바일 청약(가입 신청), 고지의무(병력 알리기), 증권 전달",
   "처음부터 끝까지 실전 모의 훈련",
 ];
 
@@ -37,14 +37,16 @@ export function Join() {
             transition={{ duration: 0.8, ease: EASE }}
             className="lg:col-span-6"
           >
-            <h2 className={`${s.serif} text-[clamp(2rem,4.4vw,3.5rem)] font-bold leading-[1.2]`}>
-              입사 첫날부터
+            {/* 이 섹션의 한 가지 임무: 처음 시작하는 10일과 32개 보험사(Codex 10/8 2차 — 제목 주어를 보메이트에서 교육으로) */}
+            <p className="text-[14px] font-semibold text-[var(--sa-brand)]">들어오면 있는 것 · 10일 교육 · 32개 보험사</p>
+            <h2 className={`${s.serif} mt-3 text-[clamp(2rem,4.4vw,3.5rem)] font-bold leading-[1.2]`}>
+              처음이라면,
               <br />
-              보메이트로 일합니다
+              10일 교육부터
             </h2>
             <p className="mt-6 max-w-[32em] text-[clamp(1rem,1.3vw,1.125rem)] leading-[1.7] text-[var(--sa-ink2)]">
-              자료를 모으고 정리하는 일은 보메이트가 맡고, 설계사는 고객과 마주 앉는 시간에 집중합니다.
-              처음 시작하는 분은 10일 교육부터 함께합니다. 한 회사 상품만 파는 곳이 아니라, 32개 보험사 상품을 비교해 설계합니다.
+              처음 시작하는 분은 10일 교육부터 함께합니다. 교재 한 권에 보험영업의 흐름부터 실전 모의 훈련까지 담았습니다.
+              한 회사 상품만 파는 곳이 아니라, 32개 보험사 상품을 비교해 설계합니다.
             </p>
           </motion.div>
 

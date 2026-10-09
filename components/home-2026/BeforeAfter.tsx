@@ -6,11 +6,10 @@ import s from "./home.module.css";
 import { EASE } from "./Screens";
 
 // 숫자 없이, 설계사가 실제로 겪는 장면만 짧게. (Codex 「AI 티」 검수 제안 문구, 2026-10-07)
+// 다섯 줄 → 핵심 세 줄: 앞 섹션과 같은 이야기를 되풀이하지 않게(Codex 10/8 2차 점검 — 자료 준비 · 놓친 보험금 · 상담 자리)
 const ROWS = [
   { k: "고객 자료", before: "서류를 부탁하고 도착할 때까지 기다림", after: "링크를 보내면 진료, 검진, 의료비 기록이 도착" },
-  { k: "알릴 진료", before: "지난 병원 기록을 고객 기억에 기대어 확인", after: "진료내역에서 알려야 할 기록을 먼저 확인" },
   { k: "놓친 보험금", before: "고객이 말하지 않으면 놓치기 쉬움", after: "의료비 기록에서 청구해 볼 진료를 먼저 확인" },
-  { k: "보장 점검", before: "증권을 한 장씩 펼쳐 손으로 비교", after: "지금 보장과 바꾼 뒤를 나란히 비교" },
   { k: "상담 자리", before: "자료를 찾을 때마다 대화가 끊김", after: "리포트를 펴 놓고 고객 이야기에 집중" },
 ];
 
@@ -50,11 +49,11 @@ export function BeforeAfter() {
               >
                 <dt className="text-[15px] font-bold text-[var(--sa-ink)] lg:col-span-2">{r.k}</dt>
                 <dd className="text-[16px] leading-[1.55] text-[var(--sa-dim)] lg:col-span-5">
-                  <span className="mr-2 text-[12.5px] font-semibold lg:hidden">혼자 준비할 때</span>
+                  <span className="mr-2 text-[13.5px] font-semibold lg:hidden">혼자 준비할 때</span>
                   {r.before}
                 </dd>
                 <dd className="text-[17px] font-semibold leading-[1.5] text-[var(--sa-ink)] lg:col-span-5">
-                  <span className="mr-2 text-[12.5px] font-bold text-[var(--sa-brand)] lg:hidden">보메이트와 함께</span>
+                  <span className="mr-2 text-[13.5px] font-bold text-[var(--sa-brand)] lg:hidden">보메이트와 함께</span>
                   {r.after}
                 </dd>
               </div>

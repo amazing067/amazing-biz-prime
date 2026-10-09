@@ -1,17 +1,13 @@
 "use client";
 
-import { useRef, useState } from "react";
-import {
-  AnimatePresence,
-  motion,
-  useMotionValueEvent,
-  useScroll,
-} from "framer-motion";
+import { useEffect, useRef, useState } from "react";
+import { AnimatePresence, motion, useReducedMotion } from "framer-motion";
+import { ArrowDown } from "lucide-react";
 import s from "./home.module.css";
 import { FitBox } from "./FitBox";
-import { scrollToY } from "./SmoothScroll";
 import {
   AgentScreen,
+  CLIP_SECONDS,
   CustomerScreen,
   EASE,
   PHONE_H,
@@ -26,7 +22,7 @@ const STEPS = [
   { t: "링크 보내기", d: "조회할 자료를 고른 뒤 고객에게 카카오톡 링크를 보냅니다." },
   { t: "고객 인증", d: "고객은 세 기관의 요청을 자기 휴대폰에서 각각 승인합니다." },
   { t: "자료 모으기", d: "승인이 끝나면 진료내역, 건강검진, 의료비 기록이 들어옵니다." },
-  { t: "분석", d: "고지할 진료, 청구해 볼 진료, 지금 보장을 차례로 살핍니다." },
+  { t: "분석", d: "가입 때 알려야 할 진료(고지), 청구해 볼 진료, 지금 보장을 차례로 살핍니다." },
   { t: "상담 리포트", d: "정리된 자료를 펴 놓고 고객과 이야기합니다." },
 ];
 
@@ -75,11 +71,11 @@ function DesktopStage({ step }: { step: number }) {
   );
 }
 
-/** 「어메이징사업부의 보메이트 영업지원시스템」 — 누가 만든 무엇인지 색·크기로 바로 보이게 */
+/** 「어메이징사업부의 보메이트 영업지원시스템」 — 누가 만든 무엇인지 색·크기로 바로 보이게(10/8 사장님) */
 function SystemTitle({ compact = false }: { compact?: boolean }) {
   if (compact) {
     return (
-      <p className="mb-2 flex flex-wrap items-center gap-x-2 gap-y-1">
+      <p className="flex flex-wrap items-center gap-x-2 gap-y-1">
         <span className="rounded-full bg-[var(--sa-brand-soft)] px-2.5 py-0.5 text-[12px] font-bold text-[var(--sa-brand)]">어메이징사업부</span>
         <span className={`${s.serif} text-[20px] font-bold leading-tight text-[var(--sa-ink)]`}>
           <span className="text-[var(--sa-brand)]">보메이트</span> 영업지원시스템
@@ -101,62 +97,59 @@ function SystemTitle({ compact = false }: { compact?: boolean }) {
   );
 }
 
+/**
+ * 「들어오면 있는 것」 중 상담 준비 도구가 실제로 이렇게 움직인다 — 실물 증거.
+ * 예전엔 화면 4배 길이 고정 스크롤이라 폰에서 「안 내려간다」 고 느꼈다(Codex 10/8 2차 점검) →
+ * 한 화면 안에서 단계를 눌러 고르고, 보이는 동안만 다음 단계로 넘어간다. 교육·입사 조건으로 바로 가는 길도 둔다.
+ */
 export function Demo() {
-  const track = useRef<HTMLDivElement>(null);
+  const reduce = useReducedMotion();
+  const ref = useRef<HTMLElement>(null);
   const [step, setStep] = useState(0);
-  const { scrollYProgress } = useScroll({ target: track, offset: ["start start", "end end"] });
+  const [inView, setInView] = useState(false);
 
-  useMotionValueEvent(scrollYProgress, "change", (v) => {
-    const next = Math.min(STEP_COUNT - 1, Math.max(0, Math.floor(v * STEP_COUNT)));
-    setStep((cur) => (cur === next ? cur : next));
-  });
-
-  const goTo = (i: number) => {
-    const el = track.current;
+  useEffect(() => {
+    const el = ref.current;
     if (!el) return;
-    const top = el.getBoundingClientRect().top + window.scrollY;
-    const len = el.offsetHeight - window.innerHeight;
-    scrollToY(top + ((i + 0.5) / STEP_COUNT) * len);
-  };
+    const io = new IntersectionObserver(([e]) => setInView(e.isIntersecting), { threshold: 0.35 });
+    io.observe(el);
+    return () => io.disconnect();
+  }, []);
+
+  // 보이는 동안만 다음 단계로(영상 길이 + 2초). 눌러서 고르면 거기서부터 이어 간다
+  useEffect(() => {
+    if (reduce || !inView) return;
+    const t = setTimeout(() => setStep((v) => (v + 1) % STEP_COUNT), (CLIP_SECONDS[step] + 2) * 1000);
+    return () => clearTimeout(t);
+  }, [step, inView, reduce]);
 
   return (
-    <section id="bomate" className="relative scroll-mt-16">
-      <div className="mx-auto max-w-[1280px] px-4 pt-20 sm:px-6 lg:px-10 lg:pt-28">
-        <h2 className={`${s.serif} text-[clamp(2rem,4.4vw,3.5rem)] font-bold leading-[1.2]`}>
-          링크를 보낸 뒤,
-          <br />
-          보메이트가 하는 일
-        </h2>
-        <p className="mt-5 max-w-[36em] text-[clamp(1rem,1.3vw,1.125rem)] leading-[1.65] text-[var(--sa-ink2)]">
-          상담 하루 전 고객에게 링크를 보내 두면, 만나기 전에 자료가 정리됩니다. 실제 보메이트의 순서 그대로입니다.
-        </p>
-      </div>
+    <section id="bomate" ref={ref} className="relative scroll-mt-16">
+      <div className="mx-auto max-w-[1280px] px-4 py-20 sm:px-6 lg:px-10 lg:py-28">
+        <div className="flex flex-wrap items-end justify-between gap-x-8 gap-y-5">
+          <div>
+            <p className="text-[14px] font-semibold text-[var(--sa-brand)]">들어오면 있는 것 · 상담 준비 도구</p>
+            <h2 className={`${s.serif} mt-3 text-[clamp(2rem,4.4vw,3.5rem)] font-bold leading-[1.2]`}>
+              링크를 보낸 뒤,
+              <br />
+              보메이트가 하는 일
+            </h2>
+            <p className="mt-5 max-w-[36em] text-[clamp(1rem,1.3vw,1.125rem)] leading-[1.65] text-[var(--sa-ink2)]">
+              상담 하루 전 고객에게 링크를 보내 두면, 만나기 전에 자료가 정리됩니다. 실제 보메이트의 순서 그대로입니다.
+            </p>
+          </div>
+          {/* 도구보다 교육·입사 조건이 궁금한 사람을 위한 지름길 */}
+          <a
+            href="#join"
+            className="inline-flex h-11 items-center gap-1.5 rounded-full border border-[var(--sa-line)] px-5 text-[15px] font-semibold text-[var(--sa-ink)] transition-colors hover:bg-[var(--sa-paper)]"
+          >
+            교육·입사 조건 바로 보기 <ArrowDown size={16} strokeWidth={2.2} />
+          </a>
+        </div>
 
-      <div ref={track} className="relative" style={{ height: `${100 + (STEP_COUNT - 1) * 75}svh` }}>
-        <div className="sticky top-0 h-[100svh] overflow-hidden">
-          <div className="mx-auto grid h-full max-w-[1280px] grid-rows-[auto_1fr_auto] px-4 pb-5 pt-[76px] sm:px-6 lg:grid-cols-12 lg:grid-rows-1 lg:gap-8 lg:px-10 lg:pb-8 lg:pt-[88px]">
-            {/* 휴대폰 폭: 무엇인지 한 줄 + 지금 단계 제목·설명 */}
-            <div className="min-h-[124px] lg:hidden">
-              <SystemTitle compact />
-              <AnimatePresence mode="wait" initial={false}>
-                <motion.div
-                  key={step}
-                  initial={{ opacity: 0, y: 10 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  exit={{ opacity: 0, y: -8 }}
-                  transition={{ duration: 0.3, ease: EASE }}
-                >
-                  <p className="text-[13px] font-semibold text-[var(--sa-brand)]">
-                    {STEP_COUNT}단계 중 {step + 1}단계
-                  </p>
-                  <p className={`${s.serif} mt-1 text-[26px] font-bold leading-tight`}>{STEPS[step].t}</p>
-                  <p className="mt-2 text-[15px] leading-[1.6] text-[var(--sa-ink2)]">{STEPS[step].d}</p>
-                </motion.div>
-              </AnimatePresence>
-            </div>
-
-            {/* PC: 무엇인지 큰 제목 + 단계 목록 — 섹션 제목이 스크롤로 사라진 뒤에도 무엇을 보는지 알게(10/8 사장님) */}
-            <div className="hidden self-center lg:col-span-5 lg:block">
+        <div className="mt-10 grid grid-cols-1 gap-6 lg:mt-14 lg:grid-cols-12 lg:items-center lg:gap-8">
+          {/* PC: 무엇인지 큰 제목 + 단계 목록(눌러서 고름) */}
+          <div className="hidden lg:col-span-5 lg:block">
             <SystemTitle />
             <ol className="mt-6">
               {STEPS.map((it, i) => {
@@ -172,19 +165,19 @@ export function Demo() {
                     )}
                     <button
                       type="button"
-                      onClick={() => goTo(i)}
-                      className="block w-full py-5 pl-7 pr-2 text-left"
+                      onClick={() => setStep(i)}
+                      className="block w-full py-4 pl-7 pr-2 text-left"
                       aria-current={on ? "step" : undefined}
                     >
                       <span
-                        className={`${s.serif} block text-[24px] font-bold leading-tight transition-colors duration-300 ${
+                        className={`${s.serif} block text-[22px] font-bold leading-tight transition-colors duration-300 ${
                           on ? "text-[var(--sa-ink)]" : "text-[var(--sa-dim)]"
                         }`}
                       >
                         {it.t}
                       </span>
                       <span
-                        className={`mt-2 block max-w-[30em] text-[15.5px] leading-[1.6] transition-colors duration-300 ${
+                        className={`mt-1.5 block max-w-[30em] text-[15.5px] leading-[1.6] transition-colors duration-300 ${
                           on ? "text-[var(--sa-ink2)]" : "text-[var(--sa-dim)]"
                         }`}
                       >
@@ -195,23 +188,58 @@ export function Demo() {
                 );
               })}
             </ol>
-            </div>
+          </div>
 
-            {/* 무대 */}
-            <div className="relative min-h-0 lg:col-span-7">
-              <FitBox w={PHONE_W} h={PHONE_H} className="h-full lg:hidden">
-                <SinglePhone step={step} />
-              </FitBox>
-              <FitBox w={STAGE_W} h={STAGE_H} className="hidden h-full lg:block">
-                <DesktopStage step={step} />
-              </FitBox>
+          {/* 휴대폰: 무엇인지 한 줄 + 단계 버튼(줄바꿈, 가로 스크롤 없음) + 지금 단계 설명 */}
+          <div className="lg:hidden">
+            <SystemTitle compact />
+            <div role="tablist" aria-label="보메이트 상담 준비 순서" className="mt-4 flex flex-wrap gap-1.5">
+              {STEPS.map((it, i) => {
+                const on = i === step;
+                return (
+                  <button
+                    key={it.t}
+                    type="button"
+                    role="tab"
+                    aria-selected={on}
+                    onClick={() => setStep(i)}
+                    className={`h-10 rounded-full px-3.5 text-[14px] font-semibold transition-colors ${
+                      on ? "bg-[var(--sa-brand)] text-[var(--sa-paper)]" : "border border-[var(--sa-line)] bg-[var(--sa-paper)] text-[var(--sa-ink2)]"
+                    }`}
+                  >
+                    {i + 1}. {it.t}
+                  </button>
+                );
+              })}
             </div>
+            <AnimatePresence mode="wait" initial={false}>
+              <motion.p
+                key={step}
+                initial={{ opacity: 0, y: 6 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: -4 }}
+                transition={{ duration: 0.25, ease: EASE }}
+                className="mt-4 min-h-[3.2em] text-[16px] leading-[1.6] text-[var(--sa-ink2)]"
+              >
+                {STEPS[step].d}
+              </motion.p>
+            </AnimatePresence>
+          </div>
 
-            <p className="pt-3 text-center text-[12px] text-[var(--sa-dim)] lg:absolute lg:bottom-6 lg:right-10 lg:pt-0">
-              화면 속 고객 이름과 숫자는 이해를 돕기 위한 예시입니다.
-            </p>
+          {/* 무대 */}
+          <div className="lg:col-span-7">
+            <FitBox w={PHONE_W} h={PHONE_H} className="h-[min(600px,66svh)] lg:hidden">
+              <SinglePhone step={step} />
+            </FitBox>
+            <FitBox w={STAGE_W} h={STAGE_H} className="hidden h-[min(680px,calc(100svh-120px))] lg:block">
+              <DesktopStage step={step} />
+            </FitBox>
           </div>
         </div>
+
+        <p className="mt-5 text-center text-[13px] text-[var(--sa-dim)] lg:text-right">
+          화면 속 고객 이름과 숫자는 이해를 돕기 위한 예시입니다.
+        </p>
       </div>
     </section>
   );

@@ -1,5 +1,5 @@
 // 프라임에셋.com 첫 화면 — 2026-10 개편(시안 A 바탕 + 시안 B 의 어두운 첫 화면).
-// 보메이트(사업부 소속 개발자가 직접 만든 상담 준비 프로그램)를 주인공으로, 「우리에게 오면」 위주.
+// ★리크루팅 사이트다(10/8 사장님): 주인공은 「어메이징사업부가 설계사를 찾는다」, 보메이트·현장 개발자·교육·32개 보험사는 들어올 이유(무기).
 // 예전 첫 화면(components/v2/*)은 이 파일에서만 쓰였다.
 import s from "@/components/home-2026/home.module.css";
 import { SmoothScroll } from "@/components/home-2026/SmoothScroll";

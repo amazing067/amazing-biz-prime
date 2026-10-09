@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
-import { Phone } from "lucide-react";
+import { MessageCircle, Phone, X } from "lucide-react";
 import { EASE } from "./Screens";
 
 // 어메이징사업부 포털(어메이징사업부.com) — 한글 도메인은 punycode 로 적는다.
@@ -58,6 +58,8 @@ export function Footer() {
 /** 휴대폰에서 첫 화면을 지나면 아래에 지원 버튼을 띄운다. 지원서 구역에 닿으면 숨긴다. */
 export function MobileCta() {
   const [show, setShow] = useState(false);
+  // 「문의」 를 누르면 전화·카카오톡 중 고른다 — 아이콘만 있으면 무엇인지 몰랐고, 카톡은 맨 아래까지 가야 보였다(Codex 10/8 2차)
+  const [ask, setAsk] = useState(false);
 
   useEffect(() => {
     const hero = document.getElementById("hero");
@@ -92,14 +94,33 @@ export function MobileCta() {
           transition={{ duration: 0.35, ease: EASE }}
           className="fixed inset-x-0 bottom-0 z-40 border-t border-[var(--sa-line)] bg-[rgba(242,244,243,0.94)] px-4 pb-[calc(12px+env(safe-area-inset-bottom))] pt-3 backdrop-blur-md lg:hidden"
         >
+          {ask && (
+            <div className="mx-auto mb-2 grid max-w-[520px] grid-cols-2 gap-2">
+              <a
+                href="tel:02-2038-4379"
+                className="flex h-12 items-center justify-center gap-2 rounded-full border border-[var(--sa-line)] bg-white text-[15px] font-semibold text-[var(--sa-ink)]"
+              >
+                <Phone size={17} strokeWidth={2.2} /> 전화하기
+              </a>
+              <a
+                href={KAKAO}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex h-12 items-center justify-center gap-2 rounded-full bg-[#FEE500] text-[15px] font-semibold text-[#191919]"
+              >
+                <MessageCircle size={17} strokeWidth={2.2} /> 카카오톡 문의
+              </a>
+            </div>
+          )}
           <div className="mx-auto flex max-w-[520px] gap-2">
-            <a
-              href="tel:02-2038-4379"
-              aria-label="전화로 문의하기"
-              className="grid h-12 w-12 shrink-0 place-items-center rounded-full border border-[var(--sa-line)] text-[var(--sa-ink)]"
+            <button
+              type="button"
+              onClick={() => setAsk((v) => !v)}
+              aria-expanded={ask}
+              className="flex h-12 shrink-0 items-center gap-1.5 rounded-full border border-[var(--sa-line)] bg-white px-4 text-[15px] font-semibold text-[var(--sa-ink)]"
             >
-              <Phone size={19} strokeWidth={2.2} />
-            </a>
+              {ask ? <X size={17} strokeWidth={2.2} /> : <MessageCircle size={17} strokeWidth={2.2} />} 문의
+            </button>
             <a
               href="#apply"
               className="flex h-12 flex-1 items-center justify-center rounded-full bg-[var(--sa-brand)] text-[16px] font-semibold text-[var(--sa-paper)] active:scale-[0.98]"

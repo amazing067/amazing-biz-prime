@@ -14,6 +14,17 @@ import {
   STEP_COUNT,
 } from "./Screens";
 
+/**
+ * 들어오면 있는 것 — 첫 화면의 주어는 「사업부가 설계사를 찾는다」, 이것들은 들어올 이유(무기)다(10/8 사장님 「리크루팅인데 보메이트 앱 홍보가 됐다」 · Codex 진단 · C안).
+ *   앞의 두 개(편한 도구 · 현장 개발자)를 강조. 사이트에 이미 있는 사실과 사장님 말씀만 — 숫자를 지어내지 않는다
+ */
+const REASONS = [
+  { title: "상담 준비가 편합니다", body: "링크 하나로 고객 자료부터 상담 리포트까지" },
+  { title: "개발자가 현장에 있습니다", body: "쓰다 불편하면 사업부 개발자가 같이 고칩니다" },
+  { title: "10일 교육", body: "처음이라면 매월 1일·15일 시작하는 교육부터" },
+  { title: "32개 보험사", body: "생명보험 19곳 · 손해보험 13곳 상품 비교" },
+];
+
 const STEP_NAMES = [
   "링크 보내기",
   "고객 인증",
@@ -67,35 +78,38 @@ export function Hero() {
     <section id="hero" className={`${s.night} relative overflow-hidden`}>
       <div className="mx-auto grid max-w-[1280px] grid-cols-1 items-center gap-10 px-4 pb-14 pt-28 sm:px-6 lg:min-h-[100svh] lg:grid-cols-12 lg:gap-8 lg:px-10 lg:pb-10 lg:pt-24">
         <div className="lg:col-span-7">
+          {/* 누가 찾는지 먼저 — 회사 이름이 첫 5초에 보이게(10/8 사장님) */}
           <motion.p
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ duration: 0.6 }}
-            className="text-[14px] font-semibold text-[var(--sa-glow)]"
+            className="flex flex-wrap items-center gap-x-2.5 gap-y-1.5"
           >
-            보험설계사 모집
+            <span className="rounded-full bg-[var(--sa-on-night)] px-3.5 py-1 text-[14px] font-bold text-[var(--sa-ink)]">
+              프라임에셋 어메이징사업부
+            </span>
+            <span className="text-[14px] font-semibold text-[var(--sa-glow)]">보험설계사 모집</span>
           </motion.p>
           <h1
-            className={`${s.serif} mt-4 text-[clamp(2.25rem,5.4vw,4.5rem)] font-bold leading-[1.12]`}
+            className={`${s.serif} mt-5 text-[clamp(2.1rem,4.8vw,4rem)] font-bold leading-[1.15]`}
           >
-            {line("상담 준비는", 0)}
-            {line("보메이트가 합니다", 1, "text-[var(--sa-glow)]")}
+            {line("함께 일할", 0)}
+            {line("보험설계사를 찾습니다", 1, "text-[var(--sa-glow)]")}
           </h1>
           <motion.p
             initial={{ opacity: 0, y: 12 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.7, delay: 0.5, ease: EASE }}
-            className="mt-6 max-w-[34em] text-[clamp(1.0625rem,1.5vw,1.25rem)] leading-[1.65] text-[var(--sa-on-night-dim)]"
+            className="mt-5 max-w-[36em] text-[clamp(1rem,1.4vw,1.1875rem)] leading-[1.7] text-[var(--sa-on-night-dim)]"
           >
-            고객에게 카카오톡 링크를 보내면 진료내역, 건강검진, 실손 미청구 확인
-            자료와 상담 리포트까지 한곳에 정리됩니다. 어메이징사업부가 직접 만든
-            프로그램이라, 소속 설계사는 입사 첫날부터 씁니다.
+            어메이징사업부에는 상담 준비를 덜어 주는 자체 도구가 있고, 그 도구를 만든
+            개발자가 사업부 안에서 설계사와 같이 고칩니다. 처음이라면 10일 교육부터 함께합니다.
           </motion.p>
           <motion.div
             initial={{ opacity: 0, y: 12 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.7, delay: 0.65, ease: EASE }}
-            className="mt-9 flex flex-wrap items-center gap-3"
+            className="mt-7 flex flex-wrap items-center gap-3"
           >
             <a
               href="#apply"
@@ -104,12 +118,30 @@ export function Hero() {
               지원하기 <ArrowRight size={18} strokeWidth={2.2} />
             </a>
             <a
-              href="#bomate"
+              href="#join"
               className="inline-flex h-[52px] items-center gap-2 rounded-full border border-white/25 px-7 text-[16px] font-semibold text-[var(--sa-on-night)] transition-[transform,background-color] duration-200 hover:bg-white/10 active:scale-[0.98]"
             >
-              보메이트 살펴보기 <ArrowDown size={17} strokeWidth={2.2} />
+              우리에게 오면 <ArrowDown size={17} strokeWidth={2.2} />
             </a>
           </motion.div>
+          {/* 들어오면 있는 것 — 들어올 이유(무기). 앞의 두 개 강조 */}
+          <motion.dl
+            initial={{ opacity: 0, y: 12 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.7, delay: 0.8, ease: EASE }}
+            className="mt-8 grid max-w-[660px] grid-cols-2 gap-2.5"
+            aria-label="어메이징사업부에 들어오면 있는 것"
+          >
+            {REASONS.map((r, i) => (
+              <div
+                key={r.title}
+                className={`rounded-2xl px-4 py-3 ring-1 ${i < 2 ? "bg-white/[0.09] ring-[var(--sa-glow)]/40" : "bg-white/[0.05] ring-white/10"}`}
+              >
+                <dt className="text-[15px] font-bold text-[var(--sa-on-night)] sm:text-[16px]">{r.title}</dt>
+                <dd className="mt-1 text-[14px] leading-[1.5] text-[var(--sa-on-night-dim)]">{r.body}</dd>
+              </div>
+            ))}
+          </motion.dl>
         </div>
 
         <motion.div
